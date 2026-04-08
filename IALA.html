@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NautikaPRO — IALA Buoy System</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#04111f;--bg2:#071a2f;--bg3:#0a2241;--bdr:#153a6b;--bdr2:#1e4d85;--gold:#c9a84c;--gold2:#e8c870;--txt:#d8cfbe;--mut:#5f7b9e;--mut2:#8a9bb0;--grn:#22c55e;--red:#ef4444;--blu:#3b82f6;--org:#f97316;--pur:#a855f7;--tel:#14b8a6;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'Source Sans 3',sans-serif;min-height:100vh;overflow-x:hidden;}
+::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+.cf{font-family:'Cinzel',serif;}.lf{font-family:'Lora',serif;}.hi{display:none!important;}
+.screen{display:none;min-height:100vh;}.screen.on{display:block;animation:fi .3s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.nav{background:var(--bg2);border-bottom:1px solid var(--bdr);padding:13px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;}
+.w{max-width:700px;margin:0 auto;padding:22px 16px;}
+.c{background:var(--bg2);border:1px solid var(--bdr);border-radius:13px;transition:all .2s;}
+.b{display:block;width:100%;padding:13px 18px;border:none;border-radius:10px;font-family:'Source Sans 3',sans-serif;font-size:15px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s;}
+.bg{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#04111f;}.bg:hover{transform:translateY(-1px);box-shadow:0 5px 20px rgba(201,168,76,.3);}
+.bg:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none;}
+.bo{background:transparent;color:var(--gold);border:1px solid var(--gold);}.bo:hover{background:rgba(201,168,76,.08);}
+.bgh{background:transparent;color:var(--mut2);border:1px solid var(--bdr2);}.bgh:hover{background:var(--bg3);color:var(--txt);}
+.bs{display:flex;flex-direction:column;gap:10px;}
+.bb{background:transparent;color:var(--gold);border:1px solid var(--bdr2);padding:7px 15px;font-size:13px;border-radius:8px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-weight:600;transition:all .2s;}.bb:hover{border-color:var(--gold);}
+.qp{height:4px;background:var(--bdr);}.qpf{height:100%;transition:width .4s;}
+.ob{width:100%;background:var(--bg2);border:1px solid var(--bdr);border-radius:11px;padding:13px 16px;text-align:left;cursor:pointer;color:var(--txt);font-size:14px;line-height:1.5;font-family:'Source Sans 3',sans-serif;transition:all .15s;display:flex;align-items:flex-start;gap:11px;margin-bottom:9px;}
+.ob:hover:not(:disabled){background:var(--bg3);border-color:var(--bdr2);transform:translateX(3px);}.ob:disabled{cursor:default;transform:none;}
+.ob.ok{background:#0a2d1a;border-color:var(--grn);color:var(--grn);}
+.ob.ng{background:#2d0a0a;border-color:var(--red);color:var(--red);}
+.ob.dm{background:var(--bg2);border-color:var(--bdr);color:var(--mut);}
+.ol{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--bdr);display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700;margin-top:1px;}
+.ob.ok .ol{background:var(--grn);}.ob.ng .ol{background:var(--red);}
+.exp{margin:0 0 14px;padding:14px 16px;border-radius:10px;font-family:'Lora',serif;font-size:14px;line-height:1.65;}
+.exp.ek{background:#061f10;border:1px solid rgba(34,197,94,.3);color:#a7f3c0;}
+.exp.en{background:#1f0606;border:1px solid rgba(239,68,68,.3);color:#fca5a5;}
+.mb{font-size:15px;line-height:1.85;color:var(--txt);}
+.mb p{margin-bottom:13px;}
+.mb h3{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:.8px;margin:18px 0 9px;border-bottom:1px solid var(--bdr);padding-bottom:5px;}
+.mb strong u{color:var(--gold2);text-decoration-color:var(--gold);text-underline-offset:3px;font-weight:700;}
+.mb .kb{background:var(--bg3);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:11px 15px;margin:13px 0;font-size:14px;line-height:1.6;}
+.mb .kb.red{border-left-color:var(--red);}
+.mb .kb.grn{border-left-color:var(--grn);}
+.mb .kb.tel{border-left-color:var(--tel);}
+.mb ul{padding-left:17px;margin-bottom:13px;}.mb li{margin-bottom:5px;line-height:1.6;}
+.mb table{width:100%;border-collapse:collapse;margin-bottom:13px;font-size:13px;}
+.mb th{background:var(--bg3);color:var(--gold);font-family:'Cinzel',serif;font-size:11px;padding:8px 10px;text-align:left;border:1px solid var(--bdr);}
+.mb td{padding:8px 10px;border:1px solid var(--bdr);vertical-align:top;line-height:1.5;}
+.mb tr:nth-child(even) td{background:rgba(255,255,255,.02);}
+.rr{display:inline-block;background:rgba(20,184,166,.15);color:var(--tel);border:1px solid rgba(20,184,166,.3);border-radius:6px;padding:1px 7px;font-size:12px;font-family:'Cinzel',serif;font-weight:600;margin-right:4px;}
+.ebox{background:var(--bg2);border:1px solid var(--bdr);border-radius:13px;padding:4px;margin-bottom:14px;transition:border-color .2s;}.ebox:focus-within{border-color:var(--gold);}
+.eta{width:100%;min-height:210px;background:transparent;border:none;outline:none;color:var(--txt);font-size:15px;line-height:1.75;padding:18px;resize:vertical;font-family:'Lora',serif;}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;}
+.sc{padding:16px;text-align:center;cursor:pointer;position:relative;transition:all .2s;border-radius:13px;background:var(--bg2);border:1px solid var(--bdr);}
+.sc:not(.cs):hover{background:var(--bg3);transform:translateY(-2px);border-color:var(--bdr2);}
+.sc.cs{opacity:.5;cursor:default;}
+.go{position:fixed;inset:0;background:rgba(4,17,31,.92);display:none;align-items:center;justify-content:center;z-index:999;flex-direction:column;gap:18px;}
+.go.on{display:flex;}
+.sp{width:54px;height:54px;border:3px solid var(--bdr2);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.ni{width:100%;background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:13px 16px;color:var(--txt);font-size:16px;font-family:'Lora',serif;outline:none;transition:border-color .2s;}.ni:focus{border-color:var(--gold);}
+.pp{background:var(--bg2);border:1px solid var(--bdr2);border-radius:10px;padding:9px 14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px;margin-bottom:8px;}.pp:hover{background:var(--bg3);border-color:var(--gold);}
+.ri{display:flex;align-items:flex-start;gap:9px;padding:9px 0;border-bottom:1px solid var(--bdr);}.ri:last-child{border-bottom:none;}
+.rd{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700;margin-top:2px;}
+.rd.rk{background:#0a2d1a;border:1px solid var(--grn);color:var(--grn);}
+.rd.rn{background:#2d0a0a;border:1px solid var(--red);color:var(--red);}
+@media(max-width:480px){.sg{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<div class="go" id="gOverlay">
+  <div class="sp"></div>
+  <div style="font-family:'Cinzel',serif;color:var(--gold);font-size:13px;letter-spacing:2px;">AI SEDANG MENILAI…</div>
+</div>
+
+<!-- SCREEN: NAME -->
+<div class="screen on" id="sc-name">
+  <div style="max-width:460px;margin:0 auto;padding:52px 18px;">
+    <div style="text-align:center;margin-bottom:32px;">
+      <div style="font-size:50px;margin-bottom:12px;">🔴</div>
+      <h1 class="cf" style="font-size:26px;color:var(--gold);letter-spacing:3px;margin-bottom:7px;">NautikaPRO</h1>
+      <p class="lf" style="font-style:italic;color:var(--mut2);font-size:14px;">Platform Belajar Ilmu Kepelautan</p>
+    </div>
+    <div class="c" style="padding:24px;margin-bottom:14px;">
+      <div class="cf" style="font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:13px;">MASUK SEBAGAI</div>
+      <input class="ni" id="nameInp" type="text" placeholder="Ketik nama lengkap kamu…" maxlength="60" autocomplete="off"/>
+      <div style="font-size:12px;color:var(--mut);margin-top:7px;">Progress disimpan berdasarkan nama di perangkat ini.</div>
+      <button class="b bg" style="margin-top:13px;" onclick="doLogin()">Mulai Belajar →</button>
+    </div>
+    <div id="savedList"></div>
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:13px;font-size:12px;color:var(--mut2);line-height:1.6;margin-top:12px;">
+      💾 <strong style="color:var(--gold)">Penyimpanan:</strong> Progress tersimpan lokal di perangkat ini. Gunakan Export/Import untuk pindah perangkat.
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: SUBJECTS -->
+<div class="screen" id="sc-subj">
+  <div style="background:linear-gradient(180deg,#071e3d,#04111f);padding:38px 22px 30px;text-align:center;border-bottom:1px solid var(--bdr);">
+    <div style="font-size:34px;margin-bottom:10px;">⚓</div>
+    <h1 class="cf" style="font-size:20px;color:var(--gold);letter-spacing:3px;margin-bottom:6px;">NautikaPRO</h1>
+    <p style="font-size:14px;color:var(--mut2);" id="greeting"></p>
+    <div style="font-size:12px;color:var(--mut);margin-top:3px;">Pilih mata kuliah yang ingin kamu pelajari</div>
+  </div>
+  <div class="w">
+    <div class="sg" id="subjGrid"></div>
+    <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+      <button class="b bgh" style="padding:8px 13px;font-size:12px;" onclick="doExport()">📤 Export Progress</button>
+      <button class="b bgh" style="padding:8px 13px;font-size:12px;" onclick="toggleImport()">📥 Import Progress</button>
+      <button class="b bgh" style="padding:8px 13px;font-size:12px;" onclick="switchUser()">👤 Ganti User</button>
+    </div>
+    <div id="importBox" class="hi" style="margin-top:10px;">
+      <textarea id="importTxt" style="width:100%;background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;color:var(--txt);padding:10px;font-size:13px;height:68px;outline:none;" placeholder="Paste kode export progress di sini…"></textarea>
+      <button class="b bo" style="margin-top:8px;padding:10px;" onclick="doImport()">Import</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: IALA HOME -->
+<div class="screen" id="sc-iala">
+  <div class="nav">
+    <button class="bb" onclick="goSubj()">← Mata Kuliah</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;color:var(--tel);">IALA BUOY SYSTEM</div><div style="font-size:13px;">Sistem Pelampung Maritim IALA</div></div>
+  </div>
+  <div class="w">
+    <div style="text-align:center;padding:14px 0 10px;">
+      <div style="font-size:12px;color:var(--mut2);">Progress keseluruhan</div>
+      <div style="max-width:360px;margin:9px auto;height:5px;background:var(--bdr);border-radius:3px;overflow:hidden;"><div style="height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;transition:width .6s;" id="mainBar"></div></div>
+      <div style="font-size:12px;color:var(--mut);" id="mainPct"></div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:12px 15px;font-size:13px;color:var(--mut2);margin-bottom:15px;">
+      🎯 <strong style="color:var(--gold)">Alur:</strong> Baca materi → Kerjakan PG (≥70%) → Semua topik lulus → Kerjakan Esai → Kategori berikutnya terbuka
+    </div>
+    <div id="secList"></div>
+  </div>
+</div>
+
+<!-- SCREEN: SECTION DETAIL -->
+<div class="screen" id="sc-sec">
+  <div class="nav">
+    <button class="bb" onclick="goIala()">← Daftar Kategori</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;" id="secLbl"></div><div style="font-size:13px;" id="secSub"></div></div>
+    <div style="font-size:22px;" id="secIco"></div>
+  </div>
+  <div class="w">
+    <div class="c" style="padding:18px;margin-bottom:16px;"><p style="font-size:15px;line-height:1.75;" id="secDesc"></p></div>
+    <div class="cf" style="font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:11px;">TOPIK-TOPIK DALAM KATEGORI INI</div>
+    <div id="ruleCards"></div>
+    <div id="essayZone" style="margin-top:16px;"></div>
+  </div>
+</div>
+
+<!-- SCREEN: MATERIAL -->
+<div class="screen" id="sc-mat">
+  <div class="nav">
+    <button class="bb" onclick="backSec()">← Daftar Topik</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;" id="matLbl"></div><div style="font-size:13px;" id="matSub"></div></div>
+  </div>
+  <div class="w">
+    <div class="c" style="padding:24px;margin-bottom:14px;">
+      <div class="cf" style="font-size:11px;color:var(--mut);letter-spacing:1px;margin-bottom:5px;">MATERI PEMBELAJARAN</div>
+      <h2 class="cf" style="font-size:17px;margin-bottom:16px;" id="matTitle"></h2>
+      <div class="mb" id="matBody"></div>
+    </div>
+    <div class="c" style="padding:15px;margin-bottom:15px;border-color:rgba(201,168,76,.3);">
+      <div class="cf" style="font-size:11px;color:var(--gold);margin-bottom:8px;">📌 POIN PENTING — Baca sebelum mengerjakan soal</div>
+      <div style="font-size:13px;line-height:1.7;" id="matKP"></div>
+    </div>
+    <button class="b bg" onclick="startRuleQuiz()">Mulai Pilihan Ganda →</button>
+  </div>
+</div>
+
+<!-- SCREEN: MC QUIZ -->
+<div class="screen" id="sc-mc">
+  <div class="nav">
+    <button class="bb" onclick="exitSec()">← Keluar</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;" id="mcLbl"></div></div>
+    <div class="cf" style="font-size:14px;color:var(--gold);" id="mcCtr"></div>
+  </div>
+  <div class="qp"><div class="qpf" id="mcBar"></div></div>
+  <div class="w">
+    <div class="c" style="padding:22px;margin-bottom:14px;">
+      <div class="cf" style="font-size:11px;color:var(--mut2);margin-bottom:9px;letter-spacing:1px;" id="mcNum"></div>
+      <div class="lf" style="font-size:17px;line-height:1.75;" id="mcQ"></div>
+    </div>
+    <div id="mcOpts"></div>
+    <div id="mcExp" class="hi"></div>
+    <button class="b bg hi" id="mcNext" onclick="nextMC()"></button>
+  </div>
+</div>
+
+<!-- SCREEN: MC RESULTS -->
+<div class="screen" id="sc-res">
+  <div class="nav">
+    <button class="bb" onclick="exitSec()">← Bagian</button>
+    <div class="cf" style="font-size:13px;color:var(--gold);">Hasil Pilihan Ganda</div>
+  </div>
+  <div class="w">
+    <div class="c" style="padding:28px;text-align:center;margin-bottom:15px;" id="resCard">
+      <div style="font-size:62px;margin-bottom:8px;" id="resEmo"></div>
+      <div class="cf" style="font-size:50px;font-weight:900;" id="resScore"></div>
+      <div class="lf" style="font-size:17px;font-style:italic;margin-top:5px;" id="resLbl"></div>
+      <div style="font-size:14px;color:var(--mut2);margin-top:8px;" id="resDet"></div>
+    </div>
+    <div class="c" style="padding:16px;margin-bottom:15px;">
+      <div class="cf" style="font-size:11px;color:var(--gold);margin-bottom:11px;">REKAP JAWABAN</div>
+      <div id="recapList"></div>
+    </div>
+    <div class="bs" id="resActs"></div>
+  </div>
+</div>
+
+<!-- SCREEN: ESSAY -->
+<div class="screen" id="sc-ess">
+  <div class="nav">
+    <button class="bb" onclick="exitSec()">← Keluar</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;color:var(--gold);" id="essLbl"></div></div>
+    <div class="cf" style="font-size:14px;color:var(--gold);" id="essCtr"></div>
+  </div>
+  <div class="qp"><div class="qpf" style="background:var(--gold);" id="essBar"></div></div>
+  <div class="w" id="essWrite">
+    <div class="c" style="padding:22px;margin-bottom:13px;">
+      <div class="cf" style="font-size:11px;color:var(--mut2);margin-bottom:9px;letter-spacing:1px;" id="essNum"></div>
+      <div class="lf" style="font-size:16px;line-height:1.75;" id="essQ"></div>
+    </div>
+    <div class="ebox">
+      <textarea class="eta" id="essTa" placeholder="Tulis jawabanmu di sini…&#10;&#10;Jelaskan dengan kata-katamu sendiri. Yang penting konsep dan pemahamannya benar."></textarea>
+      <div style="display:flex;justify-content:space-between;padding:8px 15px;border-top:1px solid var(--bdr);">
+        <div style="font-size:12px;color:var(--mut);" id="essChr">0 karakter</div>
+        <div style="font-size:12px;color:var(--mut2);">Target: 150–400 kata</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--mut2);margin-bottom:13px;">💡 <strong style="color:var(--gold)">Tips:</strong> Sebutkan poin kunci dengan jelas. AI menilai pemahaman konsep, bukan hafalan kata per kata.</div>
+    <div class="hi" id="essErr" style="background:#2d0a0a;border:1px solid rgba(239,68,68,.4);border-radius:10px;padding:13px;margin-bottom:13px;font-size:14px;color:#fca5a5;"></div>
+    <button class="b bg" id="essBtn" onclick="submitEssay()" disabled>Kirim Jawaban →</button>
+  </div>
+  <div class="w hi" id="essFB">
+    <div class="c" style="padding:22px;margin-bottom:13px;" id="fbCard">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:13px;">
+        <div style="font-size:32px;" id="fbEmo"></div>
+        <div style="text-align:right;"><div class="cf" style="font-size:38px;font-weight:900;" id="fbScore"></div><div style="font-size:13px;color:var(--mut2);">/10 — <span id="fbPass"></span></div></div>
+      </div>
+      <p class="lf" style="font-size:15px;line-height:1.7;font-style:italic;margin-bottom:13px;" id="fbSum"></p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="padding:11px;border-radius:10px;background:#061f10;border:1px solid rgba(34,197,94,.2);">
+          <div style="font-size:11px;font-weight:700;color:var(--grn);text-transform:uppercase;margin-bottom:6px;">✅ Sudah Benar</div>
+          <div style="font-size:13px;" id="fbStr"></div>
+        </div>
+        <div style="padding:11px;border-radius:10px;background:#1f140a;border:1px solid rgba(201,168,76,.2);">
+          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">📌 Perlu Ditambah</div>
+          <div style="font-size:13px;" id="fbImp"></div>
+        </div>
+      </div>
+    </div>
+    <div class="c" style="padding:14px;margin-bottom:13px;">
+      <div class="cf" style="font-size:11px;color:var(--gold);margin-bottom:9px;">POIN-POIN KUNCI</div>
+      <div id="fbKP"></div>
+    </div>
+    <div class="c" style="padding:13px;margin-bottom:13px;">
+      <div class="cf" style="font-size:11px;color:var(--mut);margin-bottom:7px;">JAWABAN KAMU</div>
+      <div class="lf" style="font-size:13px;color:var(--mut2);line-height:1.65;font-style:italic;" id="fbAns"></div>
+    </div>
+    <button class="b bg" id="essNxt" onclick="nextEssay()"></button>
+  </div>
+</div>
+
+<!-- SCREEN: COMPLETE -->
+<div class="screen" id="sc-done">
+  <div class="w" style="padding-top:38px;">
+    <div style="text-align:center;margin-bottom:22px;">
+      <div style="font-size:70px;margin-bottom:13px;">🏆</div>
+      <h2 class="cf" style="color:var(--gold);font-size:22px;margin-bottom:7px;" id="doneTitle"></h2>
+      <p class="lf" style="color:var(--mut2);font-style:italic;" id="doneSub"></p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:19px;">
+      <div class="c" style="padding:18px;text-align:center;"><div class="cf" style="font-size:28px;color:var(--grn);" id="doneMC"></div><div style="font-size:12px;color:var(--mut2);margin-top:4px;">Skor PG Rata-rata</div></div>
+      <div class="c" style="padding:18px;text-align:center;"><div class="cf" style="font-size:28px;color:var(--gold);" id="doneEss"></div><div style="font-size:12px;color:var(--mut2);margin-top:4px;">Rata-rata Esai</div></div>
+    </div>
+    <div id="doneUnlock"></div>
+    <div class="bs" id="doneActs"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// SUBJECTS
+// ============================================================
+const SUBJS=[
+  {id:"colreg",n:"COLREG",ico:"⚓",d:"Peraturan Pencegahan Tubrukan di Laut 1972",on:true,col:"#3b82f6",href:"COLREG.html"},
+  {id:"marpol",n:"MARPOL",ico:"🌊",d:"Pencemaran dari Kapal",on:true,col:"#f97316",href:"MARPOL.html"},
+  {id:"solas",n:"SOLAS",ico:"🛟",d:"Keselamatan Jiwa di Laut",on:false,col:"#a855f7"},
+  {id:"iala",n:"IALA BUOY",ico:"🔴",d:"Sistem Pelampung IALA",on:true,col:"#14b8a6",href:null},
+  {id:"stcw",n:"STCW",ico:"📜",d:"Standar Pelatihan Pelaut",on:false},
+  {id:"unclos",n:"UNCLOS",ico:"🗺️",d:"Hukum Laut Internasional",on:false},
+  {id:"nav",n:"Navigation",ico:"🧭",d:"Plotting, Kompas & Navigasi Peta",on:false},
+  {id:"stability",n:"Ship Stability",ico:"⚖️",d:"Stabilitas & Trim Kapal",on:false},
+  {id:"cargo",n:"Cargo Handling",ico:"📦",d:"Penanganan & Penyimpanan Muatan",on:false},
+  {id:"smcp",n:"SMCP",ico:"📡",d:"Frase Komunikasi Maritim Standar",on:false},
+];
+
+// ============================================================
+// STATE & STORAGE
+// ============================================================
+const SK='nautikapro_v2';
+let ST={name:null,profiles:{},curSec:null,curRule:0,mcA:{},mcIdx:0,essIdx:0,essRes:[]};
+
+function save(){try{const d=JSON.parse(localStorage.getItem(SK)||'{}');d.profiles=ST.profiles;d.last=ST.name;localStorage.setItem(SK,JSON.stringify(d));}catch(e){}}
+function load(){try{const d=JSON.parse(localStorage.getItem(SK)||'{}');ST.profiles=d.profiles||{};const ln=d.last;if(ln&&ST.profiles[ln]){ST.name=ln;return true;}}catch(e){}return false;}
+
+function getP(){
+  const p=ST.profiles[ST.name]||(ST.profiles[ST.name]={});
+  if(!p.iala||Object.keys(p.iala).length===0){
+    p.iala={};
+    SECS.forEach(s=>{
+      p.iala[s.id]={rules:{},essayDone:false,complete:false};
+      s.ruleList.forEach((_,i)=>{p.iala[s.id].rules[i]={read:false,score:null,pass:false};});
+    });
+  }
+  return p;
+}
+function getRuP(sId,ri){const p=getP();return(p.iala[sId]?.rules||{})[ri]||{read:false,score:null,pass:false};}
+function setRuP(sId,ri,u){const p=getP();if(!p.iala[sId].rules[ri])p.iala[sId].rules[ri]={};Object.assign(p.iala[sId].rules[ri],u);save();}
+function getSecP(sId){return getP().iala[sId]||{rules:{},essayDone:false,complete:false};}
+
+// ============================================================
+// SCREEN
+// ============================================================
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));const el=document.getElementById('sc-'+id);if(el){el.classList.add('on');window.scrollTo(0,0);}}
+
+// ============================================================
+// NAME
+// ============================================================
+function renderSaved(){
+  const ns=Object.keys(ST.profiles);
+  const wrap=document.getElementById('savedList');
+  if(!ns.length){wrap.innerHTML='';return;}
+  wrap.innerHTML=`<div style="font-size:11px;font-family:'Cinzel',serif;color:var(--mut);letter-spacing:1px;margin-bottom:10px;">ATAU PILIH PROFIL YANG ADA</div>`
+    +ns.map(n=>{
+      const p=ST.profiles[n];
+      const ip=p.iala||{};
+      const done=SECS.filter(s=>ip[s.id]&&ip[s.id].complete).length;
+      return `<div class="pp" onclick="pickProfile('${n}')"><div style="width:30px;height:30px;border-radius:50%;background:var(--bg3);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:15px;">👤</div><div><div style="font-weight:700;font-size:14px;">${n}</div><div style="font-size:12px;color:var(--mut2);">IALA: ${done}/${SECS.length} kategori selesai</div></div></div>`;
+    }).join('');
+}
+function doLogin(){const n=document.getElementById('nameInp').value.trim();if(!n)return;ST.name=n;getP();save();goSubj();}
+function pickProfile(n){ST.name=n;save();goSubj();}
+document.getElementById('nameInp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+
+// ============================================================
+// SUBJECTS
+// ============================================================
+function goSubj(){
+  document.getElementById('greeting').textContent=`Halo, ${ST.name} 👋`;
+  const g=document.getElementById('subjGrid');
+  g.innerHTML=SUBJS.map(s=>{
+    let clickAction='';
+    if(s.on){
+      if(s.href)clickAction=`window.location.href='${s.href}'`;
+      else clickAction='goIala()';
+    }
+    return `<div class="sc${s.on?'':' cs'}" onclick="${clickAction}">
+      ${!s.on?`<div style="position:absolute;top:8px;right:8px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:2px 7px;font-size:10px;font-family:'Cinzel',serif;">Segera</div>`:''}
+      <div style="font-size:28px;margin-bottom:7px;">${s.ico}</div>
+      <div style="font-family:'Cinzel',serif;font-size:12px;color:${s.on?'var(--gold)':'var(--mut2)'};font-weight:700;margin-bottom:3px;">${s.n}</div>
+      <div style="font-size:11px;color:var(--mut2);line-height:1.4;">${s.d}</div>
+      ${s.on?`<div style="margin-top:9px;font-size:11px;color:${s.id==='iala'?'var(--tel)':'var(--grn)'};font-weight:700;">Tersedia →</div>`:''}
+    </div>`;
+  }).join('');
+  show('subj');
+}
+function switchUser(){ST.name=null;renderSaved();document.getElementById('nameInp').value='';show('name');}
+function toggleImport(){document.getElementById('importBox').classList.toggle('hi');}
+function doExport(){
+  const d={name:ST.name,progress:ST.profiles[ST.name]};
+  const j=btoa(unescape(encodeURIComponent(JSON.stringify(d))));
+  const el=document.createElement('textarea');el.value=j;document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);
+  alert('✅ Kode progress berhasil disalin!\n\nPaste di perangkat lain menggunakan fitur Import.');
+}
+function doImport(){
+  try{const r=document.getElementById('importTxt').value.trim();const d=JSON.parse(decodeURIComponent(escape(atob(r))));ST.profiles[d.name]=d.progress;save();alert(`✅ Progress "${d.name}" berhasil diimport!`);document.getElementById('importBox').classList.add('hi');}
+  catch(e){alert('❌ Kode tidak valid. Pastikan kode yang kamu paste benar.');}
+}
+
+// ============================================================
+// IALA HOME
+// ============================================================
+function goIala(){
+  const p=getP();
+  const done=SECS.filter(s=>p.iala[s.id]?.complete).length;
+  const pct=Math.round((done/SECS.length)*100);
+  document.getElementById('mainBar').style.width=pct+'%';
+  document.getElementById('mainPct').textContent=`${done} dari ${SECS.length} kategori selesai (${pct}%)`;
+  const sl=document.getElementById('secList');sl.innerHTML='';
+  SECS.forEach((sec,si)=>{
+    const sp=p.iala[sec.id];
+    const allRuPassed=sec.ruleList.every((_,ri)=>getRuP(sec.id,ri).pass);
+    const fillPct=sp.complete?100:allRuPassed?66:Math.round(Object.values(sp.rules).filter(r=>r.pass).length/sec.ruleList.length*50);
+    const d=document.createElement('div');
+    d.className='c';d.style.cssText=`padding:16px 18px;margin-bottom:10px;display:flex;align-items:center;gap:13px;cursor:pointer;border-color:${sp.complete?'rgba(34,197,94,.5)':sec.col+'44'};transition:all .2s;`;
+    d.onclick=()=>openSec(sec.id);d.onmouseenter=()=>d.style.background='var(--bg3)';d.onmouseleave=()=>d.style.background='var(--bg2)';
+    d.innerHTML=`<div style="width:42px;height:42px;border-radius:10px;background:${sec.col}22;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">${sp.complete?'🏅':sec.ico}</div>
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;align-items:center;gap:7px;"><span style="font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:${sp.complete?'var(--grn)':sec.col};">${sec.title}</span><span style="font-size:11px;color:var(--mut);">· ${sec.rules}</span></div>
+        <div style="font-family:'Lora',serif;font-size:14px;margin-top:2px;">${sec.full}</div>
+        <div style="height:3px;background:var(--bdr);border-radius:2px;margin-top:7px;overflow:hidden;"><div style="height:100%;width:${fillPct}%;background:${sp.complete?'var(--grn)':sec.col};border-radius:2px;transition:width .5s;"></div></div>
+      </div>
+      <div style="flex-shrink:0;font-size:11px;font-weight:700;color:${sp.complete?'var(--grn)':sec.col};">${sp.complete?'SELESAI ✓':allRuPassed?'Esai →':'BUKA →'}</div>`;
+    sl.appendChild(d);
+  });
+  show('iala');
+}
+
+// ============================================================
+// SECTION DETAIL
+// ============================================================
+function openSec(sId){
+  ST.curSec=sId;
+  const sec=SECS.find(s=>s.id===sId);
+  const sp=getSecP(sId);
+  document.getElementById('secLbl').textContent=`${sec.title} · IALA Buoy System`;
+  document.getElementById('secLbl').style.color=sec.col;
+  document.getElementById('secSub').textContent=sec.full;
+  document.getElementById('secIco').textContent=sec.ico;
+  document.getElementById('secDesc').textContent=sec.desc;
+  const rc=document.getElementById('ruleCards');rc.innerHTML='';
+  sec.ruleList.forEach((rule,ri)=>{
+    const rp=getRuP(sId,ri);
+    const card=document.createElement('div');
+    card.className='c';card.style.cssText=`padding:15px 16px;margin-bottom:9px;display:flex;align-items:center;gap:12px;cursor:pointer;border-color:${rp.pass?'rgba(34,197,94,.5)':sec.col+'44'};transition:all .2s;`;
+    card.onclick=()=>openRule(sId,ri);card.onmouseenter=()=>card.style.background='var(--bg3)';card.onmouseleave=()=>card.style.background='var(--bg2)';
+    card.innerHTML=`<div style="width:36px;height:36px;border-radius:9px;background:${rp.pass?'var(--grn)':sec.col+'22'};display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:${rp.pass?'#fff':sec.col};flex-shrink:0;">${rp.pass?'✓':rule.num}</div>
+      <div style="flex:1;"><div style="font-family:'Cinzel',serif;font-size:11px;color:${rp.pass?'var(--grn)':sec.col};font-weight:700;">Topik ${rule.num}</div>
+      <div style="font-size:14px;margin-top:2px;">${rule.title}</div>
+      ${rp.score!==null?`<div style="font-size:12px;color:${rp.pass?'var(--grn)':'var(--red)'};margin-top:2px;">Skor PG: ${rp.score}%</div>`:''}
+      </div>
+      <div style="font-size:12px;font-weight:700;color:${rp.pass?'var(--grn)':sec.col};">${rp.pass?'Lulus ✓':rp.score!==null?'Ulangi':'Mulai →'}</div>`;
+    rc.appendChild(card);
+  });
+  const ez=document.getElementById('essayZone');
+  const allPass=sec.ruleList.every((_,ri)=>getRuP(sId,ri).pass);
+  if(sp.essayDone){
+    ez.innerHTML=`<div class="c" style="padding:15px;text-align:center;border-color:rgba(34,197,94,.4);"><div style="color:var(--grn);font-weight:700;margin-bottom:6px;">✅ Esai ${sec.title} Selesai</div><button class="b bgh" style="padding:9px;font-size:13px;" onclick="startEssay('${sId}')">Ulangi Esai</button></div>`;
+  } else if(allPass){
+    ez.innerHTML=`<div class="c" style="padding:16px;border-color:rgba(201,168,76,.4);"><div style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold);margin-bottom:7px;">✍️ Esai Tersedia!</div><div style="font-size:14px;margin-bottom:13px;">Semua topik di ${sec.title} sudah lulus. Kerjakan Esai!</div><button class="b bg" onclick="startEssay('${sId}')">Mulai Esai ${sec.title} →</button></div>`;
+  } else {
+    const rem=sec.ruleList.filter((_,ri)=>!getRuP(sId,ri).pass).length;
+    ez.innerHTML=`<div style="text-align:center;padding:12px;font-size:13px;color:var(--mut2);">🔒 Esai terbuka setelah semua ${sec.ruleList.length} topik lulus PG (${rem} lagi)</div>`;
+  }
+  show('sec');
+}
+function backSec(){openSec(ST.curSec);}
+function exitSec(){openSec(ST.curSec);}
+
+// ============================================================
+// MATERIAL
+// ============================================================
+function openRule(sId,ri){
+  ST.curSec=sId;ST.curRule=ri;
+  const sec=SECS.find(s=>s.id===sId);
+  const rule=sec.ruleList[ri];
+  document.getElementById('matLbl').textContent=`${sec.title} · Topik ${rule.num}`;
+  document.getElementById('matLbl').style.color=sec.col;
+  document.getElementById('matSub').textContent=rule.title;
+  document.getElementById('matTitle').textContent=`Topik ${rule.num} — ${rule.title}`;
+  document.getElementById('matTitle').style.color=sec.col;
+  document.getElementById('matBody').innerHTML=rule.mat;
+  document.getElementById('matKP').innerHTML=rule.kp;
+  setRuP(sId,ri,{read:true});
+  show('mat');
+}
+function startRuleQuiz(){ST.mcA={};ST.mcIdx=0;renderMC();show('mc');}
+
+// ============================================================
+// MC QUIZ
+// ============================================================
+function renderMC(){
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const rule=sec.ruleList[ST.curRule];
+  const q=rule.mc[ST.mcIdx];
+  const tot=rule.mc.length;
+  document.getElementById('mcLbl').textContent=`Topik ${rule.num} · Pilihan Ganda`;
+  document.getElementById('mcLbl').style.color=sec.col;
+  document.getElementById('mcCtr').textContent=`${ST.mcIdx+1} / ${tot}`;
+  document.getElementById('mcBar').style.width=`${((ST.mcIdx+1)/tot)*100}%`;
+  document.getElementById('mcBar').style.background=sec.col;
+  document.getElementById('mcNum').textContent=`SOAL ${ST.mcIdx+1} DARI ${tot}`;
+  document.getElementById('mcQ').textContent=q.q;
+  const opts=document.getElementById('mcOpts');opts.innerHTML='';
+  ['A','B','C','D'].forEach((lbl,i)=>{
+    if(i>=q.o.length)return;
+    const btn=document.createElement('button');btn.className='ob';
+    btn.innerHTML=`<span class="ol">${lbl}</span><span>${q.o[i]}</span>`;
+    btn.onclick=()=>pickOpt(i);opts.appendChild(btn);
+  });
+  document.getElementById('mcExp').classList.add('hi');
+  document.getElementById('mcNext').classList.add('hi');
+}
+function pickOpt(idx){
+  if(ST.mcA[ST.mcIdx]!==undefined)return;
+  ST.mcA[ST.mcIdx]=idx;
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const q=sec.ruleList[ST.curRule].mc[ST.mcIdx];
+  const ok=idx===q.a;
+  document.querySelectorAll('.ob').forEach((btn,i)=>{
+    btn.disabled=true;
+    if(i===q.a)btn.classList.add('ok');
+    else if(i===idx&&!ok)btn.classList.add('ng');
+    else btn.classList.add('dm');
+    const l=btn.querySelector('.ol');
+    if(i===q.a)l.textContent='✓';else if(i===idx&&!ok)l.textContent='✗';
+  });
+  const ex=document.getElementById('mcExp');
+  ex.className='exp '+(ok?'ek':'en');
+  ex.innerHTML=`<div style="font-weight:700;margin-bottom:5px;">${ok?'✅ Benar!':'❌ Salah'}</div>${q.e}`;
+  ex.classList.remove('hi');
+  const nb=document.getElementById('mcNext');
+  nb.textContent=ST.mcIdx===sec.ruleList[ST.curRule].mc.length-1?'Lihat Hasil →':'Soal Berikutnya →';
+  nb.classList.remove('hi');
+}
+function nextMC(){
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const rule=sec.ruleList[ST.curRule];
+  const isLast=ST.mcIdx===rule.mc.length-1;
+  if(!isLast){ST.mcIdx++;renderMC();return;}
+  let ok=0;rule.mc.forEach((_,i)=>{if(ST.mcA[i]===rule.mc[i].a)ok++;});
+  const score=Math.round((ok/rule.mc.length)*100);
+  const pass=score>=70;
+  setRuP(ST.curSec,ST.curRule,{score,pass});
+  const rc=document.getElementById('resCard');
+  rc.style.borderColor=pass?'rgba(34,197,94,.5)':'rgba(239,68,68,.4)';
+  document.getElementById('resEmo').textContent=pass?'🎉':'📚';
+  document.getElementById('resScore').textContent=score+'%';
+  document.getElementById('resScore').style.color=pass?'var(--grn)':'var(--red)';
+  document.getElementById('resLbl').textContent=pass?'Selamat! Lulus!':'Belum Lulus. Ulangi lagi!';
+  document.getElementById('resLbl').style.color=pass?'var(--grn)':'var(--red)';
+  document.getElementById('resDet').textContent=`${ok} benar dari ${rule.mc.length} soal · Target ≥70%`;
+  const rl=document.getElementById('recapList');rl.innerHTML='';
+  rule.mc.forEach((q,i)=>{
+    const good=ST.mcA[i]===q.a;
+    const d=document.createElement('div');d.className='ri';
+    d.innerHTML=`<div class="rd ${good?'rk':'rn'}">${good?'✓':'✗'}</div><div><div style="font-size:13px;">${q.q.substring(0,88)}…</div>${!good?`<div style="font-size:12px;color:var(--red);margin-top:2px;">Kamu: ${['A','B','C','D'][ST.mcA[i]]} · Benar: ${['A','B','C','D'][q.a]}</div>`:''}</div>`;
+    rl.appendChild(d);
+  });
+  const ra=document.getElementById('resActs');
+  const nextRi=ST.curRule+1;
+  const hasNext=nextRi<sec.ruleList.length;
+  if(pass){
+    ra.innerHTML=hasNext
+      ?`<button class="b bg" onclick="openRule('${ST.curSec}',${nextRi})">Lanjut ke Topik ${sec.ruleList[nextRi].num} →</button><button class="b bgh" onclick="startRuleQuiz()">⟳ Ulangi Soal Ini</button>`
+      :`<div class="c" style="padding:14px;border-color:rgba(201,168,76,.4);text-align:center;"><div style="color:var(--gold);font-weight:700;margin-bottom:5px;">✅ Semua Topik Lulus!</div><div style="font-size:13px;color:var(--mut2);">Kerjakan Esai untuk menyelesaikan ${SECS.find(s=>s.id===ST.curSec).title}</div></div>
+         <button class="b bg" onclick="startEssay('${ST.curSec}')">✍️ Mulai Esai →</button>
+         <button class="b bgh" onclick="exitSec()">Kembali ke Daftar Topik</button>`;
+  } else {
+    ra.innerHTML=`<button class="b bg" onclick="openRule('${ST.curSec}',${ST.curRule})">📖 Baca Materi Lagi</button><button class="b bo" onclick="startRuleQuiz()">⟳ Ulangi Pilihan Ganda</button><button class="b bgh" onclick="exitSec()">← Kembali</button>`;
+  }
+  show('res');
+}
+
+// ============================================================
+// ESSAY
+// ============================================================
+function startEssay(sId){
+  ST.curSec=sId;ST.essIdx=0;ST.essRes=[];
+  renderEssQ();show('ess');
+}
+function renderEssQ(){
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const q=sec.essay[ST.essIdx];
+  const tot=sec.essay.length;
+  document.getElementById('essLbl').textContent=`${sec.title} · Esai`;
+  document.getElementById('essCtr').textContent=`${ST.essIdx+1} / ${tot}`;
+  document.getElementById('essBar').style.width=`${((ST.essIdx+1)/tot)*100}%`;
+  document.getElementById('essNum').textContent=`SOAL ESAI ${ST.essIdx+1} DARI ${tot}`;
+  document.getElementById('essQ').textContent=q.q;
+  const ta=document.getElementById('essTa');ta.value='';
+  ta.oninput=()=>{document.getElementById('essChr').textContent=ta.value.length+' karakter';document.getElementById('essBtn').disabled=ta.value.trim().length<80;};
+  document.getElementById('essChr').textContent='0 karakter';
+  document.getElementById('essBtn').disabled=true;
+  document.getElementById('essBtn').textContent='Kirim Jawaban →';
+  document.getElementById('essErr').classList.add('hi');
+  document.getElementById('essWrite').classList.remove('hi');
+  document.getElementById('essFB').classList.add('hi');
+}
+async function submitEssay(){
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const q=sec.essay[ST.essIdx];
+  const ans=document.getElementById('essTa').value.trim();
+  document.getElementById('essBtn').disabled=true;document.getElementById('essBtn').textContent='Memproses…';
+  document.getElementById('essErr').classList.add('hi');
+  document.getElementById('gOverlay').classList.add('on');
+  try{
+    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,
+        messages:[{role:"user",content:`Kamu adalah dosen kepelautan yang menguji mahasiswa Nautika POLIMARIN tentang Sistem Pelampung IALA (IALA Maritime Buoyage System). Nilai jawaban secara adil — yang penting PEMAHAMAN KONSEP yang benar, bukan hafalan kata per kata. Bahasa Indonesia diutamakan.
+
+Pertanyaan: "${q.q}"
+Poin kunci: ${q.kp.map((p,i)=>`${i+1}. ${p}`).join('; ')}
+Jawaban mahasiswa: "${ans}"
+
+Balas HANYA dengan JSON valid tanpa backticks: {"score":7,"passed":true,"summary":"...","strengths":"...","improvements":"...","correctPoints":["..."],"missedPoints":["..."]}`}]})});
+    const data=await res.json();
+    let txt=(data.content||[]).find(b=>b.type==="text")?.text||"{}";
+    txt=txt.replace(/```json|```/g,"").trim();
+    const js=txt.indexOf('{');const je=txt.lastIndexOf('}');if(js!==-1&&je!==-1)txt=txt.substring(js,je+1);
+    const result=JSON.parse(txt);
+    ST.essRes.push({...result,q:q.q,ans});
+    renderEssFB(result,ans);
+  }catch(e){
+    document.getElementById('essErr').textContent="⚠️ Gagal menilai. Periksa koneksi internet dan coba lagi.";
+    document.getElementById('essErr').classList.remove('hi');
+    document.getElementById('essBtn').disabled=false;document.getElementById('essBtn').textContent='Coba Lagi →';
+  }finally{document.getElementById('gOverlay').classList.remove('on');}
+}
+function renderEssFB(r,ans){
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const isLast=ST.essIdx===sec.essay.length-1;
+  document.getElementById('fbCard').style.borderColor=r.passed?'rgba(34,197,94,.5)':'rgba(201,168,76,.4)';
+  document.getElementById('fbEmo').textContent=r.passed?'🎓':'📖';
+  document.getElementById('fbScore').textContent=r.score;
+  document.getElementById('fbScore').style.color=r.passed?'var(--grn)':'var(--gold)';
+  document.getElementById('fbPass').textContent=r.passed?'Lulus ✓':'Perlu Diperdalam';
+  document.getElementById('fbPass').style.color=r.passed?'var(--grn)':'var(--gold)';
+  document.getElementById('fbSum').textContent=r.summary;
+  document.getElementById('fbStr').textContent=r.strengths;
+  document.getElementById('fbImp').textContent=r.improvements;
+  const kp=document.getElementById('fbKP');kp.innerHTML=
+    (r.correctPoints||[]).map(p=>`<div style="display:flex;gap:7px;margin-bottom:5px;font-size:13px;color:var(--grn);"><span>✓</span><span>${p}</span></div>`).join('')+
+    (r.missedPoints||[]).map(p=>`<div style="display:flex;gap:7px;margin-bottom:5px;font-size:13px;color:var(--mut2);"><span>○</span><span>${p}</span></div>`).join('');
+  document.getElementById('fbAns').textContent=ans;
+  document.getElementById('essNxt').textContent=isLast?'🏁 Selesaikan Kategori Ini →':'Soal Esai Berikutnya →';
+  document.getElementById('essWrite').classList.add('hi');document.getElementById('essFB').classList.remove('hi');
+}
+function nextEssay(){
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const isLast=ST.essIdx===sec.essay.length-1;
+  if(!isLast){ST.essIdx++;renderEssQ();return;}
+  const sp=getSecP(ST.curSec);sp.essayDone=true;sp.complete=true;save();
+  const ni=SECS.findIndex(s=>s.id===ST.curSec)+1;
+  document.getElementById('doneTitle').textContent=`${sec.title} Selesai!`;
+  document.getElementById('doneSub').textContent=`${sec.full} · ${sec.rules}`;
+  const avgMC=Object.values(sp.rules).filter(r=>r.score!==null).reduce((s,r,_,a)=>s+r.score/a.length,0);
+  document.getElementById('doneMC').textContent=Math.round(avgMC)+'%';
+  const avgEss=ST.essRes.length>0?Math.round(ST.essRes.reduce((s,r)=>s+(r.score||0),0)/ST.essRes.length*10)+'%':'—';
+  document.getElementById('doneEss').textContent=avgEss;
+  const nxtSec=ni<SECS.length?SECS[ni]:null;
+  document.getElementById('doneUnlock').innerHTML=nxtSec
+    ?`<div class="c" style="padding:14px;border-color:rgba(34,197,94,.4);margin-bottom:15px;"><div style="color:var(--grn);font-weight:700;margin-bottom:5px;">✅ ${sec.title} Selesai!</div><div style="font-size:14px;">Lanjut ke ${nxtSec.title}: ${nxtSec.ico} ${nxtSec.full}</div></div>`
+    :`<div class="c" style="padding:20px;text-align:center;border-color:rgba(201,168,76,.4);margin-bottom:15px;"><div style="font-size:40px;margin-bottom:8px;">🎓</div><div style="font-family:'Cinzel',serif;color:var(--gold);font-size:16px;">IALA BUOY MASTERY COMPLETE!</div></div>`;
+  document.getElementById('doneActs').innerHTML=(nxtSec?`<button class="b bg" onclick="openSec('${nxtSec.id}')">Lanjut ke ${nxtSec.title} →</button>`:'')+`<button class="b bgh" onclick="goIala()">← Kembali ke IALA</button>`;
+  show('done');
+}
+
+// ============================================================
+// IALA SECTIONS DATA
+// ============================================================
+const SECS=[
+
+// ===== KATEGORI 1: PENDAHULUAN =====
+{id:"intro",title:"Pendahuluan",full:"Sejarah & Deskripsi Sistem IALA",rules:"Topik 1–2",ico:"📚",col:"#14b8a6",
+ desc:"Sistem IALA (International Association of Lighthouse Authorities) adalah sistem pelampung maritim internasional yang menggabungkan Cardinal System dan Lateral System. Pelajari sejarah, implementasi, dan komponen dasar sistem ini.",
+ ruleList:[
+  {num:1,title:"Sejarah & Implementasi Sistem IALA",
+   mat:`<h3>📍 Latar Belakang Sejarah</h3>
+<p>Kebutuhan akan sistem pelampung yang seragam muncul akibat perbedaan sistem yang digunakan berbagai negara, yang menyebabkan kecelakaan laut. Insiden-insiden kritis mendorong lahirnya IALA:</p>
+<ul>
+<li><strong>1971 — Dover Strait:</strong> Kapal Brandenburg menabrak bangkai Texaco Caribbean. Beberapa saat kemudian, bangkai yang sudah ditandai itu kembali ditabrak kapal Niki, menewaskan 51 orang. Tragedi ini memicu gerakan reformasi sistem pelampung dunia.</li>
+<li><strong>2002 — Dover Strait:</strong> Kapal Tricolor kandas dan menjadi bahaya baru. Kasus ini mendorong pengembangan Emergency Wreck Marking Buoy.</li>
+</ul>
+<div class="kb">💡 <strong>Pelajaran Kunci:</strong> Sistem pelampung yang tidak seragam berarti pelaut tidak dapat membaca tanda navigasi secara instinktif saat menghadapi bahaya di malam hari atau visibilitas rendah.</div>
+<h3>📍 Perkembangan IALA</h3>
+<p><span class="rr">1809</span> Negara-negara pertama kali bersepakat menandai sisi kiri alur dengan can buoy berwarna hitam, dan sisi kanan dengan conical buoy berwarna merah.</p>
+<p><span class="rr">1936</span> Konvensi Geneva di bawah League of Nations menetapkan Cardinal System dan Lateral System dengan prinsip buoy merah di sisi kiri (port). Namun beberapa negara tidak menandatangani sehingga tetap ada perbedaan.</p>
+<p><span class="rr">1973</span> Komite Teknis IALA mulai bekerja mencari sistem tunggal dunia. IALA sendiri adalah <strong><u>badan non-pemerintah</u></strong> yang menyatukan otoritas navigasi dari berbagai negara.</p>
+<p><span class="rr">1980</span> Pada konferensi yang dibantu IMCO (sekarang IMO) dan IHO, otoritas mercusuar dari 50 negara sepakat mengadopsi sistem IALA. Sistem ini kemudian diimplementasikan secara bertahap di seluruh dunia.</p>
+<h3>📍 Dua Region IALA</h3>
+<p>Kesepakatan penuh pada satu sistem global ternyata tidak bisa dicapai. Solusinya: dunia dibagi menjadi <strong><u>dua Region</u></strong> di mana warna rambu Lateral dibalik:</p>
+<table>
+<tr><th>Aspek</th><th>Region A</th><th>Region B</th></tr>
+<tr><td>Sisi Port (Kiri)</td><td>🔴 Merah</td><td>🟢 Hijau</td></tr>
+<tr><td>Sisi Starboard (Kanan)</td><td>🟢 Hijau</td><td>🔴 Merah</td></tr>
+<tr><td>Cakupan Wilayah</td><td>Eropa, Afrika, Asia, Australia, Selandia Baru</td><td>Amerika (Utara, Tengah, Selatan), Jepang, Korea, Filipina</td></tr>
+</table>
+<div class="kb tel">⚓ <strong>Indonesia termasuk Region A</strong> — buoy Merah di sisi Kiri (Port) saat berlayar menuju pelabuhan.</div>`,
+   kp:`<ul><li><strong>IALA</strong> = International Association of Lighthouse Authorities — badan non-pemerintah</li><li>Insiden Dover Strait <strong>1971</strong> (51 korban jiwa) menjadi katalis reformasi sistem pelampung global</li><li>Sistem IALA diadopsi resmi pada <strong>1980</strong> dan diimplementasikan bertahap</li><li><strong>Region A</strong>: Merah di Kiri (termasuk Indonesia, Asia, Eropa, Afrika, Australia)</li><li><strong>Region B</strong>: Merah di Kanan (Amerika, Jepang, Korea, Filipina)</li><li>Pembagian 2 region karena <strong>tidak bisa dicapai kesepakatan</strong> sistem tunggal global</li></ul>`,
+   mc:[
+    {q:"IALA adalah singkatan dari…",o:["International Aid to Lighthouse Authorities","International Association of Lighthouse Authorities","International Agency for Lateral Aids","International Admiralty of Light and Aids"],a:1,e:"IALA = International Association of Lighthouse Authorities. Ini adalah badan non-pemerintah yang menyatukan representatif dari layanan aids to navigation berbagai negara untuk bertukar informasi dan merekomendasikan perbaikan."},
+    {q:"Insiden Dover Strait tahun 1971 yang menewaskan 51 orang melibatkan kapal…",o:["Tricolor dan Kariba","Brandenburg dan Texaco Caribbean / Niki","Exon Valdez dan Braer","Herald of Free Enterprise"],a:1,e:"Pada 1971 di Dover Strait: Brandenburg menabrak sisa bangkai Texaco Caribbean. Tak lama kemudian, bangkai itu kembali ditabrak Niki yang menewaskan 51 orang. Tragedi ini mendorong reformasi sistem pelampung dunia."},
+    {q:"Sistem IALA secara resmi diadopsi oleh otoritas mercusuar dari 50 negara pada tahun…",o:["1936","1973","1980","1990"],a:2,e:"Pada 1980, pada konferensi yang dibantu IMCO (sekarang IMO) dan IHO, otoritas mercusuar dari 50 negara sepakat mengadopsi aturan sistem IALA Maritime Buoyage System."},
+    {q:"Di Region A sistem IALA, buoy berwarna merah ditempatkan di sisi mana kapal saat masuk pelabuhan?",o:["Starboard (kanan)","Port (kiri)","Di tengah alur","Tidak ada aturan pasti"],a:1,e:"Region A: Red to Port — buoy merah ada di sisi PORT (kiri) saat berlayar dalam Conventional Direction of Buoyage (umumnya dari laut menuju pelabuhan). Indonesia termasuk Region A."},
+    {q:"Amerika Serikat dan negara-negara Amerika pada umumnya termasuk dalam…",o:["Region A — Red to Port","Region B — Red to Starboard","Tidak terikat sistem IALA","Region C — Special System"],a:1,e:"Amerika Serikat, Amerika Tengah, Amerika Selatan, Jepang, Korea, dan Filipina termasuk Region B di mana Merah ada di sisi STARBOARD (kanan). Di sini berlaku 'Red Right Returning' — merah kanan saat kembali ke pelabuhan."},
+    {q:"Mengapa dunia IALA dibagi menjadi dua Region (A dan B) bukan satu sistem seragam?",o:["Karena Region A dan B memiliki kondisi laut yang berbeda","Kesepakatan sistem tunggal global tidak bisa dicapai sehingga dua sistem dianggap paling praktis","Karena kapal di Amerika berlayar berlawanan arah","Untuk memudahkan identifikasi asal kapal"],a:1,e:"IALA memutuskan bahwa kesepakatan langsung tidak bisa dicapai. Menggunakan hanya dua sistem alternatif dianggap paling praktis dengan membagi dunia menjadi dua Region, mempertahankan Cardinal dan Lateral di keduanya."},
+    {q:"Indonesia, Eropa, Afrika, dan Australia termasuk dalam…",o:["Region B","Region A","Keduanya A dan B tergantung perairan","Region Netral"],a:1,e:"Region A mencakup: Eropa, Afrika, Asia (termasuk Indonesia), Australia, dan Selandia Baru. Di seluruh kawasan ini berlaku prinsip Red to Port — buoy merah di sisi kiri saat masuk pelabuhan."},
+    {q:"IALA sebagai organisasi berstatus sebagai…",o:["Badan pemerintah di bawah IMO","Badan non-pemerintah yang menyatukan otoritas aids to navigation","Divisi dari International Hydrographic Organization","Komite teknis PBB untuk navigasi maritim"],a:1,e:"IALA adalah non-governmental body (badan non-pemerintah) yang membawa bersama representatif dari layanan aids to navigation berbagai negara untuk bertukar informasi dan merekomendasikan perbaikan pada alat bantu navigasi."},
+    {q:"Konvensi Geneva 1936 di bawah League of Nations menetapkan prinsip bahwa buoy merah seharusnya…",o:["Selalu di sisi kanan kapal","Di sisi port (kiri) dan buoy hitam di sisi starboard","Di tengah alur navigasi","Hanya digunakan untuk Cardinal marks"],a:1,e:"Konvensi Geneva 1936 menetapkan sistem dengan prinsip buoy merah di PORT (kiri) dan hitam di STARBOARD (kanan). Namun beberapa negara tidak menandatanganinya, menyebabkan variasi yang berbahaya di lautan."},
+    {q:"Kapal Tricolor yang kandas di Dover Strait tahun 2002 berkontribusi pada perkembangan…",o:["IALA Region B","Emergency Wreck Marking Buoy","Cardinal Marks versi baru","Sistem AIS"],a:1,e:"Insiden kapal Tricolor di Dover Strait 2002 menyoroti pentingnya menandai bahaya baru dengan cepat dan jelas, mendorong diperkenalkannya Emergency Wreck Marking Buoy (EWMB) sebagai solusi sementara dalam 24-72 jam pertama."},
+   ]},
+  {num:2,title:"Komponen & Karakteristik Sistem IALA",
+   mat:`<h3>📍 Lima Jenis Rambu IALA</h3>
+<p>Sistem IALA menyediakan <strong><u>lima jenis rambu</u></strong> yang dapat digunakan dalam kombinasi apapun:</p>
+<table>
+<tr><th>#</th><th>Jenis Rambu</th><th>Warna Utama</th><th>Fungsi</th></tr>
+<tr><td>1</td><td>🔴🟢 Lateral Marks</td><td>Merah / Hijau</td><td>Sisi kiri-kanan alur pelayaran</td></tr>
+<tr><td>2</td><td>🟡⬛ Cardinal Marks</td><td>Hitam & Kuning</td><td>Menunjukkan posisi aman berdasarkan kompas</td></tr>
+<tr><td>3</td><td>⬛🔴 Isolated Danger Marks</td><td>Hitam & Merah</td><td>Menandai bahaya terisolasi</td></tr>
+<tr><td>4</td><td>🔴⬜ Safe Water Marks</td><td>Merah & Putih</td><td>Menunjukkan air aman di semua sisi</td></tr>
+<tr><td>5</td><td>🟡 Special Marks</td><td>Kuning</td><td>Menandai area/fitur khusus</td></tr>
+</table>
+<div class="kb red">⚠️ <strong>Warna Eksklusif:</strong> Merah & Hijau HANYA untuk Lateral Marks. Kuning HANYA untuk Special Marks. Jangan sampai tertukar!</div>
+<h3>📍 Bentuk Dasar Buoy</h3>
+<p>Ada <strong><u>lima bentuk dasar</u></strong> buoy dalam sistem IALA:</p>
+<ul>
+<li><strong>Can (Silinder datar)</strong> — digunakan untuk port-hand lateral marks (Region A)</li>
+<li><strong>Conical (Kerucut)</strong> — digunakan untuk starboard-hand lateral marks (Region A)</li>
+<li><strong>Spherical (Bola)</strong> — digunakan untuk safe water marks</li>
+<li><strong>Pillar (Tiang)</strong> — digunakan untuk cardinal, isolated danger, dan special marks</li>
+<li><strong>Spar (Batang)</strong> — alternatif untuk semua jenis marks</li>
+</ul>
+<div class="kb">💡 Can, Conical, dan Spherical menunjukkan sisi yang benar untuk dilewati berdasarkan bentuknya. Pillar dan Spar memerlukan topmark untuk identifikasi.</div>
+<h3>📍 Topmark</h3>
+<p>Hanya <strong><u>empat bentuk topmark</u></strong> yang digunakan:</p>
+<ul>
+<li><strong>Can (silinder)</strong> — untuk port-hand lateral marks</li>
+<li><strong>Conical (kerucut)</strong> — untuk starboard-hand lateral marks</li>
+<li><strong>Spherical (bola)</strong> — untuk safe water marks</li>
+<li><strong>X-shape (silang)</strong> — untuk special marks</li>
+</ul>
+<p>Cardinal marks menggunakan topmark khusus: <strong>dua kerucut hitam</strong> yang tersusun secara vertikal dengan orientasi berbeda untuk setiap arah (North, South, East, West).</p>
+<h3>📍 Sistem Lampu</h3>
+<table>
+<tr><th>Jenis Mark</th><th>Warna Lampu</th><th>Karakteristik</th></tr>
+<tr><td>Lateral Marks</td><td>Merah atau Hijau</td><td>Berbagai ritme (kecuali Fl(2+1) yang digunakan preferred channel)</td></tr>
+<tr><td>Cardinal Marks</td><td>Putih</td><td>Q atau VQ dengan pola berbeda (3, 6+LFl, 9, atau kontinu)</td></tr>
+<tr><td>Isolated Danger</td><td>Putih</td><td>Fl(2) — group flashing 2</td></tr>
+<tr><td>Safe Water</td><td>Putih</td><td>Iso, Occ, LFl 10s, atau Mo(A)</td></tr>
+<tr><td>Special Marks</td><td>Kuning</td><td>Ritme apapun kecuali yang digunakan lampu putih</td></tr>
+</table>
+<h3>📍 Ruang Lingkup Sistem</h3>
+<p>Sistem IALA berlaku untuk semua <strong><u>fixed and floating marks</u></strong>, <strong>KECUALI</strong>:</p>
+<ul>
+<li>Lighthouses (mercusuar)</li>
+<li>Sector lights</li>
+<li>Leading lights dan leading marks</li>
+<li>Lanbys (large automatic navigation buoys)</li>
+<li>Light-vessels tertentu</li>
+</ul>`,
+   kp:`<ul><li><strong>5 jenis rambu:</strong> Lateral, Cardinal, Isolated Danger, Safe Water, Special</li><li><strong>Merah/Hijau</strong> HANYA untuk Lateral | <strong>Kuning</strong> HANYA untuk Special</li><li><strong>5 bentuk:</strong> Can, Conical, Spherical, Pillar, Spar</li><li><strong>4 topmark:</strong> Can, Conical, Spherical, X-shape (Cardinal pakai double cone khusus)</li><li><strong>Lampu Putih</strong>: Cardinal, Isolated Danger, Safe Water</li><li><strong>Lampu Kuning</strong>: HANYA Special Marks</li><li>Sistem TIDAK berlaku untuk: lighthouse, leading lights, sector lights, lanbys, light-vessels</li></ul>`,
+   mc:[
+    {q:"Sistem IALA menyediakan berapa jenis rambu navigasi?",o:["3 jenis","4 jenis","5 jenis","6 jenis"],a:2,e:"IALA menyediakan 5 jenis rambu: (1) Lateral Marks, (2) Cardinal Marks, (3) Isolated Danger Marks, (4) Safe Water Marks, dan (5) Special Marks. Keduanya dapat dikombinasikan."},
+    {q:"Warna merah dan hijau dalam sistem IALA HANYA digunakan untuk…",o:["Cardinal Marks","Special Marks","Lateral Marks","Safe Water Marks"],a:2,e:"Warna merah dan hijau adalah eksklusif untuk Lateral Marks. Kuning untuk Special, Hitam/Kuning untuk Cardinal, Hitam/Merah untuk Isolated Danger, Merah/Putih untuk Safe Water."},
+    {q:"Topmark berbentuk X (silang) digunakan untuk jenis rambu apa?",o:["Cardinal Marks","Isolated Danger Marks","Safe Water Marks","Special Marks"],a:3,e:"Topmark X (X-shape atau silang) digunakan untuk Special Marks. Cardinal Marks menggunakan double cone (dua kerucut hitam). Isolated Danger menggunakan double sphere (dua bola hitam). Safe Water menggunakan single sphere (satu bola merah)."},
+    {q:"Lima bentuk dasar buoy dalam sistem IALA adalah…",o:["Barrel, Conical, Spherical, Pillar, Spar","Can, Conical, Spherical, Pillar, Spar","Can, Triangle, Spherical, Pillar, Spar","Can, Conical, Diamond, Pillar, Spar"],a:1,e:"Lima bentuk dasar: Can (silinder datar), Conical (kerucut), Spherical (bola), Pillar (tiang tinggi), dan Spar (batang memanjang). Can, Conical, Spherical menunjukkan sisi lewat berdasarkan bentuk; Pillar/Spar memerlukan topmark."},
+    {q:"Lampu berwarna KUNING dalam sistem IALA digunakan HANYA untuk…",o:["Cardinal Marks","Isolated Danger Marks","Safe Water Marks","Special Marks"],a:3,e:"Lampu kuning adalah eksklusif untuk Special Marks. Lampu merah dan hijau untuk Lateral Marks. Lampu putih untuk Cardinal, Isolated Danger, dan Safe Water Marks."},
+    {q:"Karakteristik lampu Fl(2) — Group Flashing 2 digunakan untuk…",o:["North Cardinal Mark","Safe Water Mark","Isolated Danger Mark","Preferred Channel Mark"],a:2,e:"Fl(2) — dua kerlip dalam satu grup — adalah karakteristik lampu PUTIH yang khas untuk Isolated Danger Marks. Ingat: dua bola di topmark, dua kerlip di lampu."},
+    {q:"Sistem IALA TIDAK berlaku untuk jenis navigasi aid berikut, KECUALI…",o:["Lighthouses (mercusuar)","Leading lights (lampu pemandu)","Cardinal buoy di tengah laut","Sector lights"],a:2,e:"Sistem IALA berlaku untuk fixed and floating marks termasuk Cardinal buoy. Yang DIKECUALIKAN dari sistem IALA: lighthouses, sector lights, leading lights and marks, lanbys (large automatic navigation buoys), dan certain large light-boats/light-vessels."},
+    {q:"Lampu Safe Water Mark menampilkan karakteristik apa?",o:["Fl(2) putih","Q atau VQ putih","Iso, Occ, LFl 10s, atau Mo(A) putih","Fl(2+1) kuning"],a:2,e:"Safe Water Mark menggunakan lampu putih dengan salah satu dari: Isophase (Iso), Occulting (Occ), Long Flash setiap 10 detik (LFl.10s), atau Morse Code A — Mo(A). Semua lampu putih."},
+    {q:"Buoy dengan bentuk Can (silinder datar) tanpa warna spesifik di Region A, menunjukkan bahwa buoy tersebut kemungkinan adalah…",o:["Starboard-hand lateral mark","Port-hand lateral mark","Cardinal mark","Safe water mark"],a:1,e:"Bentuk Can (silinder datar) digunakan untuk PORT-hand lateral marks di Region A. Bentuk Conical untuk STARBOARD-hand lateral marks. Can, Conical, dan Spherical menunjukkan sisi yang benar berdasarkan bentuknya."},
+    {q:"Retroreflector dalam sistem IALA berfungsi untuk…",o:["Memancarkan cahaya sendiri di malam hari","Memantulkan kembali cahaya agar rambu dapat diidentifikasi di malam hari tanpa lampu","Mendeteksi radar kapal yang lewat","Mengukur kedalaman air di sekitar buoy"],a:1,e:"Retroreflector adalah material yang memantulkan cahaya kembali ke sumbernya. Digunakan pada unlighted marks (rambu tanpa lampu) agar tetap bisa diidentifikasi di malam hari menggunakan cahaya senter atau spotlight kapal."},
+   ]},
+ ],
+ essay:[
+  {q:"Jelaskan mengapa sistem IALA dibagi menjadi dua Region (A dan B), dan apa konsekuensi praktisnya bagi seorang pelaut yang berlayar dari perairan Indonesia (Region A) ke Amerika Serikat (Region B)?",
+   kp:["IALA dibagi 2 Region karena kesepakatan sistem tunggal tidak bisa dicapai secara global","Region A: Merah di Port/kiri; Region B: Merah di Starboard/kanan","Indonesia = Region A; Amerika Serikat = Region B","Konsekuensi: pelaut harus mengubah interpretasi warna lateral marks — merah yang sebelumnya menandai sisi kiri kini di kanan","Penting untuk selalu mengecek chart dan sailing directions saat memasuki region baru","Bahaya kesalahan interpretasi jika pelaut tidak menyadari pergantian region"]},
+  {q:"Sebutkan dan jelaskan kelima jenis rambu dalam sistem IALA beserta warna, bentuk, dan fungsi utamanya!",
+   kp:["Lateral Marks: merah/hijau, can/conical, menandai sisi kiri-kanan alur","Cardinal Marks: hitam/kuning, pillar/spar + double cone topmark, menunjukkan air aman berdasarkan kompas","Isolated Danger Marks: hitam/merah, pillar/spar + double sphere, menandai bahaya terisolasi","Safe Water Marks: merah/putih stripes, pillar/spar/spherical + red sphere, menunjukkan air aman di semua sisi","Special Marks: kuning, optional shape + X topmark, menandai area/fitur khusus"]},
+ ]
+},
+
+// ===== KATEGORI 2: LATERAL MARKS =====
+{id:"lateral",title:"Rambu Lateral",full:"Lateral Marks — Alur Pelayaran",rules:"Topik 3–5",ico:"🚦",col:"#3b82f6",
+ desc:"Rambu Lateral digunakan untuk menandai sisi kiri (port) dan kanan (starboard) alur pelayaran. Warna merah dan hijau — yang berlaku berbeda di Region A dan Region B — memandu pelaut melalui alur yang aman.",
+ ruleList:[
+  {num:3,title:"Arah Konvensional Buoyage & Preferred Channel",
+   mat:`<h3>📍 Arah Konvensional Buoyage</h3>
+<p>Lateral Marks hanya bermakna jika kita tahu <strong><u>arah konvensional buoyage</u></strong> — arah yang menjadi acuan penentuan sisi kiri dan kanan. Ada dua cara mendefinisikannya:</p>
+<ul>
+<li><strong>Local Direction of Buoyage:</strong> Arah yang diambil pelaut saat <strong><u>mendekati pelabuhan, sungai, estuari, atau perairan lainnya dari arah laut</u></strong>. Ini adalah definisi paling umum — "dari laut ke darat".</li>
+<li><strong>General Direction of Buoyage:</strong> Arah yang ditetapkan otoritas buoyage, <strong><u>searah jarum jam mengelilingi benua</u></strong> sejauh mungkin. Ditandai dengan simbol panah magenta di peta.</li>
+</ul>
+<div class="kb">🧭 <strong>Di sekitar Kepulauan Inggris:</strong> General Direction of Buoyage berjalan ke Utara di sepanjang pantai Barat dan Irish Sea; ke Timur melalui English Channel; ke Utara melalui North Sea.</div>
+<h3>📍 Penomoran dan Urutan</h3>
+<p>Jika rambu di sisi alur diberi <strong>nomor atau huruf</strong>, urutannya mengikuti Conventional Direction of Buoyage (dari laut ke pelabuhan). Biasanya:</p>
+<ul>
+<li>Nomor ganjil: sisi Port (kiri) — merah di Region A</li>
+<li>Nomor genap: sisi Starboard (kanan) — hijau di Region A</li>
+</ul>
+<h3>📍 Preferred Channel Marks</h3>
+<p>Ketika sebuah alur bercabang menjadi dua alternatif menuju tujuan yang sama, <strong><u>Preferred Channel Mark</u></strong> menunjukkan alur yang lebih diutamakan. Ini adalah versi modifikasi dari Lateral Mark.</p>
+<div class="kb red">⚠️ <strong>Lampu Khas:</strong> Preferred Channel Marks menggunakan lampu <strong>Composite Group Flashing (2+1)</strong> — dua kerlip diikuti satu kerlip. Ini adalah ritme lampu yang unik dan harus dihapal!</div>
+<table>
+<tr><th>Posisi</th><th>Region A</th><th>Region B</th></tr>
+<tr><td>Preferred Channel ke STARBOARD</td><td>Merah + satu strip lebar Hijau · Can/Pillar/Spar · Topmark: can merah · Lampu: Fl(2+1)R</td><td>Hijau + satu strip lebar Merah · Can/Pillar/Spar · Topmark: can hijau · Lampu: Fl(2+1)G</td></tr>
+<tr><td>Preferred Channel ke PORT</td><td>Hijau + satu strip lebar Merah · Conical/Pillar/Spar · Topmark: cone hijau · Lampu: Fl(2+1)G</td><td>Merah + satu strip lebar Hijau · Conical/Pillar/Spar · Topmark: cone merah · Lampu: Fl(2+1)R</td></tr>
+</table>`,
+   kp:`<ul><li><strong>Local Direction:</strong> dari laut → pelabuhan/daratan</li><li><strong>General Direction:</strong> searah jarum jam mengelilingi benua — ditandai panah magenta di peta</li><li><strong>Preferred Channel Mark:</strong> lampu <strong>Fl(2+1)</strong> — dua kerlip + satu kerlip (unik, mudah dikenali)</li><li>Region A Preferred to Starboard: Merah + strip Hijau, lampu Fl(2+1)R</li><li>Region A Preferred to Port: Hijau + strip Merah, lampu Fl(2+1)G</li></ul>`,
+   mc:[
+    {q:"'Local Direction of Buoyage' didefinisikan sebagai arah yang diambil pelaut saat…",o:["Berlayar meninggalkan pelabuhan menuju laut lepas","Mendekati pelabuhan, sungai, atau estuari dari arah laut","Berlayar searah jarum jam mengelilingi benua","Mengikuti arus laut yang dominan"],a:1,e:"Local Direction of Buoyage: arah yang diambil Mariner ketika mendekati pelabuhan, sungai, estuari, atau perairan lain dari arah laut. Ini berarti arahnya adalah 'dari laut ke darat' — bukan sebaliknya."},
+    {q:"'General Direction of Buoyage' didasarkan pada prinsip…",o:["Berlawanan arah jarum jam mengelilingi benua","Searah jarum jam mengelilingi benua sejauh mungkin","Selalu mengarah ke Utara","Mengikuti arah angin dominan"],a:1,e:"General Direction of Buoyage didasarkan pada prinsip mengikuti arah searah jarum jam (clockwise) mengelilingi benua sejauh mungkin. Ini ditunjukkan di peta dengan simbol panah magenta."},
+    {q:"Simbol panah magenta pada peta nautika menunjukkan…",o:["Arah arus laut yang kuat","Lokasi bahaya bawah laut","Conventional Direction of Buoyage (arah konvensional buoyage)","Batas kawasan perairan khusus"],a:2,e:"Panah magenta (pink) pada peta menunjukkan Conventional Direction of Buoyage — arah referensi untuk interpretasi lateral marks. Panah yang saling berhadapan menunjukkan perubahan arah buoyage (misalnya di selat yang kompleks)."},
+    {q:"Preferred Channel Mark dapat diidentifikasi dari lampu yang berpola…",o:["Isophase putih setiap 10 detik","Quick flashing putih","Composite Group Flashing (2+1) merah atau hijau","Group Occulting (3) kuning"],a:2,e:"Preferred Channel Marks menggunakan Composite Group Flashing (2+1) — dua kerlip diikuti satu kerlip. Ini adalah ritme yang UNIK dan tidak digunakan untuk tujuan lain, sehingga mudah diidentifikasi."},
+    {q:"Di Region A, Preferred Channel Mark berwarna Merah dengan satu strip lebar Hijau dan lampu Fl(2+1)R menunjukkan bahwa preferred channel ada di sisi…",o:["Port (kiri)","Starboard (kanan)","Tengah alur","Tidak ada arti khusus"],a:1,e:"Di Region A: warna dasar merah dengan strip hijau → preferred channel ke STARBOARD. Ingat logikanya: warna dominan (merah) adalah warna port, tapi karena ada strip hijau, preferred channel justru ke starboard (hijau = starboard di Region A)."},
+    {q:"Di Region A, Preferred Channel Mark berwarna Hijau dengan satu strip lebar Merah menunjukkan…",o:["Preferred channel ke Starboard","Preferred channel ke Port","Bahaya di sisi kanan","Alur sama-sama baik"],a:1,e:"Di Region A: Hijau dengan strip Merah → preferred channel ke PORT. Lampu: Fl(2+1)G. Topmark: single green cone (karena preferred channel ke port = sisi conical/starboard yang dimodifikasi untuk prefer port)."},
+    {q:"Jika rambu lateral di sisi alur pelayaran diberi nomor, urutannya mengikuti…",o:["Kedalaman air dari dangkal ke dalam","Conventional Direction of Buoyage (dari laut ke pelabuhan)","Urutan alfabetis dari barat ke timur","Jarak dari pelabuhan terdekat"],a:1,e:"Penomoran atau pengurutan rambu mengikuti Conventional Direction of Buoyage. Umumnya nomor ganjil di sisi port, genap di sisi starboard — mengikuti konvensi dari laut menuju pelabuhan."},
+    {q:"Saat alur bercabang menjadi dua alternatif menuju tujuan yang sama, Preferred Channel Mark TIDAK digunakan jika…",o:["Kedua alur memiliki kedalaman yang sama","Alur tersebut di dalam kawasan khusus","Dua alur bergabung kembali — dalam kondisi ini sistem tidak menyediakan preferred channel mark","Visibilitas terbatas"],a:2,e:"Sistem IALA tidak menyediakan Preferred Channel Mark di titik di mana dua alur alternatif bergabung kembali. Preferred Channel Mark hanya untuk titik di mana alur bercabang (diverge), bukan di titik penggabungan (converge)."},
+   ]},
+  {num:4,title:"Lateral Marks Region A & Region B",
+   mat:`<h3>📍 Lateral Marks Region A</h3>
+<p>Di <strong>Region A</strong> (termasuk Indonesia, Eropa, Afrika, Asia, Australia), prinsip dasarnya adalah <strong><u>Merah di Kiri (Red to Port)</u></strong>:</p>
+<table>
+<tr><th>Aspek</th><th>Port-hand Mark (Kiri)</th><th>Starboard-hand Mark (Kanan)</th></tr>
+<tr><td>Warna</td><td>🔴 Merah</td><td>🟢 Hijau</td></tr>
+<tr><td>Bentuk</td><td>Can, Pillar, atau Spar</td><td>Conical, Pillar, atau Spar</td></tr>
+<tr><td>Topmark</td><td>Single Can (silinder merah)</td><td>Single Cone point upward (kerucut hijau)</td></tr>
+<tr><td>Lampu</td><td>Merah, ritme apapun (kecuali Fl(2+1))</td><td>Hijau, ritme apapun (kecuali Fl(2+1))</td></tr>
+<tr><td>Retroreflector</td><td>Pita/kotak merah</td><td>Pita/segitiga hijau</td></tr>
+</table>
+<div class="kb grn">✅ <strong>Mnemonik Region A:</strong> "PANCA" — Port = cAn = merah (cAN berasal dari kata 'kAN' dibalik). Atau lebih mudah: <strong>Merah Kiri, Hijau Kanan</strong> (seperti lampu merah-hijau Indonesia).</div>
+<h3>📍 Lateral Marks Region B</h3>
+<p>Di <strong>Region B</strong> (Amerika, Jepang, Korea, Filipina), warnanya <strong><u>dibalik</u></strong>:</p>
+<table>
+<tr><th>Aspek</th><th>Port-hand Mark (Kiri)</th><th>Starboard-hand Mark (Kanan)</th></tr>
+<tr><td>Warna</td><td>🟢 Hijau</td><td>🔴 Merah</td></tr>
+<tr><td>Bentuk</td><td>Can, Pillar, atau Spar</td><td>Conical, Pillar, atau Spar</td></tr>
+<tr><td>Topmark</td><td>Single Can (silinder hijau)</td><td>Single Cone point upward (kerucut merah)</td></tr>
+<tr><td>Lampu</td><td>Hijau, ritme apapun (kecuali Fl(2+1))</td><td>Merah, ritme apapun (kecuali Fl(2+1))</td></tr>
+</table>
+<div class="kb red">⚠️ <strong>Mnemonik Region B:</strong> "Red Right Returning" — Merah di Kanan saat kembali ke pelabuhan. Ingat ini adalah kebalikan dari Region A!</div>
+<h3>📍 Perbedaan Kritis</h3>
+<p>Satu-satunya perbedaan antara Region A dan B untuk Lateral Marks adalah <strong><u>warna dibalik</u></strong>. Bentuk (can untuk port, conical untuk starboard) dan ritme lampu tetap sama — hanya warnanya yang berbeda.</p>
+<div class="kb tel">🌊 <strong>Catatan Penting:</strong> Warna merah dan hijau juga sering digunakan untuk lampu shore lights kecil seperti lampu di ujung dermaga dan jetty. Hati-hati agar tidak salah mengidentifikasi ini sebagai lateral buoys.</div>`,
+   kp:`<ul><li><strong>Region A</strong>: Port = 🔴 Merah (Can) | Starboard = 🟢 Hijau (Conical)</li><li><strong>Region B</strong>: Port = 🟢 Hijau (Can) | Starboard = 🔴 Merah (Conical) — "<em>Red Right Returning</em>"</li><li>Bentuk Can SELALU untuk Port, Conical SELALU untuk Starboard (di kedua region)</li><li>Perbedaan A vs B HANYA pada warna — bentuk tetap sama</li><li>Topmark Port: single Can | Topmark Starboard: single Cone pointing up</li></ul>`,
+   mc:[
+    {q:"Di Region A, pelaut berlayar masuk pelabuhan. Buoy berwarna MERAH berbentuk Can ada di sisi…",o:["Starboard (kanan) kapal","Port (kiri) kapal","Tengah alur","Tidak ada arti — buoy merah bisa di mana saja"],a:1,e:"Region A = Red to Port. Buoy merah di PORT (kiri) kapal saat berlayar masuk (Conventional Direction of Buoyage = dari laut ke pelabuhan). Buoy harus selalu di sisi kiri kapal."},
+    {q:"Seorang pelaut di Region A melihat buoy berbentuk conical berwarna hijau. Buoy ini harus dilewati dengan menempatkannya di sisi…",o:["Port (kiri) kapal","Starboard (kanan) kapal","Bisa di mana saja — hanya informasi, tidak wajib dilewati dari sisi tertentu","Tepat di haluan kapal"],a:1,e:"Region A: Hijau Conical = Starboard-hand mark. Tempatkan buoy ini di sisi STARBOARD (kanan) kapal, artinya kapal harus melewatinya dari sisi kiri buoy ini."},
+    {q:"Di Region B (Amerika), saat kapal kembali ke pelabuhan, buoy merah harus dilewati dengan menempatkannya di sisi…",o:["Port (kiri)","Starboard (kanan)","Di belakang kapal","Bebas — bergantung kondisi"],a:1,e:"Region B: 'Red Right Returning' — Merah Kanan saat Kembali. Buoy merah adalah starboard-hand mark di Region B, jadi tempatkan di sisi STARBOARD (kanan). Ini kebalikan dari Region A!"},
+    {q:"Apa bentuk topmark dari starboard-hand lateral mark (di kedua Region A dan B)?",o:["Single can (silinder) mengarah ke atas","Single cone (kerucut) dengan ujung mengarah ke atas","Double sphere (dua bola) tersusun vertikal","X-shape (silang)"],a:1,e:"Starboard-hand lateral mark (baik di Region A maupun B) memiliki topmark berupa Single Cone dengan ujung/puncak mengarah ke ATAS. Port-hand mark memiliki topmark Single Can (silinder). Bentuk topmark tidak berubah antar region — hanya warna yang berbeda."},
+    {q:"Di Region A, pelaut melihat dua buoy: satu merah berbentuk can di kiri dan satu hijau berbentuk conical di kanan. Kapal berada di posisi…",o:["Di luar alur pelayaran dan harus berputar balik","Tepat di dalam alur pelayaran yang aman","Di zona bahaya","Di dekat bahaya terisolasi"],a:1,e:"Merah (can) di kiri dan Hijau (conical) di kanan, dengan kapal di tengahnya = kapal berada di dalam alur yang aman di Region A. Ini adalah posisi ideal yang harus dipertahankan pelaut."},
+    {q:"Mnemonik 'Red Right Returning' berlaku untuk…",o:["Region A — saat meninggalkan pelabuhan","Region B — saat mendekati pelabuhan","Region A — saat mendekati pelabuhan","Region B — saat meninggalkan pelabuhan"],a:1,e:"'Red Right Returning' adalah mnemonik Region B: saat RETURNING (kembali ke pelabuhan), merah ada di RIGHT (kanan = starboard). Ini berlaku di Amerika dan beberapa negara Asia seperti Jepang."},
+    {q:"Satu-satunya perbedaan antara Lateral Marks di Region A dan Region B adalah…",o:["Bentuk buoy (can vs conical dibalik)","Warna buoy (merah/hijau dibalik)","Karakteristik lampu","Ukuran buoy"],a:1,e:"Perbedaan HANYA pada warna: Region A merah di port dan hijau di starboard; Region B hijau di port dan merah di starboard. Bentuk (can = port, conical = starboard) dan ritme lampu tetap sama."},
+    {q:"Kapal nelayan Indonesia berangkat melaut dari pelabuhan. Buoy merah yang tadinya ada di kiri kini berpindah ke sisi kanan kapal. Ini menandakan…",o:["Ada kesalahan penempatan buoy","Kapal sudah keluar dari alur dan kini meninggalkan pelabuhan (bukan memasuki)","Kapal berada di Region B","Ada perubahan Conventional Direction of Buoyage"],a:1,e:"Di Region A, saat memasuki pelabuhan merah di kiri. Saat meninggalkan pelabuhan (arah berlawanan dengan Conventional Direction), merah yang tadinya di kiri kini akan ada di KANAN. Ini benar dan wajar — perspektif kapal berbalik."},
+    {q:"Port-hand lateral mark di Region A menggunakan lampu berwarna…",o:["Putih isophase","Merah, ritme apapun kecuali Fl(2+1)","Hijau, ritme apapun","Kuning, ritme apapun"],a:1,e:"Port-hand mark di Region A menggunakan lampu MERAH dengan ritme apapun KECUALI Fl(2+1) yang merupakan ritme khusus Preferred Channel marks. Starboard-hand mark menggunakan lampu HIJAU."},
+    {q:"Sebuah buoy di pelabuhan Tanjung Priok (Region A) memiliki topmark berbentuk can berwarna merah. Buoy ini adalah…",o:["Starboard-hand mark — lewati dari sisi kanan","Port-hand mark — lewati dari sisi kiri (buoy ada di kiri kapal)","Safe water mark","Cardinal mark"],a:1,e:"Can topmark merah = Port-hand mark di Region A. Tempatkan buoy ini di sisi PORT (kiri) kapal saat memasuki pelabuhan. Kapal berlayar dengan buoy ini di sisi kirinya."},
+   ]},
+ ],
+ essay:[
+  {q:"Jelaskan perbedaan sistem Lateral Marks di Region A dan Region B, serta bagaimana seorang pelaut Indonesia harus menyesuaikan diri ketika berlayar dari Region A ke Region B untuk pertama kalinya. Sertakan penjelasan tentang Preferred Channel Marks.",
+   kp:["Region A: Merah di Port (kiri), Hijau di Starboard (kanan) — 'Red to Port'","Region B: Hijau di Port (kiri), Merah di Starboard (kanan) — 'Red Right Returning'","Bentuk tetap sama: Can untuk Port, Conical untuk Starboard di kedua region","Perlunya mempelajari chart, pilot book, dan sailing directions sebelum memasuki Region B","Preferred Channel Mark: Fl(2+1) — ritme unik yang harus dikenali; warna dominan menunjukkan non-preferred side","Pentingnya konsultasi Notices to Mariners saat ada perubahan buoyage"]},
+ ]
+},
+
+// ===== KATEGORI 3: CARDINAL MARKS =====
+{id:"cardinal",title:"Rambu Kardinal",full:"Cardinal Marks — Panduan Kompas",rules:"Topik 6–7",ico:"🧭",col:"#f97316",
+ desc:"Cardinal Marks digunakan bersama kompas untuk menunjukkan di mana pelaut dapat menemukan air yang dapat dilayari dengan aman. Ditempatkan di salah satu dari empat kuadran (North, South, East, West) dari titik bahaya.",
+ ruleList:[
+  {num:6,title:"Pengantar, Topmark & Warna Cardinal Marks",
+   mat:`<h3>📍 Konsep Dasar Cardinal Marks</h3>
+<p>Cardinal Marks ditempatkan di salah satu dari <strong><u>empat kuadran</u></strong> yang dibatasi oleh inter-cardinal bearings dari titik yang ditandai. Nama cardinal mark mengacu pada kuadran di mana mark tersebut ditempatkan.</p>
+<div class="kb">🧭 <strong>Prinsip Emas:</strong> Pelaut AMAN jika melewati sisi yang sesuai dengan nama cardinal mark — lewati <strong>North mark dari sisi Utara</strong>, <strong>East mark dari sisi Timur</strong>, <strong>South mark dari sisi Selatan</strong>, <strong>West mark dari sisi Barat</strong>.</div>
+<h3>📍 Penggunaan Cardinal Marks</h3>
+<p>Cardinal marks dapat digunakan untuk:</p>
+<ul>
+<li>Menunjukkan bahwa <strong>air terdalam</strong> di suatu area ada di sisi yang dinamai mark tersebut</li>
+<li>Menunjukkan <strong>sisi aman</strong> untuk melewati suatu bahaya</li>
+<li>Menarik perhatian pada <strong>fitur penting</strong> di alur seperti tikungan, junction, bifurcation, atau ujung gosong</li>
+</ul>
+<h3>📍 Bentuk</h3>
+<p>Bentuk cardinal mark tidak signifikan (tidak ada makna khusus), tetapi jika berupa buoy, menggunakan <strong>Pillar atau Spar</strong>. Karena bentuk tidak memberi informasi, <strong><u>topmark sangat penting</u></strong>.</p>
+<h3>📍 Warna — Hitam dan Kuning</h3>
+<p>Cardinal marks menggunakan kombinasi <strong><u>Hitam (Black) dan Kuning (Yellow)</u></strong>. Posisi pita hitam menunjukkan ke mana topmark mengarah:</p>
+<table>
+<tr><th>Cardinal Mark</th><th>Topmark Orientasi</th><th>Pola Warna</th><th>Deskripsi</th></tr>
+<tr><td>🧭 <strong>North</strong></td><td>▲▲ Kedua kerucut mengarah ke ATAS</td><td>Hitam di ATAS, Kuning di bawah</td><td>Pita hitam atas menunjukkan kerucut mengarah ke atas</td></tr>
+<tr><td>🧭 <strong>East</strong></td><td>▲▼ Kerucut mengarah ke LUAR (menjauhi tengah)</td><td>Hitam di ATAS dan di BAWAH, Kuning di TENGAH</td><td>Menyerupai belah ketupat/wajik</td></tr>
+<tr><td>🧭 <strong>South</strong></td><td>▼▼ Kedua kerucut mengarah ke BAWAH</td><td>Kuning di atas, Hitam di BAWAH</td><td>Pita hitam bawah menunjukkan kerucut mengarah ke bawah</td></tr>
+<tr><td>🧭 <strong>West</strong></td><td>▼▲ Kerucut mengarah ke DALAM (saling berhadapan)</td><td>Kuning di ATAS dan di BAWAH, Hitam di TENGAH</td><td>Menyerupai bentuk piala/gelas anggur (Wineglass)</td></tr>
+</table>
+<div class="kb red">🎯 <strong>Mnemonik Topmark:</strong><br/>
+• <strong>North</strong>: ▲▲ Points UP (seperti panah ke Utara di kompas)<br/>
+• <strong>South</strong>: ▼▼ Points DOWN (kebalikan North)<br/>
+• <strong>East</strong>: ▲▼ Points Away/Out (menjauhi pusat = seperti ujung lancing ke luar)<br/>
+• <strong>West</strong>: ▼▲ '<strong>W</strong> for <strong>W</strong>ineglass' — bentuk piala anggur — mudah diingat!</div>`,
+   kp:`<ul><li>Cardinal marks = berdasarkan <strong>kompas</strong>, 4 arah: North, South, East, West</li><li>Aman jika melewati sisi yang sesuai nama mark (North mark → lewati dari Utara)</li><li>Warna: <strong>Hitam & Kuning</strong> — posisi hitam sesuai arah kerucut topmark</li><li>North: ▲▲ hitam atas | East: ▲▼ hitam kedua ujung | South: ▼▼ hitam bawah | West: ▼▲ kuning kedua ujung (Wineglass)</li><li>Bentuk buoy: Pillar atau Spar — topmark SANGAT PENTING!</li></ul>`,
+   mc:[
+    {q:"Cardinal Marks ditempatkan berdasarkan…",o:["Arah arus laut dominan","Kuadran kompas (North, South, East, West) dari titik bahaya","Kedalaman air di sekitar bahaya","Jenis bahaya (karang, bangkai kapal, dll.)"],a:1,e:"Cardinal marks ditempatkan di salah satu dari empat kuadran (North, South, East, West) yang dibatasi oleh inter-cardinal bearings dari titik yang ditandai. Nama mark menunjukkan kuadran penempatan."},
+    {q:"Pelaut aman melewati North Cardinal Mark jika ia melewatinya dari sisi…",o:["Selatan mark","Timur mark","Barat mark","Utara mark"],a:3,e:"Prinsip dasar: pelaut AMAN jika melewati sisi yang sesuai dengan nama. North Cardinal Mark → lewati dari sisi UTARA (North). East → dari Timur. South → dari Selatan. West → dari Barat."},
+    {q:"Warna yang digunakan untuk Cardinal Marks adalah…",o:["Merah dan Putih","Hitam dan Merah","Hitam dan Kuning","Biru dan Kuning"],a:2,e:"Cardinal Marks menggunakan kombinasi Hitam (Black) dan Kuning (Yellow). Hitam dan Merah adalah warna Isolated Danger Marks. Merah dan Putih adalah Safe Water Marks."},
+    {q:"North Cardinal Mark memiliki topmark dengan orientasi…",o:["▼▼ Kedua kerucut mengarah ke bawah","▲▼ Kerucut mengarah ke luar","▲▲ Kedua kerucut mengarah ke atas","▼▲ Seperti gelas anggur"],a:2,e:"North Cardinal Mark: ▲▲ — kedua kerucut mengarah ke ATAS (seperti panah kompas mengarah ke Utara). Ini adalah pola paling intuitif — North = UP."},
+    {q:"Pola warna South Cardinal Mark adalah…",o:["Hitam di atas, Kuning di bawah","Kuning di atas, Hitam di bawah","Hitam di kedua ujung, Kuning di tengah","Kuning di kedua ujung, Hitam di tengah"],a:1,e:"South Cardinal: Kuning di atas, Hitam di BAWAH. Topmark: ▼▼ kedua kerucut mengarah ke bawah. Pita hitam di bagian bawah sesuai dengan arah kerucut yang menunjuk ke bawah."},
+    {q:"East Cardinal Mark memiliki pola warna yang menyerupai…",o:["Gelas anggur (wineglass)","Belah ketupat/wajik — hitam kedua ujung, kuning tengah","Stripes merah putih bergantian","Polos kuning dengan satu pita hitam"],a:1,e:"East Cardinal: Hitam di ATAS dan di BAWAH, Kuning di TENGAH — menyerupai belah ketupat/wajik. Topmark: ▲▼ mengarah ke luar (kedua kerucut saling menjauhi pusat). Ingat: 3 o'clock = East, 3 kerlip."},
+    {q:"Mnemonik 'W for Wineglass' merujuk pada Cardinal Mark arah…",o:["North","South","East","West"],a:3,e:"'W for Wineglass' adalah mnemonik untuk West Cardinal Mark. Polanya: Kuning di ATAS dan BAWAH, Hitam di TENGAH — membentuk siluet seperti gelas anggur (wineglass). Topmark: ▼▲ (kerucut saling mengarah ke dalam)."},
+    {q:"Mengapa topmark sangat penting pada Cardinal Marks?",o:["Karena warnanya tidak bisa dilihat di malam hari","Karena bentuk buoy cardinal marks (pillar/spar) tidak memberikan informasi arah","Karena lampu cardinal marks selalu putih dan sulit dibedakan","Karena cardinal marks tidak memiliki lampu"],a:1,e:"Bentuk buoy Cardinal Marks (pillar atau spar) tidak signifikan — tidak memberi informasi arah. Oleh karena itu topmark (double cone) sangat penting karena orientasinya menunjukkan kuadran (N/S/E/W). Topmark harus dipasang sebesar mungkin dan jarak kerucut harus jelas."},
+   ]},
+  {num:7,title:"Lampu Cardinal Marks — Pola Quick & Very Quick",
+   mat:`<h3>📍 Karakteristik Lampu Cardinal Marks</h3>
+<p>Cardinal marks yang dilengkapi lampu menggunakan <strong><u>lampu putih</u></strong> dengan karakteristik berdasarkan <strong>Quick (Q) atau Very Quick (VQ)</strong> flashing. Pola kerlipan berbeda untuk setiap arah:</p>
+<table>
+<tr><th>Cardinal Mark</th><th>Pola Quick Light</th><th>Pola VQ Light</th><th>Periode Q</th><th>Periode VQ</th></tr>
+<tr><td>🧭 <strong>North</strong></td><td>Q — Uninterrupted (kontinu)</td><td>VQ — Uninterrupted (kontinu)</td><td>—</td><td>—</td></tr>
+<tr><td>🧭 <strong>East</strong></td><td>Q(3) setiap 10 detik</td><td>VQ(3) setiap 5 detik</td><td>10s</td><td>5s</td></tr>
+<tr><td>🧭 <strong>South</strong></td><td>Q(6) + LFl setiap 15 detik</td><td>VQ(6) + LFl setiap 10 detik</td><td>15s</td><td>10s</td></tr>
+<tr><td>🧭 <strong>West</strong></td><td>Q(9) setiap 30 detik</td><td>VQ(9) setiap 10 detik</td><td>30s</td><td>10s</td></tr>
+</table>
+<div class="kb">⏰ <strong>Mnemonik JAM (Clock Face):</strong><br/>
+Jumlah kerlip dapat dikaitkan dengan posisi jam:<br/>
+• <strong>East</strong> = <strong>3</strong> kerlip = posisi jam <strong>3:00</strong><br/>
+• <strong>South</strong> = <strong>6</strong> kerlip = posisi jam <strong>6:00</strong><br/>
+• <strong>West</strong> = <strong>9</strong> kerlip = posisi jam <strong>9:00</strong><br/>
+• <strong>North</strong> = <strong>Kontinu</strong> (tidak terhenti) = paling "aktif" = posisi puncak (12:00)</div>
+<h3>📍 Long Flash pada South Cardinal</h3>
+<p>South Cardinal menggunakan <strong><u>Long Flash (LFl)</u></strong> yang segera mengikuti grup kerlip. Long Flash adalah kilatan dengan durasi <strong>tidak kurang dari 2 detik</strong>. Fungsinya untuk memastikan karakteristik South tidak bisa tertukar dengan 3 kerlip (East) atau 9 kerlip (West).</p>
+<h3>📍 Quick vs Very Quick</h3>
+<ul>
+<li><strong>Quick (Q):</strong> 60–79 kerlip per menit (biasanya 60 atau 66)</li>
+<li><strong>Very Quick (VQ):</strong> 80–159 kerlip per menit (biasanya 100 atau 120)</li>
+</ul>
+<p>Keduanya menggunakan pola kerlip yang sama, hanya kecepatan berbeda. Setiap wilayah biasanya hanya menggunakan salah satu jenis.</p>
+<h3>📍 New Dangers</h3>
+<p><strong><u>New Danger</u></strong> adalah bahaya yang baru ditemukan dan belum tercantum di peta atau Sailing Directions. Cardinal atau Lateral marks dapat digunakan untuk menandainya, dan jika digunakan lampu, karakteristiknya adalah <strong>Q atau VQ</strong> — untuk membuatnya mencolok dan segera dikenali sebagai bahaya baru.</p>`,
+   kp:`<ul><li><strong>North</strong>: Q atau VQ — kontinu (tidak berhenti)</li><li><strong>East</strong>: Q(3)/VQ(3) — 3 kerlip = jam 3:00</li><li><strong>South</strong>: Q(6)+LFl / VQ(6)+LFl — 6 kerlip + Long Flash = jam 6:00</li><li><strong>West</strong>: Q(9)/VQ(9) — 9 kerlip = jam 9:00</li><li>LFl pada South untuk mencegah kebingungan dengan East (3) atau West (9)</li><li>Semua lampu Cardinal: <strong>PUTIH</strong></li><li>New Danger: ditandai Cardinal/Lateral + lampu Q atau VQ</li></ul>`,
+   mc:[
+    {q:"North Cardinal Mark menggunakan karakteristik lampu…",o:["Q(3) atau VQ(3) setiap 10/5 detik","Q(9) atau VQ(9) setiap 30/10 detik","Q atau VQ — kontinu tanpa henti","Q(6)+LFl atau VQ(6)+LFl setiap 15/10 detik"],a:2,e:"North Cardinal Mark: Q atau VQ KONTINU (uninterrupted) — kerlipan tanpa henti. Ini paling mudah diingat karena North adalah 'puncak' — paling aktif/kontinu."},
+    {q:"East Cardinal Mark menggunakan berapa kerlip dalam satu grup?",o:["3 kerlip","6 kerlip","9 kerlip","Kontinu"],a:0,e:"East Cardinal Mark: Q(3) atau VQ(3) — 3 kerlip dalam satu grup. Ingat mnemonik jam: East = posisi jam 3:00 = 3 kerlip."},
+    {q:"Mengapa South Cardinal Mark menggunakan Long Flash (LFl) setelah grup kerlipnya?",o:["Karena South adalah arah yang paling berbahaya","Untuk memastikan polanya tidak bisa tertukar dengan 3 kerlip (East) atau 9 kerlip (West)","Karena LFl lebih terang dari kerlip biasa","Untuk memberi waktu lebih bagi pelaut mengidentifikasi buoy"],a:1,e:"Long Flash (durasi ≥ 2 detik) segera mengikuti 6 kerlip South agar tidak bisa tertukar dengan Q(3) East atau Q(9) West. Tanpa LFl, penghitungan 6 kerlip bisa saja disalahartikan."},
+    {q:"West Cardinal Mark menggunakan berapa kerlip dalam satu grup?",o:["3 kerlip","6 kerlip","9 kerlip","12 kerlip"],a:2,e:"West Cardinal Mark: Q(9) atau VQ(9) — 9 kerlip dalam satu grup. Ingat mnemonik jam: West = posisi jam 9:00 = 9 kerlip."},
+    {q:"Mnemonik 'jam' untuk mengingat pola kerlip Cardinal Marks adalah…",o:["North=12, East=3, South=6, West=9 kerlip","North=kontinu, East=3, South=6, West=9 kerlip","North=1, East=4, South=7, West=10 kerlip","North=3, East=6, South=9, West=12 kerlip"],a:1,e:"Mnemonik jam: North = KONTINU (tidak terhenti, seperti jarum detik terus berputar), East = 3 kerlip (posisi jam 3), South = 6 kerlip + LFl (posisi jam 6), West = 9 kerlip (posisi jam 9)."},
+    {q:"Semua Cardinal Marks yang dilengkapi lampu menggunakan warna lampu…",o:["Merah","Hijau","Kuning","Putih"],a:3,e:"Semua Cardinal Marks menggunakan lampu PUTIH. Merah dan hijau adalah eksklusif untuk Lateral Marks. Kuning untuk Special Marks."},
+    {q:"Quick lights (Q) memiliki kecepatan kerlip…",o:["30–59 kerlip per menit","60–79 kerlip per menit","80–159 kerlip per menit","160 kerlip per menit ke atas"],a:1,e:"Quick lights (Q): 60–79 kerlip per menit (biasanya 60 atau 66). Very Quick lights (VQ): 80–159 kerlip per menit (biasanya 100 atau 120). Keduanya menggunakan pola kerlip yang sama, hanya kecepatan berbeda."},
+    {q:"Pelaut di malam hari melihat lampu putih yang berpola kerlip: tiga kerlip cepat diikuti jeda, tiga kerlip cepat lagi — berulang. Ini kemungkinan adalah…",o:["North Cardinal Mark","East Cardinal Mark","South Cardinal Mark","West Cardinal Mark"],a:1,e:"Q(3) atau VQ(3) — 3 kerlip dalam grup — adalah karakteristik East Cardinal Mark. Ingat jam 3:00 = East. Pastikan juga mengidentifikasi topmark (▲▼) dan warna (hitam kedua ujung, kuning tengah) saat kondisi memungkinkan."},
+    {q:"'New Danger' dalam konteks IALA adalah…",o:["Semua bahaya navigasi yang ada di laut","Bahaya yang baru ditemukan dan belum tercantum di peta atau Sailing Directions","Bahaya yang ditandai dengan Emergency Wreck Marking Buoy saja","Karang yang muncul akibat perubahan pasang surut"],a:1,e:"New Danger: bahaya navigasi yang baru ditemukan dan belum ditampilkan di peta atau dimasukkan Sailing Directions, atau belum cukup dipublikasikan melalui Notices to Mariners. Bisa berupa gosong alami, karang, atau bangkai kapal baru."},
+   ]},
+ ],
+ essay:[
+  {q:"Jelaskan secara lengkap sistem Cardinal Marks IALA, meliputi: konsep dasar, keempat arah beserta pola warna dan topmark masing-masing, serta pola lampu yang digunakan. Bagaimana seorang pelaut dapat mengidentifikasi Cardinal Mark di malam hari?",
+   kp:["Konsep: ditempatkan di kuadran kompas dari bahaya; pelaut aman melewati sisi sesuai nama mark","Warna: Hitam dan Kuning; posisi hitam sesuai arah topmark","North: ▲▲ hitam atas, Q/VQ kontinu","East: ▲▼ hitam kedua ujung kuning tengah, Q(3)/VQ(3)","South: ▼▼ kuning atas hitam bawah, Q(6)+LFl/VQ(6)+LFl","West: ▼▲ kuning kedua ujung hitam tengah (Wineglass), Q(9)/VQ(9)","Di malam hari: hitung pola kerlip putih; North=kontinu, East=3, South=6+LFl, West=9"]},
+ ]
+},
+
+// ===== KATEGORI 4: ISOLATED DANGER MARKS =====
+{id:"isolated",title:"Rambu Bahaya Terisolasi",full:"Isolated Danger Marks",rules:"Topik 8",ico:"⚫",col:"#ef4444",
+ desc:"Isolated Danger Marks ditambatkan di atas atau di dekat bahaya terisolasi yang memiliki air yang dapat dilayari di semua sisinya. Topmark dua bola hitam dan lampu Fl(2) adalah cirinya yang paling khas.",
+ ruleList:[
+  {num:8,title:"Isolated Danger Marks — Karakteristik Lengkap",
+   mat:`<h3>📍 Definisi dan Konsep</h3>
+<p>Isolated Danger Marks ditempatkan <strong>di atas, atau ditambatkan di atas, atau di dekat</strong> bahaya terisolasi (<strong><u>isolated danger</u></strong>) yang memiliki <strong><u>air yang dapat dilayari di semua sisinya</u></strong>.</p>
+<div class="kb">💡 <strong>Contoh:</strong> Sebuah gosong yang jauh di tengah laut dengan air yang cukup dalam di sekelilingnya. Juga bisa berupa pulau kecil yang dipisahkan dari pantai oleh alur sempit — selama ada air navigable di sekitar bahaya tersebut.</div>
+<p>Penting: luas air navigable di sekitar bahaya tidak menjadi syarat. Mark ini bisa menandai gosong yang jauh lepas pantai atau pulau kecil dekat pantai dengan alur sempit — yang penting ada air navigable di sekelilingnya.</p>
+<h3>📍 Karakteristik Lengkap</h3>
+<table>
+<tr><th>Karakteristik</th><th>Detail</th></tr>
+<tr><td>Warna</td><td>⬛🔴 Hitam dengan satu atau lebih pita MERAH horizontal</td></tr>
+<tr><td>Bentuk (jika buoy)</td><td>Pillar atau Spar</td></tr>
+<tr><td>Topmark</td><td>🔵🔵 DUA bola hitam — tersusun VERTIKAL — sangat penting!</td></tr>
+<tr><td>Lampu</td><td>Putih, Group Flashing (2) — Fl(2)</td></tr>
+<tr><td>Retroreflector (Standard)</td><td>Satu atau lebih pita putih, huruf, angka, atau simbol</td></tr>
+<tr><td>Retroreflector (Comprehensive)</td><td>Satu atau lebih pasang pita biru di atas merah</td></tr>
+</table>
+<div class="kb red">🎯 <strong>Mnemonik:</strong> Dua Bola di Topmark = Dua Kerlip di Lampu (Fl(2)). Mudah diingat! Selain itu: "Hitam-Merah seperti bendera bahaya".</div>
+<h3>📍 Pentingnya Topmark</h3>
+<p>Topmark <strong>dua bola hitam yang tersusun vertikal</strong> adalah fitur <strong><u>sangat penting</u></strong> dari Isolated Danger Marks dan dipasang setiap saat jika memungkinkan. Bola-bola harus sebesar mungkin dan jarak antar bola harus jelas terpisah.</p>
+<h3>📍 Posisi di Peta</h3>
+<p>Di peta Admiralty, posisi bahaya adalah pusat simbol atau sounding yang menunjukkan bahaya. Simbol Isolated Danger buoy <strong>mungkin sedikit bergeser</strong> dari posisi tepat bahaya di peta.</p>`,
+   kp:`<ul><li>Warna: <strong>Hitam</strong> dengan satu/lebih pita <strong>Merah</strong> horizontal</li><li>Bentuk: Pillar atau Spar (tidak ada makna khusus dari bentuk)</li><li>Topmark: <strong>Dua bola hitam</strong> tersusun vertikal — SANGAT PENTING</li><li>Lampu: <strong>Fl(2)</strong> — dua kerlip — PUTIH</li><li>Mnemonik: 2 Bola = 2 Kerlip</li><li>Air navigable ada di <strong>semua sisi</strong> mark ini</li></ul>`,
+   mc:[
+    {q:"Isolated Danger Mark ditempatkan di atas atau di dekat bahaya yang memiliki karakteristik…",o:["Hanya bahaya di tengah laut lepas berjarak lebih dari 12 nm dari pantai","Air yang dapat dilayari di semua sisinya","Kedalaman kurang dari 2 meter","Bahaya yang tidak bisa ditandai dengan Cardinal atau Lateral marks"],a:1,e:"Isolated Danger Mark: ditempatkan di atas bahaya terisolasi yang memiliki AIR NAVIGABLE DI SEMUA SISI. Luas air navigable di sekitarnya tidak menjadi syarat — bisa sempit atau luas."},
+    {q:"Warna Isolated Danger Mark adalah…",o:["Merah dan Putih bergaris horizontal","Hitam dan Kuning bergaris horizontal","Hitam dengan satu atau lebih pita Merah horizontal","Merah dengan satu atau lebih pita Hitam horizontal"],a:2,e:"Isolated Danger Mark: Hitam dengan satu atau lebih pita MERAH horizontal. Jangan tertukar dengan Cardinal (hitam/kuning) atau Lateral (merah atau hijau saja)."},
+    {q:"Topmark Isolated Danger Mark terdiri dari…",o:["Satu kerucut tunggal mengarah ke atas","Dua kerucut hitam tersusun vertikal","Dua bola hitam tersusun vertikal","Satu X (silang) kuning"],a:2,e:"Isolated Danger Mark: DUA bola hitam tersusun VERTIKAL. Ini adalah fitur yang sangat penting dan harus dikenali. Mnemonik: 2 bola = 2 kerlip lampu Fl(2)."},
+    {q:"Karakteristik lampu Isolated Danger Mark adalah…",o:["Q atau VQ putih kontinu","Fl(2) putih — dua kerlip dalam satu grup","Iso putih — isophase","Fl(2+1) merah — composite group flashing"],a:1,e:"Fl(2) — Group Flashing 2 — PUTIH adalah lampu khas Isolated Danger Mark. Dua kerlip putih sesuai dengan dua bola hitam di topmark. Mudah diingat!"},
+    {q:"Isolated Danger Mark menggunakan bentuk buoy…",o:["Can (silinder datar)","Conical (kerucut)","Spherical (bola)","Pillar atau Spar"],a:3,e:"Isolated Danger Mark menggunakan Pillar atau Spar sebagai buoy. Bentuk ini tidak memberi informasi — hanya topmark (dua bola hitam) yang penting untuk identifikasi."},
+    {q:"Seorang pelaut melihat buoy hitam dengan pita merah dan dua bola hitam di atasnya. Ia harus…",o:["Berlayar tepat di atas buoy tersebut — air aman di sana","Menghindari area tersebut karena ada bahaya di sekelilingnya","Melewati buoy ini bisa dari arah mana saja — air aman di semua sisi, tapi hindari posisi buoy itu sendiri","Berlayar tepat ke arah Utara dari buoy"],a:2,e:"Isolated Danger Mark berarti ada bahaya tepat di bawah/dekat buoy, TAPI air navigable ada di semua sisinya. Pelaut bisa melewatinya dari arah mana saja, asalkan TIDAK berlayar tepat di posisi buoy (bahaya ada di sana)."},
+    {q:"Mengapa topmark dua bola hitam disebut 'sangat penting' pada Isolated Danger Marks?",o:["Karena warnanya hitam yang kontras dengan langit","Karena bentuk buoy tidak memberi informasi arah sehingga topmark menjadi satu-satunya identifikasi khas","Karena ukurannya yang besar memudahkan deteksi radar","Karena bola hitam memantulkan cahaya dengan baik di malam hari"],a:1,e:"Bentuk buoy (pillar/spar) tidak memberi informasi khusus tentang jenis mark. Topmark dua bola hitam adalah identifikasi UNIK Isolated Danger Marks — tidak digunakan oleh jenis mark lain. Tanpa topmark, sulit membedakannya dari Cardinal marks saat siang hari."},
+    {q:"Manakah yang paling tepat menggambarkan contoh bahaya yang sesuai untuk ditandai dengan Isolated Danger Mark?",o:["Gosong yang memanjang di sepanjang sisi alur pelayaran","Sebuah karang tunggal di tengah laut dengan air dalam di sekelilingnya","Serangkaian batu karang yang membentang di depan pantai","Wilayah alur yang sangat dangkal"],a:1,e:"Isolated Danger Mark paling sesuai untuk bahaya TERISOLASI (tunggal, terpisah) dengan air navigable di semua sisinya — seperti karang tunggal di tengah laut. Bahaya yang memanjang di sepanjang alur lebih cocok ditandai dengan Lateral Marks."},
+   ]},
+ ],
+ essay:[
+  {q:"Jelaskan karakteristik lengkap Isolated Danger Marks IALA, termasuk warna, bentuk, topmark, dan lampu. Bagaimana cara pelaut yang aman melewati area yang ditandai Isolated Danger Mark, dan mengapa mark ini berbeda dari Cardinal Marks meskipun keduanya menggunakan warna hitam?",
+   kp:["Warna: Hitam dengan pita Merah horizontal (bukan hitam/kuning seperti Cardinal)","Bentuk: Pillar atau Spar (tidak signifikan)","Topmark: DUA bola hitam tersusun vertikal — sangat penting","Lampu: Fl(2) putih — dua kerlip","Pelaut bisa melewati dari semua sisi tapi hindari posisi tepat di buoy","Perbedaan dari Cardinal: topmark bola (bukan cone), warna pita merah (bukan kuning), Fl(2) (bukan Q/VQ)"]},
+ ]
+},
+
+// ===== KATEGORI 5: SAFE WATER MARKS =====
+{id:"safewater",title:"Rambu Air Aman",full:"Safe Water Marks — Air Navigable Semua Sisi",rules:"Topik 9",ico:"🔵",col:"#22c55e",
+ desc:"Safe Water Marks menunjukkan bahwa ada air yang dapat dilayari di semua sisi mark ini. Digunakan sebagai buoy tengah alur (centreline), mid-channel, atau landfall buoy — penanda pertama yang ditemukan saat mendekati pantai dari laut.",
+ ruleList:[
+  {num:9,title:"Safe Water Marks — Karakteristik Lengkap",
+   mat:`<h3>📍 Fungsi dan Penggunaan</h3>
+<p>Safe Water Marks digunakan untuk menunjukkan bahwa <strong><u>ada air navigable di semua sisi mark</u></strong>. Penggunaannya meliputi:</p>
+<ul>
+<li><strong>Centreline buoy:</strong> Menandai garis tengah alur pelayaran</li>
+<li><strong>Mid-channel buoy:</strong> Menandai bagian tengah alur</li>
+<li><strong>Landfall buoy:</strong> Penanda pertama yang dicari pelaut saat mendekati daratan dari laut lepas</li>
+<li><strong>Titik terbaik di bawah jembatan tetap:</strong> Menandai lokasi dengan air terdalam di bawah jembatan</li>
+</ul>
+<div class="kb grn">✅ <strong>Analogi:</strong> Safe Water Mark seperti "pintu selamat datang" — menandai area di mana air aman dari segala arah. Berbeda dari Cardinal Mark yang mengarahkan ke sisi aman, Safe Water Mark menyatakan bahwa posisinya sendiri sudah aman.</div>
+<h3>📍 Karakteristik Lengkap</h3>
+<table>
+<tr><th>Karakteristik</th><th>Detail</th></tr>
+<tr><td>Warna</td><td>🔴⬜ Merah dan Putih bergaris VERTIKAL (stripes)</td></tr>
+<tr><td>Bentuk (jika buoy)</td><td>Spherical, Pillar, atau Spar</td></tr>
+<tr><td>Topmark</td><td>🔴 SATU bola MERAH</td></tr>
+<tr><td>Lampu</td><td>Putih: Isophase (Iso), Occulting (Occ), Long Flashing 10s (LFl.10s), atau Morse Code A — Mo(A)</td></tr>
+<tr><td>Retroreflector (Standard)</td><td>Satu atau lebih pita putih</td></tr>
+<tr><td>Retroreflector (Comprehensive)</td><td>Pita Merah dan Putih bergaris</td></tr>
+</table>
+<h3>📍 Detail Lampu</h3>
+<p>Jika lampu yang digunakan adalah <strong>Long Flash</strong>, periodenya adalah <strong>10 detik</strong>. Long Flash = kilatan dengan durasi tidak kurang dari 2 detik.</p>
+<p><strong>Morse Code A</strong> — Mo(A) — berarti: satu titik (kerlip pendek) diikuti satu garis (kerlip panjang). Ini adalah kode Morse untuk huruf "A".</p>
+<div class="kb tel">🔴⬜ <strong>Cara Membedakan dari Isolated Danger:</strong><br/>
+• Safe Water: stripes MERAH-PUTIH vertikal, topmark SATU bola MERAH, lampu Iso/Occ/LFl/Mo(A)<br/>
+• Isolated Danger: HITAM dengan pita MERAH horizontal, topmark DUA bola HITAM, lampu Fl(2)<br/>
+Garis VERTIKAL vs HORIZONTAL adalah perbedaan visual kunci!</div>
+<h3>📍 Topmark</h3>
+<p>Topmark <strong>satu bola merah</strong> adalah fitur sangat penting jika buoy bukan berbentuk spherical. Dipasang setiap saat jika memungkinkan.</p>`,
+   kp:`<ul><li>Warna: <strong>Merah dan Putih</strong> bergaris VERTIKAL (stripes)</li><li>Bentuk: Spherical, Pillar, atau Spar</li><li>Topmark: <strong>Satu bola Merah</strong> (bukan dua bola seperti Isolated Danger)</li><li>Lampu: <strong>Iso, Occ, LFl 10s, atau Mo(A)</strong> — semua PUTIH</li><li>Menunjukkan air navigable di <strong>semua sisi</strong></li><li>Digunakan sebagai centreline, mid-channel, landfall buoy</li></ul>`,
+   mc:[
+    {q:"Safe Water Mark digunakan untuk menunjukkan bahwa…",o:["Ada bahaya di sisi utara mark","Ada air yang dapat dilayari di semua sisi mark","Alur pelayaran berakhir di sini","Kecepatan kapal harus dikurangi"],a:1,e:"Safe Water Mark menyatakan bahwa ada air navigable (dapat dilayari) di semua sisi mark. Berbeda dari Cardinal yang mengarahkan ke sisi aman — Safe Water Mark sendiri sudah berada di posisi yang aman."},
+    {q:"Warna Safe Water Mark adalah…",o:["Merah polos","Hitam dengan pita merah horizontal","Merah dan Putih bergaris vertikal (stripes)","Kuning dan Merah bergaris horizontal"],a:2,e:"Safe Water Mark: Merah dan Putih bergaris VERTIKAL. Pola stripes vertikal ini membedakannya dari Isolated Danger Mark yang memiliki pita merah horizontal di atas dasar hitam."},
+    {q:"Topmark Safe Water Mark adalah…",o:["Dua bola hitam tersusun vertikal","Satu bola merah","Dua kerucut hitam mengarah ke atas","X (silang) kuning"],a:1,e:"Safe Water Mark: Satu bola MERAH. Ini berbeda dari Isolated Danger Mark yang memiliki dua bola hitam. Satu bola merah pada Safe Water Mark juga melambangkan 'air merah = aman' dalam konteks ini."},
+    {q:"Manakah yang BUKAN karakteristik lampu Safe Water Mark?",o:["Isophase (Iso) putih","Occulting (Occ) putih","Fl(2) putih — Group Flashing 2","Long Flashing 10s (LFl.10s) putih"],a:2,e:"Fl(2) adalah karakteristik Isolated Danger Mark, BUKAN Safe Water Mark. Safe Water Mark menggunakan: Iso (isophase), Occ (occulting), LFl.10s (long flash setiap 10s), atau Mo(A) (Morse Code A) — semuanya putih."},
+    {q:"'Landfall buoy' adalah istilah yang paling sering dikaitkan dengan Safe Water Mark karena…",o:["Buoy ini hanya ditempatkan di pintu masuk pelabuhan","Pelaut yang mendekati daratan dari laut lepas mencarinya sebagai penanda pertama bahwa air di sekitarnya aman","Buoy ini menandai batas perairan teritorial","Buoy ini hanya terlihat dari daratan"],a:1,e:"Landfall buoy adalah buoy pertama yang dicari pelaut saat mendekati daratan dari laut lepas. Safe Water Mark cocok untuk peran ini karena menandai posisi yang memiliki air navigable di semua sisi — pelaut bisa mendekatinya dari arah mana saja."},
+    {q:"Perbedaan visual kunci antara Safe Water Mark dan Isolated Danger Mark adalah…",o:["Safe Water berwarna kuning, Isolated Danger berwarna hitam","Safe Water memiliki stripes vertikal merah-putih dan topmark satu bola merah; Isolated Danger berwarna hitam/merah horizontal dan topmark dua bola hitam","Safe Water memiliki lampu hijau, Isolated Danger lampu merah","Safe Water berbentuk conical, Isolated Danger berbentuk can"],a:1,e:"Perbedaan kunci: Safe Water = stripes VERTIKAL merah-putih + satu bola MERAH + lampu Iso/Occ/LFl/Mo(A). Isolated Danger = hitam + pita merah HORIZONTAL + dua bola HITAM + Fl(2). Garis vertikal vs horizontal adalah petunjuk visual yang cepat."},
+    {q:"Morse Code A yang digunakan sebagai karakteristik lampu Safe Water Mark berarti…",o:["Satu kerlip panjang diikuti dua kerlip pendek","Satu kerlip pendek diikuti satu kerlip panjang (titik-garis)","Tiga kerlip pendek berurutan","Dua kerlip panjang berurutan"],a:1,e:"Morse Code A = dot-dash = titik-garis = kerlip pendek diikuti kerlip panjang. Ini adalah karakteristik lampu Mo(A) yang khas untuk Safe Water Mark."},
+    {q:"Safe Water Mark dapat berbentuk Spherical karena…",o:["Bentuk bola mudah terlihat dari jauh","Bentuk spherical tidak digunakan oleh jenis mark lain sehingga langsung bisa diidentifikasi","Bentuk bola lebih stabil di perairan bergelombang","Regulasi IALA mewajibkan bentuk spherical untuk safe water marks"],a:1,e:"Bentuk Spherical (bola) digunakan HANYA untuk Safe Water Marks dan tidak digunakan jenis mark lain. Ini memungkinkan identifikasi langsung berdasarkan bentuk, mirip seperti Can untuk port-hand dan Conical untuk starboard-hand lateral marks."},
+   ]},
+ ],
+ essay:[
+  {q:"Jelaskan fungsi, karakteristik, dan cara penggunaan Safe Water Marks dalam navigasi maritim. Bandingkan Safe Water Mark dengan Isolated Danger Mark — apa perbedaan fisik dan makna navigasinya?",
+   kp:["Fungsi: menunjukkan air navigable di semua sisi; digunakan sebagai centreline, mid-channel, landfall buoy","Warna: Merah-Putih stripes VERTIKAL","Topmark: satu bola merah (vs dua bola hitam pada Isolated Danger)","Lampu: Iso/Occ/LFl.10s/Mo(A) putih (vs Fl(2) putih pada Isolated Danger)","Isolated Danger: hitam + pita merah horizontal — ada bahaya di posisi buoy","Safe Water: stripes vertikal — posisi sendiri adalah aman","Pelaut bisa mendekati Safe Water Mark dari semua arah; harus menghindari posisi tepat Isolated Danger Mark"]},
+ ]
+},
+
+// ===== KATEGORI 6: SPECIAL MARKS & EMERGENCY =====
+{id:"special",title:"Rambu Khusus & Darurat",full:"Special Marks & Emergency Wreck Marking Buoy",rules:"Topik 10–11",ico:"🟡",col:"#a855f7",
+ desc:"Special Marks menandai area atau fitur khusus yang perlu diperhatikan pelaut. Emergency Wreck Marking Buoy (EWMB) adalah rambu darurat biru-kuning yang digunakan untuk menandai bangkai kapal baru yang berbahaya.",
+ ruleList:[
+  {num:10,title:"Special Marks — Area & Fitur Khusus",
+   mat:`<h3>📍 Fungsi Special Marks</h3>
+<p>Special Marks digunakan untuk menunjukkan kepada pelaut sebuah <strong><u>area atau fitur khusus</u></strong> yang sifatnya bisa dilihat dari referensi peta, Sailing Directions, atau Notices to Mariners. Special Marks bisa diberi huruf atau label untuk menunjukkan tujuannya.</p>
+<h3>📍 Contoh Penggunaan</h3>
+<ul>
+<li><strong>ODAS buoys</strong> (Ocean Data Acquisition System) — buoy pengumpul data oseanografi</li>
+<li><strong>Traffic Separation Schemes</strong> — di mana penggunaan buoy alur konvensional bisa membingungkan</li>
+<li><strong>Sport grounds</strong> — area olahraga air</li>
+<li><strong>Kabel atau pipa bawah laut</strong> — termasuk pipa pembuangan</li>
+<li><strong>Recreation zones</strong> — area rekreasi</li>
+<li><strong>Saluran khusus dalam saluran</strong> — misalnya alur kapal berbobot besar dalam estuari lebar</li>
+</ul>
+<div class="kb tel">🟡 <strong>Contoh Kanal dalam Kanal:</strong> Di estuari lebar yang batasnya ditandai buoy merah/hijau (lateral), alur khusus untuk kapal deep-draught bisa dibatasi dengan buoy KUNING berbentuk lateral yang sesuai, atau buoy kuning spherical di tengah alur khusus tersebut.</div>
+<h3>📍 Karakteristik Lengkap</h3>
+<table>
+<tr><th>Karakteristik</th><th>Detail</th></tr>
+<tr><td>Warna</td><td>🟡 Kuning (Yellow) — eksklusif Special Marks</td></tr>
+<tr><td>Bentuk</td><td>Opsional — tapi TIDAK BOLEH konflik dengan Lateral atau Safe Water marks</td></tr>
+<tr><td>Topmark</td><td>✕ Satu X (silang) kuning — opsional jika dipasang</td></tr>
+<tr><td>Lampu</td><td>Kuning, ritme APAPUN kecuali yang digunakan untuk lampu putih</td></tr>
+<tr><td>Retroreflector</td><td>Satu pita kuning, X, atau simbol</td></tr>
+</table>
+<h3>📍 Batasan Bentuk</h3>
+<p>Meski bentuk Special Mark opsional, ada aturan: bentuknya <strong>tidak boleh konflik</strong> dengan Lateral atau Safe Water marks. Contoh: buoy pembuangan di sisi port alur bisa berbentuk can, tapi TIDAK boleh berbentuk conical (karena conical = starboard-hand mark).</p>
+<h3>📍 Ritme Lampu</h3>
+<p>Ritme lampu kuning Special Marks bisa apa saja, <strong>kecuali</strong> ritme yang digunakan untuk lampu putih (Cardinal, Isolated Danger, Safe Water). Contoh yang diperbolehkan:</p>
+<ul>
+<li>Group Occulting</li>
+<li>Flashing</li>
+<li>Group Flashing 4, 5, atau 6 kerlip</li>
+<li>Composite Group Flashing</li>
+<li>Morse Code (kecuali A, D, atau U)</li>
+</ul>
+<p>ODAS buoys khusus menggunakan Group Flashing 5 kerlip setiap 20 detik.</p>`,
+   kp:`<ul><li>Warna: <strong>Kuning eksklusif</strong> — tidak digunakan jenis mark lain</li><li>Topmark: <strong>X (silang) kuning</strong> — opsional</li><li>Lampu: <strong>Kuning</strong>, ritme apapun kecuali yang digunakan lampu putih</li><li>Bentuk opsional tapi tidak boleh konflik dengan Lateral/Safe Water marks</li><li>Fungsi: menandai ODAS, TSS, sport grounds, kabel/pipa, recreation zone, dll.</li><li>ODAS buoy: Fl(5)Y every 20s (lampu kuning 5 kerlip tiap 20 detik)</li></ul>`,
+   mc:[
+    {q:"Warna yang HANYA digunakan untuk Special Marks dalam sistem IALA adalah…",o:["Putih","Oranye","Kuning","Biru"],a:2,e:"Kuning (Yellow) adalah warna eksklusif Special Marks. Merah/Hijau untuk Lateral, Hitam/Kuning untuk Cardinal (kombinasi dengan hitam), Hitam/Merah untuk Isolated Danger, Merah/Putih untuk Safe Water."},
+    {q:"Topmark Special Marks yang digunakan (jika dipasang) adalah…",o:["Single sphere (bola tunggal)","Double cone (dua kerucut)","X (silang) kuning","Single cone (kerucut tunggal)"],a:2,e:"Special Marks menggunakan topmark X (silang/cross) berwarna kuning — jika dipasang (opsional). Ini berbeda dari topmark jenis mark lain: double cone (Cardinal), double sphere (Isolated Danger), sphere (Safe Water), can/cone (Lateral)."},
+    {q:"Lampu Special Marks berwarna…",o:["Putih","Merah","Hijau","Kuning"],a:3,e:"Special Marks menggunakan lampu KUNING — satu-satunya jenis mark yang menggunakan lampu kuning. Ini berbeda dari Lateral (merah/hijau), Cardinal/Isolated Danger/Safe Water (semua putih)."},
+    {q:"Ritme lampu yang TIDAK BOLEH digunakan untuk Special Marks adalah…",o:["Flashing Kuning","Group Occulting Kuning","Ritme yang sama dengan yang digunakan untuk lampu putih (Cardinal, Isolated Danger, Safe Water)","Group Flashing 5 kerlip Kuning"],a:2,e:"Special Marks boleh menggunakan ritme apapun untuk lampu kuning, KECUALI ritme yang digunakan untuk lampu PUTIH (Q/VQ untuk Cardinal, Fl(2) untuk Isolated Danger, Iso/Occ/LFl/Mo(A) untuk Safe Water). Ini untuk mencegah kebingungan."},
+    {q:"ODAS buoy dalam sistem IALA menggunakan lampu…",o:["Fl(2) kuning setiap 5 detik","VQ kuning kontinu","Fl(5)Y setiap 20 detik — Group Flashing 5 kerlip kuning","Iso kuning setiap 10 detik"],a:2,e:"ODAS (Ocean Data Acquisition System) buoys menggunakan Group Flashing 5 kerlip setiap 20 detik — Fl(5)Y.20s. Ini adalah ritme spesifik yang ditetapkan untuk buoy pengumpul data oseanografi."},
+    {q:"Sebuah Special Mark berbentuk Can kuning ditempatkan di sisi port alur. Ini diperbolehkan karena…",o:["Can hanya boleh untuk port-hand marks saja","Bentuk can tidak konflik dengan lateral/safe water marks jika berwarna kuning","Special marks boleh berbentuk apa saja tanpa batasan","Can adalah satu-satunya bentuk yang boleh untuk special marks"],a:1,e:"Special Mark boleh berbentuk can karena can berwarna kuning tidak akan tertukar dengan port-hand lateral mark (merah/can di Region A). Bentuk yang DILARANG adalah conical kuning di sisi port, karena bisa membingungkan dengan starboard-hand mark."},
+    {q:"Manakah yang BUKAN contoh penggunaan Special Marks?",o:["ODAS (Ocean Data Acquisition System) buoy","Batas zona rekreasi","Penanda sisi port-hand alur pelayaran utama","Lokasi kabel bawah laut"],a:2,e:"Penanda sisi port alur pelayaran utama adalah Lateral Mark (merah di Region A) — bukan Special Mark. Special Marks digunakan untuk ODAS, traffic separation, sport grounds, kabel/pipa, recreation zones, dan fitur khusus lainnya."},
+    {q:"Di estuari lebar, alur untuk kapal berbobot besar ditandai di sisi-sisinya dengan…",o:["Rambu Cardinal biru","Buoy kuning dengan bentuk lateral yang sesuai atau buoy kuning spherical di tengah","Buoy merah dan hijau tambahan","Rambu bertanda segitiga oranye"],a:1,e:"Di estuari lebar: batas alur utama ditandai Lateral (merah/hijau), dan alur dalam untuk kapal deep-draught bisa ditandai dengan buoy KUNING lateral (sesuai posisi kiri/kanan) atau buoy spherical kuning di tengah alur khusus. Ini adalah Special Marks dalam fungsi 'channel within a channel'."},
+   ]},
+  {num:11,title:"New Dangers & Emergency Wreck Marking Buoy",
+   mat:`<h3>📍 New Dangers (Bahaya Baru)</h3>
+<p>Bahaya baru (<strong>New Danger</strong>) adalah hazard yang baru ditemukan dan <strong><u>belum tercantum di peta, Sailing Directions, atau belum cukup dipublikasikan melalui Notices to Mariners</u></strong>. Termasuk: gosong alami, karang, dan bangkai kapal baru.</p>
+<p>Menandai New Danger:</p>
+<ul>
+<li>Satu atau lebih <strong>Cardinal atau Lateral marks</strong> digunakan</li>
+<li>Jika dilengkapi lampu: <strong>Q atau VQ</strong> (cepat dan mencolok)</li>
+<li>Jika Cardinal: lampu putih; jika Lateral: lampu merah atau hijau</li>
+<li><strong>Racon Morse Code "D"</strong> dengan panjang sinyal 1 nautical mile di radar bisa digunakan</li>
+<li>Jika bahaya sangat serius: mark <strong>digandakan</strong> dengan mark identik sampai bahaya cukup dipublikasikan</li>
+</ul>
+<h3>📍 Emergency Wreck Marking Buoy (EWMB)</h3>
+<p>Diperkenalkan IALA pada 2006 secara percobaan (trial basis), EWMB adalah respons sementara untuk menandai bangkai kapal baru yang berbahaya. Dirancang untuk deployment dalam <strong>24–72 jam pertama</strong>.</p>
+<div class="kb red">🚨 <strong>EWMB berbeda dari semua rambu IALA lainnya</strong> — menggunakan kombinasi warna BIRU dan KUNING yang tidak digunakan rambu jenis lain!</div>
+<h3>📍 Karakteristik EWMB</h3>
+<table>
+<tr><th>Karakteristik</th><th>Detail</th></tr>
+<tr><td>Bentuk</td><td>Pillar atau Spar, ukuran tergantung lokasi</td></tr>
+<tr><td>Warna</td><td>🔵🟡 Stripes VERTIKAL Biru dan Kuning dalam jumlah dan dimensi yang sama (minimum 4, maksimum 8 stripes)</td></tr>
+<tr><td>Topmark</td><td>✛ Silang kuning berdiri tegak (standing/upright yellow cross)</td></tr>
+<tr><td>Lampu</td><td>Bergantian Biru dan Kuning: Bu 1.0s + 0.5s + Y 1.0s + 0.5s = periode 3.0 detik</td></tr>
+<tr><td>Racon</td><td>Morse Code "D" (opsional)</td></tr>
+<tr><td>AIS</td><td>AIS transponder (opsional)</td></tr>
+<tr><td>Jangkauan lampu</td><td>Nominal 4 nautical miles</td></tr>
+</table>
+<p>Jika beberapa EWMB di-deploy di sekitar satu bangkai kapal, lampu-lampunya akan <strong>disinkronkan</strong>.</p>
+<h3>📍 Kapan EWMB Digunakan dan Kapan Diangkat</h3>
+<p>EWMB akan dipertahankan sampai salah satu kondisi terpenuhi:</p>
+<ol>
+<li>Bangkai sudah cukup dikenal dan dipublikasikan di nautical publications</li>
+<li>Bangkai sudah disurvei sepenuhnya dengan detail posisi dan kedalaman diketahui</li>
+<li>Penandaan permanen sudah dipasang</li>
+</ol>`,
+   kp:`<ul><li><strong>New Danger:</strong> belum terpetakan/dipublikasikan → tandai dengan Cardinal/Lateral + lampu Q/VQ + Racon D</li><li><strong>EWMB:</strong> biru-kuning vertikal, silang kuning tegak, lampu bergantian biru-kuning (Bu 1s+0.5s+Y 1s+0.5s = 3.0s)</li><li>EWMB = respons darurat <strong>24–72 jam pertama</strong></li><li>Minimum 4, maksimum 8 stripes biru-kuning</li><li>Racon D opsional; jika multipel EWMB, lampu disinkronkan</li><li>EWMB diangkat setelah bahaya dipublikasikan, disurvei, atau ditandai permanen</li></ul>`,
+   mc:[
+    {q:"'New Danger' dalam konteks IALA didefinisikan sebagai…",o:["Semua bahaya yang ada di laut termasuk yang sudah terpetakan","Bahaya baru yang belum tercantum di peta atau Sailing Directions dan belum dipublikasikan melalui Notices to Mariners","Hanya bangkai kapal yang baru tenggelam","Bahaya yang kedalaman airnya kurang dari 5 meter"],a:1,e:"New Danger: hazard yang baru ditemukan dan belum ditampilkan di peta, belum dimasukkan dalam Sailing Directions, atau belum cukup dipublikasikan melalui Notices to Mariners. Bisa berupa gosong alami, karang, atau bangkai kapal baru."},
+    {q:"Emergency Wreck Marking Buoy (EWMB) diperkenalkan IALA pada tahun…",o:["1980","1990","2002","2006"],a:3,e:"EWMB diperkenalkan IALA pada 2006 secara percobaan (trial basis). Peristiwa yang mendorong pengembangan EWMB adalah insiden kapal Tricolor di Dover Strait tahun 2002 yang menyoroti perlunya penandaan bangkai kapal baru yang cepat dan jelas."},
+    {q:"Warna stripes pada Emergency Wreck Marking Buoy adalah…",o:["Merah dan Putih vertikal","Hitam dan Kuning horizontal","Biru dan Kuning vertikal","Merah dan Kuning diagonal"],a:2,e:"EWMB menggunakan stripes VERTIKAL warna BIRU dan KUNING dalam jumlah dan dimensi yang sama (minimum 4, maksimum 8 stripes). Kombinasi biru-kuning tidak digunakan jenis mark lain sehingga EWMB mudah dikenali."},
+    {q:"Topmark Emergency Wreck Marking Buoy berbentuk…",o:["Dua bola hitam tersusun vertikal","X (silang) kuning horizontal","Silang kuning berdiri tegak (upright/standing yellow cross)","Dua kerucut mengarah ke atas"],a:2,e:"EWMB menggunakan topmark silang kuning berdiri tegak (standing/upright yellow cross) — berbentuk + bukan ×. Ini berbeda dari topmark Special Marks yang berbentuk X (diagonal)."},
+    {q:"Pola lampu Emergency Wreck Marking Buoy adalah…",o:["Fl(2) bergantian biru-kuning","VQ biru kontinu","Bergantian Biru dan Kuning: Bu 1.0s + 0.5s + Y 1.0s + 0.5s = periode 3.0 detik","Iso biru setiap 5 detik"],a:2,e:"EWMB: lampu bergantian Biru 1.0 detik, jeda 0.5 detik, Kuning 1.0 detik, jeda 0.5 detik — total periode 3.0 detik. Jika ada beberapa EWMB di sekitar satu bangkai, lampunya disinkronkan."},
+    {q:"EWMB dimaksudkan sebagai respons darurat sementara untuk…",o:["Digunakan secara permanen menggantikan Cardinal/Lateral marks","24–72 jam pertama setelah bahaya ditemukan, sebelum penandaan permanen","Seluruh durasi tidak terbatas sampai bangkai disingkirkan","Hanya digunakan saat kondisi cuaca buruk"],a:1,e:"EWMB adalah respons SEMENTARA, dirancang untuk deployment dalam 24–72 jam pertama. Akan diangkat setelah bangkai cukup dipublikasikan di nautical publications, sudah disurvei dengan detail, atau penandaan permanen sudah dipasang."},
+    {q:"Jika bahaya baru (New Danger) sangat serius, tindakan tambahan yang diambil adalah…",o:["Menempatkan kapal penjaga di dekat bahaya","Menggunakan EWMB saja tanpa Cardinal/Lateral marks","Menduplikasi mark dengan mark identik sampai bahaya cukup dipublikasikan","Memasang lampu Q dan VQ secara bersamaan"],a:2,e:"Jika New Danger sangat serius (especially grave), setidaknya satu mark harus DIDUPLIKASI dengan mark identik secepatnya, sampai bahaya sudah cukup dipublikasikan. Duplikasi ini memberikan pengamanan ganda."},
+    {q:"Racon Morse Code 'D' pada New Danger Mark memberikan sinyal dengan panjang…",o:["0.5 nautical mile di layar radar","1 nautical mile di layar radar","3 nautical miles di layar radar","5 nautical miles di layar radar"],a:1,e:"Racon Morse D yang digunakan pada New Danger marks memberikan sinyal sepanjang 1 nautical mile pada tampilan radar. Ini memberikan identifikasi visual yang jelas pada layar radar kapal yang mendekati bahaya."},
+    {q:"Berapa jumlah minimum dan maksimum stripes pada Emergency Wreck Marking Buoy?",o:["Minimum 2, maksimum 6 stripes","Minimum 4, maksimum 8 stripes","Minimum 3, maksimum 9 stripes","Minimum 6, maksimum 12 stripes"],a:1,e:"EWMB: minimum 4 stripes, maksimum 8 stripes — semua berwarna biru dan kuning bergantian dalam jumlah dan dimensi yang sama. Batasan ini memastikan buoy cukup mencolok namun tidak terlalu kompleks secara konstruksi."},
+   ]},
+ ],
+ essay:[
+  {q:"Jelaskan perbedaan antara Special Marks dan Emergency Wreck Marking Buoy (EWMB) dalam sistem IALA. Kapan masing-masing digunakan, dan bagaimana cara pelaut mengidentifikasi keduanya di laut?",
+   kp:["Special Marks: kuning, topmark X kuning opsional, lampu kuning berbagai ritme, untuk area/fitur khusus (ODAS, TSS, kabel, dll.)","EWMB: biru-kuning vertikal, topmark silang kuning tegak, lampu bergantian biru-kuning Bu1s+Y1s = 3s","EWMB adalah respons SEMENTARA 24-72 jam untuk bangkai kapal baru berbahaya","Identifikasi EWMB: satu-satunya buoy dengan kombinasi biru-kuning, tidak digunakan jenis mark lain","Identifikasi Special Marks: warna kuning polos tanpa biru, topmark X diagonal","EWMB diangkat setelah bahaya dipublikasikan atau penandaan permanen dipasang"]},
+  {q:"Seorang pelaut dalam pelayaran malam menemukan light buoy berwarna putih dengan pola kerlip yang tidak dikenali dari daftar lampu. Jelaskan protokol yang harus dilakukan, dan bagaimana sistem IALA membantu dalam situasi New Danger. Sertakan cara mengidentifikasi jenis mark dari pola lampu saja.",
+   kp:["Protokol: hati-hati, kurangi kecepatan, waspada bahaya baru, update posisi","Identifikasi dari lampu: Q/VQ kontinu = North Cardinal; Q(3)/VQ(3) = East Cardinal; Q(6)+LFl = South Cardinal; Q(9)/VQ(9) = West Cardinal","Fl(2) putih = Isolated Danger; Iso/Occ/LFl/Mo(A) putih = Safe Water; Fl(2+1) merah/hijau = Preferred Channel","New Danger: Cardinal/Lateral + lampu Q atau VQ untuk membuatnya mencolok","Cek Notices to Mariners dan BNtM terbaru untuk informasi New Dangers","Lapor ke otoritas maritim jika menemukan bahaya yang belum terpetakan"]},
+ ]
+},
+
+];
+// ============================================================
+// INIT
+// ============================================================
+if(load()){goIala();}else{renderSaved();show('name');}
+</script>
+</body>
+</html>

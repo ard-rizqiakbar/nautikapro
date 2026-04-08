@@ -1,0 +1,18 @@
+const SUBJS=[
+  {id:"colreg",n:"COLREG",ico:"⚓",d:"Peraturan Pencegahan Tubrukan di Laut 1972",on:true,col:"#3b82f6",href:null},
+  {id:"marpol",n:"MARPOL",ico:"🌊",d:"Pencemaran dari Kapal",on:true,col:"#f97316",href:"MARPOL.html"},
+  {id:"solas",n:"SOLAS",ico:"🛟",d:"Keselamatan Jiwa di Laut",on:false},
+  {id:"iala",n:"IALA BUOY",ico:"🔴",d:"Sistem Pelampung IALA",on:true,col:"#14b8a6",href:"IALA.html"},
+  {id:"stcw",n:"STCW",ico:"📜",d:"Standar Pelatihan Pelaut",on:false},
+  {id:"unclos",n:"UNCLOS",ico:"🗺️",d:"Hukum Laut Internasional",on:false},
+  {id:"nav",n:"Navigation",ico:"🧭",d:"Plotting, Kompas & Navigasi Peta",on:false},
+  {id:"stability",n:"Ship Stability",ico:"⚖️",d:"Stabilitas & Trim Kapal",on:false},
+  {id:"cargo",n:"Cargo Handling",ico:"📦",d:"Penanganan & Penyimpanan Muatan",on:false},
+  {id:"smcp",n:"SMCP",ico:"📡",d:"Frase Komunikasi Maritim Standar",on:false},
+  {id:"shipconst",n:"Ship Construction",ico:"🔧",d:"Konstruksi & Pengetahuan Kapal",on:false},
+  {id:"meteor",n:"Meteorologi",ico:"🌤️",d:"Meteorologi & Oseanografi",on:false},
+  {id:"english",n:"Maritime English",ico:"🇬🇧",d:"Bahasa Inggris Maritim",on:false},
+  {id:"isyarat",n:"Isyarat Visual",ico:"🚩",d:"Isyarat Bendera & Visual",on:false},
+  {id:"ism",n:"ISM Code",ico:"📋",d:"International Safety Management",on:false},
+  {id:"shipmgmt",n:"Ship Management",ico:"🏢",d:"Manajemen Kapal",on:false},
+];

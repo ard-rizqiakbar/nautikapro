@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NautikaPRO — Platform Belajar Nautika</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/main.css"/>
+</head>
+<body>
+
+<div class="go" id="gOverlay">
+  <div class="sp"></div>
+  <div style="font-family:'Cinzel',serif;color:var(--gold);font-size:13px;letter-spacing:2px;">AI SEDANG MENILAI…</div>
+</div>
+
+<!-- ========== SCREEN: NAME ========== -->
+<div class="screen on" id="sc-name">
+  <div style="max-width:460px;margin:0 auto;padding:52px 18px;">
+    <div style="text-align:center;margin-bottom:32px;">
+      <div style="font-size:50px;margin-bottom:12px;">⚓</div>
+      <h1 class="cf" style="font-size:26px;color:var(--gold);letter-spacing:3px;margin-bottom:7px;">NautikaPRO</h1>
+      <p class="lf" style="font-style:italic;color:var(--mut2);font-size:14px;">Platform Belajar Ilmu Kepelautan</p>
+    </div>
+    <div class="c" style="padding:24px;margin-bottom:14px;">
+      <div class="cf" style="font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:13px;">MASUK SEBAGAI</div>
+      <input class="ni" id="nameInp" type="text" placeholder="Ketik nama lengkap kamu…" maxlength="60" autocomplete="off"/>
+      <div style="font-size:12px;color:var(--mut);margin-top:7px;">Progress disimpan berdasarkan nama di perangkat ini.</div>
+      <button class="b bg" style="margin-top:13px;" onclick="doLogin()">Mulai Belajar →</button>
+    </div>
+    <div id="savedList"></div>
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:13px;font-size:12px;color:var(--mut2);line-height:1.6;margin-top:12px;">
+      💾 <strong style="color:var(--gold)">Penyimpanan:</strong> Progress tersimpan lokal di perangkat ini. Gunakan Export/Import untuk pindah perangkat.
+    </div>
+  </div>
+</div>
+
+<!-- ========== SCREEN: SUBJECTS ========== -->
+<div class="screen" id="sc-subj">
+  <div style="background:linear-gradient(180deg,#071e3d,#04111f);padding:38px 22px 30px;text-align:center;border-bottom:1px solid var(--bdr);">
+    <div style="font-size:34px;margin-bottom:10px;">⚓</div>
+    <h1 class="cf" style="font-size:20px;color:var(--gold);letter-spacing:3px;margin-bottom:6px;">NautikaPRO</h1>
+    <p style="font-size:14px;color:var(--mut2);" id="greeting"></p>
+    <div style="font-size:12px;color:var(--mut);margin-top:3px;">Pilih mata kuliah yang ingin kamu pelajari</div>
+  </div>
+  <div class="w">
+    <div class="sg" id="subjGrid"></div>
+    <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+      <button class="b bgh" style="padding:8px 13px;font-size:12px;" onclick="doExport()">📤 Export Progress</button>
+      <button class="b bgh" style="padding:8px 13px;font-size:12px;" onclick="toggleImport()">📥 Import Progress</button>
+      <button class="b bgh" style="padding:8px 13px;font-size:12px;" onclick="switchUser()">👤 Ganti User</button>
+    </div>
+    <div id="importBox" class="hi" style="margin-top:10px;">
+      <textarea id="importTxt" style="width:100%;background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;color:var(--txt);padding:10px;font-size:13px;height:68px;outline:none;" placeholder="Paste kode export progress di sini…"></textarea>
+      <button class="b bo" style="margin-top:8px;padding:10px;" onclick="doImport()">Import</button>
+    </div>
+  </div>
+</div>
+
+<!-- ========== SCREEN: COLREG HOME ========== -->
+<div class="screen" id="sc-colreg">
+  <div class="nav">
+    <button class="bb" onclick="goSubj()">← Mata Kuliah</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;color:var(--gold);">COLREG 1972</div><div style="font-size:13px;">Pencegahan Tubrukan di Laut</div></div>
+  </div>
+  <div class="w">
+    <div style="text-align:center;padding:14px 0 10px;">
+      <div style="font-size:12px;color:var(--mut2);">Progress keseluruhan</div>
+      <div style="max-width:360px;margin:9px auto;height:5px;background:var(--bdr);border-radius:3px;overflow:hidden;"><div style="height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;transition:width .6s;" id="mainBar"></div></div>
+      <div style="font-size:12px;color:var(--mut);" id="mainPct"></div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:12px 15px;font-size:13px;color:var(--mut2);margin-bottom:15px;">
+      🎯 <strong style="color:var(--gold)">Alur:</strong> Baca materi per aturan → Kerjakan PG (≥70%) → Semua aturan lulus → Kerjakan Esai → Bagian berikutnya terbuka
+    </div>
+    <div id="secList"></div>
+  </div>
+</div>
+
+<!-- ========== SCREEN: SECTION DETAIL ========== -->
+<div class="screen" id="sc-sec">
+  <div class="nav">
+    <button class="bb" onclick="goColreg()">← Daftar Bagian</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;" id="secLbl"></div><div style="font-size:13px;" id="secSub"></div></div>
+    <div style="font-size:22px;" id="secIco"></div>
+  </div>
+  <div class="w">
+    <div class="c" style="padding:18px;margin-bottom:16px;"><p style="font-size:15px;line-height:1.75;" id="secDesc"></p></div>
+    <div class="cf" style="font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:11px;">ATURAN-ATURAN DALAM BAGIAN INI</div>
+    <div id="ruleCards"></div>
+    <div id="essayZone" style="margin-top:16px;"></div>
+  </div>
+</div>
+
+<!-- ========== SCREEN: MATERIAL ========== -->
+<div class="screen" id="sc-mat">
+  <div class="nav">
+    <button class="bb" onclick="backSec()">← Daftar Aturan</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;" id="matLbl"></div><div style="font-size:13px;" id="matSub"></div></div>
+  </div>
+  <div class="w">
+    <div class="c" style="padding:24px;margin-bottom:14px;">
+      <div class="cf" style="font-size:11px;color:var(--mut);letter-spacing:1px;margin-bottom:5px;">MATERI PEMBELAJARAN</div>
+      <h2 class="cf" style="font-size:17px;margin-bottom:16px;" id="matTitle"></h2>
+      <div class="mb" id="matBody"></div>
+    </div>
+    <div class="c" style="padding:15px;margin-bottom:15px;border-color:rgba(201,168,76,.3);">
+      <div class="cf" style="font-size:11px;color:var(--gold);margin-bottom:8px;">📌 POIN PENTING — Baca sebelum mengerjakan soal</div>
+      <div style="font-size:13px;line-height:1.7;" id="matKP"></div>
+    </div>
+    <button class="b bg" onclick="startRuleQuiz()">Mulai Pilihan Ganda →</button>
+  </div>
+</div>
+
+<!-- ========== SCREEN: MC QUIZ ========== -->
+<div class="screen" id="sc-mc">
+  <div class="nav">
+    <button class="bb" onclick="exitSec()">← Keluar</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;" id="mcLbl"></div></div>
+    <div class="cf" style="font-size:14px;color:var(--gold);" id="mcCtr"></div>
+  </div>
+  <div class="qp"><div class="qpf" id="mcBar"></div></div>
+  <div class="w">
+    <div class="c" style="padding:22px;margin-bottom:14px;">
+      <div class="cf" style="font-size:11px;color:var(--mut2);margin-bottom:9px;letter-spacing:1px;" id="mcNum"></div>
+      <div class="lf" style="font-size:17px;line-height:1.75;" id="mcQ"></div>
+    </div>
+    <div id="mcOpts"></div>
+    <div id="mcExp" class="hi"></div>
+    <button class="b bg hi" id="mcNext" onclick="nextMC()"></button>
+  </div>
+</div>
+
+<!-- ========== SCREEN: MC RESULTS ========== -->
+<div class="screen" id="sc-res">
+  <div class="nav">
+    <button class="bb" onclick="exitSec()">← Bagian</button>
+    <div class="cf" style="font-size:13px;color:var(--gold);">Hasil Pilihan Ganda</div>
+  </div>
+  <div class="w">
+    <div class="c" style="padding:28px;text-align:center;margin-bottom:15px;" id="resCard">
+      <div style="font-size:62px;margin-bottom:8px;" id="resEmo"></div>
+      <div class="cf" style="font-size:50px;font-weight:900;" id="resScore"></div>
+      <div class="lf" style="font-size:17px;font-style:italic;margin-top:5px;" id="resLbl"></div>
+      <div style="font-size:14px;color:var(--mut2);margin-top:8px;" id="resDet"></div>
+    </div>
+    <div class="c" style="padding:16px;margin-bottom:15px;">
+      <div class="cf" style="font-size:11px;color:var(--gold);margin-bottom:11px;">REKAP JAWABAN</div>
+      <div id="recapList"></div>
+    </div>
+    <div class="bs" id="resActs"></div>
+  </div>
+</div>
+
+<!-- ========== SCREEN: ESSAY ========== -->
+<div class="screen" id="sc-ess">
+  <div class="nav">
+    <button class="bb" onclick="exitSec()">← Keluar</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;color:var(--gold);" id="essLbl"></div></div>
+    <div class="cf" style="font-size:14px;color:var(--gold);" id="essCtr"></div>
+  </div>
+  <div class="qp"><div class="qpf" style="background:var(--gold);" id="essBar"></div></div>
+  <div class="w" id="essWrite">
+    <div class="c" style="padding:22px;margin-bottom:13px;">
+      <div class="cf" style="font-size:11px;color:var(--mut2);margin-bottom:9px;letter-spacing:1px;" id="essNum"></div>
+      <div class="lf" style="font-size:16px;line-height:1.75;" id="essQ"></div>
+    </div>
+    <div class="ebox">
+      <textarea class="eta" id="essTa" placeholder="Tulis jawabanmu di sini…&#10;&#10;Jelaskan dengan kata-katamu sendiri. Yang penting konsep dan pemahamannya benar — tidak perlu persis seperti textbook."></textarea>
+      <div style="display:flex;justify-content:space-between;padding:8px 15px;border-top:1px solid var(--bdr);">
+        <div style="font-size:12px;color:var(--mut);" id="essChr">0 karakter</div>
+        <div style="font-size:12px;color:var(--mut2);">Target: 150–400 kata</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--mut2);margin-bottom:13px;">💡 <strong style="color:var(--gold)">Tips:</strong> Sebutkan poin kunci dengan jelas. AI menilai pemahaman konsep, bukan hafalan kata per kata.</div>
+    <div class="hi" id="essErr" style="background:#2d0a0a;border:1px solid rgba(239,68,68,.4);border-radius:10px;padding:13px;margin-bottom:13px;font-size:14px;color:#fca5a5;"></div>
+    <button class="b bg" id="essBtn" onclick="submitEssay()" disabled>Kirim Jawaban →</button>
+  </div>
+  <div class="w hi" id="essFB">
+    <div class="c" style="padding:22px;margin-bottom:13px;" id="fbCard">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:13px;">
+        <div style="font-size:32px;" id="fbEmo"></div>
+        <div style="text-align:right;"><div class="cf" style="font-size:38px;font-weight:900;" id="fbScore"></div><div style="font-size:13px;color:var(--mut2);">/10 — <span id="fbPass"></span></div></div>
+      </div>
+      <p class="lf" style="font-size:15px;line-height:1.7;font-style:italic;margin-bottom:13px;" id="fbSum"></p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="padding:11px;border-radius:10px;background:#061f10;border:1px solid rgba(34,197,94,.2);">
+          <div style="font-size:11px;font-weight:700;color:var(--grn);text-transform:uppercase;margin-bottom:6px;">✅ Sudah Benar</div>
+          <div style="font-size:13px;" id="fbStr"></div>
+        </div>
+        <div style="padding:11px;border-radius:10px;background:#1f140a;border:1px solid rgba(201,168,76,.2);">
+          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">📌 Perlu Ditambah</div>
+          <div style="font-size:13px;" id="fbImp"></div>
+        </div>
+      </div>
+    </div>
+    <div class="c" style="padding:14px;margin-bottom:13px;">
+      <div class="cf" style="font-size:11px;color:var(--gold);margin-bottom:9px;">POIN-POIN KUNCI</div>
+      <div id="fbKP"></div>
+    </div>
+    <div class="c" style="padding:13px;margin-bottom:13px;">
+      <div class="cf" style="font-size:11px;color:var(--mut);margin-bottom:7px;">JAWABAN KAMU</div>
+      <div class="lf" style="font-size:13px;color:var(--mut2);line-height:1.65;font-style:italic;" id="fbAns"></div>
+    </div>
+    <button class="b bg" id="essNxt" onclick="nextEssay()"></button>
+  </div>
+</div>
+
+<!-- ========== SCREEN: COMPLETE ========== -->
+<div class="screen" id="sc-done">
+  <div class="w" style="padding-top:38px;">
+    <div style="text-align:center;margin-bottom:22px;">
+      <div style="font-size:70px;margin-bottom:13px;">🏆</div>
+      <h2 class="cf" style="color:var(--gold);font-size:22px;margin-bottom:7px;" id="doneTitle"></h2>
+      <p class="lf" style="color:var(--mut2);font-style:italic;" id="doneSub"></p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:19px;">
+      <div class="c" style="padding:18px;text-align:center;"><div class="cf" style="font-size:28px;color:var(--grn);" id="doneMC"></div><div style="font-size:12px;color:var(--mut2);margin-top:4px;">Skor PG Rata-rata</div></div>
+      <div class="c" style="padding:18px;text-align:center;"><div class="cf" style="font-size:28px;color:var(--gold);" id="doneEss"></div><div style="font-size:12px;color:var(--mut2);margin-top:4px;">Rata-rata Esai</div></div>
+    </div>
+    <div id="doneUnlock"></div>
+    <div class="bs" id="doneActs"></div>
+  </div>
+</div>
+
+<script src="data/subjects.js"></script>
+<script src="data/colreg.js"></script>
+<script src="js/app.js"></script>
+<script src="js/quiz.js"></script>
+</body>
+</html>

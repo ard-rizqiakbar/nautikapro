@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NautikaPRO — MARPOL 73/78</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#04111f;--bg2:#071a2f;--bg3:#0a2241;--bdr:#153a6b;--bdr2:#1e4d85;--gold:#c9a84c;--gold2:#e8c870;--txt:#d8cfbe;--mut:#5f7b9e;--mut2:#8a9bb0;--grn:#22c55e;--red:#ef4444;--blu:#3b82f6;--org:#f97316;--pur:#a855f7;--tel:#14b8a6;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'Source Sans 3',sans-serif;min-height:100vh;overflow-x:hidden;}
+::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+.cf{font-family:'Cinzel',serif;}.lf{font-family:'Lora',serif;}.hi{display:none!important;}
+.screen{display:none;min-height:100vh;}.screen.on{display:block;animation:fi .3s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.nav{background:var(--bg2);border-bottom:1px solid var(--bdr);padding:13px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;}
+.w{max-width:700px;margin:0 auto;padding:22px 16px;}
+.c{background:var(--bg2);border:1px solid var(--bdr);border-radius:13px;transition:all .2s;}
+.b{display:block;width:100%;padding:13px 18px;border:none;border-radius:10px;font-family:'Source Sans 3',sans-serif;font-size:15px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s;}
+.bg{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#04111f;}.bg:hover{transform:translateY(-1px);box-shadow:0 5px 20px rgba(201,168,76,.3);}
+.bg:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none;}
+.bo{background:transparent;color:var(--gold);border:1px solid var(--gold);}.bo:hover{background:rgba(201,168,76,.08);}
+.bgh{background:transparent;color:var(--mut2);border:1px solid var(--bdr2);}.bgh:hover{background:var(--bg3);color:var(--txt);}
+.bs{display:flex;flex-direction:column;gap:10px;}
+.bb{background:transparent;color:var(--gold);border:1px solid var(--bdr2);padding:7px 15px;font-size:13px;border-radius:8px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-weight:600;transition:all .2s;}.bb:hover{border-color:var(--gold);}
+.qp{height:4px;background:var(--bdr);}.qpf{height:100%;transition:width .4s;}
+.ob{width:100%;background:var(--bg2);border:1px solid var(--bdr);border-radius:11px;padding:13px 16px;text-align:left;cursor:pointer;color:var(--txt);font-size:14px;line-height:1.5;font-family:'Source Sans 3',sans-serif;transition:all .15s;display:flex;align-items:flex-start;gap:11px;margin-bottom:9px;}
+.ob:hover:not(:disabled){background:var(--bg3);border-color:var(--bdr2);transform:translateX(3px);}.ob:disabled{cursor:default;transform:none;}
+.ob.ok{background:#0a2d1a;border-color:var(--grn);color:var(--grn);}
+.ob.ng{background:#2d0a0a;border-color:var(--red);color:var(--red);}
+.ob.dm{background:var(--bg2);border-color:var(--bdr);color:var(--mut);}
+.ol{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--bdr);display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700;margin-top:1px;}
+.ob.ok .ol{background:var(--grn);}.ob.ng .ol{background:var(--red);}
+.exp{margin:0 0 14px;padding:14px 16px;border-radius:10px;font-family:'Lora',serif;font-size:14px;line-height:1.65;}
+.exp.ek{background:#061f10;border:1px solid rgba(34,197,94,.3);color:#a7f3c0;}
+.exp.en{background:#1f0606;border:1px solid rgba(239,68,68,.3);color:#fca5a5;}
+.mb{font-size:15px;line-height:1.85;color:var(--txt);}
+.mb p{margin-bottom:13px;}
+.mb h3{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:.8px;margin:18px 0 9px;border-bottom:1px solid var(--bdr);padding-bottom:5px;}
+.mb strong u{color:var(--gold2);text-decoration-color:var(--gold);text-underline-offset:3px;font-weight:700;}
+.mb .kb{background:var(--bg3);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:11px 15px;margin:13px 0;font-size:14px;line-height:1.6;}
+.mb ul{padding-left:17px;margin-bottom:13px;}.mb li{margin-bottom:5px;line-height:1.6;}
+.rr{display:inline-block;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:1px 7px;font-size:12px;font-family:'Cinzel',serif;font-weight:600;margin-right:4px;}
+.ebox{background:var(--bg2);border:1px solid var(--bdr);border-radius:13px;padding:4px;margin-bottom:14px;transition:border-color .2s;}.ebox:focus-within{border-color:var(--gold);}
+.eta{width:100%;min-height:210px;background:transparent;border:none;outline:none;color:var(--txt);font-size:15px;line-height:1.75;padding:18px;resize:vertical;font-family:'Lora',serif;}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;}
+.sc{padding:16px;text-align:center;cursor:pointer;position:relative;transition:all .2s;border-radius:13px;background:var(--bg2);border:1px solid var(--bdr);}
+.sc:not(.cs):hover{background:var(--bg3);transform:translateY(-2px);border-color:var(--bdr2);}
+.sc.cs{opacity:.5;cursor:default;}
+.go{position:fixed;inset:0;background:rgba(4,17,31,.92);display:none;align-items:center;justify-content:center;z-index:999;flex-direction:column;gap:18px;}
+.go.on{display:flex;}
+.sp{width:54px;height:54px;border:3px solid var(--bdr2);border-top-color:var(--gold);border-radius:50%;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.ni{width:100%;background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:13px 16px;color:var(--txt);font-size:16px;font-family:'Lora',serif;outline:none;transition:border-color .2s;}.ni:focus{border-color:var(--gold);}
+.pp{background:var(--bg2);border:1px solid var(--bdr2);border-radius:10px;padding:9px 14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px;margin-bottom:8px;}.pp:hover{background:var(--bg3);border-color:var(--gold);}
+.ri{display:flex;align-items:flex-start;gap:9px;padding:9px 0;border-bottom:1px solid var(--bdr);}.ri:last-child{border-bottom:none;}
+.rd{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700;margin-top:2px;}
+.rd.rk{background:#0a2d1a;border:1px solid var(--grn);color:var(--grn);}
+.rd.rn{background:#2d0a0a;border:1px solid var(--red);color:var(--red);}
+@media(max-width:480px){.sg{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<div class="go" id="gOverlay">
+  <div class="sp"></div>
+  <div style="font-family:'Cinzel',serif;color:var(--gold);font-size:13px;letter-spacing:2px;">AI SEDANG MENILAI…</div>
+</div>
+
+<!-- SCREEN: NAME -->
+<div class="screen on" id="sc-name">
+  <div style="max-width:460px;margin:0 auto;padding:52px 18px;">
+    <div style="text-align:center;margin-bottom:32px;">
+      <div style="font-size:50px;margin-bottom:12px;">⚓</div>
+      <h1 class="cf" style="font-size:26px;color:var(--gold);letter-spacing:3px;margin-bottom:7px;">NautikaPRO</h1>
+      <p class="lf" style="font-style:italic;color:var(--mut2);font-size:14px;">Platform Belajar Ilmu Kepelautan</p>
+    </div>
+    <div class="c" style="padding:24px;margin-bottom:14px;">
+      <div class="cf" style="font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:13px;">MASUK SEBAGAI</div>
+      <input class="ni" id="nameInp" type="text" placeholder="Ketik nama lengkap kamu…" maxlength="60" autocomplete="off"/>
+      <div style="font-size:12px;color:var(--mut);margin-top:7px;">Progress disimpan berdasarkan nama di perangkat ini.</div>
+      <button class="b bg" style="margin-top:13px;" onclick="doLogin()">Mulai Belajar →</button>
+    </div>
+    <div id="savedList"></div>
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:13px;font-size:12px;color:var(--mut2);line-height:1.6;margin-top:12px;">
+      💾 <strong style="color:var(--gold)">Penyimpanan:</strong> Progress tersimpan lokal di perangkat ini. Gunakan Export/Import untuk pindah perangkat.
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: SUBJECTS -->
+<div class="screen" id="sc-subj">
+  <div style="background:linear-gradient(180deg,#071e3d,#04111f);padding:38px 22px 30px;text-align:center;border-bottom:1px solid var(--bdr);">
+    <div style="font-size:34px;margin-bottom:10px;">⚓</div>
+    <h1 class="cf" style="font-size:20px;color:var(--gold);letter-spacing:3px;margin-bottom:6px;">NautikaPRO</h1>
+    <p style="font-size:14px;color:var(--mut2);" id="greeting"></p>
+    <div style="font-size:12px;color:var(--mut);margin-top:3px;">Pilih mata kuliah yang ingin kamu pelajari</div>
+  </div>
+  <div class="w">
+    <div class="sg" id="subjGrid"></div>
+    <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+      <button class="b bgh" style="padding:8px 13px;font-size:12px;" onclick="doExport()">📤 Export Progress</button>
+      <button class="b bgh" style="padding:8px 13px;font-size:12px;" onclick="toggleImport()">📥 Import Progress</button>
+      <button class="b bgh" style="padding:8px 13px;font-size:12px;" onclick="switchUser()">👤 Ganti User</button>
+    </div>
+    <div id="importBox" class="hi" style="margin-top:10px;">
+      <textarea id="importTxt" style="width:100%;background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;color:var(--txt);padding:10px;font-size:13px;height:68px;outline:none;" placeholder="Paste kode export progress di sini…"></textarea>
+      <button class="b bo" style="margin-top:8px;padding:10px;" onclick="doImport()">Import</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCREEN: MARPOL HOME -->
+<div class="screen" id="sc-marpol">
+  <div class="nav">
+    <button class="bb" onclick="goSubj()">← Mata Kuliah</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;color:var(--org);">MARPOL 73/78</div><div style="font-size:13px;">Pencegahan Pencemaran dari Kapal</div></div>
+  </div>
+  <div class="w">
+    <div style="text-align:center;padding:14px 0 10px;">
+      <div style="font-size:12px;color:var(--mut2);">Progress keseluruhan</div>
+      <div style="max-width:360px;margin:9px auto;height:5px;background:var(--bdr);border-radius:3px;overflow:hidden;"><div style="height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;transition:width .6s;" id="mainBar"></div></div>
+      <div style="font-size:12px;color:var(--mut);" id="mainPct"></div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:12px 15px;font-size:13px;color:var(--mut2);margin-bottom:15px;">
+      🎯 <strong style="color:var(--gold)">Alur:</strong> Baca materi → Kerjakan PG (≥70%) → Semua topik lulus → Kerjakan Esai → Annex berikutnya terbuka
+    </div>
+    <div id="secList"></div>
+  </div>
+</div>
+
+<!-- SCREEN: SECTION DETAIL -->
+<div class="screen" id="sc-sec">
+  <div class="nav">
+    <button class="bb" onclick="goMarpol()">← Daftar Annex</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;" id="secLbl"></div><div style="font-size:13px;" id="secSub"></div></div>
+    <div style="font-size:22px;" id="secIco"></div>
+  </div>
+  <div class="w">
+    <div class="c" style="padding:18px;margin-bottom:16px;"><p style="font-size:15px;line-height:1.75;" id="secDesc"></p></div>
+    <div class="cf" style="font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:11px;">TOPIK-TOPIK DALAM ANNEX INI</div>
+    <div id="ruleCards"></div>
+    <div id="essayZone" style="margin-top:16px;"></div>
+  </div>
+</div>
+
+<!-- SCREEN: MATERIAL -->
+<div class="screen" id="sc-mat">
+  <div class="nav">
+    <button class="bb" onclick="backSec()">← Daftar Topik</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;" id="matLbl"></div><div style="font-size:13px;" id="matSub"></div></div>
+  </div>
+  <div class="w">
+    <div class="c" style="padding:24px;margin-bottom:14px;">
+      <div class="cf" style="font-size:11px;color:var(--mut);letter-spacing:1px;margin-bottom:5px;">MATERI PEMBELAJARAN</div>
+      <h2 class="cf" style="font-size:17px;margin-bottom:16px;" id="matTitle"></h2>
+      <div class="mb" id="matBody"></div>
+    </div>
+    <div class="c" style="padding:15px;margin-bottom:15px;border-color:rgba(201,168,76,.3);">
+      <div class="cf" style="font-size:11px;color:var(--gold);margin-bottom:8px;">📌 POIN PENTING — Baca sebelum mengerjakan soal</div>
+      <div style="font-size:13px;line-height:1.7;" id="matKP"></div>
+    </div>
+    <button class="b bg" onclick="startRuleQuiz()">Mulai Pilihan Ganda →</button>
+  </div>
+</div>
+
+<!-- SCREEN: MC QUIZ -->
+<div class="screen" id="sc-mc">
+  <div class="nav">
+    <button class="bb" onclick="exitSec()">← Keluar</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;" id="mcLbl"></div></div>
+    <div class="cf" style="font-size:14px;color:var(--gold);" id="mcCtr"></div>
+  </div>
+  <div class="qp"><div class="qpf" id="mcBar"></div></div>
+  <div class="w">
+    <div class="c" style="padding:22px;margin-bottom:14px;">
+      <div class="cf" style="font-size:11px;color:var(--mut2);margin-bottom:9px;letter-spacing:1px;" id="mcNum"></div>
+      <div class="lf" style="font-size:17px;line-height:1.75;" id="mcQ"></div>
+    </div>
+    <div id="mcOpts"></div>
+    <div id="mcExp" class="hi"></div>
+    <button class="b bg hi" id="mcNext" onclick="nextMC()"></button>
+  </div>
+</div>
+
+<!-- SCREEN: MC RESULTS -->
+<div class="screen" id="sc-res">
+  <div class="nav">
+    <button class="bb" onclick="exitSec()">← Bagian</button>
+    <div class="cf" style="font-size:13px;color:var(--gold);">Hasil Pilihan Ganda</div>
+  </div>
+  <div class="w">
+    <div class="c" style="padding:28px;text-align:center;margin-bottom:15px;" id="resCard">
+      <div style="font-size:62px;margin-bottom:8px;" id="resEmo"></div>
+      <div class="cf" style="font-size:50px;font-weight:900;" id="resScore"></div>
+      <div class="lf" style="font-size:17px;font-style:italic;margin-top:5px;" id="resLbl"></div>
+      <div style="font-size:14px;color:var(--mut2);margin-top:8px;" id="resDet"></div>
+    </div>
+    <div class="c" style="padding:16px;margin-bottom:15px;">
+      <div class="cf" style="font-size:11px;color:var(--gold);margin-bottom:11px;">REKAP JAWABAN</div>
+      <div id="recapList"></div>
+    </div>
+    <div class="bs" id="resActs"></div>
+  </div>
+</div>
+
+<!-- SCREEN: ESSAY -->
+<div class="screen" id="sc-ess">
+  <div class="nav">
+    <button class="bb" onclick="exitSec()">← Keluar</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;color:var(--gold);" id="essLbl"></div></div>
+    <div class="cf" style="font-size:14px;color:var(--gold);" id="essCtr"></div>
+  </div>
+  <div class="qp"><div class="qpf" style="background:var(--gold);" id="essBar"></div></div>
+  <div class="w" id="essWrite">
+    <div class="c" style="padding:22px;margin-bottom:13px;">
+      <div class="cf" style="font-size:11px;color:var(--mut2);margin-bottom:9px;letter-spacing:1px;" id="essNum"></div>
+      <div class="lf" style="font-size:16px;line-height:1.75;" id="essQ"></div>
+    </div>
+    <div class="ebox">
+      <textarea class="eta" id="essTa" placeholder="Tulis jawabanmu di sini…&#10;&#10;Jelaskan dengan kata-katamu sendiri. Yang penting konsep dan pemahamannya benar."></textarea>
+      <div style="display:flex;justify-content:space-between;padding:8px 15px;border-top:1px solid var(--bdr);">
+        <div style="font-size:12px;color:var(--mut);" id="essChr">0 karakter</div>
+        <div style="font-size:12px;color:var(--mut2);">Target: 150–400 kata</div>
+      </div>
+    </div>
+    <div style="font-size:12px;color:var(--mut2);margin-bottom:13px;">💡 <strong style="color:var(--gold)">Tips:</strong> Sebutkan poin kunci dengan jelas. AI menilai pemahaman konsep, bukan hafalan kata per kata.</div>
+    <div class="hi" id="essErr" style="background:#2d0a0a;border:1px solid rgba(239,68,68,.4);border-radius:10px;padding:13px;margin-bottom:13px;font-size:14px;color:#fca5a5;"></div>
+    <button class="b bg" id="essBtn" onclick="submitEssay()" disabled>Kirim Jawaban →</button>
+  </div>
+  <div class="w hi" id="essFB">
+    <div class="c" style="padding:22px;margin-bottom:13px;" id="fbCard">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:13px;">
+        <div style="font-size:32px;" id="fbEmo"></div>
+        <div style="text-align:right;"><div class="cf" style="font-size:38px;font-weight:900;" id="fbScore"></div><div style="font-size:13px;color:var(--mut2);">/10 — <span id="fbPass"></span></div></div>
+      </div>
+      <p class="lf" style="font-size:15px;line-height:1.7;font-style:italic;margin-bottom:13px;" id="fbSum"></p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div style="padding:11px;border-radius:10px;background:#061f10;border:1px solid rgba(34,197,94,.2);">
+          <div style="font-size:11px;font-weight:700;color:var(--grn);text-transform:uppercase;margin-bottom:6px;">✅ Sudah Benar</div>
+          <div style="font-size:13px;" id="fbStr"></div>
+        </div>
+        <div style="padding:11px;border-radius:10px;background:#1f140a;border:1px solid rgba(201,168,76,.2);">
+          <div style="font-size:11px;font-weight:700;color:var(--gold);text-transform:uppercase;margin-bottom:6px;">📌 Perlu Ditambah</div>
+          <div style="font-size:13px;" id="fbImp"></div>
+        </div>
+      </div>
+    </div>
+    <div class="c" style="padding:14px;margin-bottom:13px;">
+      <div class="cf" style="font-size:11px;color:var(--gold);margin-bottom:9px;">POIN-POIN KUNCI</div>
+      <div id="fbKP"></div>
+    </div>
+    <div class="c" style="padding:13px;margin-bottom:13px;">
+      <div class="cf" style="font-size:11px;color:var(--mut);margin-bottom:7px;">JAWABAN KAMU</div>
+      <div class="lf" style="font-size:13px;color:var(--mut2);line-height:1.65;font-style:italic;" id="fbAns"></div>
+    </div>
+    <button class="b bg" id="essNxt" onclick="nextEssay()"></button>
+  </div>
+</div>
+
+<!-- SCREEN: COMPLETE -->
+<div class="screen" id="sc-done">
+  <div class="w" style="padding-top:38px;">
+    <div style="text-align:center;margin-bottom:22px;">
+      <div style="font-size:70px;margin-bottom:13px;">🏆</div>
+      <h2 class="cf" style="color:var(--gold);font-size:22px;margin-bottom:7px;" id="doneTitle"></h2>
+      <p class="lf" style="color:var(--mut2);font-style:italic;" id="doneSub"></p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-bottom:19px;">
+      <div class="c" style="padding:18px;text-align:center;"><div class="cf" style="font-size:28px;color:var(--grn);" id="doneMC"></div><div style="font-size:12px;color:var(--mut2);margin-top:4px;">Skor PG Rata-rata</div></div>
+      <div class="c" style="padding:18px;text-align:center;"><div class="cf" style="font-size:28px;color:var(--gold);" id="doneEss"></div><div style="font-size:12px;color:var(--mut2);margin-top:4px;">Rata-rata Esai</div></div>
+    </div>
+    <div id="doneUnlock"></div>
+    <div class="bs" id="doneActs"></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// SUBJECTS
+// ============================================================
+const SUBJS=[
+  {id:"colreg",n:"COLREG",ico:"⚓",d:"Peraturan Pencegahan Tubrukan di Laut 1972",on:true,col:"#3b82f6",href:"COLREG.html"},
+  {id:"marpol",n:"MARPOL",ico:"🌊",d:"Pencemaran dari Kapal",on:true,col:"#f97316",href:null},
+  {id:"solas",n:"SOLAS",ico:"🛟",d:"Keselamatan Jiwa di Laut",on:false,col:"#a855f7"},
+  {id:"iala",n:"IALA BUOY",ico:"🔴",d:"Sistem Pelampung IALA",on:false},
+  {id:"stcw",n:"STCW",ico:"📜",d:"Standar Pelatihan Pelaut",on:false},
+  {id:"unclos",n:"UNCLOS",ico:"🗺️",d:"Hukum Laut Internasional",on:false},
+  {id:"nav",n:"Navigation",ico:"🧭",d:"Plotting, Kompas & Navigasi Peta",on:false},
+  {id:"stability",n:"Ship Stability",ico:"⚖️",d:"Stabilitas & Trim Kapal",on:false},
+  {id:"cargo",n:"Cargo Handling",ico:"📦",d:"Penanganan & Penyimpanan Muatan",on:false},
+  {id:"smcp",n:"SMCP",ico:"📡",d:"Frase Komunikasi Maritim Standar",on:false},
+  {id:"shipconst",n:"Ship Construction",ico:"🔧",d:"Konstruksi & Pengetahuan Kapal",on:false},
+  {id:"meteor",n:"Meteorologi",ico:"🌤️",d:"Meteorologi & Oseanografi",on:false},
+  {id:"english",n:"Maritime English",ico:"🇬🇧",d:"Bahasa Inggris Maritim",on:false},
+  {id:"isyarat",n:"Isyarat Visual",ico:"🚩",d:"Isyarat Bendera & Visual",on:false},
+  {id:"ism",n:"ISM Code",ico:"📋",d:"International Safety Management",on:false},
+  {id:"shipmgmt",n:"Ship Management",ico:"🏢",d:"Manajemen Kapal",on:false},
+];
+
+// ============================================================
+// MARPOL SECTIONS DATA
+// ============================================================
+const SECS=[
+// ---- ANNEX I ----
+{id:"ANX1",title:"Annex I",full:"Pencemaran Minyak",rules:"Reg 1–43",ico:"🛢️",col:"#f97316",
+ desc:"Annex I mengatur pencegahan pencemaran oleh minyak dari kapal. Mencakup persyaratan konstruksi, peralatan pemisah minyak (OWS), Oil Record Book, pembuangan minyak di laut, serta persyaratan khusus kapal tanker.",
+ ruleList:[
+  {num:1,title:"Definisi & Lingkup Annex I",
+   mat:`<h3>📍 Definisi Utama Annex I</h3>
+<p><span class="rr">Reg 1(1)</span> <strong><u>Oil (Minyak)</u></strong>: petroleum dalam segala bentuk, termasuk minyak mentah (crude oil), bahan bakar minyak (fuel oil), sludge, oil refuse, dan produk olahan. Mencakup semua jenis minyak — tidak terbatas pada minyak mentah.</p>
+<p><span class="rr">Reg 1(2)</span> <strong><u>Oily Mixture (Campuran Berminyak)</u></strong>: campuran yang mengandung <strong><u>minyak dalam kadar berapapun</u></strong>. Air got (bilge water) yang tercampur minyak adalah oily mixture.</p>
+<p><span class="rr">Reg 1(6)</span> <strong><u>Oil Tanker</u></strong>: kapal yang dibangun atau diadaptasi terutama untuk mengangkut minyak dalam bentuk curah (bulk) di ruang-ruang kargo.</p>
+<h3>📍 New Ship vs Existing Ship</h3>
+<p><span class="rr">Reg 1(8)</span> <strong><u>New Ship</u></strong>: kapal yang lunas (keel) diletakkan pada atau setelah <strong><u>31 Januari 1977</u></strong>. Existing ship adalah kapal yang bukan new ship. Perbedaan ini penting karena persyaratan teknis berbeda.</p>
+<div class="kb">💡 <strong>Perlu diingat:</strong> Sebagian besar kapal saat ini sudah masuk kategori "new ship" karena sudah lebih dari 40 tahun sejak 1977. Tapi perbedaan ini masih relevan untuk memahami persyaratan transisi.</div>
+<h3>📍 Penerapan Annex I</h3>
+<p><span class="rr">Reg 2</span> Annex I berlaku untuk <strong><u>semua kapal</u></strong> kecuali kapal perang dan kapal negara yang tidak digunakan untuk tujuan komersial. Namun, setiap negara anggota wajib memastikan kapal tersebut beroperasi sesuai Annex I sejauh praktis dan wajar.</p>
+<p><span class="rr">Reg 3</span> <strong><u>Pengecualian (Exceptions)</u></strong>: pembuangan minyak atau oily mixture diperbolehkan jika diperlukan untuk:</p>
+<ul>
+<li>Keselamatan kapal atau jiwa manusia di laut</li>
+<li>Kerusakan pada kapal atau perlengkapannya (asalkan semua tindakan pencegahan yang wajar sudah diambil)</li>
+<li>Memerangi pencemaran spesifik untuk melindungi lingkungan laut</li>
+</ul>`,
+   kp:`<ul><li><strong>Oil</strong> = petroleum dalam segala bentuk (crude, fuel oil, sludge, refined products)</li><li><strong>Oily mixture</strong> = campuran yang mengandung minyak dalam kadar berapapun</li><li><strong>New ship</strong>: keel diletakkan pada/setelah <strong>31 Januari 1977</strong></li><li>Annex I berlaku untuk <strong>semua kapal</strong> (kecuali kapal perang non-komersial)</li><li>Pengecualian hanya untuk <strong>keselamatan jiwa/kapal</strong> atau memerangi pencemaran</li></ul>`,
+   mc:[
+    {q:"Menurut MARPOL Annex I, 'oil' (minyak) mencakup…",o:["Hanya minyak mentah (crude oil) dalam tangki kargo","Petroleum dalam segala bentuk termasuk crude oil, fuel oil, sludge, dan produk olahan","Hanya bahan bakar kapal (marine fuel)","Hanya minyak yang sudah terkontaminasi air laut"],a:1,e:"Reg 1(1): Oil mencakup petroleum dalam segala bentuk — crude oil, fuel oil, sludge, oil refuse, dan refined products. Definisi ini sangat luas dan mencakup semua turunan petroleum."},
+    {q:"'Oily mixture' dalam konteks MARPOL Annex I adalah…",o:["Campuran minyak dan air yang kadar minyaknya melebihi 15 ppm","Campuran yang mengandung minyak dalam kadar berapapun","Hanya air got (bilge water) dari ruang mesin","Campuran bahan bakar dengan pelumas mesin"],a:1,e:"Reg 1(2): Oily mixture adalah campuran yang mengandung minyak dalam kadar berapapun — bukan hanya yang melebihi 15 ppm. Namun batas 15 ppm berlaku untuk persyaratan pembuangan."},
+    {q:"'New ship' menurut MARPOL Annex I adalah kapal yang…",o:["Dibangun setelah tahun 1980","Lunas (keel) diletakkan pada atau setelah 31 Januari 1977","Berusia kurang dari 25 tahun","Memiliki sertifikat IOPP yang diterbitkan setelah 1990"],a:1,e:"Reg 1(8): New ship adalah kapal yang keelnya diletakkan pada atau setelah 31 Januari 1977. Ini adalah tanggal berlakunya MARPOL Annex I pertama kali."},
+    {q:"MARPOL Annex I berlaku untuk kapal perang?",o:["Ya, semua kapal termasuk kapal perang wajib mematuhi Annex I sepenuhnya","Tidak, kapal perang sepenuhnya dikecualikan tanpa syarat","Tidak untuk kapal perang non-komersial, tapi negara anggota wajib memastikan kepatuhannya sejauh wajar dan praktis","Ya, tapi hanya di perairan negara lain"],a:2,e:"Reg 2: Annex I tidak berlaku untuk kapal perang dan kapal negara non-komersial. Namun negara anggota wajib memastikan kapal tersebut beroperasi sejauh wajar sesuai Annex I."},
+    {q:"Pembuangan minyak ke laut masih diperbolehkan oleh MARPOL dalam kondisi…",o:["Tidak pernah diperbolehkan dalam kondisi apapun","Jika diperlukan untuk keselamatan kapal atau jiwa di laut setelah semua tindakan pencegahan wajar dilakukan","Jika kapal sedang dalam perjalanan jauh dari daratan","Jika kapal sudah memasang OWS yang berfungsi baik"],a:1,e:"Reg 3: Pengecualian diperbolehkan untuk keselamatan kapal/jiwa, kerusakan kapal (setelah tindakan pencegahan wajar), atau memerangi insiden pencemaran. Bukan izin umum membuang minyak."},
+    {q:"Kapal tanker menurut definisi MARPOL Annex I adalah…",o:["Semua kapal berukuran besar yang berlayar di laut lepas","Kapal yang dibangun atau diadaptasi terutama untuk mengangkut minyak dalam bentuk curah di ruang kargo","Kapal yang mengangkut bahan kimia berbahaya","Kapal berbendera negara penghasil minyak"],a:1,e:"Reg 1(6): Oil tanker adalah kapal yang dibangun atau diadaptasi terutama (primarily) untuk mengangkut minyak dalam bulk di cargo spaces. Kapal pengangkut BBM dalam drum tidak termasuk."},
+    {q:"Sludge dalam konteks MARPOL Annex I adalah…",o:["Air got yang berasal dari ruang mesin","Residu minyak yang dihasilkan dari pemurnian bahan bakar atau pelumas","Campuran air laut dengan crude oil","Limbah domestik dari dapur kapal"],a:1,e:"Sludge adalah residu minyak (oil residue) yang dihasilkan dari proses pemisahan bahan bakar/pelumas, separator, dan filter. Sludge masuk kategori 'oil' dalam Annex I dan harus dikelola khusus."},
+    {q:"Mengapa tanggal '31 Januari 1977' penting dalam MARPOL Annex I?",o:["Tanggal ratifikasi MARPOL oleh Indonesia","Tanggal pembatas antara 'new ship' dan 'existing ship' yang menentukan persyaratan konstruksi berbeda","Tanggal berlakunya kewajiban Oil Record Book","Tanggal pertama IOPP Certificate diterbitkan"],a:1,e:"31 Januari 1977 adalah tanggal berlakunya MARPOL Annex I (original Protocol 1978). New ship (keel diletakkan ≥ tanggal ini) harus memenuhi persyaratan konstruksi yang lebih ketat dibanding existing ships."},
+    {q:"Air got (bilge water) dari kamar mesin yang mengandung sedikit minyak pelumas termasuk kategori apa dalam MARPOL?",o:["Bukan oily mixture karena kadar minyaknya sangat kecil","Oily mixture yang harus diproses melalui OWS sebelum dibuang","Air limbah biasa yang boleh dibuang bebas","Sewage yang diatur oleh Annex IV"],a:1,e:"Air got dari kamar mesin hampir selalu mengandung sejumlah minyak, sehingga termasuk 'oily mixture' menurut Reg 1(2). Harus diproses melalui OWS (Oily Water Separator) — tidak boleh langsung dibuang ke laut."},
+   ]},
+  {num:2,title:"Peralatan OWS & Persyaratan Ruang Mesin",
+   mat:`<h3>📍 Oil Filtering Equipment (OWS)</h3>
+<p><span class="rr">Reg 14</span> Setiap kapal <strong><u>400 GT ke atas</u></strong> wajib dilengkapi <strong><u>Oil Filtering Equipment</u></strong> yang memastikan kandungan minyak dalam air yang dibuang <strong><u>tidak melebihi 15 ppm (parts per million)</u></strong>. Peralatan ini dikenal sebagai OWS (Oily Water Separator) atau bilge separator.</p>
+<div class="kb">📏 <strong>15 ppm Rule:</strong> 15 bagian minyak per 1.000.000 bagian air = 0,0015%. Ini adalah batas internasional untuk pembuangan oily mixture dari ruang mesin. Air yang terlihat jernih bisa saja masih mengandung lebih dari 15 ppm!</div>
+<h3>📍 Oil Discharge Monitor (ODM)</h3>
+<p>Kapal 400 GT ke atas juga wajib memiliki <strong><u>ODM (Oil Discharge Monitor)</u></strong> atau Oil Content Meter (OCM) — alat yang <strong><u>secara otomatis mendeteksi kadar minyak</u></strong> dalam air yang akan dibuang. ODM akan <strong><u>membunyikan alarm dan menghentikan pembuangan</u></strong> jika kadar minyak melebihi 15 ppm.</p>
+<h3>📍 ODMCS untuk Tanker</h3>
+<p><span class="rr">Reg 31</span> Kapal tanker minyak <strong><u>150 GT ke atas</u></strong> wajib memiliki <strong><u>ODMCS (Oil Discharge Monitoring and Control System)</u></strong> — sistem yang memantau dan mengendalikan pembuangan dari area kargo (cargo area). ODMCS lebih canggih dari ODM biasa.</p>
+<h3>📍 Sludge Tank</h3>
+<p><span class="rr">Reg 12</span> Setiap kapal <strong><u>400 GT ke atas</u></strong> wajib memiliki <strong><u>sludge tank (tangki lumpur)</u></strong> berkapasitas yang cukup untuk menampung residu minyak (sludge) selama operasi normal. Sludge tidak boleh dibuang ke laut — harus diserahkan ke fasilitas penerimaan darat.</p>
+<h3>📍 Persyaratan Pembuangan dari Ruang Mesin (Reg 15)</h3>
+<p><strong>Di luar kawasan khusus (Outside Special Areas):</strong></p>
+<ul>
+<li>Kapal <strong><u>sedang berlayar</u></strong> (underway/en route)</li>
+<li>Kadar minyak dalam pembuangan: <strong><u>≤ 15 ppm</u></strong></li>
+<li>OWS dan ODM dalam kondisi <strong><u>aktif dan berfungsi baik</u></strong></li>
+<li>Tidak di dalam <strong><u>50 nautical miles</u></strong> dari daratan terdekat (untuk tanker)</li>
+</ul>
+<p><strong>Di dalam kawasan khusus (Inside Special Areas):</strong></p>
+<ul>
+<li>Kapal <strong><u>400 GT ke atas</u></strong>: <strong><u>DILARANG SAMA SEKALI</u></strong> membuang bilge water</li>
+<li>Kapal di bawah 400 GT: boleh membuang jika ≤15 ppm dan sejauh praktis</li>
+</ul>`,
+   kp:`<ul><li><strong>OWS wajib</strong> untuk kapal ≥400 GT</li><li><strong>Batas 15 ppm</strong> untuk semua pembuangan dari ruang mesin</li><li><strong>ODM</strong> otomatis menghentikan pembuangan jika >15 ppm</li><li><strong>ODMCS</strong> wajib untuk tanker ≥150 GT (untuk area kargo)</li><li><strong>Sludge tank</strong> wajib untuk kapal ≥400 GT</li><li>Dalam <strong>Special Areas</strong>: DILARANG membuang bilge water (kapal ≥400 GT)</li></ul>`,
+   mc:[
+    {q:"Kapal manakah yang WAJIB dilengkapi Oil Filtering Equipment (OWS) menurut MARPOL Annex I?",o:["Semua kapal tanpa terkecuali","Kapal 400 GT ke atas","Hanya kapal tanker minyak","Kapal yang berlayar di kawasan khusus saja"],a:1,e:"Reg 14: OWS wajib untuk kapal 400 GT ke atas. Kapal di bawah 400 GT hanya perlu memastikan air buangan tidak melebihi 15 ppm, tapi tidak diwajibkan memiliki OWS khusus."},
+    {q:"Batas maksimum kandungan minyak dalam air buangan dari ruang mesin kapal adalah…",o:["5 ppm","10 ppm","15 ppm","30 ppm"],a:2,e:"15 ppm (parts per million) adalah standar internasional MARPOL untuk pembuangan oily mixture dari machinery space. Angka ini berlaku di luar kawasan khusus. Di dalam special areas, kapal ≥400 GT dilarang sama sekali membuang."},
+    {q:"ODM (Oil Discharge Monitor) pada kapal berfungsi untuk…",o:["Mengukur volume total minyak yang diangkut","Secara otomatis mendeteksi kadar minyak dan menghentikan pembuangan jika melebihi 15 ppm","Memisahkan minyak dari air got","Mencatat semua operasi bahan bakar di Oil Record Book"],a:1,e:"ODM/OCM (Oil Content Meter) adalah alat monitoring yang terus memantau kadar minyak dalam discharge. Jika kadar melebihi 15 ppm, ODM secara otomatis membunyikan alarm dan menutup valve pembuangan."},
+    {q:"ODMCS (Oil Discharge Monitoring and Control System) wajib dipasang pada…",o:["Semua kapal 400 GT ke atas","Kapal tanker minyak 150 GT ke atas untuk pemantauan area kargo","Kapal penumpang 500 GT ke atas","Kapal ro-ro yang mengangkut kendaraan bermotor"],a:1,e:"Reg 31: ODMCS wajib untuk oil tankers 150 GT ke atas. ODMCS berbeda dengan ODM biasa — ODMCS khusus untuk monitoring pembuangan dari cargo area (tangki kargo), bukan hanya ruang mesin."},
+    {q:"Sludge tank di atas kapal diperlukan untuk…",o:["Menyimpan minyak cargo sementara","Menampung residu minyak (sludge) dari proses pemisahan bahan bakar dan pelumas agar tidak langsung dibuang ke laut","Memproses air got menjadi air bersih","Menyimpan bahan bakar cadangan"],a:1,e:"Reg 12: Sludge tank menampung residu minyak dari separator, filter bahan bakar, dan proses pemurnian pelumas. Sludge tidak boleh dibuang ke laut — harus diserahkan ke fasilitas penerimaan (reception facility) di darat."},
+    {q:"Di dalam kawasan khusus (special area) MARPOL Annex I, kapal 500 GT boleh membuang bilge water jika…",o:["Kadar minyak di bawah 15 ppm dan OWS berfungsi","Tidak boleh membuang bilge water sama sekali","Kapal sedang berlayar di atas 7 knot","Jarak dari daratan lebih dari 12 nautical miles"],a:1,e:"Di dalam special areas, kapal 400 GT ke atas DILARANG SAMA SEKALI membuang bilge water dari ruang mesin — tidak peduli berapa kadar minyaknya. Harus menggunakan fasilitas penerimaan di pelabuhan."},
+    {q:"Persyaratan pembuangan bilge water dari ruang mesin di LUAR kawasan khusus adalah…",o:["Bebas dibuang jika kapal sedang berlabuh jangkar","Kadar ≤15 ppm, kapal underway, OWS aktif","Kadar ≤30 ppm, jarak >50 nm dari pantai","Kadar ≤15 ppm, hanya di malam hari"],a:1,e:"Di luar special areas: kapal harus underway (bergerak), kadar minyak ≤15 ppm, OWS dalam kondisi aktif dan berfungsi. Pembuangan saat kapal berlabuh di pelabuhan tidak diperbolehkan."},
+    {q:"Mengapa bilge water dari ruang mesin tidak boleh langsung dibuang ke laut tanpa pengolahan?",o:["Karena bilge water panas dan akan memanaskan laut","Karena bilge water selalu mengandung minyak yang akan mencemari lingkungan laut","Karena bilge water bersifat asam dan korosif","Karena bilge water mengandung bakteri berbahaya"],a:1,e:"Bilge water dari ruang mesin hampir selalu terkontaminasi minyak pelumas, bahan bakar, dan produk minyak lainnya. Jika dibuang langsung, minyak akan mencemari laut, membunuh organisme, dan merusak ekosistem."},
+    {q:"Seorang masinis menemukan OWS rusak di tengah perjalanan. Tindakan yang benar menurut MARPOL adalah…",o:["Terus membuang bilge water langsung karena OWS rusak bukan kesalahan awak","Hentikan pembuangan bilge water, tampung di sludge tank/tangki cadangan, catat di ORB, segera perbaiki OWS","Kurangi kecepatan kapal dan buang bilge water secara bertahap","Pindahkan bilge water ke tangki kargo yang kosong"],a:1,e:"Jika OWS rusak, pembuangan bilge water harus dihentikan. Bilge water ditampung di sludge tank atau tangki tersedia. Kerusakan dan tindakan yang diambil harus dicatat di Oil Record Book. OWS harus segera diperbaiki."},
+   ]},
+  {num:3,title:"Oil Record Book (ORB)",
+   mat:`<h3>📍 Oil Record Book (ORB) — Buku Catatan Minyak</h3>
+<p><span class="rr">Reg 17</span> Setiap kapal <strong><u>400 GT ke atas</u></strong> wajib memiliki <strong><u>Oil Record Book Part I (Machinery Space Operations)</u></strong>. ORB Part I mencatat semua operasi yang berkaitan dengan minyak di ruang mesin.</p>
+<p><span class="rr">Reg 36</span> Setiap kapal tanker minyak <strong><u>150 GT ke atas</u></strong> JUGA wajib memiliki <strong><u>Oil Record Book Part II (Cargo/Ballast Operations)</u></strong>. ORB Part II mencatat operasi kargo dan ballast di area tangki kargo.</p>
+<h3>📍 Yang Harus Dicatat di ORB Part I</h3>
+<ul>
+<li>Ballasting atau pembersihan fuel oil tanks</li>
+<li>Pembuangan bilge yang terakumulasi di ruang mesin (melalui OWS)</li>
+<li>Pengumpulan, pemindahan, dan pembuangan oil residues (sludge)</li>
+<li>Pembuangan atau pemindahan bilge water dari bilge holding tank</li>
+<li>Kondisi OWS, ODM jika terjadi kerusakan</li>
+<li>Pembuangan yang tidak disengaja atau pembuangan luar biasa lainnya</li>
+</ul>
+<h3>📍 Yang Harus Dicatat di ORB Part II (Khusus Tanker)</h3>
+<ul>
+<li>Loading of oil cargo (memuat minyak)</li>
+<li>Internal transfer of oil cargo (pemindahan minyak antar tangki)</li>
+<li>Ballasting of cargo tanks (pengisian ballast ke tangki kargo)</li>
+<li>Cleaning of cargo tanks</li>
+<li>Discharge of ballast water (pembuangan ballast)</li>
+<li>Discharge of dirty ballast or cleaning water from tankers</li>
+</ul>
+<div class="kb">⚠️ <strong>Setiap entri ORB harus ditandatangani</strong> oleh perwira yang bertanggung jawab atas operasi tersebut. Setiap halaman ORB harus ditandatangani oleh nakhoda (Master). ORB harus tersedia di atas kapal selama 3 tahun setelah entri terakhir.</div>
+<h3>📍 Pemeriksaan ORB oleh Port State Control</h3>
+<p>ORB adalah dokumen yang paling sering diperiksa oleh <strong><u>Port State Control (PSC)</u></strong>. Pemalsuan ORB — termasuk mencatat operasi fiktif atau menggunakan "magic pipe" — merupakan pelanggaran serius yang dapat mengakibatkan:</p>
+<ul>
+<li>Penahanan kapal (detention)</li>
+<li>Denda yang sangat besar (bisa mencapai jutaan dolar)</li>
+<li>Tuntutan pidana terhadap nakhoda dan perwira terkait</li>
+</ul>`,
+   kp:`<ul><li><strong>ORB Part I</strong>: wajib untuk kapal ≥400 GT (operasi ruang mesin)</li><li><strong>ORB Part II</strong>: wajib untuk tanker ≥150 GT (operasi kargo/ballast)</li><li>Setiap entri ditandatangani <strong>perwira bertanggung jawab</strong>, setiap halaman oleh <strong>Master</strong></li><li>ORB harus disimpan <strong>3 tahun</strong> setelah entri terakhir</li><li>Pemalsuan ORB: pelanggaran serius → denda besar, tuntutan pidana</li></ul>`,
+   mc:[
+    {q:"Oil Record Book Part I wajib dimiliki oleh kapal…",o:["Semua kapal tanpa pengecualian","Kapal 400 GT ke atas","Hanya kapal tanker minyak","Kapal yang melintas kawasan khusus saja"],a:1,e:"Reg 17: ORB Part I wajib untuk kapal 400 GT ke atas. Ini berlaku untuk semua jenis kapal — bukan hanya tanker. ORB Part I mencatat operasi minyak di machinery space."},
+    {q:"Oil Record Book Part II wajib dimiliki oleh…",o:["Semua kapal 400 GT ke atas","Kapal tanker minyak 150 GT ke atas (selain ORB Part I)","Kapal penumpang yang mengangkut kendaraan","Kapal yang beroperasi di kawasan khusus"],a:1,e:"Reg 36: ORB Part II wajib untuk oil tankers 150 GT ke atas, TAMBAHAN dari ORB Part I. ORB Part II mencatat operasi di cargo area — loading, ballasting, tank cleaning, dll."},
+    {q:"Siapa yang menandatangani setiap entri dalam Oil Record Book?",o:["Hanya nakhoda (Master)","Perwira yang bertanggung jawab atas operasi tersebut, dan setiap halaman oleh Master","Kepala Kamar Mesin (Chief Engineer) untuk semua entri","Petugas Port State Control saat pemeriksaan"],a:1,e:"Setiap entri ORB harus ditandatangani oleh perwira yang bertanggung jawab atas operasi yang dicatat. Setiap halaman ORB harus ditandatangani oleh Master. Ini memastikan akuntabilitas ganda."},
+    {q:"Berapa lama ORB harus disimpan di atas kapal setelah entri terakhir?",o:["1 tahun","2 tahun","3 tahun","5 tahun"],a:2,e:"ORB harus disimpan selama 3 tahun setelah entri terakhir. Ini memungkinkan inspektur PSC untuk memeriksa riwayat operasi kapal jauh ke belakang — bukan hanya perjalanan terkini."},
+    {q:"Operasi mana yang harus dicatat di ORB Part I?",o:["Pemuatan minyak mentah ke tangki kargo tanker","Pembuangan bilge water melalui OWS dari ruang mesin","Pencucian tangki kargo kapal tanker","Pengisian ballast ke tangki kargo bekas minyak"],a:1,e:"ORB Part I mencatat operasi di machinery space (ruang mesin): pembuangan bilge water, pengumpulan sludge, transfer oil residues, operasi OWS. Pencucian tangki kargo dan ballasting kargo adalah untuk ORB Part II."},
+    {q:"Kapal tanker ditemukan membuang oily mixture melalui 'magic pipe' yang melewati OWS. Konsekuensi yang mungkin terjadi adalah…",o:["Hanya mendapat peringatan tertulis karena tidak ada yang melihat","Penahanan kapal, denda sangat besar, dan tuntutan pidana terhadap nakhoda dan perwira","Hanya dicatat dalam ORB sebagai keadaan darurat","Tidak ada konsekuensi jika kejadiannya di laut lepas"],a:1,e:"'Magic pipe' adalah selang ilegal yang membypass OWS untuk membuang oily bilge water langsung ke laut. Ini pelanggaran serius MARPOL: kapal ditahan, denda bisa jutaan dolar, nakhoda dan chief engineer bisa dituntut pidana dan dipenjara."},
+    {q:"Apa yang harus dicatat jika terjadi pembuangan minyak yang tidak disengaja (accidental discharge) karena kerusakan pipa?",o:["Tidak perlu dicatat karena tidak disengaja","Harus segera dicatat di ORB dengan rincian kejadian, jumlah perkiraan, tindakan yang diambil","Hanya dilaporkan secara lisan ke perusahaan","Dicatat di Deck Log Book saja, tidak perlu di ORB"],a:1,e:"Semua pembuangan minyak — termasuk yang tidak disengaja — harus dicatat di ORB. Entri harus mencakup tanggal, waktu, lokasi, jenis minyak, perkiraan jumlah, alasan, dan tindakan yang telah diambil untuk menghentikan pembuangan."},
+    {q:"Mengapa PSC sering menaruh perhatian khusus pada Oil Record Book saat inspeksi?",o:["Karena ORB berisi informasi keuangan kapal","Karena ORB adalah bukti utama kepatuhan atau pelanggaran MARPOL — pemalsuan ORB menunjukkan niat jahat pelanggaran","Karena ORB diperlukan untuk klaim asuransi","Karena ORB berisi daftar awak kapal"],a:1,e:"ORB adalah dokumen verifikasi utama kepatuhan MARPOL. Ketidakkonsistenan (misalnya tidak ada entri bilge discharge tapi sludge tank selalu kosong) adalah red flag yang mengindikasikan pembuangan ilegal. PSC menggunakan ORB untuk mendeteksi pelanggaran."},
+   ]},
+  {num:4,title:"Kawasan Khusus & Pembuangan dari Tanker",
+   mat:`<h3>📍 Kawasan Khusus (Special Areas) Annex I</h3>
+<p>MARPOL menetapkan beberapa <strong><u>kawasan khusus</u></strong> di mana persyaratan pembuangan minyak jauh lebih ketat. Di kawasan ini, pembuangan oily mixture dari kapal ≥400 GT <strong><u>dilarang sama sekali</u></strong>.</p>
+<p><strong>Kawasan Khusus Annex I meliputi:</strong></p>
+<ul>
+<li>Laut Mediterania (Mediterranean Sea)</li>
+<li>Laut Baltik (Baltic Sea)</li>
+<li>Laut Hitam (Black Sea)</li>
+<li>Laut Merah (Red Sea)</li>
+<li>Gulfs Area (Teluk Persia/Oman)</li>
+<li>Teluk Aden (Gulf of Aden)</li>
+<li>Perairan Antartika (Antarctic Area) — di bawah 60°S</li>
+<li>Perairan Barat Laut Eropa (NW European Waters)</li>
+<li>Area Laut Oman (Oman Area of Sea)</li>
+<li>Perairan Afrika Selatan bagian selatan</li>
+</ul>
+<div class="kb">⚠️ <strong>Penting:</strong> Perairan Indonesia <strong>BUKAN</strong> kawasan khusus MARPOL Annex I — tetapi ketentuan pembuangan umum (15 ppm, OWS) tetap berlaku.</div>
+<h3>📍 Pembuangan dari Area Kargo Tanker (Reg 34)</h3>
+<p>Pembuangan dari area kargo kapal tanker (ballast kotor, sisa muatan, dll.) di luar kawasan khusus diperbolehkan HANYA jika:</p>
+<ul>
+<li>Kapal <strong><u>sedang berlayar</u></strong> (not at anchor/berth)</li>
+<li>Jarak dari daratan terdekat: <strong><u>> 50 nautical miles</u></strong></li>
+<li><strong><u>Instantaneous rate of discharge</u></strong>: ≤ 30 liter per nautical mile</li>
+<li>Total jumlah yang dibuang: ≤ <strong><u>1/30.000 dari total muatan kargo sebelumnya</u></strong></li>
+<li>ODMCS dalam kondisi aktif</li>
+</ul>
+<h3>📍 Di Dalam Kawasan Khusus (Tanker)</h3>
+<p>Di dalam kawasan khusus, pembuangan dari area kargo tanker <strong><u>DILARANG SAMA SEKALI</u></strong> — tidak ada pengecualian.</p>`,
+   kp:`<ul><li><strong>10 kawasan khusus</strong> Annex I: Med, Baltik, Laut Hitam, Merah, Gulfs, Aden, Antartika, NW Eropa, Oman, Afrika Selatan</li><li>Dalam special areas: kapal ≥400 GT <strong>DILARANG membuang</strong> bilge water</li><li>Tanker di luar special areas: >50 nm dari daratan, ≤30 L/nm, ≤1/30.000 total muatan</li><li>Dalam special areas: tanker <strong>ZERO DISCHARGE</strong> dari area kargo</li></ul>`,
+   mc:[
+    {q:"Berapa banyak kawasan khusus (special areas) yang ditetapkan dalam MARPOL Annex I?",o:["5 kawasan","7 kawasan","10 kawasan","13 kawasan"],a:2,e:"Annex I menetapkan 10 kawasan khusus: Mediterania, Baltik, Laut Hitam, Laut Merah, Gulfs, Teluk Aden, Antartika, NW Eropa, Oman, dan Perairan Afrika Selatan. Masing-masing memiliki larangan pembuangan yang lebih ketat."},
+    {q:"Di dalam kawasan khusus Annex I, kapal 500 GT diperbolehkan membuang bilge water jika…",o:["Menggunakan OWS dan kadar minyak ≤15 ppm","Kapal sedang berlayar cepat di atas 12 knot","Tidak diperbolehkan sama sekali — zero discharge di dalam special areas untuk kapal ≥400 GT","Jarak dari daratan lebih dari 25 nautical miles"],a:2,e:"Di dalam special areas: kapal ≥400 GT DILARANG SAMA SEKALI membuang bilge water dari ruang mesin, apapun kadar minyaknya. Zero discharge. Harus menggunakan fasilitas penerimaan di pelabuhan."},
+    {q:"Laut Mediterania termasuk dalam kawasan khusus Annex I. Apa konsekuensinya bagi kapal kargo 800 GT yang transit?",o:["Boleh membuang bilge water normal menggunakan OWS","Kadar batas dikurangi dari 15 ppm menjadi 5 ppm","Tidak boleh membuang bilge water sama sekali — harus gunakan fasilitas darat di pelabuhan","Boleh membuang jika jarak dari pantai lebih dari 25 nm"],a:2,e:"Di dalam Mediterania (kawasan khusus), kapal ≥400 GT dilarang membuang bilge water dari machinery space. Saat tiba di pelabuhan, bilge water harus diserahkan ke fasilitas penerimaan."},
+    {q:"Kapal tanker minyak di luar kawasan khusus boleh membuang air ballast kotor jika…",o:["Kapal sedang berlabuh di pelabuhan dengan izin harbormaster","Kapal berlayar, jarak >50 nm dari daratan, instantaneous rate ≤30 L/nm, total ≤1/30.000 muatan, ODMCS aktif","Menggunakan OWS standard yang sama dengan ruang mesin","Jarak dari daratan >12 nm dan kapal berlayar di atas 7 knot"],a:1,e:"Reg 34 di luar special areas: kapal tanker boleh membuang dari cargo area dengan syarat kumulatif: berlayar, >50 nm, ≤30 L/nm (instantaneous rate), total ≤1/30.000 kargo, ODMCS aktif. Semua syarat harus terpenuhi sekaligus."},
+    {q:"'Instantaneous rate of discharge' 30 liter per nautical mile untuk tanker artinya…",o:["Tanker boleh membuang maksimal 30 liter per jam","Untuk setiap satu mil laut yang ditempuh, jumlah minyak yang dibuang tidak boleh melebihi 30 liter","Kecepatan pembuangan maksimal 30 liter per menit","Total pembuangan selama perjalanan tidak boleh melebihi 30.000 liter"],a:1,e:"Instantaneous rate 30 L/nm berarti: dalam setiap satu nautical mile perjalanan, tidak boleh ada lebih dari 30 liter minyak yang dibuang. Ini menjamin bahwa pencemaran tersebar sangat tipis dan laut memiliki kapasitas menyerap yang cukup."},
+    {q:"Perairan Antartika (di bawah 60°S) termasuk kawasan khusus Annex I. Mengapa kawasan ini mendapat perlindungan lebih?",o:["Karena banyak kapal yang melintas di sana","Karena ekosistemnya sangat rentan dan kemampuan pemulihan sendiri sangat lambat di suhu dingin","Karena banyak pangkalan militer di sana","Karena aturan IMO hanya berlaku di sana"],a:1,e:"Perairan Antartika adalah ekosistem paling sensitif di bumi. Suhu sangat dingin membuat proses biodegradasi minyak hampir tidak terjadi. Sekali tercemar, dampaknya bisa bertahan puluhan tahun. Oleh karena itu, zero discharge diberlakukan."},
+    {q:"Di kawasan mana Indonesia perlu waspada bahwa perairan sekitarnya termasuk kawasan khusus Annex I?",o:["Seluruh Samudra Hindia","Laut Jawa dan Selat Malaka","Gulfs Area (Teluk Persia/Oman) jika kapal berlayar ke Timur Tengah","Seluruh Samudra Pasifik"],a:2,e:"Perairan Indonesia sendiri BUKAN kawasan khusus Annex I. Namun kapal-kapal Indonesia yang berlayar ke Timur Tengah akan melewati Gulfs Area dan Oman Area yang merupakan kawasan khusus. Juga Laut Mediterania jika berlayar ke Eropa."},
+   ]},
+  {num:5,title:"Persyaratan Kapal Tanker: SBT, COW & Sertifikasi",
+   mat:`<h3>📍 SBT — Segregated Ballast Tank</h3>
+<p><span class="rr">Reg 18</span> Kapal tanker baru (new tanker) <strong><u>20.000 DWT ke atas</u></strong> wajib memiliki <strong><u>SBT (Segregated Ballast Tank)</u></strong>. SBT adalah tangki ballast yang <strong><u>sepenuhnya terpisah</u></strong> dari sistem kargo minyak dan sistem bahan bakar kapal.</p>
+<div class="kb">💡 <strong>Mengapa SBT penting?</strong> Tanpa SBT, kapal tanker mengisi tangki kargo yang bekas digunakan untuk minyak dengan air ballast. Saat ballast itu dibuang, minyak sisa di tangki ikut terbuang ke laut. SBT mencegah kontaminasi ini karena ballast tidak pernah bersentuhan dengan minyak.</div>
+<h3>📍 COW — Crude Oil Washing</h3>
+<p><span class="rr">Reg 33</span> Kapal tanker minyak mentah (crude oil tanker) <strong><u>20.000 DWT ke atas</u></strong> wajib menggunakan sistem <strong><u>COW (Crude Oil Washing)</u></strong>. COW adalah teknik pencucian tangki kargo menggunakan <strong><u>minyak mentah itu sendiri</u></strong> (bukan air laut) sebagai media pencuci.</p>
+<p>Keuntungan COW:</p>
+<ul>
+<li>Mengurangi residu minyak di tangki kargo secara signifikan</li>
+<li>Hasil pencucian (residu) kembali ke kargo — tidak ada limbah</li>
+<li>Mengurangi kebutuhan air ballast kotor</li>
+<li>Meningkatkan kapasitas muatan efektif</li>
+</ul>
+<h3>📍 IGS — Inert Gas System</h3>
+<p>Kapal tanker minyak mentah yang menggunakan COW <strong><u>wajib memiliki IGS</u></strong> (Inert Gas System). IGS mengisi tangki dengan gas inert (biasanya gas buang dari boiler atau generator inert gas) untuk mencegah campuran eksplosif antara uap minyak dan oksigen.</p>
+<h3>📍 IOPP Certificate</h3>
+<p><span class="rr">Reg 6</span> Setiap kapal <strong><u>400 GT ke atas</u></strong> yang berlayar di perairan internasional wajib memiliki <strong><u>IOPP Certificate (International Oil Pollution Prevention Certificate)</u></strong>. IOPP dikeluarkan setelah survei lengkap dan berlaku maksimum <strong><u>5 tahun</u></strong> (dengan survei antara setiap 2,5 tahun).</p>`,
+   kp:`<ul><li><strong>SBT</strong>: wajib untuk new tanker ≥20.000 DWT — tangki ballast terpisah total dari sistem kargo</li><li><strong>COW</strong>: wajib untuk crude oil tanker ≥20.000 DWT — cuci tangki dengan crude oil sendiri</li><li><strong>IGS</strong>: wajib jika kapal menggunakan COW</li><li><strong>IOPP Certificate</strong>: wajib untuk kapal ≥400 GT, berlaku 5 tahun, survei antara 2,5 tahun</li></ul>`,
+   mc:[
+    {q:"SBT (Segregated Ballast Tank) wajib dimiliki oleh kapal tanker yang…",o:["Berusia lebih dari 20 tahun","New tanker 20.000 DWT ke atas","Semua kapal tanker tanpa batasan ukuran","Kapal tanker yang beroperasi di kawasan khusus saja"],a:1,e:"Reg 18: SBT wajib untuk new tanker (keel diletakkan ≥31 Januari 1977) berukuran 20.000 DWT ke atas. SBT memastikan ballast water tidak pernah bersentuhan dengan minyak kargo."},
+    {q:"Apa fungsi utama SBT (Segregated Ballast Tank) dalam pencegahan pencemaran laut?",o:["Menyimpan minyak berlebih saat kapal terlalu berat","Memisahkan air ballast dari sistem minyak sehingga ballast tidak terkontaminasi minyak saat dibuang","Menggantikan fungsi OWS untuk kapal tanker","Menyimpan air tawar untuk kebutuhan ABK"],a:1,e:"SBT adalah tangki yang sepenuhnya terpisah dari sistem kargo minyak. Air ballast dalam SBT tidak pernah bersentuhan dengan minyak, sehingga bisa dibuang tanpa mencemari laut — berbeda dengan dirty ballast yang harus diproses dulu."},
+    {q:"COW (Crude Oil Washing) adalah teknik yang menggunakan…",o:["Air laut bertekanan tinggi untuk membersihkan tangki kargo","Minyak mentah itu sendiri sebagai media pencuci tangki kargo","Campuran air tawar dan deterjen khusus","Uap air panas untuk melarutkan sisa minyak"],a:1,e:"COW menggunakan crude oil sebagai pencuci tangki kargo — bukan air. Efektif karena minyak melarutkan sisa minyak. Hasil pencucian dikembalikan ke kargo, sehingga tidak ada limbah yang perlu dibuang."},
+    {q:"Mengapa kapal tanker yang menggunakan COW wajib memiliki IGS (Inert Gas System)?",o:["Karena IGS diperlukan untuk memompa minyak mentah dengan tekanan tinggi","Karena COW menciptakan kondisi di mana uap minyak bisa bercampur dengan udara — membentuk campuran eksplosif yang dicegah oleh IGS","Karena IGS membantu memisahkan minyak dari residu tangki","Karena aturan asuransi mewajibkan IGS"],a:1,e:"COW berarti ada minyak mentah (dan uapnya) di dalam tangki. Uap minyak + udara (oksigen) bisa membentuk campuran yang mudah meledak. IGS mengisi tangki dengan gas inert (bebas oksigen) sehingga tidak bisa terjadi ledakan."},
+    {q:"IOPP Certificate berlaku selama…",o:["1 tahun","2,5 tahun","5 tahun","10 tahun"],a:2,e:"IOPP Certificate berlaku maksimum 5 tahun. Selama masa berlaku, ada survei antara (intermediate survey) setiap 2,5 tahun. IOPP harus diperbarui setelah 5 tahun melalui survei pembaruan (renewal survey)."},
+    {q:"Kapal kargo umum 600 GT perlu IOPP Certificate karena…",o:["Tidak perlu — IOPP hanya untuk kapal tanker","Perlu — semua kapal 400 GT ke atas yang berlayar internasional wajib memiliki IOPP","Hanya perlu jika berlayar melalui kawasan khusus","Hanya perlu jika memiliki OWS di atas kapal"],a:1,e:"Reg 6: IOPP Certificate wajib untuk SEMUA kapal 400 GT ke atas yang berlayar di perairan internasional — bukan hanya tanker. IOPP membuktikan bahwa kapal memenuhi persyaratan MARPOL Annex I."},
+    {q:"Apa perbedaan utama antara dirty ballast dan clean ballast pada kapal tanker tanpa SBT?",o:["Dirty ballast adalah ballast yang berwarna gelap, clean ballast yang jernih","Dirty ballast adalah air ballast yang pernah bersentuhan dengan minyak kargo, clean ballast yang tidak pernah bersentuhan dengan minyak","Dirty ballast berasal dari tangki depan kapal, clean ballast dari tangki belakang","Tidak ada perbedaan, keduanya bisa dibuang bebas"],a:1,e:"Kapal tanker tanpa SBT menggunakan tangki kargo untuk ballast. Setelah membawa minyak, sisa minyak masih ada di tangki. Air ballast yang mengisi tangki ini menjadi 'dirty ballast'. Sebelum dibuang, dirty ballast harus diproses melalui ODMCS atau dikirim ke reception facility."},
+   ]},
+ ],
+ essay:[
+  {q:"Jelaskan sistem pencegahan pencemaran minyak di atas kapal berdasarkan MARPOL Annex I! Apa saja peralatan yang wajib ada di kapal ≥400 GT, bagaimana prosedur pembuangan bilge water yang benar, dan apa konsekuensi jika nakhoda/masinis memalsukan Oil Record Book?",
+   kp:["OWS (Oily Water Separator) wajib untuk kapal ≥400 GT","ODM/OCM untuk monitoring otomatis kadar minyak — alarm dan stop jika >15 ppm","Sludge tank untuk menampung residu minyak","ORB Part I wajib untuk ≥400 GT, Part II untuk tanker ≥150 GT","15 ppm rule di luar special areas; zero discharge di dalam special areas","Prosedur: OWS aktif, kapal underway, kadar ≤15 ppm, catat di ORB","Pemalsuan ORB: penahanan kapal, denda jutaan dolar, tuntutan pidana","Magic pipe adalah pelanggaran serius yang dapat dipenjara","PSC memeriksa ORB dan membandingkan dengan catatan bahan bakar/sludge"]},
+ ]
+},
+
+// ---- ANNEX II ----
+{id:"ANX2",title:"Annex II",full:"Zat Cair Berbahaya (NLS)",rules:"Reg 1–25",ico:"⚗️",col:"#a855f7",
+ desc:"Annex II mengatur pencegahan pencemaran oleh Noxious Liquid Substances (NLS) — zat cair berbahaya yang diangkut dalam bentuk curah. NLS diklasifikasikan menjadi empat kategori berdasarkan tingkat bahayanya terhadap lingkungan laut.",
+ ruleList:[
+  {num:1,title:"Kategorisasi NLS (X, Y, Z, OS)",
+   mat:`<h3>📍 Noxious Liquid Substances (NLS)</h3>
+<p>NLS adalah <strong><u>zat cair berbahaya</u></strong> yang diangkut di atas kapal dalam bentuk curah (bulk) — bukan dalam kemasan (packaged form). Zat-zat ini bisa mencemari dan merusak lingkungan laut jika dibuang sembarangan.</p>
+<h3>📍 Kategori NLS</h3>
+<p><span class="rr">Kategori X</span> <strong><u>Bahaya Besar (Major Hazard)</u></strong>: zat-zat yang jika dibuang ke laut menimbulkan bahaya yang sangat signifikan terhadap sumber daya laut atau kesehatan manusia. <strong>Pembuangan ke laut DILARANG MUTLAK</strong> — harus diserahkan seluruhnya ke fasilitas penerimaan darat. Contoh: Bromine, Carbon disulfide.</p>
+<p><span class="rr">Kategori Y</span> <strong><u>Bahaya (Hazardous)</u></strong>: zat yang menimbulkan bahaya terhadap sumber daya laut atau kesehatan manusia, atau menyebabkan kerusakan pada keindahan laut. <strong>Dapat dibuang ke laut dengan ketentuan ketat</strong>. Contoh: Styrene, Benzene (konsentrasi rendah), minyak tumbuhan.</p>
+<p><span class="rr">Kategori Z</span> <strong><u>Bahaya Kecil (Minor Hazard)</u></strong>: zat yang menimbulkan bahaya yang lebih kecil terhadap sumber daya laut atau kesehatan manusia. <strong>Dapat dibuang ke laut dengan ketentuan yang lebih longgar</strong>. Contoh: beberapa larutan gula, beberapa asam lemah encer.</p>
+<p><span class="rr">OS — Other Substances</span>: zat-zat yang tidak termasuk kategori X, Y, atau Z karena dianggap <strong><u>tidak membahayakan</u></strong> lingkungan laut. <strong>Tidak ada ketentuan pembuangan khusus dari Annex II</strong> yang berlaku.</p>
+<div class="kb">🔑 <strong>Urutan bahaya:</strong> X (paling berbahaya) → Y (berbahaya) → Z (sedikit berbahaya) → OS (tidak berbahaya). Semakin berbahaya, semakin ketat larangan pembuangannya.</div>`,
+   kp:`<ul><li><strong>Kategori X</strong>: bahaya besar — DILARANG MUTLAK dibuang ke laut</li><li><strong>Kategori Y</strong>: berbahaya — boleh dibuang dengan ketentuan ketat</li><li><strong>Kategori Z</strong>: bahaya kecil — boleh dibuang dengan ketentuan lebih longgar</li><li><strong>OS</strong>: tidak berbahaya — tidak ada ketentuan Annex II yang berlaku</li></ul>`,
+   mc:[
+    {q:"NLS Kategori X menurut MARPOL Annex II adalah…",o:["Zat dengan bahaya rendah yang boleh dibuang dengan persyaratan minimal","Zat dengan bahaya besar yang pembuangannya ke laut dilarang mutlak","Zat yang hanya berbahaya dalam konsentrasi tinggi","Zat yang hanya diatur di kawasan khusus saja"],a:1,e:"Kategori X: major hazard — bahaya besar terhadap sumber daya laut atau kesehatan manusia. Pembuangan ke laut DILARANG MUTLAK. Residu harus diserahkan ke fasilitas penerimaan darat sebelum tangki dicuci."},
+    {q:"Urutan kategori NLS dari yang paling berbahaya ke yang paling tidak berbahaya adalah…",o:["OS → Z → Y → X","X → Y → Z → OS","Y → X → Z → OS","Z → Y → X → OS"],a:1,e:"X adalah yang paling berbahaya (major hazard), Y berbahaya (hazardous), Z bahaya kecil (minor hazard), OS tidak berbahaya (other substances tidak termasuk X/Y/Z). Urutan: X > Y > Z > OS."},
+    {q:"Kapal chemical tanker mengangkut NLS Kategori Y. Apa yang bisa dilakukan dengan residu setelah bongkar?",o:["Bisa dibuang langsung ke laut setelah berlayar 12 nm dari pantai tanpa persyaratan lain","Boleh dibuang ke laut dengan persyaratan ketat: jarak, kedalaman, kecepatan kapal, dan kondisi prewash","Harus diserahkan ke fasilitas darat seperti Kategori X — dilarang dibuang ke laut","Boleh dibuang di pelabuhan jika ada izin otoritas pelabuhan"],a:1,e:"Kategori Y boleh dibuang ke laut tapi dengan persyaratan ketat: di luar 12 nm dari nearest land, kedalaman >25 m, kapal underway ≥7 knot, melalui titik di bawah garis air, dan setelah prosedur prewash jika diperlukan."},
+    {q:"NLS dengan kategori OS (Other Substances) artinya…",o:["Zat yang tidak diketahui bahayanya dan perlu penelitian lebih lanjut","Zat yang tidak termasuk kategori X, Y, Z karena tidak menimbulkan bahaya terhadap lingkungan laut","Zat yang hanya boleh diangkut di kapal khusus","Zat yang sedang dalam proses evaluasi oleh IMO"],a:1,e:"OS = Other Substances: zat-zat yang telah dievaluasi dan dinyatakan tidak menimbulkan bahaya yang signifikan terhadap lingkungan laut. Tidak ada ketentuan pembuangan khusus dari Annex II yang berlaku untuk OS."},
+    {q:"Mengapa NLS Kategori X tidak boleh dibuang ke laut sama sekali?",o:["Karena zat-zat ini terlalu mahal untuk dibuang","Karena tingkat bahayanya terhadap lingkungan laut dan kesehatan manusia sangat besar sehingga tidak bisa ditoleransi","Karena kawasan laut tidak mampu mengencerkannya","Karena aturan komersial mencegah pembuangan produk berharga"],a:1,e:"Kategori X ditetapkan sebagai major hazard karena potensi kerusakannya terhadap sumber daya laut, keanekaragaman hayati, atau kesehatan manusia sangat signifikan. Tidak ada konsentrasi atau kondisi yang membuat pembuangannya aman."},
+    {q:"Pengklasifikasian suatu zat ke dalam kategori NLS (X, Y, Z, atau OS) didasarkan pada…",o:["Harga pasaran zat tersebut","Tingkat bahaya terhadap sumber daya laut, kesehatan manusia, dan keindahan laut","Viskositas dan titik didih zat tersebut","Negara asal produsen zat tersebut"],a:1,e:"Klasifikasi NLS didasarkan pada penilaian bahaya (hazard assessment): bahaya terhadap sumber daya laut (toksisitas terhadap organisme laut), kesehatan manusia, keindahan laut (estetika), dan sumber daya biologis. Semakin tinggi bahaya, semakin ketat kategorinya."},
+   ]},
+  {num:2,title:"Pembuangan NLS & Prosedur Prewash",
+   mat:`<h3>📍 Persyaratan Pembuangan NLS ke Laut</h3>
+<p><strong>Kategori X:</strong> <span style="color:var(--red);font-weight:700;">DILARANG MUTLAK dibuang ke laut</span>. Residu tangki harus diserahkan ke fasilitas penerimaan sebelum proses pencucian tangki dimulai.</p>
+<p><strong>Kategori Y (di luar kawasan khusus):</strong></p>
+<ul>
+<li>Kapal <strong><u>underway</u></strong> dengan kecepatan ≥ 7 knot</li>
+<li>Jarak dari daratan terdekat: ≥ <strong><u>12 nautical miles</u></strong></li>
+<li>Kedalaman air: ≥ <strong><u>25 meter</u></strong></li>
+<li>Pembuangan melalui titik <strong><u>di bawah garis air</u></strong> (below the waterline)</li>
+<li>Prewash jika disyaratkan sudah dilakukan</li>
+</ul>
+<p><strong>Kategori Z (di luar kawasan khusus):</strong> Syarat sama dengan Kategori Y.</p>
+<h3>📍 Prewash (Pencucian Awal)</h3>
+<p>Prewash adalah prosedur <strong><u>pencucian awal tangki kargo</u></strong> yang dilakukan sebelum kapal meninggalkan pelabuhan bongkar. Tujuannya: mengurangi residu NLS yang tersisa di tangki ke tingkat yang aman.</p>
+<p><strong>Kapan prewash wajib?</strong></p>
+<ul>
+<li><strong>Kategori X</strong>: prewash <strong><u>selalu wajib</u></strong> sebelum meninggalkan pelabuhan bongkar. Air cucian harus diserahkan ke fasilitas penerimaan di darat.</li>
+<li><strong>Kategori Y</strong>: prewash wajib jika residu lebih dari jumlah yang diperbolehkan.</li>
+<li><strong>Kategori Z</strong>: umumnya tidak diperlukan prewash.</li>
+</ul>
+<div class="kb">💡 <strong>Prewash dilakukan di pelabuhan</strong> — air cucian prewash diserahkan ke fasilitas penerimaan, BUKAN dibuang ke laut. Setelah prewash selesai dan disertifikasi oleh surveyor, barulah sisa air bilasan boleh dibuang ke laut sesuai aturan Annex II.</div>
+<h3>📍 NLS Record Book & Prosedur Survey</h3>
+<p>Kapal yang mengangkut NLS dalam bentuk curah wajib memiliki <strong><u>Cargo Record Book</u></strong> yang mencatat semua operasi kargo NLS, termasuk pemuatan, pembongkaran, prewash, dan pembuangan residu.</p>`,
+   kp:`<ul><li><strong>Kategori X</strong>: ZERO DISCHARGE ke laut, prewash wajib di pelabuhan</li><li><strong>Kategori Y & Z</strong>: boleh dibuang di luar 12 nm, kedalaman >25 m, ≥7 knot</li><li><strong>Prewash</strong>: pencucian awal tangki di pelabuhan, air cucian ke fasilitas darat</li><li><strong>Cargo Record Book</strong>: wajib dimiliki untuk mencatat operasi NLS</li></ul>`,
+   mc:[
+    {q:"Residu NLS Kategori X di tangki kargo setelah pembongkaran harus…",o:["Dibuang ke laut setelah kapal berlayar lebih dari 12 nm","Diserahkan ke fasilitas penerimaan darat, dan tangki diprewash sebelum kapal berangkat","Diencerkan dengan air laut dan dibuang melalui ODMCS","Dibakar di incinerator kapal"],a:1,e:"Kategori X: residu harus diserahkan ke fasilitas penerimaan. Kemudian dilakukan prewash dengan air yang hasilnya juga ke fasilitas darat. Hanya setelah prewash bersertifikat, tangki bisa dibersihkan lebih lanjut."},
+    {q:"Untuk membuang air sisa pencucian tangki berisi NLS Kategori Y ke laut, kapal harus…",o:["Berlabuh di pelabuhan dan mendapat izin harbormaster","Berlayar, minimal 12 nm dari daratan, kedalaman ≥25 m, kecepatan ≥7 knot","Berada di laut bebas lebih dari 200 nm dari pantai","Hanya berlaku di siang hari dengan visibilitas baik"],a:1,e:"Kategori Y (di luar special areas): kapal underway ≥7 knot, jarak ≥12 nm dari nearest land, kedalaman laut ≥25 m, pembuangan di bawah garis air. Semua syarat harus terpenuhi."},
+    {q:"Mengapa pembuangan NLS harus dilakukan 'di bawah garis air' (below the waterline)?",o:["Agar terlihat lebih sedikit oleh kapal lain","Agar NLS langsung bercampur dengan air laut dan diencerkan lebih cepat, mengurangi konsentrasi di permukaan","Karena tekanan air membantu pembuangan","Karena aturan keselamatan kebakaran di atas geladak"],a:1,e:"Pembuangan di bawah garis air menjamin bahwa NLS langsung masuk ke kolom air dan terencerkan oleh turbulensi dan arus, bukan mengapung di permukaan. Ini mengurangi dampak terhadap biota permukaan dan burung laut."},
+    {q:"Prewash untuk NLS Kategori X harus dilakukan di…",o:["Laut terbuka lebih dari 50 nm dari pantai","Di pelabuhan sebelum kapal berangkat, dengan air cucian diserahkan ke fasilitas darat","Di tengah perjalanan menggunakan air laut","Saat memasuki kawasan khusus"],a:1,e:"Prewash Kategori X WAJIB di pelabuhan sebelum keberangkatan. Air hasil prewash harus diserahkan ke reception facility di darat — TIDAK boleh dibuang ke laut. Surveyor harus mensertifikasi bahwa prewash telah dilakukan sesuai prosedur."},
+    {q:"Cargo Record Book untuk NLS wajib mencatat operasi apa?",o:["Hanya operasi pembongkaran NLS di pelabuhan tujuan","Semua operasi kargo NLS: pemuatan, pembongkaran, prewash, transfer, dan pembuangan residu","Hanya operasi yang melibatkan Kategori X dan Y","Hanya operasi yang terjadi di kawasan khusus"],a:1,e:"Cargo Record Book harus mencatat SEMUA operasi yang berkaitan dengan NLS curah: loading, unloading, internal transfer, prewash, dan disposal of residues. Ini adalah dokumen audit utama untuk kepatuhan Annex II."},
+   ]},
+  {num:3,title:"Sertifikasi NLS & Kawasan Khusus",
+   mat:`<h3>📍 NLS Certificate (Certificate of Fitness)</h3>
+<p>Kapal yang mengangkut NLS curah wajib memiliki <strong><u>Certificate of Fitness (CoF)</u></strong> yang dikeluarkan oleh Administration atau badan klasifikasi yang diakui. CoF menyatakan bahwa kapal sesuai untuk mengangkut jenis NLS tertentu.</p>
+<p>Selain itu, kapal juga memerlukan <strong><u>NLS Certificate (International Pollution Prevention Certificate for the Carriage of Noxious Liquid Substances in Bulk)</u></strong> sebagai bukti kepatuhan terhadap Annex II.</p>
+<h3>📍 Kawasan Khusus Annex II</h3>
+<p>Annex II menetapkan kawasan khusus yang lebih ketat. <strong><u>Laut Baltik</u></strong> adalah satu-satunya kawasan khusus yang secara spesifik disebutkan dalam Annex II dengan ketentuan bahwa pembuangan NLS Kategori Y dan Z juga dilarang di dalam area tersebut.</p>
+<div class="kb">📌 <strong>Perbedaan Annex I vs Annex II:</strong><br>
+Annex I mengatur minyak bumi (oil/petroleum)<br>
+Annex II mengatur NLS (Noxious Liquid Substances) curah — bahan kimia cair berbahaya<br>
+Annex III mengatur bahan berbahaya dalam kemasan (packaged form)</div>
+<h3>📍 Prosedur Survei Kapal NLS</h3>
+<p>Kapal chemical tanker menjalani survei regular untuk mempertahankan NLS Certificate:</p>
+<ul>
+<li><strong>Initial Survey:</strong> sebelum kapal dioperasikan pertama kali</li>
+<li><strong>Renewal Survey:</strong> setiap 5 tahun</li>
+<li><strong>Intermediate Survey:</strong> antara tahun ke-2 dan ke-3 masa berlaku sertifikat</li>
+<li><strong>Annual Survey:</strong> setiap tahun dalam masa berlaku sertifikat</li>
+</ul>`,
+   kp:`<ul><li><strong>Certificate of Fitness</strong>: membuktikan kapal layak angkut NLS jenis tertentu</li><li><strong>Kawasan khusus Annex II</strong>: Laut Baltik (Kategori Y dan Z juga dilarang)</li><li>Annex I = minyak; Annex II = NLS curah; Annex III = bahan berbahaya kemasan</li><li>Survei: Initial → Annual → Intermediate → Renewal (5 tahun)</li></ul>`,
+   mc:[
+    {q:"Certificate of Fitness dalam konteks MARPOL Annex II membuktikan bahwa…",o:["Awak kapal sudah mendapat pelatihan penanganan bahan kimia","Kapal memenuhi persyaratan konstruksi dan peralatan untuk mengangkut jenis NLS tertentu","Kapal sudah membayar pajak pelabuhan untuk muatan kimia","Muatan NLS sudah diperiksa dan aman untuk diangkut"],a:1,e:"Certificate of Fitness (CoF) adalah sertifikat yang menyatakan bahwa kapal memiliki konstruksi, peralatan keselamatan, dan sistem yang sesuai untuk mengangkut NLS jenis tertentu secara aman dan ramah lingkungan."},
+    {q:"Kawasan khusus yang disebutkan spesifik dalam MARPOL Annex II adalah…",o:["Laut Mediterania","Laut Baltik","Laut Merah","Samudra Antartika"],a:1,e:"Annex II menetapkan Laut Baltik sebagai kawasan khusus, di mana pembuangan NLS Kategori Y dan Z juga dilarang (bukan hanya Kategori X seperti di luar kawasan khusus)."},
+    {q:"Perbedaan utama antara MARPOL Annex I, Annex II, dan Annex III adalah…",o:["Perbedaan ukuran kapal yang diatur","Annex I: minyak bumi; Annex II: NLS curah; Annex III: bahan berbahaya dalam kemasan","Perbedaan kawasan perairan yang diatur","Perbedaan negara anggota yang menandatangani"],a:1,e:"Annex I mengatur oil/petroleum dalam semua bentuk. Annex II mengatur NLS (zat cair berbahaya) yang diangkut dalam bentuk curah (bulk). Annex III mengatur harmful substances yang diangkut dalam packaged form (kemasan). Ketiganya mengatur zat berbeda dengan cara pengangkutan berbeda."},
+    {q:"Sebuah chemical tanker akan mengangkut muatan NLS Kategori Y baru. Survei apa yang harus dilakukan jika ini pertama kali kapal mengangkut jenis muatan ini?",o:["Tidak perlu survei khusus — cukup catat di Cargo Record Book","Initial Survey oleh Administration atau biro klasifikasi untuk mendapatkan CoF","Annual Survey yang diperbarui untuk mencakup muatan baru","Kapal tidak bisa mengangkut muatan baru tanpa membuat kapal baru"],a:1,e:"Sebelum mengangkut jenis NLS baru (terutama yang lebih berbahaya), kapal harus mendapat Certificate of Fitness yang mencakup muatan tersebut. Initial survey diperlukan untuk memverifikasi bahwa kapal sesuai untuk muatan spesifik tersebut."},
+   ]},
+ ],
+ essay:[
+  {q:"Jelaskan sistem klasifikasi NLS dalam MARPOL Annex II dan prosedur prewash yang wajib dilakukan kapal chemical tanker! Bandingkan persyaratan pembuangan NLS Kategori X dengan Kategori Y, dan jelaskan mengapa persyaratan ini berbeda secara fundamental.",
+   kp:["Kategori X: major hazard, zero discharge ke laut, prewash wajib di pelabuhan","Kategori Y: hazardous, boleh dibuang di luar 12 nm, kedalaman >25 m, ≥7 knot","Kategori Z: minor hazard, persyaratan lebih longgar dari Y","OS: tidak berbahaya, tidak ada ketentuan Annex II","Prewash: pencucian awal tangki di pelabuhan, air cucian ke reception facility","Perbedaan fundamental: tingkat bahaya terhadap ekosistem laut menentukan persyaratan","Cargo Record Book wajib mencatat semua operasi NLS","Certificate of Fitness membuktikan kelayakan kapal angkut NLS"]},
+ ]
+},
+
+// ---- ANNEX IV ----
+{id:"ANX4",title:"Annex IV",full:"Air Kotor — Sewage",rules:"Reg 1–13",ico:"🚿",col:"#14b8a6",
+ desc:"Annex IV mengatur pencegahan pencemaran dari pembuangan air kotor (sewage) kapal ke laut. Annex ini berlaku untuk kapal 400 GT ke atas, dan kapal di bawah 400 GT yang bersertifikat membawa lebih dari 15 orang.",
+ ruleList:[
+  {num:1,title:"Definisi & Penerapan Annex IV",
+   mat:`<h3>📍 Definisi Sewage</h3>
+<p><span class="rr">Reg 1</span> <strong><u>Sewage (Air Kotor)</u></strong> mencakup:</p>
+<ul>
+<li>Pembuangan dan residu dari toilet, urinal, dan <strong><u>WC (Water Closet)</u></strong></li>
+<li>Pembuangan dari <strong><u>ruang medis</u></strong> (wastafel, bak mandi) melalui sistem yang terhubung ke WC</li>
+<li>Pembuangan dari ruangan-ruangan di mana <strong><u>hewan hidup</u></strong> disimpan</li>
+<li>Campuran air kotor tersebut dengan <strong><u>bilge water</u></strong></li>
+</ul>
+<div class="kb">⚠️ <strong>Grey water</strong> (air dari dapur, wastafel, kamar mandi yang TIDAK terhubung ke toilet) <strong>tidak termasuk 'sewage'</strong> dalam Annex IV. Grey water diatur secara terpisah dan umumnya lebih longgar ketentuannya.</div>
+<h3>📍 Penerapan Annex IV</h3>
+<p><span class="rr">Reg 2</span> Annex IV berlaku untuk:</p>
+<ul>
+<li>Kapal <strong><u>400 GT ke atas</u></strong></li>
+<li>Kapal di bawah 400 GT yang <strong><u>bersertifikat membawa lebih dari 15 orang</u></strong></li>
+</ul>
+<p>Kapal kecil di bawah 400 GT yang membawa 15 orang atau kurang dikecualikan dari Annex IV.</p>
+<h3>📍 ISPP Certificate</h3>
+<p>Kapal yang tunduk pada Annex IV wajib memiliki <strong><u>ISPP Certificate (International Sewage Pollution Prevention Certificate)</u></strong>. Sertifikat ini membuktikan bahwa kapal memiliki peralatan pengolahan sewage yang memadai dan sistem pemipaan yang sesuai.</p>`,
+   kp:`<ul><li><strong>Sewage</strong>: pembuangan dari toilet/WC, ruang medis, kandang hewan — bukan grey water</li><li>Berlaku untuk kapal <strong>≥400 GT</strong> atau kapal <15 orang yang bersertifikat membawa >15 orang</li><li><strong>Grey water</strong> TIDAK termasuk sewage — perlakuan berbeda</li><li><strong>ISPP Certificate</strong>: wajib bagi kapal yang tunduk Annex IV</li></ul>`,
+   mc:[
+    {q:"Yang termasuk 'sewage' menurut MARPOL Annex IV adalah…",o:["Air dari dapur kapal (grey water)","Air buangan dari toilet, WC, dan ruang medis yang terhubung ke sistem WC","Air dari mesin cuci dan kamar mandi awak","Air dari sistem pendingin mesin kapal"],a:1,e:"Sewage per Reg 1: pembuangan dari toilet/urinal/WC, ruang medis melalui sistem yang terhubung ke WC, dan kandang hewan hidup. Grey water (dapur, kamar mandi tanpa WC) bukan sewage."},
+    {q:"Annex IV MARPOL berlaku untuk kapal…",o:["Semua kapal tanpa pengecualian","Kapal 400 GT ke atas, dan kapal <400 GT yang bersertifikat membawa >15 orang","Hanya kapal penumpang besar","Hanya kapal yang beroperasi di kawasan khusus"],a:1,e:"Annex IV berlaku untuk: (1) kapal ≥400 GT, dan (2) kapal <400 GT yang bersertifikat membawa lebih dari 15 orang. Kapal kecil dengan ≤15 orang dikecualikan."},
+    {q:"Grey water (air dari dapur dan kamar mandi tanpa WC) dalam konteks MARPOL adalah…",o:["Sama dengan sewage — dilarang dibuang ke laut","Bukan sewage menurut Annex IV — diatur berbeda dan umumnya lebih longgar","Termasuk kategori NLS Kategori Z","Diatur oleh Annex I sebagai oily mixture"],a:1,e:"Grey water (air dari dapur, kamar mandi, laundry yang tidak terhubung ke toilet) bukan sewage menurut Annex IV. Grey water tidak dilarang oleh Annex IV, meskipun beberapa pelabuhan memiliki ketentuan khusus tersendiri."},
+    {q:"ISPP Certificate pada kapal membuktikan bahwa…",o:["Kapal memiliki fasilitas gym dan kolam renang yang higienis","Kapal memenuhi persyaratan Annex IV untuk peralatan pengolahan sewage dan sistem pemipaan","Kapal sudah melakukan inspeksi sewage tahunan oleh otoritas pelabuhan","Semua awak kapal sudah mendapat vaksinasi"],a:1,e:"ISPP Certificate (International Sewage Pollution Prevention Certificate) membuktikan bahwa kapal memiliki STP (Sewage Treatment Plant) yang disetujui atau sistem komminusi/disinfeksi yang memadai, serta sistem pemipaan sesuai Annex IV."},
+   ]},
+  {num:2,title:"Persyaratan Pembuangan Sewage",
+   mat:`<h3>📍 Persyaratan Pembuangan Sewage ke Laut (Reg 11)</h3>
+<p>MARPOL Annex IV mengatur pembuangan sewage berdasarkan:</p>
+<ol>
+<li><strong>Jenis pengolahan yang telah dilakukan</strong></li>
+<li><strong>Jarak dari daratan terdekat</strong></li>
+</ol>
+<h3>📍 Tiga Jenis Pembuangan</h3>
+<p><span class="rr">Jenis 1</span> <strong><u>Sewage dari STP yang disetujui</u></strong>: kapal yang memiliki Sewage Treatment Plant (STP) yang telah disetujui Administration dapat membuang effluen sewage dari STP <strong><u>tanpa batasan jarak</u></strong> — asalkan kapal berlayar dan STP beroperasi sesuai standar yang ditetapkan.</p>
+<p><span class="rr">Jenis 2</span> <strong><u>Sewage yang telah dikomminusi dan didisinfeksi</u></strong>: sewage yang telah dihancurkan (comminuted) dan didisinfeksi menggunakan peralatan yang disetujui dapat dibuang jika:</p>
+<ul>
+<li>Jarak dari daratan terdekat: <strong><u>≥ 3 nautical miles</u></strong></li>
+<li>Kapal <strong><u>sedang berlayar</u></strong></li>
+</ul>
+<p><span class="rr">Jenis 3</span> <strong><u>Sewage yang TIDAK dikomminusi dan tidak didisinfeksi</u></strong>: sewage mentah hanya boleh dibuang jika:</p>
+<ul>
+<li>Jarak dari daratan terdekat: <strong><u>≥ 12 nautical miles</u></strong></li>
+<li>Kapal <strong><u>sedang berlayar</u></strong></li>
+<li>Tidak dibuang secara sekaligus (instantaneously) — harus pada laju yang wajar</li>
+</ul>
+<div class="kb">📏 <strong>Ringkasan jarak pembuangan sewage:</strong><br>
+STP → Boleh membuang bebas (kapal berlayar)<br>
+Comminuted + disinfected → ≥ 3 nm<br>
+Sewage mentah → ≥ 12 nm</div>
+<h3>📍 Kawasan Khusus Annex IV — Laut Baltik</h3>
+<p>Laut Baltik adalah kawasan khusus untuk Annex IV (berlaku sejak 2019). Di dalam Laut Baltik, pembuangan sewage dari kapal penumpang <strong><u>dilarang sama sekali</u></strong> kecuali jika kapal memiliki STP berstandar tinggi yang disetujui.</p>`,
+   kp:`<ul><li><strong>STP yang disetujui</strong>: boleh buang sewage tanpa batasan jarak (kapal berlayar)</li><li><strong>Comminuted + disinfected</strong>: boleh buang di ≥3 nm dari nearest land</li><li><strong>Sewage mentah</strong>: boleh buang di ≥12 nm (tidak sekaligus)</li><li><strong>Baltik</strong>: kawasan khusus — kapal penumpang dilarang buang sewage</li></ul>`,
+   mc:[
+    {q:"Kapal yang memiliki Sewage Treatment Plant (STP) yang disetujui dapat membuang effluen sewage…",o:["Hanya di luar 12 nm dari daratan","Hanya jika ada izin dari otoritas pantai terdekat","Tanpa batasan jarak (saat berlayar), sesuai standar effluen yang ditetapkan","Hanya di kawasan laut bebas di atas 200 nm"],a:2,e:"STP yang disetujui mengolah sewage hingga standar effluen yang memenuhi persyaratan Annex IV. Effluen dari STP yang disetujui boleh dibuang saat kapal berlayar tanpa batasan jarak minimum."},
+    {q:"Sewage yang sudah dikomminusi (dihancurkan) dan didisinfeksi dapat dibuang ke laut pada jarak…",o:["≥ 1 nautical mile dari daratan terdekat","≥ 3 nautical miles dari daratan terdekat","≥ 12 nautical miles dari daratan terdekat","≥ 50 nautical miles dari daratan terdekat"],a:1,e:"Sewage yang sudah comminuted (dihancurkan jadi partikel halus) dan disinfected (dibunuh bakterinya) boleh dibuang di ≥3 nm dari nearest land, saat kapal berlayar."},
+    {q:"Sewage mentah (tidak diolah sama sekali) hanya boleh dibuang ke laut jika jarak dari daratan…",o:["≥ 3 nm","≥ 6 nm","≥ 12 nm","≥ 25 nm"],a:2,e:"Sewage mentah (tidak comminuted, tidak disinfected) hanya boleh dibuang di ≥12 nm dari nearest land, saat kapal berlayar, dan tidak sekaligus (tidak pada laju instantaneous yang tinggi)."},
+    {q:"Mengapa sewage mentah memerlukan jarak minimum yang lebih jauh dari daratan dibanding sewage yang dikomminusi?",o:["Karena sewage mentah berbau lebih menyengat","Karena sewage mentah mengandung patogen (bakteri, virus) yang lebih banyak dan membutuhkan pengenceran lebih besar sebelum aman","Karena sewage mentah lebih berat dan tenggelam lebih lambat","Karena aturan estetika pantai"],a:1,e:"Sewage mentah mengandung banyak patogen berbahaya, organic matter, dan nutrients. Membutuhkan pengenceran yang sangat besar di laut terbuka sebelum aman bagi manusia dan ekosistem. Jarak 12 nm memberikan buffer yang cukup sebelum mencapai perairan pantai."},
+    {q:"Di dalam Laut Baltik, kapal penumpang berdasarkan aturan kawasan khusus Annex IV…",o:["Boleh membuang sewage dengan aturan normal (3 nm untuk comminuted)","Dilarang membuang sewage sama sekali kecuali dari STP berstandar tinggi yang disetujui","Hanya boleh membuang sewage di malam hari","Boleh membuang jika total penumpang di bawah 100 orang"],a:1,e:"Laut Baltik adalah kawasan khusus Annex IV (berlaku 2019). Kapal penumpang di Baltik dilarang membuang sewage kecuali jika memiliki STP berstandar tinggi yang disetujui HELCOM. Ini karena Baltik adalah laut tertutup yang sangat rentan terhadap eutrofikasi."},
+    {q:"Comminution (pengkomminusian) sewage berarti…",o:["Mengencerkan sewage dengan air laut","Menghancurkan padatan fecal menjadi partikel-partikel halus menggunakan alat penghancur mekanis","Memanaskan sewage untuk membunuh bakteri","Memisahkan padatan dari cairan sewage"],a:1,e:"Comminution adalah proses mekanis yang menghancurkan padatan dalam sewage (termasuk feces) menjadi partikel-partikel sangat kecil (fine particles). Partikel halus terurai lebih cepat di laut dan mengencerkan lebih merata."},
+   ]},
+ ],
+ essay:[
+  {q:"Jelaskan sistem pengelolaan air kotor (sewage) di atas kapal berdasarkan MARPOL Annex IV! Apa perbedaan antara sewage dan grey water? Bandingkan tiga cara pembuangan sewage dan jarak minimum yang diperlukan untuk masing-masing!",
+   kp:["Sewage: dari toilet/WC, ruang medis, kandang hewan","Grey water: dari dapur, kamar mandi tanpa WC — bukan sewage Annex IV","STP yang disetujui: bebas membuang saat berlayar","Comminuted + disinfected: ≥3 nm dari nearest land","Sewage mentah: ≥12 nm, tidak sekaligus","ISPP Certificate wajib bagi kapal yang tunduk Annex IV","Baltik: kawasan khusus — kapal penumpang zero sewage discharge","Penumpang menghasilkan lebih banyak sewage, karena itu kapal penumpang lebih diperketat"]},
+ ]
+},
+
+// ---- ANNEX V ----
+{id:"ANX5",title:"Annex V",full:"Sampah (Garbage)",rules:"Reg 1–10",ico:"🗑️",col:"#22c55e",
+ desc:"Annex V mengatur pencegahan pencemaran dari pembuangan sampah kapal ke laut. Annex ini berlaku untuk semua kapal dan mencakup larangan pembuangan plastik ke laut, serta persyaratan Garbage Management Plan dan Garbage Record Book.",
+ ruleList:[
+  {num:1,title:"Definisi & Klasifikasi Sampah",
+   mat:`<h3>📍 Definisi Sampah (Garbage)</h3>
+<p><span class="rr">Reg 1</span> <strong><u>Garbage</u></strong> mencakup semua jenis limbah makanan, sampah domestik, dan operasional yang dihasilkan selama pengoperasian normal kapal dan yang perlu dibuang terus-menerus atau secara berkala, <strong><u>kecuali</u></strong>: ikan segar, bagian-bagiannya, dan substansi yang diatur Annex lainnya.</p>
+<h3>📍 Kategori Sampah Kapal</h3>
+<p>Annex V mengkategorikan sampah sebagai berikut:</p>
+<ul>
+<li><strong><u>Plastik</u></strong> — termasuk tali sintetis, kantong plastik, dan abu insinerator yang mengandung residu plastik</li>
+<li><strong><u>Limbah makanan (Food waste)</u></strong> — sisa makanan, bahan organik dari dapur</li>
+<li><strong><u>Sampah domestik</u></strong> — sampah dari akomodasi awak/penumpang (selain food waste dan grey water)</li>
+<li><strong><u>Minyak goreng (Cooking oil)</u></strong></li>
+<li><strong><u>Abu insinerator</u></strong> — sisa pembakaran dari incinerator kapal</li>
+<li><strong><u>Sampah operasional</u></strong> — kertas, karton, kaleng, gelas, logam, dll.</li>
+<li><strong><u>Cargo residues</u></strong> — sisa muatan yang tidak berbahaya bagi lingkungan laut</li>
+<li><strong><u>Peralatan penangkapan ikan</u></strong> (fishing gear) — jaring, tali, dll.</li>
+<li><strong><u>Bangkai hewan</u></strong> (animal carcasses)</li>
+</ul>
+<div class="kb">🚫 <strong>PLASTIK adalah satu-satunya jenis sampah yang SEPENUHNYA DILARANG dibuang ke laut di mana pun — tanpa pengecualian!</strong> Ini termasuk kantong plastik, tali sintetis, dan material plastik apapun.</div>`,
+   kp:`<ul><li><strong>Plastik</strong>: DILARANG MUTLAK dibuang ke laut di mana pun</li><li>Garbage = semua limbah dari operasi normal kapal (kecuali substansi Annex lain)</li><li>9 kategori: plastik, food waste, sampah domestik, cooking oil, abu insinerator, operasional, cargo residues, fishing gear, bangkai hewan</li></ul>`,
+   mc:[
+    {q:"Jenis sampah yang SEPENUHNYA DILARANG dibuang ke laut di mana pun menurut MARPOL Annex V adalah…",o:["Sisa makanan (food waste)","Plastik dan semua material sintetis","Abu dari insinerator kapal","Kardus dan kertas bekas"],a:1,e:"Plastik adalah satu-satunya kategori yang dilarang mutlak di mana pun — di laut manapun, dalam kondisi apapun. Termasuk kantong plastik, tali sintetis, styrofoam, dll. Ini karena plastik tidak terurai di laut dan sangat berbahaya bagi satwa laut."},
+    {q:"Yang termasuk 'garbage' (sampah) menurut definisi MARPOL Annex V adalah…",o:["Ikan segar dan bagian-bagiannya","Abu insinerator dan sisa makanan dari dapur kapal","Air kotor (sewage) dari toilet","Oily mixture dari ruang mesin"],a:1,e:"Garbage mencakup limbah makanan, sampah domestik, sampah operasional, plastik, dll. dari operasi normal kapal. Yang TIDAK termasuk garbage: ikan segar/bagian-bagiannya, substansi yang diatur Annex lain (oil, NLS, sewage)."},
+    {q:"Tali sintetis (synthetic rope) yang rusak dan tidak bisa digunakan lagi, menurut MARPOL Annex V…",o:["Boleh dibuang ke laut jika kapal berlayar di luar 25 nm","Termasuk kategori plastik — DILARANG dibuang ke laut di mana pun","Boleh dibuang jika dicincang dulu menjadi potongan kecil","Diatur sebagai operational waste — boleh dibuang di luar 12 nm"],a:1,e:"Tali sintetis termasuk kategori plastik karena terbuat dari bahan sintetis/polimer. Kategori plastik DILARANG MUTLAK di semua perairan. Tali sintetis bekas harus dibawa ke darat atau dibuang ke fasilitas penerimaan."},
+    {q:"Mengapa plastik mendapat larangan paling ketat dalam MARPOL Annex V?",o:["Karena plastik mahal dan sebaiknya didaur ulang","Karena plastik tidak terurai di lingkungan laut, dapat bertahan ratusan tahun, dan membahayakan satwa laut yang menelannya","Karena plastik mengandung zat kimia yang melarutkan garam laut","Karena plastik menghalangi sinyal radio dan navigasi"],a:1,e:"Plastik tidak terurai secara biologis di laut — dapat bertahan 400-1000 tahun. Satwa laut (kura-kura, paus, burung) sering menelan plastik yang mengira sebagai makanan, menyebabkan kematian. Plastik juga pecah menjadi microplastics yang memasuki rantai makanan."},
+   ]},
+  {num:2,title:"Persyaratan Pembuangan Sampah ke Laut",
+   mat:`<h3>📍 Tabel Pembuangan Sampah MARPOL Annex V</h3>
+<p>Berikut ketentuan pembuangan berbagai jenis sampah <strong>di luar kawasan khusus</strong>:</p>
+<ul>
+<li><strong><u>Plastik</u></strong>: <span style="color:var(--red);font-weight:700;">DILARANG di mana pun</span></li>
+<li><strong><u>Food waste (tidak digiling)</u></strong>: boleh ≥ <strong>12 nm</strong> dari nearest land</li>
+<li><strong><u>Food waste (digiling ≤25 mm)</u></strong>: boleh ≥ <strong>3 nm</strong> dari nearest land</li>
+<li><strong><u>Cargo residues (tidak berbahaya)</u></strong>: boleh ≥ <strong>12 nm</strong></li>
+<li><strong><u>Cargo residues (berbahaya bagi lingkungan)</u></strong>: <span style="color:var(--red);font-weight:700;">DILARANG</span></li>
+<li><strong><u>Sampah domestik, cooking oil, abu insinerator, sampah operasional</u></strong>: boleh ≥ <strong>12 nm</strong></li>
+<li><strong><u>Fishing gear (jaring ikan)</u></strong>: DILARANG dibuang atau ditinggalkan di laut</li>
+<li><strong><u>Bangkai hewan (non-karantina)</u></strong>: sejauh mungkin dari nearest land</li>
+</ul>
+<h3>📍 Di Dalam Kawasan Khusus</h3>
+<p>Di dalam kawasan khusus Annex V, sebagian besar kategori sampah dilarang dibuang ke laut. Yang masih diperbolehkan:</p>
+<ul>
+<li><strong>Food waste yang digiling ≤25 mm</strong>: boleh di ≥ 12 nm di dalam kawasan khusus (di beberapa kawasan khusus: 3 nm)</li>
+</ul>
+<h3>📍 Kawasan Khusus Annex V</h3>
+<p>Kawasan khusus untuk sampah lebih banyak dari Annex I:</p>
+<ul>
+<li>Mediterania, Baltik, Laut Hitam, Laut Merah, Gulfs, Antartika, Teluk Aden, Arabian Sea, perairan sekitar North Sea</li>
+<li>Di Antartika: <strong>SEMUA pembuangan sampah dilarang</strong> (termasuk food waste)</li>
+</ul>`,
+   kp:`<ul><li><strong>Plastik</strong>: DILARANG di mana pun</li><li><strong>Food waste tidak digiling</strong>: ≥12 nm di luar special area</li><li><strong>Food waste digiling ≤25mm</strong>: ≥3 nm di luar special area</li><li><strong>Lainnya</strong> (domestic, cooking oil, abu, operational): ≥12 nm</li><li><strong>Antartika</strong>: SEMUA sampah dilarang</li></ul>`,
+   mc:[
+    {q:"Sisa makanan (food waste) yang BELUM digiling boleh dibuang ke laut di luar kawasan khusus pada jarak…",o:["≥ 3 nm dari nearest land","≥ 12 nm dari nearest land","≥ 25 nm dari nearest land","Tidak boleh dibuang sama sekali"],a:1,e:"Food waste yang belum digiling/dihaluskan boleh dibuang di ≥12 nm dari nearest land di luar special areas. Jika sudah digiling menjadi partikel ≤25mm, jarak minimum berkurang menjadi ≥3 nm."},
+    {q:"Food waste yang sudah digiling hingga ukuran partikel ≤25 mm dapat dibuang di jarak…",o:["≥ 1 nm","≥ 3 nm","≥ 6 nm","≥ 12 nm"],a:1,e:"Food waste yang dihaluskan/digiling (comminuted) hingga partikel ≤25 mm lebih cepat terurai di laut. Oleh karena itu jarak minimum lebih dekat: ≥3 nm dari nearest land (di luar special areas)."},
+    {q:"Di kawasan Antartika (perairan di bawah 60°S), peraturan sampah kapal adalah…",o:["Sama dengan kawasan khusus lainnya — food waste digiling boleh dibuang","Semua pembuangan sampah dilarang — termasuk food waste","Hanya plastik yang dilarang, sampah lain boleh dibuang normal","Boleh membuang food waste karena tidak ada organisme yang terancam di sana"],a:1,e:"Antartika adalah kawasan paling ketat: SEMUA pembuangan sampah ke laut dilarang, termasuk food waste. Semua sampah harus dibawa kembali dari kawasan Antartika. Ini karena ekosistem Antartika sangat sensitif dan tidak punya kapasitas untuk memproses sampah dari luar."},
+    {q:"Jaring ikan (fishing gear) yang sudah rusak parah dan tidak bisa digunakan lagi, menurut MARPOL Annex V…",o:["Boleh dibuang ke laut jika kapal sedang di luar 25 nm","Dilarang dibuang atau ditinggalkan di laut — termasuk kategori fishing gear yang dilarang","Boleh dibakar di insinerator kapal dan abunya dibuang ke laut","Boleh dibuang jika sudah dipotong kecil-kecil menjadi bagian tidak berbahaya"],a:1,e:"Fishing gear (jaring, tali ikan, dll.) dilarang dibuang atau ditinggalkan di laut. Ghost fishing — jaring yang terbuang terus menangkap ikan selamanya — adalah ancaman serius. Fishing gear harus dibawa ke darat untuk dibuang atau didaur ulang."},
+    {q:"Sebuah kapal hendak membuang kaleng logam bekas di laut. Berdasarkan Annex V, ini boleh dilakukan jika…",o:["Kaleng sudah dilubangi agar tenggelam","Di luar kawasan khusus, jarak ≥12 nm dari nearest land","Kaleng dalam kondisi bersih dan tidak mengandung makanan","Tidak diperbolehkan sama sekali — logam termasuk plastik"],a:1,e:"Kaleng logam termasuk 'operational waste' — boleh dibuang di ≥12 nm dari nearest land di luar special areas. Di dalam special areas, ini umumnya dilarang. Meskipun diperbolehkan, praktik terbaik adalah membawa sampah ke darat."},
+    {q:"Cooking oil (minyak goreng bekas) dari dapur kapal termasuk kategori apa dalam Annex V dan bagaimana ketentuannya?",o:["Termasuk kategori minyak Annex I — harus diproses dengan OWS","Kategori sendiri dalam Annex V — boleh dibuang di ≥12 nm dari nearest land di luar special areas","Termasuk NLS Kategori Z — boleh dibuang di ≥12 nm","Dilarang dibuang ke laut seperti plastik"],a:1,e:"Cooking oil adalah kategori tersendiri dalam Annex V (bukan Annex I karena bukan petroleum). Di luar special areas: boleh dibuang di ≥12 nm dari nearest land. Di dalam special areas: umumnya dilarang."},
+   ]},
+  {num:3,title:"Garbage Management Plan & Garbage Record Book",
+   mat:`<h3>📍 Garbage Management Plan (GMP)</h3>
+<p><span class="rr">Reg 10</span> Kapal <strong><u>100 GT ke atas</u></strong>, dan kapal yang bersertifikat membawa <strong><u>15 orang atau lebih</u></strong>, wajib memiliki <strong><u>Garbage Management Plan (GMP)</u></strong>.</p>
+<p>GMP harus mencakup:</p>
+<ul>
+<li>Prosedur untuk <strong><u>pengumpulan, pemilahan, dan penyimpanan</u></strong> sampah di atas kapal</li>
+<li>Prosedur untuk <strong><u>pembuangan sampah</u></strong> ke laut atau ke fasilitas darat</li>
+<li>Tugas dan tanggung jawab <strong><u>awak kapal yang ditunjuk</u></strong> (designated crew member)</li>
+<li>Prosedur penggunaan <strong><u>incinerator</u></strong> (jika ada)</li>
+</ul>
+<h3>📍 Garbage Record Book (GRB)</h3>
+<p><span class="rr">Reg 10</span> Kapal <strong><u>400 GT ke atas</u></strong>, dan kapal bersertifikat membawa <strong><u>15 orang atau lebih</u></strong>, wajib memiliki <strong><u>Garbage Record Book (GRB)</u></strong>.</p>
+<p>GRB harus mencatat:</p>
+<ul>
+<li>Setiap operasi pembuangan sampah ke laut atau ke fasilitas penerimaan darat</li>
+<li>Operasi insinerasi sampah di atas kapal</li>
+<li>Estimasi kategori dan volume sampah yang dibuang atau diinsinerasi</li>
+<li>Tanggal, posisi kapal, dan tanda tangan perwira yang bertanggung jawab</li>
+</ul>
+<div class="kb">📌 <strong>Perbedaan kewajiban GMP vs GRB:</strong><br>
+GMP wajib: kapal ≥100 GT atau yang bawa ≥15 orang<br>
+GRB wajib: kapal ≥400 GT atau yang bawa ≥15 orang<br>
+GRB disimpan 2 tahun setelah entri terakhir.</div>
+<h3>📍 Placard Annex V</h3>
+<p>Kapal yang panjangnya <strong><u>12 meter atau lebih</u></strong> wajib menampilkan <strong><u>plakat (placard)</u></strong> yang memberikan informasi kepada awak dan penumpang tentang persyaratan pembuangan sampah MARPOL. Placard harus ditulis dalam bahasa yang dimengerti awak dan dalam bahasa Inggris untuk kapal internasional.</p>`,
+   kp:`<ul><li><strong>GMP wajib</strong>: kapal ≥100 GT atau bersertifikat bawa ≥15 orang</li><li><strong>GRB wajib</strong>: kapal ≥400 GT atau bersertifikat bawa ≥15 orang</li><li>GRB disimpan <strong>2 tahun</strong> setelah entri terakhir</li><li><strong>Placard</strong>: wajib untuk kapal panjang ≥12 meter</li></ul>`,
+   mc:[
+    {q:"Garbage Management Plan (GMP) wajib dimiliki oleh kapal…",o:["Hanya kapal penumpang besar di atas 3.000 GT","Kapal 100 GT ke atas, dan kapal yang bersertifikat membawa 15 orang atau lebih","Hanya kapal yang beroperasi di kawasan khusus","Semua kapal tanpa pengecualian termasuk yang di bawah 100 GT"],a:1,e:"GMP wajib untuk: (1) kapal ≥100 GT, dan (2) kapal <100 GT yang bersertifikat membawa ≥15 orang. GMP lebih luas cakupannya dari GRB yang baru wajib untuk kapal ≥400 GT."},
+    {q:"Garbage Record Book (GRB) wajib dimiliki oleh kapal…",o:["Semua kapal yang memiliki GMP","Kapal 400 GT ke atas, dan kapal bersertifikat membawa 15 orang atau lebih","Hanya kapal penumpang internasional","Hanya kapal yang menggunakan incinerator"],a:1,e:"GRB wajib untuk kapal ≥400 GT atau yang bersertifikat membawa ≥15 orang. Ini threshold yang lebih tinggi dari GMP (100 GT). GRB adalah log operasional pembuangan sampah."},
+    {q:"GRB (Garbage Record Book) harus disimpan selama berapa lama setelah entri terakhir?",o:["1 tahun","2 tahun","3 tahun","5 tahun"],a:1,e:"GRB harus disimpan selama 2 tahun setelah entri terakhir. Ini berbeda dengan ORB (Oil Record Book) yang disimpan 3 tahun. GRB memungkinkan PSC memeriksa riwayat pembuangan sampah kapal."},
+    {q:"Placard MARPOL Annex V wajib dipasang di kapal yang panjangnya…",o:["≥ 5 meter","≥ 12 meter","≥ 25 meter","≥ 50 meter"],a:1,e:"Kapal dengan panjang ≥12 meter wajib menampilkan placard Annex V yang menginformasikan persyaratan pembuangan sampah. Ini berlaku untuk kapal yang cukup besar untuk membawa awak, termasuk kapal penangkap ikan ukuran kecil."},
+    {q:"Apa yang harus dicatat dalam Garbage Record Book saat kapal membuang sampah ke fasilitas penerimaan di pelabuhan?",o:["Hanya total berat sampah yang diserahkan","Tanggal, nama pelabuhan, estimasi kategori dan volume/berat sampah yang diserahkan, serta tanda tangan perwira bertanggung jawab","Hanya nama fasilitas penerimaan yang menerima sampah","Tidak perlu dicatat — pembuangan ke fasilitas darat tidak masuk GRB"],a:1,e:"Semua pembuangan sampah harus dicatat di GRB, termasuk pembuangan ke fasilitas darat di pelabuhan. Entri harus mencakup: tanggal, lokasi/nama pelabuhan, kategori sampah, perkiraan volume, dan tanda tangan perwira."},
+    {q:"Mengapa kapal diwajibkan memisahkan sampah berdasarkan kategori di atas kapal?",o:["Untuk menghemat ruang penyimpanan sampah","Agar pembuangan bisa dilakukan sesuai ketentuan berbeda untuk setiap kategori — terutama plastik yang harus selalu dipisahkan","Untuk memenuhi persyaratan asuransi kapal","Untuk memudahkan penjualan sampah daur ulang di pelabuhan"],a:1,e:"Pemilahan sampah wajib karena setiap kategori memiliki ketentuan pembuangan berbeda. Plastik harus selalu dibawa ke darat — tidak boleh dibuang ke laut. Food waste boleh dibuang di jarak tertentu. Tanpa pemilahan, tidak mungkin mematuhi aturan pembuangan yang berbeda per kategori."},
+   ]},
+ ],
+ essay:[
+  {q:"Jelaskan Garbage Management Plan (GMP) yang diwajibkan MARPOL Annex V! Kapal apa yang wajib memiliki GMP dan Garbage Record Book? Jelaskan kategori-kategori sampah dan ketentuan pembuangannya ke laut, serta apa yang membuat plastik mendapat perlakuan paling ketat dari semua jenis sampah.",
+   kp:["GMP wajib untuk kapal ≥100 GT atau bersertifikat bawa ≥15 orang","GRB wajib untuk kapal ≥400 GT atau bersertifikat bawa ≥15 orang","GRB disimpan 2 tahun","Plastik: DILARANG di mana pun — tidak terurai ratusan tahun, membunuh satwa laut","Food waste tidak digiling: ≥12 nm; digiling: ≥3 nm","Sampah domestik, cooking oil, abu, operational: ≥12 nm","Antartika: zero discharge semua sampah","GMP mengatur pengumpulan, pemilahan, penyimpanan, dan pembuangan","Placard wajib untuk kapal ≥12 meter"]},
+ ]
+},
+
+// ---- ANNEX VI ----
+{id:"ANX6",title:"Annex VI",full:"Pencemaran Udara",rules:"Reg 1–28",ico:"💨",col:"#3b82f6",
+ desc:"Annex VI mengatur pencegahan pencemaran udara dari kapal, termasuk emisi SOx, NOx, ODS, dan VOC. Annex ini juga mencakup persyaratan efisiensi energi seperti EEXI dan CII yang mulai berlaku sejak 2022-2023.",
+ ruleList:[
+  {num:1,title:"ODS, VOC & Dasar Annex VI",
+   mat:`<h3>📍 Sejarah & Dasar Annex VI</h3>
+<p>Annex VI MARPOL, yang berlaku sejak <strong><u>19 Mei 2005</u></strong>, adalah annex termuda yang mengatur pencemaran udara dari kapal. Annex ini terus diperbarui — revisi besar terjadi pada 2008, 2016, dan 2022.</p>
+<h3>📍 Ozone Depleting Substances (ODS) — Reg 12</h3>
+<p><span class="rr">Reg 12</span> Pemasangan sistem dan peralatan baru yang mengandung <strong><u>ODS (Ozone Depleting Substances)</u></strong> pada kapal <strong><u>dilarang</u></strong>. ODS adalah zat yang merusak lapisan ozon seperti CFC (chlorofluorocarbons) dan halon.</p>
+<p>Larangan spesifik:</p>
+<ul>
+<li><strong>Halon</strong> dalam sistem pemadam kebakaran: <strong><u>dilarang instalasi baru sejak 2010</u></strong></li>
+<li>CFC dalam sistem pendingin: dilarang instalasi baru</li>
+<li>ODS yang sudah ada: diperbolehkan digunakan sampai akhir masa pakai, tetapi tidak boleh di-vent ke atmosfer secara sengaja</li>
+</ul>
+<h3>📍 VOC — Volatile Organic Compounds (Reg 15)</h3>
+<p><span class="rr">Reg 15</span> <strong><u>VOC</u></strong> adalah senyawa organik yang mudah menguap dari minyak mentah dan produk minyak. VOC dari kapal tanker (saat loading dan transit) berkontribusi pada polusi udara dan efek rumah kaca.</p>
+<p>Kapal tanker di pelabuhan dan terminal yang ditentukan oleh negara anggota harus menggunakan <strong><u>Vapour Emission Control System (VECS)</u></strong> untuk menangkap uap VOC yang dilepaskan saat pemuatan minyak.</p>
+<h3>📍 IAPP Certificate</h3>
+<p>Kapal <strong><u>400 GT ke atas</u></strong> wajib memiliki <strong><u>IAPP Certificate (International Air Pollution Prevention Certificate)</u></strong> sebagai bukti kepatuhan terhadap Annex VI. IAPP berlaku 5 tahun dengan survei reguler.</p>`,
+   kp:`<ul><li><strong>Annex VI</strong>: berlaku sejak 19 Mei 2005, mengatur emisi udara dari kapal</li><li><strong>ODS</strong>: Reg 12 — instalasi baru sistem ODS dilarang; halon dilarang sejak 2010</li><li><strong>VOC</strong>: Reg 15 — tanker harus pakai VECS di pelabuhan tertentu</li><li><strong>IAPP Certificate</strong>: wajib untuk kapal ≥400 GT, berlaku 5 tahun</li></ul>`,
+   mc:[
+    {q:"MARPOL Annex VI yang mengatur pencemaran udara mulai berlaku pada tahun…",o:["1998","2005","2010","2015"],a:1,e:"Annex VI MARPOL berlaku sejak 19 Mei 2005. Ini adalah annex yang paling baru dalam MARPOL 73/78 dan terus mengalami revisi signifikan seiring perubahan standar lingkungan global."},
+    {q:"Reg 12 Annex VI mengatur tentang…",o:["Batas emisi SOx dari cerobong kapal","Larangan instalasi sistem dan peralatan baru yang mengandung ODS (Ozone Depleting Substances)","Persyaratan sistem scrubber untuk mengurangi emisi","Aturan penggunaan bahan bakar di ECA"],a:1,e:"Reg 12 melarang instalasi baru sistem/peralatan yang mengandung ODS. ODS (CFC, halon) merusak lapisan ozon. Halon dalam pemadam kebakaran dilarang untuk instalasi baru sejak 2010. Sistem lama boleh digunakan tapi tidak boleh sengaja dilepas ke atmosfer."},
+    {q:"VOC (Volatile Organic Compounds) dari kapal tanker terutama dihasilkan dari…",o:["Pembakaran bahan bakar di mesin kapal","Penguapan minyak mentah dari tangki kargo saat loading dan transit","Sistem pendingin dan AC kapal","Pembakaran sampah di incinerator"],a:1,e:"VOC adalah senyawa organik yang mudah menguap dari minyak mentah. Minyak mentah melepaskan uap VOC terutama saat loading (pengisian tangki) dan selama transit ketika tangki terpapar panas. VECS (Vapour Emission Control System) menangkap uap ini."},
+    {q:"IAPP Certificate wajib dimiliki oleh kapal…",o:["Hanya kapal tanker minyak","Kapal 400 GT ke atas yang berlayar internasional","Hanya kapal yang beroperasi di ECA","Semua kapal yang menggunakan mesin diesel"],a:1,e:"IAPP Certificate wajib untuk kapal ≥400 GT yang berlayar internasional — berlaku untuk semua jenis kapal, bukan hanya tanker. IAPP membuktikan kapal mematuhi ketentuan Annex VI tentang emisi udara."},
+   ]},
+  {num:2,title:"NOx — Standar Emisi Gas Buang (Reg 13)",
+   mat:`<h3>📍 NOx (Nitrogen Oxides)</h3>
+<p>NOx adalah gas beracun yang dihasilkan oleh pembakaran bahan bakar di mesin diesel kapal pada suhu tinggi. NOx berkontribusi pada hujan asam dan polusi udara perkotaan. MARPOL Reg 13 mengatur batas emisi NOx berdasarkan <strong><u>tiga tier (tingkatan)</u></strong>.</p>
+<h3>📍 Tier System NOx</h3>
+<p><span class="rr">Tier I</span> Berlaku untuk mesin diesel yang dipasang pada kapal yang <strong><u>keel diletakkan sebelum 1 Januari 2011</u></strong>. Batas emisi Tier I adalah batas yang paling longgar — batas minimum MARPOL generasi pertama.</p>
+<p><span class="rr">Tier II</span> Berlaku untuk mesin diesel yang dipasang pada kapal yang <strong><u>keel diletakkan pada atau setelah 1 Januari 2011</u></strong>. Tier II ≈ 20% lebih ketat dari Tier I. Berlaku di semua perairan (bukan hanya ECA).</p>
+<p><span class="rr">Tier III</span> Berlaku untuk mesin diesel yang dipasang pada kapal yang <strong><u>keel diletakkan pada atau setelah 1 Januari 2016</u></strong> yang beroperasi di dalam <strong><u>NOx ECA (NOx Emission Control Area)</u></strong>. Tier III ≈ 80% lebih ketat dari Tier I — batas paling ketat.</p>
+<div class="kb">🔑 <strong>Tier III hanya berlaku di dalam NOx ECA:</strong><br>
+- Baltic Sea ECA (berlaku sejak Mei 2021)<br>
+- North Sea ECA (berlaku sejak Mei 2021)<br>
+- North American ECA<br>
+- US Caribbean Sea ECA</div>
+<h3>📍 Teknologi Penurunan NOx</h3>
+<p>Untuk memenuhi Tier III, kapal menggunakan:</p>
+<ul>
+<li><strong>SCR (Selective Catalytic Reduction)</strong>: injeksi urea/amonia untuk mereaksikan NOx menjadi N₂ yang tidak berbahaya</li>
+<li><strong>EGR (Exhaust Gas Recirculation)</strong>: meresirkulasi sebagian gas buang untuk menurunkan suhu pembakaran</li>
+<li>Kombinasi SCR + EGR</li>
+</ul>`,
+   kp:`<ul><li><strong>Tier I</strong>: mesin pada kapal keel <1 Jan 2011 — paling longgar</li><li><strong>Tier II</strong>: mesin pada kapal keel ≥1 Jan 2011 — berlaku global</li><li><strong>Tier III</strong>: mesin pada kapal keel ≥1 Jan 2016, <strong>hanya berlaku di NOx ECA</strong></li><li>NOx ECA: Baltik, North Sea, Amerika Utara, Karibia AS</li><li>Teknologi: SCR (urea) dan EGR</li></ul>`,
+   mc:[
+    {q:"NOx Tier III dalam MARPOL Annex VI berlaku untuk…",o:["Semua kapal di semua perairan mulai 2016","Mesin diesel yang dipasang pada kapal dengan keel ≥1 Jan 2016, hanya saat berada di dalam NOx ECA","Kapal penumpang di semua perairan","Mesin diesel yang dipasang setelah 2011 di kawasan khusus Annex I"],a:1,e:"Tier III: mesin yang dipasang pada kapal dengan keel ≥1 Jan 2016, dan hanya berlaku saat kapal berada di dalam NOx ECA. Di luar NOx ECA, kapal yang sama cukup memenuhi Tier II."},
+    {q:"Dibandingkan Tier I, standar NOx Tier III lebih ketat sekitar…",o:["10% lebih ketat","40% lebih ketat","80% lebih ketat","200% lebih ketat"],a:2,e:"Tier III ≈ 80% lebih ketat dari Tier I. Ini pengurangan yang sangat signifikan. Untuk mencapai Tier III diperlukan teknologi khusus seperti SCR (Selective Catalytic Reduction) dengan injeksi urea."},
+    {q:"SCR (Selective Catalytic Reduction) digunakan di kapal untuk…",o:["Memisahkan sulfur dari bahan bakar sebelum dibakar","Mereaksikan NOx dalam gas buang dengan urea/amonia menjadi nitrogen tidak berbahaya (N₂)","Mengolah air ballast agar bebas organisme hidup","Menyaring partikulat dari gas buang mesin"],a:1,e:"SCR adalah teknologi after-treatment: gas buang yang mengandung NOx dialirkan melalui reaktor katalitik. Urea atau amonia disuntikkan, bereaksi dengan NOx menghasilkan N₂ (nitrogen) dan H₂O yang tidak berbahaya."},
+    {q:"NOx ECA yang berlaku di Eropa mencakup…",o:["Mediterania dan Adriatik","Laut Baltik dan Laut Utara (North Sea), berlaku sejak Mei 2021","Seluruh perairan Eropa","Laut Hitam dan Aegean"],a:1,e:"NOx ECA di Eropa: Baltic Sea dan North Sea, berlaku sejak Mei 2021. Di sini kapal dengan mesin yang dipasang setelah 2016 harus memenuhi standar Tier III (80% lebih ketat dari Tier I)."},
+    {q:"Kapal yang dibangun pada tahun 2009 memasang mesin diesel baru pada tahun 2014. Standar NOx mana yang berlaku untuk mesin tersebut?",o:["Tier I (karena kapal dibangun 2009)","Tier II (karena mesin dipasang pada atau setelah 1 Jan 2011)","Tier III (karena kapal melewati NOx ECA)","Tidak ada standar yang berlaku karena kapal bukan new ship"],a:1,e:"Tier NOx ditentukan oleh tanggal pemasangan MESIN, bukan tanggal pembangunan kapal. Mesin dipasang 2014 → setelah 1 Jan 2011 → Tier II. Tier III hanya berlaku saat kapal memasuki NOx ECA."},
+   ]},
+  {num:3,title:"SOx & Emission Control Areas (ECA)",
+   mat:`<h3>📍 SOx (Sulphur Oxides)</h3>
+<p>SOx adalah gas beracun yang dihasilkan dari pembakaran bahan bakar yang mengandung sulfur. SOx menyebabkan hujan asam, masalah pernapasan, dan kerusakan ekosistem. MARPOL Reg 14 mengatur batas kandungan sulfur (% m/m) dalam bahan bakar kapal.</p>
+<h3>📍 Batas Sulfur Global</h3>
+<p>Batas sulfur dalam bahan bakar kapal di <strong>perairan non-ECA (global)</strong>:</p>
+<ul>
+<li>Sebelum 1 Januari 2020: <strong><u>3,50% m/m</u></strong></li>
+<li>Mulai 1 Januari 2020: <strong><u>0,50% m/m</u></strong> — ini dikenal sebagai <strong>"IMO 2020"</strong></li>
+</ul>
+<h3>📍 Batas Sulfur di ECA (SOx ECA)</h3>
+<p>Di dalam <strong>SOx Emission Control Areas</strong>:</p>
+<ul>
+<li>Sebelum 1 Januari 2015: <strong><u>1,00% m/m</u></strong></li>
+<li>Mulai 1 Januari 2015: <strong><u>0,10% m/m</u></strong></li>
+</ul>
+<h3>📍 SOx ECA yang Ditetapkan</h3>
+<p>SOx ECA meliputi:</p>
+<ul>
+<li><strong>Baltic Sea Area</strong></li>
+<li><strong>North Sea Area</strong> (termasuk Selat Inggris/English Channel)</li>
+<li><strong>North American Area</strong> (perairan 200 nm dari pantai AS dan Kanada)</li>
+<li><strong>US Caribbean Sea Area</strong> (Puerto Rico, Kepulauan Virgin AS)</li>
+</ul>
+<h3>📍 Alternatif untuk Mematuhi SOx ECA</h3>
+<p>Kapal yang berlayar di ECA bisa mematuhi batas SOx 0,10% dengan:</p>
+<ul>
+<li>Menggunakan <strong><u>LSFO (Low Sulphur Fuel Oil)</u></strong> atau <strong><u>MGO (Marine Gas Oil)</u></strong> berkadar sulfur ≤0,10%</li>
+<li>Memasang <strong><u>EGCS (Exhaust Gas Cleaning System / Scrubber)</u></strong> — membersihkan gas buang sehingga emisi SOx memenuhi standar</li>
+<li>Menggunakan <strong><u>LNG (Liquefied Natural Gas)</u></strong> atau bahan bakar alternatif bebas sulfur</li>
+</ul>
+<div class="kb">⚠️ <strong>IMO 2020:</strong> Sejak 1 Jan 2020, kapal di seluruh dunia (di luar ECA) harus menggunakan bahan bakar ≤0,5% sulfur ATAU memasang scrubber. Ini revolusi terbesar industri pelayaran dalam satu dekade.</div>`,
+   kp:`<ul><li><strong>Global (non-ECA)</strong>: ≤3,5% sebelum 2020; ≤<strong>0,5%</strong> sejak 1 Jan 2020 (IMO 2020)</li><li><strong>SOx ECA</strong>: ≤1,0% sebelum 2015; ≤<strong>0,1%</strong> sejak 1 Jan 2015</li><li>4 SOx ECA: Baltik, North Sea, Amerika Utara, Karibia AS</li><li>Alternatif: LSFO/MGO ≤0,1%, Scrubber (EGCS), atau LNG</li></ul>`,
+   mc:[
+    {q:"Sejak 1 Januari 2020 (IMO 2020), batas maksimum kandungan sulfur bahan bakar kapal di perairan global (non-ECA) adalah…",o:["3,50% m/m","1,50% m/m","0,50% m/m","0,10% m/m"],a:2,e:"IMO 2020: sejak 1 Jan 2020, batas sulfur global turun drastis dari 3,5% menjadi 0,5% m/m. Ini adalah perubahan terbesar regulasi emisi kapal — mengurangi SOx global dari kapal sekitar 77%."},
+    {q:"Di dalam SOx ECA (misalnya Laut Baltik), batas sulfur bahan bakar kapal yang berlaku sejak 2015 adalah…",o:["0,50% m/m","0,10% m/m","1,00% m/m","3,50% m/m"],a:1,e:"Di dalam SOx ECA sejak 1 Jan 2015: batas sulfur 0,10% m/m. Ini 5 kali lebih ketat dari batas global (0,5%). Hanya LSFO, MGO, LNG, atau scrubber yang bisa memenuhi standar ini."},
+    {q:"Scrubber (EGCS — Exhaust Gas Cleaning System) pada kapal berfungsi untuk…",o:["Menyaring partikel debu dari udara kamar mesin","Membersihkan gas buang dari SOx sebelum dilepas ke atmosfer, sehingga kapal bisa tetap pakai bahan bakar HFO di ECA","Memisahkan minyak dari air got","Mendaur ulang gas buang untuk meningkatkan efisiensi mesin"],a:1,e:"EGCS/Scrubber membersihkan gas buang dengan menyemprotkan air (atau alkali) yang menyerap SOx. Kapal dengan scrubber boleh menggunakan HFO (High Sulfur Fuel Oil) di ECA karena emisi akhirnya tetap memenuhi standar 0,1%."},
+    {q:"Kapal memasuki SOx ECA (North Sea). Kapal tidak memiliki scrubber. Apa yang harus dilakukan awak kapal?",o:["Terus gunakan HFO normal karena ECA hanya berlaku untuk tanker","Beralih ke bahan bakar berkadar sulfur ≤0,10% (LSFO atau MGO) sebelum memasuki ECA","Mengurangi kecepatan kapal untuk mengurangi konsumsi bahan bakar","Mematikan satu mesin untuk mengurangi emisi"],a:1,e:"Kapal tanpa scrubber harus menggunakan bahan bakar rendah sulfur ≤0,10% di dalam ECA. Pergantian bahan bakar harus dilakukan sebelum memasuki ECA dan dicatat dalam Fuel Oil Changeover Log. Menggunakan HFO tanpa scrubber di ECA adalah pelanggaran Annex VI."},
+    {q:"LNG sebagai bahan bakar kapal memiliki keunggulan dalam konteks Annex VI karena…",o:["LNG lebih murah dari HFO di semua pelabuhan dunia","LNG hampir bebas sulfur sehingga memenuhi persyaratan ECA tanpa perlu scrubber","LNG menghasilkan lebih banyak energi per liter","LNG tidak memerlukan tangki khusus di kapal"],a:1,e:"LNG (Liquefied Natural Gas) hampir tidak mengandung sulfur, sehingga emisi SOx hampir nol. Dengan LNG, kapal secara otomatis memenuhi persyaratan ECA tanpa scrubber. LNG juga mengurangi NOx dan partikulat. Kekurangannya: infrastruktur bunkering LNG masih terbatas."},
+    {q:"'Fuel Oil Changeover Log' yang diperlukan saat memasuki ECA berisi catatan tentang…",o:["Jumlah bahan bakar yang tersisa setelah pergantian","Waktu dan posisi saat pergantian bahan bakar dimulai dan selesai, jenis bahan bakar, dan kandungan sulfur","Harga bahan bakar yang dibeli di pelabuhan terakhir","Persetujuan nakhoda untuk memasuki ECA"],a:1,e:"Fuel Oil Changeover Log mencatat: waktu dan posisi mulai/selesai changeover, jenis dan kandungan sulfur bahan bakar HFO dan LSFO/MGO. Log ini harus tersedia untuk pemeriksaan PSC yang memverifikasi kepatuhan Annex VI di ECA."},
+   ]},
+  {num:4,title:"EEXI & CII — Efisiensi Energi (Reg 22A, 28)",
+   mat:`<h3>📍 Latar Belakang Efisiensi Energi</h3>
+<p>Pelayaran global menyumbang sekitar <strong><u>2,5% emisi CO₂ global</u></strong>. IMO menargetkan pengurangan total emisi GHG dari pelayaran setidaknya <strong><u>50% pada 2050</u></strong> dibanding 2008. Untuk mencapai ini, MARPOL Annex VI ditambah dengan aturan efisiensi energi.</p>
+<h3>📍 EEXI — Energy Efficiency Existing Ship Index (Reg 22A)</h3>
+<p><span class="rr">Reg 22A</span> EEXI berlaku untuk <strong><u>kapal yang sudah ada (existing ships)</u></strong> — kapal 400 GT ke atas mulai <strong><u>1 November 2022</u></strong>. EEXI mengukur efisiensi energi berdasarkan desain kapal (seperti EEDI untuk kapal baru).</p>
+<p>Setiap kapal yang tunduk harus:</p>
+<ul>
+<li>Menghitung dan memverifikasi <strong><u>nilai EEXI-nya</u></strong></li>
+<li>Nilai EEXI harus memenuhi <strong><u>EEXI yang diperlukan (required EEXI)</u></strong></li>
+<li>Jika tidak memenuhi, kapal harus mengambil tindakan teknis (misal: membatasi daya mesin/EPL — Engine Power Limitation)</li>
+</ul>
+<h3>📍 CII — Carbon Intensity Indicator (Reg 28)</h3>
+<p><span class="rr">Reg 28</span> CII berlaku mulai <strong><u>1 Januari 2023</u></strong> untuk kapal <strong><u>5.000 GT ke atas</u></strong>. CII adalah <strong><u>ukuran operasional</u></strong> — mengukur efisiensi nyata penggunaan energi selama setahun.</p>
+<p>Kapal diberi <strong><u>Rating A sampai E</u></strong> berdasarkan CII:</p>
+<ul>
+<li><strong>A</strong>: Mayor superior (jauh lebih efisien dari yang diperlukan)</li>
+<li><strong>B</strong>: Minor superior</li>
+<li><strong>C</strong>: Sesuai (compliant)</li>
+<li><strong>D</strong>: Minor inferior (di bawah yang diperlukan)</li>
+<li><strong>E</strong>: Inferior (jauh di bawah yang diperlukan)</li>
+</ul>
+<div class="kb">⚠️ <strong>Konsekuensi Rating CII:</strong><br>
+• Rating <strong>D selama 3 tahun berturut-turut</strong>: kapal harus menyerahkan Corrective Action Plan (SECP)<br>
+• Rating <strong>E selama 1 tahun</strong>: kapal juga harus menyerahkan SECP<br>
+• Required CII semakin ketat setiap tahun hingga 2030</div>`,
+   kp:`<ul><li><strong>EEXI</strong>: Reg 22A, untuk existing ships ≥400 GT, berlaku Nov 2022 — ukuran desain</li><li><strong>CII</strong>: Reg 28, untuk kapal ≥5.000 GT, berlaku Jan 2023 — ukuran operasional tahunan</li><li>CII rating: <strong>A–E</strong> (A terbaik, E terburuk)</li><li>Rating <strong>D 3 tahun</strong> atau <strong>E 1 tahun</strong>: wajib Corrective Action Plan</li><li>Target IMO: kurangi GHG 50% pada 2050 dibanding 2008</li></ul>`,
+   mc:[
+    {q:"EEXI dalam MARPOL Annex VI mengukur apa dan berlaku untuk kapal apa?",o:["Mengukur emisi CO₂ harian, berlaku untuk kapal >1000 GT","Mengukur efisiensi energi berdasarkan desain teknis, berlaku untuk existing ships ≥400 GT mulai Nov 2022","Mengukur konsumsi bahan bakar tahunan, berlaku untuk kapal baru","Mengukur emisi NOx, berlaku untuk mesin diesel baru"],a:1,e:"EEXI (Energy Efficiency Existing Ship Index) mengukur efisiensi energi berdasarkan parameter desain kapal (daya mesin, kecepatan, kapasitas). Berlaku untuk existing ships ≥400 GT sejak 1 November 2022. Berbeda dengan CII yang mengukur kinerja operasional aktual."},
+    {q:"CII (Carbon Intensity Indicator) dalam MARPOL Annex VI berlaku untuk kapal…",o:["Semua kapal ≥400 GT sejak 2022","Kapal ≥5.000 GT sejak 1 Januari 2023","Hanya kapal tanker dan bulk carrier","Hanya kapal yang beroperasi di ECA"],a:1,e:"CII berlaku untuk kapal ≥5.000 GT sejak 1 Jan 2023. CII mengukur intensitas karbon operasional — gram CO₂ yang diemisi per ton-mil kargo yang diangkut selama setahun."},
+    {q:"Kapal yang mendapat rating CII 'E' selama satu tahun harus…",o:["Langsung ditarik dari operasi","Menyerahkan Corrective Action Plan (SECP) dan mengimplementasikannya","Membayar denda ke IMO berdasarkan jumlah emisi berlebih","Mengganti mesin utamanya dalam waktu 6 bulan"],a:1,e:"Rating E (atau D selama 3 tahun berturut-turut) mengharuskan kapal menyerahkan Ship Energy Efficiency Management Plan yang sudah ada (SEEMP) dengan Corrective Action Plan. Rencana ini harus disetujui oleh Administration."},
+    {q:"IMO menargetkan pengurangan total emisi GHG dari pelayaran pada tahun 2050 sebesar…",o:["25% dibanding level 2008","50% dibanding level 2008","75% dibanding level 2008","Nol emisi (net zero) pada 2050"],a:1,e:"Target IMO saat ini (dalam strategi GHG 2018): setidaknya 50% pengurangan total emisi GHG dari pelayaran pada 2050 dibanding baseline 2008. IMO juga menargetkan dekarbonisasi penuh secepat mungkin dalam abad ini. (Catatan: IMO sedang merevisi target ini menjadi lebih ambisius.)"},
+    {q:"EPL (Engine Power Limitation) adalah tindakan yang diambil kapal untuk…",o:["Meningkatkan kecepatan kapal untuk efisiensi perjalanan","Membatasi daya maksimum mesin agar EEXI yang dicapai memenuhi persyaratan","Meningkatkan kapasitas muatan kapal","Mengurangi konsumsi minyak pelumas"],a:1,e:"EPL membatasi daya maksimum yang bisa digunakan mesin. Ini langkah mudah untuk memperbaiki EEXI: daya lebih rendah → konsumsi bahan bakar lebih rendah → EEXI lebih baik. Trade-off: kecepatan kapal berkurang."},
+    {q:"Perbedaan utama antara EEXI dan CII adalah…",o:["EEXI untuk tanker, CII untuk bulk carrier","EEXI mengukur efisiensi desain teknis (one-time assessment), CII mengukur kinerja operasional nyata (tahunan)","EEXI berlaku di ECA, CII berlaku global","Tidak ada perbedaan — keduanya mengukur hal yang sama"],a:1,e:"EEXI: ukuran desain teknis kapal (seperti EEDI untuk kapal baru), dihitung sekali saat verifikasi, berkaitan dengan kapasitas teknis kapal. CII: ukuran operasional nyata yang dihitung setiap tahun berdasarkan konsumsi bahan bakar dan jarak tempuh aktual."},
+   ]},
+ ],
+ essay:[
+  {q:"Jelaskan sistem Emission Control Areas (ECA) dalam MARPOL Annex VI! Apa persyaratan batas sulfur di dalam dan di luar ECA, dan teknologi apa yang tersedia untuk kapal memenuhi persyaratan SOx di dalam ECA? Jelaskan juga mengapa IMO memperkenalkan EEXI dan CII, dan bagaimana kedua instrumen ini saling melengkapi.",
+   kp:["SOx ECA: 0,1% sulfur (sejak 2015); Global: 0,5% (sejak Jan 2020 — IMO 2020)","4 SOx ECA: Baltik, North Sea, Amerika Utara, Karibia AS","Teknologi kepatuhan SOx: LSFO/MGO ≤0,1%, Scrubber/EGCS, LNG","EEXI: desain teknis, untuk existing ships ≥400 GT, Nov 2022","CII: operasional tahunan, untuk kapal ≥5000 GT, Jan 2023","CII rating A-E; D 3 tahun atau E 1 tahun → Corrective Action Plan","Target IMO: -50% GHG pada 2050 vs 2008","EEXI memastikan efisiensi teknis; CII memastikan kinerja operasional nyata setiap tahun"]},
+ ]
+},
+
+// ---- KETENTUAN UMUM ----
+{id:"GEN",title:"Ketentuan Umum",full:"Konvensi MARPOL & Kepatuhan",rules:"Artikel 1–9",ico:"📋",col:"#c9a84c",
+ desc:"Bagian ini mencakup ketentuan-ketentuan umum Konvensi MARPOL 73/78, termasuk sejarah, definisi utama, pengecualian dalam keadaan darurat, dan mekanisme Port State Control serta tanggung jawab Flag State.",
+ ruleList:[
+  {num:1,title:"Sejarah & Definisi Utama MARPOL",
+   mat:`<h3>📍 Sejarah MARPOL</h3>
+<p><strong><u>MARPOL</u></strong> adalah singkatan dari <strong>"Marine Pollution"</strong>. Konvensi lengkapnya bernama <strong><u>International Convention for the Prevention of Pollution from Ships, 1973</u></strong>, yang dimodifikasi oleh <strong><u>Protocol 1978</u></strong> — sehingga disebut MARPOL 73/78.</p>
+<p>Latar belakang: Kecelakaan kapal tanker Torrey Canyon (1967) yang menumpahkan 117.000 ton minyak mentah di lepas pantai Inggris mendorong komunitas internasional untuk membuat regulasi komprehensif pencegahan pencemaran laut.</p>
+<p>MARPOL 73/78 resmi berlaku pada <strong><u>2 Oktober 1983</u></strong>.</p>
+<h3>📍 Definisi Utama Konvensi (Artikel 2)</h3>
+<ul>
+<li><strong><u>Harmful substance</u></strong>: substansi yang jika dimasukkan ke laut dapat menimbulkan bahaya terhadap kesehatan manusia, merusak sumber daya hayati, merusak keindahan alam, atau mengganggu penggunaan sah laut.</li>
+<li><strong><u>Discharge</u></strong>: setiap pelepasan dari kapal — termasuk pembuangan, pemompaan, kebocoran, rembesan, pengeluaran secara terus menerus atau tidak. Discharge TIDAK termasuk pembuangan yang berhubungan dengan eksplorasi minyak bumi lepas pantai yang diatur terpisah.</li>
+<li><strong><u>Administration</u></strong>: pemerintah negara bendera kapal. Bertanggung jawab atas kepatuhan kapal berbendera negaranya terhadap MARPOL.</li>
+</ul>
+<h3>📍 Enam Annex MARPOL</h3>
+<ul>
+<li><strong>Annex I</strong> — Minyak (Oil)</li>
+<li><strong>Annex II</strong> — NLS curah (Noxious Liquid Substances in Bulk)</li>
+<li><strong>Annex III</strong> — Bahan berbahaya dalam kemasan (Harmful Substances in Packaged Form)</li>
+<li><strong>Annex IV</strong> — Air Kotor (Sewage)</li>
+<li><strong>Annex V</strong> — Sampah (Garbage)</li>
+<li><strong>Annex VI</strong> — Polusi Udara (Air Pollution)</li>
+</ul>
+<div class="kb">📌 <strong>Annex I & II bersifat wajib</strong> (mandatory) bagi semua negara yang meratifikasi MARPOL. <strong>Annex III–VI bersifat opsional</strong> — negara bisa meratifikasi atau tidak. Namun saat ini hampir semua negara maritim telah meratifikasi semua Annex.</div>`,
+   kp:`<ul><li><strong>MARPOL 73/78</strong>: berlaku 2 Oktober 1983, dipicu kecelakaan Torrey Canyon 1967</li><li>6 Annex: I (Minyak), II (NLS), III (Kemasan), IV (Sewage), V (Sampah), VI (Udara)</li><li>Annex I & II: <strong>wajib</strong>; Annex III–VI: <strong>opsional</strong> (tapi hampir semua negara meratifikasi)</li><li><strong>Administration</strong>: pemerintah negara bendera kapal</li></ul>`,
+   mc:[
+    {q:"MARPOL adalah singkatan dari…",o:["Maritime Regulation and Pollution Law","Marine Pollution — International Convention for the Prevention of Pollution from Ships","Maritime Area Regulation for Protecting Ocean Life","Marine Area and Pollution Laws"],a:1,e:"MARPOL = Marine Pollution. Nama lengkap konvensinya: International Convention for the Prevention of Pollution from Ships, 1973, as modified by the Protocol of 1978 — disebut MARPOL 73/78."},
+    {q:"MARPOL 73/78 mulai berlaku (entered into force) pada…",o:["2 Oktober 1978","2 Oktober 1983","1 Januari 1977","19 Mei 2005"],a:1,e:"MARPOL 73/78 berlaku sejak 2 Oktober 1983. Meskipun konvensi aslinya dibuat 1973 dan dimodifikasi protokol 1978, baru berlaku 1983 setelah cukup banyak negara meratifikasinya."},
+    {q:"Yang mendorong komunitas internasional membuat MARPOL adalah…",o:["Ledakan platform minyak Deepwater Horizon 2010","Kecelakaan tanker Torrey Canyon 1967 yang menumpahkan 117.000 ton minyak","Kebocoran pipa bawah laut di Laut Utara tahun 1975","Kecelakaan tanker Exxon Valdez 1989"],a:1,e:"Torrey Canyon (1967) adalah katalis utama MARPOL: 117.000 ton crude oil menghancurkan pantai Inggris dan Prancis. Sebelumnya tidak ada regulasi internasional komprehensif. IMCO (sekarang IMO) kemudian mengembangkan MARPOL."},
+    {q:"Annex MARPOL yang bersifat WAJIB (mandatory) bagi semua negara yang meratifikasi MARPOL adalah…",o:["Annex I, II, dan V","Annex I dan II saja","Semua Annex (I–VI) bersifat wajib","Annex IV dan VI saja"],a:1,e:"Annex I (Minyak) dan Annex II (NLS) bersifat mandatory — negara yang meratifikasi MARPOL secara otomatis terikat keduanya. Annex III–VI bersifat optional protocol, tapi hampir semua negara maritim kini telah meratifikasi semuanya."},
+    {q:"'Administration' dalam konvensi MARPOL merujuk pada…",o:["Sekretariat IMO di London","Pemerintah negara bendera kapal yang bertanggung jawab atas kepatuhan kapal berbendera negaranya","Perusahaan pelayaran yang mengoperasikan kapal","Otoritas pelabuhan di negara tujuan kapal"],a:1,e:"Administration = pemerintah negara bendera (flag state). Bertanggung jawab mengeluarkan sertifikat, memastikan kapal berbendera negaranya memenuhi MARPOL, dan menginvestigasi pelanggaran oleh kapal berbendera negaranya."},
+   ]},
+  {num:2,title:"Pengecualian MARPOL & Insiden Pencemaran",
+   mat:`<h3>📍 Pengecualian (Exceptions) — Artikel 4</h3>
+<p>Pembuangan yang dilarang oleh MARPOL diperbolehkan dalam kondisi berikut:</p>
+<ul>
+<li><strong><u>Keselamatan kapal</u></strong>: jika diperlukan untuk keselamatan kapal itu sendiri</li>
+<li><strong><u>Keselamatan jiwa</u></strong>: untuk menyelamatkan jiwa manusia di laut</li>
+<li><strong><u>Kerusakan kapal</u></strong>: akibat kerusakan pada kapal atau perlengkapannya — DENGAN SYARAT: setelah kerusakan terjadi, semua tindakan pencegahan yang wajar (reasonable precautions) sudah diambil untuk mencegah atau meminimalkan pembuangan. Pengecualian tidak berlaku jika pemilik atau nakhoda sengaja atau lalai menyebabkan kerusakan.</li>
+<li><strong><u>Memerangi pencemaran</u></strong>: pembuangan substansi yang disetujui Administration untuk memerangi insiden pencemaran tertentu</li>
+</ul>
+<h3>📍 Laporan Insiden Pencemaran — Artikel 8</h3>
+<p>Setiap insiden yang melibatkan pembuangan atau kemungkinan pembuangan substansi berbahaya ke laut <strong><u>harus dilaporkan</u></strong>. Laporan dikirim ke:</p>
+<ul>
+<li>Negara pantai (coastal state) terdekat</li>
+<li>Administration (negara bendera)</li>
+</ul>
+<p>Laporan harus mencakup: identitas kapal, tanggal/waktu/lokasi, kondisi cuaca/laut, jenis substansi, tindakan yang diambil.</p>
+<div class="kb">⚠️ <strong>Kegagalan melapor</strong> adalah pelanggaran tersendiri yang bisa mengakibatkan sanksi, terlepas dari apakah pembuangannya sendiri sah atau tidak.</div>`,
+   kp:`<ul><li>Pengecualian: keselamatan kapal/jiwa, kerusakan kapal (dengan tindakan pencegahan wajar), memerangi pencemaran</li><li>Pengecualian TIDAK berlaku jika pemilik/nakhoda <strong>sengaja atau lalai</strong> menyebabkan kerusakan</li><li>Insiden pencemaran <strong>wajib dilaporkan</strong> ke coastal state dan Administration</li><li>Gagal melapor = pelanggaran tersendiri</li></ul>`,
+   mc:[
+    {q:"MARPOL memperbolehkan pembuangan minyak ke laut dalam kondisi apa?",o:["Jika kapal berlayar di luar 50 nm dari pantai","Untuk keselamatan kapal atau jiwa manusia di laut, setelah semua tindakan pencegahan wajar diambil","Jika kapal sudah memasang OWS yang berfungsi","Tidak pernah diperbolehkan dalam kondisi apapun"],a:1,e:"MARPOL memperbolehkan pengecualian untuk: keselamatan kapal, keselamatan jiwa, dan kerusakan kapal (setelah tindakan pencegahan wajar). Pengecualian ini bukan izin bebas — semua tindakan pencegahan harus sudah dilakukan terlebih dahulu."},
+    {q:"Pengecualian MARPOL untuk 'kerusakan kapal' (damage to ship) TIDAK berlaku jika…",o:["Kerusakan terjadi di kawasan khusus","Pemilik atau nakhoda sengaja atau lalai menyebabkan kerusakan tersebut","Pembuangan dilakukan lebih dari 50 nm dari pantai","Jumlah yang dibuang melebihi 1 ton"],a:1,e:"Pengecualian kerusakan tidak berlaku jika pemilik/nakhoda SENGAJA atau lalai menyebabkan kerusakan. Ini mencegah kapal 'sengaja menabrakkan diri' atau membiarkan kerusakan untuk bisa membuang minyak secara 'legal'."},
+    {q:"Jika terjadi insiden pencemaran di laut, siapa yang harus diberitahu?",o:["Hanya IMO di London","Negara pantai terdekat dan Administration (negara bendera kapal)","Hanya perusahaan pelayaran yang memiliki kapal","Hanya otoritas pelabuhan tujuan"],a:1,e:"Artikel 8: laporan insiden dikirim ke coastal state terdekat dan ke Administration (negara bendera). Kedua pihak ini memiliki kepentingan berbeda: coastal state untuk tindakan penanggulangan, Administration untuk investigasi tanggung jawab."},
+    {q:"Kapal mengalami kebocoran bahan bakar akibat tabrakan dengan karang. Nakhoda tidak segera mengambil tindakan penanggulangan. Menurut MARPOL, nakhoda…",o:["Dilindungi pengecualian karena itu kecelakaan yang tidak disengaja","Tidak terlindungi pengecualian karena lalai tidak mengambil tindakan pencegahan wajar","Dilindungi jika segera melaporkan ke otoritas pantai","Tidak bisa dituntut karena karang yang menyebabkan tabrakan"],a:1,e:"Pengecualian kerusakan mensyaratkan: setelah kerusakan terjadi, 'all reasonable precautions shall have been taken'. Jika nakhoda tidak segera bertindak — menutup katup, memompa minyak ke tangki lain, dll. — berarti lalai, dan pengecualian tidak berlaku."},
+   ]},
+  {num:3,title:"Port State Control (PSC) & Penegakan MARPOL",
+   mat:`<h3>📍 Tiga Kapasitas Negara dalam MARPOL</h3>
+<p>Setiap negara anggota IMO berperan dalam tiga kapasitas:</p>
+<ul>
+<li><strong><u>Flag State (Negara Bendera)</u></strong>: bertanggung jawab memastikan kapal berbendera negaranya mematuhi MARPOL. Mengeluarkan sertifikat, melakukan inspeksi, dan menginvestigasi pelanggaran oleh kapal berbendera negaranya.</li>
+<li><strong><u>Port State (Negara Pelabuhan)</u></strong>: berwenang memeriksa kapal asing yang masuk pelabuhannya (Port State Control / PSC). Dapat menahan kapal yang tidak memenuhi persyaratan.</li>
+<li><strong><u>Coastal State (Negara Pantai)</u></strong>: berwenang memantau dan menegakkan MARPOL di perairannya (perairan territorial dan ZEE). Berwenang menginvestigasi pelanggaran di perairannya.</li>
+</ul>
+<h3>📍 Port State Control (PSC)</h3>
+<p>PSC adalah <strong><u>inspeksi kapal asing</u></strong> oleh otoritas pelabuhan. Inspektur PSC memeriksa:</p>
+<ul>
+<li>Sertifikat (IOPP, ISPP, IAPP, NLS Certificate, dll.)</li>
+<li>Oil Record Book, Cargo Record Book, Garbage Record Book</li>
+<li>Kondisi peralatan (OWS, ODM, dll.)</li>
+<li>Buku-buku catatan dan prosedur operasional</li>
+</ul>
+<p>Jika ditemukan kekurangan (deficiency) serius, PSC dapat <strong><u>menahan kapal (detention)</u></strong> hingga kekurangan diperbaiki.</p>
+<h3>📍 Organisasi PSC Regional</h3>
+<ul>
+<li><strong>Paris MOU</strong>: Eropa dan Atlantik Utara</li>
+<li><strong>Tokyo MOU</strong>: Asia-Pasifik (termasuk Indonesia)</li>
+<li><strong>Indian Ocean MOU</strong>: Samudra Hindia</li>
+</ul>
+<div class="kb">🇮🇩 <strong>Indonesia</strong> adalah anggota Tokyo MOU. Kapal Indonesia bisa diperiksa PSC di pelabuhan negara anggota Tokyo MOU (Jepang, Korea, Australia, dll.).</div>`,
+   kp:`<ul><li><strong>Flag State</strong>: mengeluarkan sertifikat, menginvestigasi pelanggaran kapal berbendera sendiri</li><li><strong>Port State</strong>: memeriksa kapal asing di pelabuhan (PSC), bisa menahan kapal</li><li><strong>Coastal State</strong>: memantau dan menegakkan MARPOL di perairan sendiri</li><li>Indonesia → anggota <strong>Tokyo MOU</strong></li></ul>`,
+   mc:[
+    {q:"Dalam konteks MARPOL, 'Flag State' (negara bendera) bertanggung jawab untuk…",o:["Memeriksa semua kapal yang masuk pelabuhan negaranya","Memastikan kapal berbendera negaranya mematuhi MARPOL dan mengeluarkan sertifikat terkait","Memantau pembuangan kapal di ZEE negaranya","Menginspeksi kapal asing yang melintas di selat internasionalnya"],a:1,e:"Flag State = negara bendera kapal. Bertanggung jawab atas kapal-kapal berbendera negaranya: mengeluarkan IOPP, ISPP, IAPP, dll.; memastikan standar konstruksi dan operasional terpenuhi; menginvestigasi pelanggaran oleh kapal berbendera sendiri."},
+    {q:"Port State Control (PSC) berwenang memeriksa kapal asing dan jika ditemukan kekurangan serius, PSC bisa…",o:["Hanya memberikan rekomendasi tertulis tanpa kewenangan lain","Menahan kapal (detention) di pelabuhan hingga kekurangan diperbaiki","Membatalkan sertifikat yang dikeluarkan negara bendera","Mengubah rute kapal untuk menghindari kawasan khusus"],a:1,e:"PSC memiliki wewenang menahan kapal (detention) jika ditemukan kekurangan yang membahayakan keselamatan atau lingkungan. Kapal ditahan di pelabuhan sampai kekurangan diperbaiki dan diverifikasi. Ini bisa sangat mahal bagi pemilik kapal."},
+    {q:"Indonesia sebagai negara anggota IMO berperan sebagai coastal state di Selat Malaka. Artinya Indonesia berwenang untuk…",o:["Memaksa semua kapal yang melintas untuk membayar tol","Memantau dan menginvestigasi pembuangan ilegal di perairan Indonesia termasuk Selat Malaka","Menghentikan kapal-kapal berbendera negara lain tanpa izin","Mengubah aturan MARPOL untuk perairan Indonesia"],a:1,e:"Sebagai coastal state, Indonesia berwenang memantau perairan teritorial dan ZEE untuk mendeteksi pembuangan ilegal, melakukan investigasi, dan menuntut kapal yang melanggar di perairan Indonesia."},
+    {q:"Indonesia masuk ke dalam organisasi PSC regional yang bernama…",o:["Paris MOU","Tokyo MOU","Indian Ocean MOU","Caribbean MOU"],a:1,e:"Indonesia adalah anggota Tokyo MOU — organisasi PSC regional Asia-Pasifik. Kapal berbendera Indonesia bisa diperiksa PSC di pelabuhan negara anggota Tokyo MOU (Jepang, Korea, Australia, China, dll.)."},
+    {q:"Saat pemeriksaan PSC, dokumen apa yang paling sering diperiksa untuk memverifikasi kepatuhan MARPOL?",o:["Manifest kargo dan bill of lading","Oil Record Book, Garbage Record Book, Cargo Record Book, dan sertifikat (IOPP, ISPP, IAPP)","Daftar awak kapal dan sertifikat STCW mereka","Polis asuransi P&I dan asuransi lambung"],a:1,e:"PSC untuk MARPOL: memeriksa ORB (apakah ada ketidakkonsistenan?), GRB (apakah sampah dibuang sesuai aturan?), Cargo Record Book untuk NLS, kondisi fisik OWS dan peralatan, serta sertifikat IOPP, ISPP, IAPP yang valid."},
+    {q:"Mengapa negara pantai (coastal state) memiliki kepentingan yang berbeda dari flag state dalam penegakan MARPOL?",o:["Karena coastal state mendapat bagian dari denda pelanggaran","Karena coastal state langsung terdampak oleh pencemaran di perairannya dan bertanggung jawab melindungi lingkungan lautnya sendiri","Karena coastal state wajib membayar biaya pembersihan pencemaran","Karena coastal state memiliki lebih banyak kapal dari flag state"],a:1,e:"Coastal state memiliki kepentingan langsung: pencemaran di perairan mereka merusak pantai, industri perikanan, pariwisata, dan ekosistem laut mereka. Mereka paling termotivasi untuk menegakkan aturan MARPOL di perairannya sendiri."},
+   ]},
+ ],
+ essay:[
+  {q:"Jelaskan peran Indonesia dalam penegakan MARPOL berdasarkan tiga kapasitasnya: sebagai flag state, port state, dan coastal state! Berikan contoh konkret untuk masing-masing kapasitas. Jelaskan juga bagaimana seorang nakhoda dan anak buah kapal dapat mempersiapkan diri menghadapi inspeksi Port State Control (PSC) terkait MARPOL.",
+   kp:["Flag State: Indonesia mengeluarkan IOPP, ISPP, IAPP untuk kapal berbendera Indonesia","Flag State: Kemenhub/Ditjen Hubla bertanggung jawab survei dan sertifikasi","Port State: Indonesia (anggota Tokyo MOU) memeriksa kapal asing di Belawan, Tanjung Priok, dll.","Port State: bisa menahan kapal yang tidak memenuhi MARPOL","Coastal State: memantau Selat Malaka, ZEE, dan perairan kepulauan dari pencemaran","Coastal State: berwenang menuntut kapal yang mencemari di ALKI atau ZEE Indonesia","PSC preparation: ORB, GRB, sertifikat valid, OWS berfungsi baik","Awak kapal harus mengerti prosedur dan mampu menjelaskan kepada inspektur"]},
+ ]
+},
+];
+
+// ============================================================
+// STATE + STORAGE
+// ============================================================
+const SK='nautikapro_v2';
+let ST={name:null,profiles:{},curSec:null,curRule:0,mcA:{},mcIdx:0,essIdx:0,essRes:[]};
+
+function save(){try{const d=JSON.parse(localStorage.getItem(SK)||'{}');d.profiles=ST.profiles;d.last=ST.name;localStorage.setItem(SK,JSON.stringify(d));}catch(e){}}
+function load(){try{const d=JSON.parse(localStorage.getItem(SK)||'{}');ST.profiles=d.profiles||{};const ln=d.last;if(ln&&ST.profiles[ln]){ST.name=ln;return true;}}catch(e){}return false;}
+
+function getP(){
+  if(!ST.profiles[ST.name])ST.profiles[ST.name]={};
+  const p=ST.profiles[ST.name];
+  if(!p.marpol||Object.keys(p.marpol).length===0){
+    p.marpol={};
+    SECS.forEach(s=>{
+      p.marpol[s.id]={rules:{},essayDone:false,complete:false};
+      s.ruleList.forEach((_,i)=>{p.marpol[s.id].rules[i]={read:false,score:null,pass:false};});
+    });
+  }
+  return p;
+}
+function getRuP(sId,ri){const p=getP();return(p.marpol[sId]?.rules||{})[ri]||{read:false,score:null,pass:false};}
+function setRuP(sId,ri,u){const p=getP();if(!p.marpol[sId].rules[ri])p.marpol[sId].rules[ri]={};Object.assign(p.marpol[sId].rules[ri],u);save();}
+function getSecP(sId){return getP().marpol[sId]||{rules:{},essayDone:false,complete:false};}
+
+// ============================================================
+// SCREEN
+// ============================================================
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));const el=document.getElementById('sc-'+id);if(el){el.classList.add('on');window.scrollTo(0,0);}}
+
+// ============================================================
+// NAME
+// ============================================================
+function renderSaved(){
+  const ns=Object.keys(ST.profiles);
+  const wrap=document.getElementById('savedList');
+  if(!ns.length){wrap.innerHTML='';return;}
+  wrap.innerHTML=`<div style="font-size:11px;font-family:'Cinzel',serif;color:var(--mut);letter-spacing:1px;margin-bottom:10px;">ATAU PILIH PROFIL YANG ADA</div>`
+    +ns.map(n=>{
+      const p=ST.profiles[n];
+      const mp=p.marpol||{};
+      const done=SECS.filter(s=>mp[s.id]&&mp[s.id].complete).length;
+      return `<div class="pp" onclick="pickProfile('${n}')"><div style="width:30px;height:30px;border-radius:50%;background:var(--bg3);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:15px;">👤</div><div><div style="font-weight:700;font-size:14px;">${n}</div><div style="font-size:12px;color:var(--mut2);">MARPOL: ${done}/${SECS.length} bagian selesai</div></div></div>`;
+    }).join('');
+}
+function doLogin(){const n=document.getElementById('nameInp').value.trim();if(!n)return;ST.name=n;getP();save();goSubj();}
+function pickProfile(n){ST.name=n;save();goSubj();}
+document.getElementById('nameInp').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+
+// ============================================================
+// SUBJECTS
+// ============================================================
+function goSubj(){
+  document.getElementById('greeting').textContent=`Halo, ${ST.name} 👋`;
+  const g=document.getElementById('subjGrid');
+  g.innerHTML=SUBJS.map(s=>{
+    let clickAction='';
+    if(s.on){
+      if(s.href)clickAction=`window.location.href='${s.href}'`;
+      else clickAction='goMarpol()';
+    }
+    return `<div class="sc${s.on?'':' cs'}" onclick="${clickAction}">
+      ${!s.on?`<div style="position:absolute;top:8px;right:8px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:2px 7px;font-size:10px;font-family:'Cinzel',serif;">Segera</div>`:''}
+      <div style="font-size:28px;margin-bottom:7px;">${s.ico}</div>
+      <div style="font-family:'Cinzel',serif;font-size:12px;color:${s.on?'var(--gold)':'var(--mut2)'};font-weight:700;margin-bottom:3px;">${s.n}</div>
+      <div style="font-size:11px;color:var(--mut2);line-height:1.4;">${s.d}</div>
+      ${s.on?`<div style="margin-top:9px;font-size:11px;color:${s.id==='marpol'?'var(--org)':'var(--grn)'};font-weight:700;">Tersedia →</div>`:''}
+    </div>`;
+  }).join('');
+  show('subj');
+}
+function switchUser(){ST.name=null;renderSaved();document.getElementById('nameInp').value='';show('name');}
+function toggleImport(){document.getElementById('importBox').classList.toggle('hi');}
+function doExport(){
+  const d={name:ST.name,progress:ST.profiles[ST.name]};
+  const j=btoa(unescape(encodeURIComponent(JSON.stringify(d))));
+  const el=document.createElement('textarea');el.value=j;document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);
+  alert('✅ Kode progress berhasil disalin!\n\nPaste di perangkat lain menggunakan fitur Import.');
+}
+function doImport(){
+  try{const r=document.getElementById('importTxt').value.trim();const d=JSON.parse(decodeURIComponent(escape(atob(r))));ST.profiles[d.name]=d.progress;save();alert(`✅ Progress "${d.name}" berhasil diimport!`);document.getElementById('importBox').classList.add('hi');}
+  catch(e){alert('❌ Kode tidak valid. Pastikan kode yang kamu paste benar.');}
+}
+
+// ============================================================
+// MARPOL HOME
+// ============================================================
+function goMarpol(){
+  const p=getP();
+  const done=SECS.filter(s=>p.marpol[s.id]?.complete).length;
+  const pct=Math.round((done/SECS.length)*100);
+  document.getElementById('mainBar').style.width=pct+'%';
+  document.getElementById('mainPct').textContent=`${done} dari ${SECS.length} annex selesai (${pct}%)`;
+  const sl=document.getElementById('secList');sl.innerHTML='';
+  SECS.forEach((sec,si)=>{
+    const sp=p.marpol[sec.id];
+    const allRuPassed=sec.ruleList.every((_,ri)=>getRuP(sec.id,ri).pass);
+    const fillPct=sp.complete?100:allRuPassed?66:Math.round(Object.values(sp.rules).filter(r=>r.pass).length/sec.ruleList.length*50);
+    const d=document.createElement('div');
+    d.className='c';d.style.cssText=`padding:16px 18px;margin-bottom:10px;display:flex;align-items:center;gap:13px;cursor:pointer;border-color:${sp.complete?'rgba(34,197,94,.5)':sec.col+'44'};transition:all .2s;`;
+    d.onclick=()=>openSec(sec.id);d.onmouseenter=()=>d.style.background='var(--bg3)';d.onmouseleave=()=>d.style.background='var(--bg2)';
+    d.innerHTML=`<div style="width:42px;height:42px;border-radius:10px;background:${sec.col}22;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">${sp.complete?'🏅':sec.ico}</div>
+      <div style="flex:1;min-width:0;">
+        <div style="display:flex;align-items:center;gap:7px;"><span style="font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:${sp.complete?'var(--grn)':sec.col};">${sec.title}</span><span style="font-size:11px;color:var(--mut);">· ${sec.rules}</span></div>
+        <div style="font-family:'Lora',serif;font-size:14px;margin-top:2px;">${sec.full}</div>
+        <div style="height:3px;background:var(--bdr);border-radius:2px;margin-top:7px;overflow:hidden;"><div style="height:100%;width:${fillPct}%;background:${sp.complete?'var(--grn)':sec.col};border-radius:2px;transition:width .5s;"></div></div>
+      </div>
+      <div style="flex-shrink:0;font-size:11px;font-weight:700;color:${sp.complete?'var(--grn)':sec.col};">${sp.complete?'SELESAI ✓':allRuPassed?'Esai →':'BUKA →'}</div>`;
+    sl.appendChild(d);
+  });
+  show('marpol');
+}
+
+// ============================================================
+// SECTION DETAIL
+// ============================================================
+function openSec(sId){
+  ST.curSec=sId;
+  const sec=SECS.find(s=>s.id===sId);
+  const sp=getSecP(sId);
+  document.getElementById('secLbl').textContent=`${sec.title} · MARPOL 73/78`;
+  document.getElementById('secLbl').style.color=sec.col;
+  document.getElementById('secSub').textContent=sec.full;
+  document.getElementById('secIco').textContent=sec.ico;
+  document.getElementById('secDesc').textContent=sec.desc;
+  const rc=document.getElementById('ruleCards');rc.innerHTML='';
+  sec.ruleList.forEach((rule,ri)=>{
+    const rp=getRuP(sId,ri);
+    const card=document.createElement('div');
+    card.className='c';card.style.cssText=`padding:15px 16px;margin-bottom:9px;display:flex;align-items:center;gap:12px;cursor:pointer;border-color:${rp.pass?'rgba(34,197,94,.5)':sec.col+'44'};transition:all .2s;`;
+    card.onclick=()=>openRule(sId,ri);card.onmouseenter=()=>card.style.background='var(--bg3)';card.onmouseleave=()=>card.style.background='var(--bg2)';
+    card.innerHTML=`<div style="width:36px;height:36px;border-radius:9px;background:${rp.pass?'var(--grn)':sec.col+'22'};display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:12px;font-weight:700;color:${rp.pass?'#fff':sec.col};flex-shrink:0;">${rp.pass?'✓':rule.num}</div>
+      <div style="flex:1;"><div style="font-family:'Cinzel',serif;font-size:11px;color:${rp.pass?'var(--grn)':sec.col};font-weight:700;">Topik ${rule.num}</div>
+      <div style="font-size:14px;margin-top:2px;">${rule.title}</div>
+      ${rp.score!==null?`<div style="font-size:12px;color:${rp.pass?'var(--grn)':'var(--red)'};margin-top:2px;">Skor PG: ${rp.score}%</div>`:''}
+      </div>
+      <div style="font-size:12px;font-weight:700;color:${rp.pass?'var(--grn)':sec.col};">${rp.pass?'Lulus ✓':rp.score!==null?'Ulangi':'Mulai →'}</div>`;
+    rc.appendChild(card);
+  });
+  const ez=document.getElementById('essayZone');
+  const allPass=sec.ruleList.every((_,ri)=>getRuP(sId,ri).pass);
+  if(sp.essayDone){
+    ez.innerHTML=`<div class="c" style="padding:15px;text-align:center;border-color:rgba(34,197,94,.4);"><div style="color:var(--grn);font-weight:700;margin-bottom:6px;">✅ Esai ${sec.title} Selesai</div><button class="b bgh" style="padding:9px;font-size:13px;" onclick="startEssay('${sId}')">Ulangi Esai</button></div>`;
+  } else if(allPass){
+    ez.innerHTML=`<div class="c" style="padding:16px;border-color:rgba(201,168,76,.4);"><div style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold);margin-bottom:7px;">✍️ Esai Tersedia!</div><div style="font-size:14px;margin-bottom:13px;">Semua topik di ${sec.title} sudah lulus. Kerjakan Esai!</div><button class="b bg" onclick="startEssay('${sId}')">Mulai Esai ${sec.title} →</button></div>`;
+  } else {
+    const rem=sec.ruleList.filter((_,ri)=>!getRuP(sId,ri).pass).length;
+    ez.innerHTML=`<div style="text-align:center;padding:12px;font-size:13px;color:var(--mut2);">🔒 Esai terbuka setelah semua ${sec.ruleList.length} topik lulus PG (${rem} lagi)</div>`;
+  }
+  show('sec');
+}
+function backSec(){openSec(ST.curSec);}
+function exitSec(){openSec(ST.curSec);}
+
+// ============================================================
+// MATERIAL
+// ============================================================
+function openRule(sId,ri){
+  ST.curSec=sId;ST.curRule=ri;
+  const sec=SECS.find(s=>s.id===sId);
+  const rule=sec.ruleList[ri];
+  document.getElementById('matLbl').textContent=`${sec.title} · Topik ${rule.num}`;
+  document.getElementById('matLbl').style.color=sec.col;
+  document.getElementById('matSub').textContent=rule.title;
+  document.getElementById('matTitle').textContent=`Topik ${rule.num} — ${rule.title}`;
+  document.getElementById('matTitle').style.color=sec.col;
+  document.getElementById('matBody').innerHTML=rule.mat;
+  document.getElementById('matKP').innerHTML=rule.kp;
+  setRuP(sId,ri,{read:true});
+  show('mat');
+}
+function startRuleQuiz(){ST.mcA={};ST.mcIdx=0;renderMC();show('mc');}
+
+// ============================================================
+// MC QUIZ
+// ============================================================
+function renderMC(){
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const rule=sec.ruleList[ST.curRule];
+  const q=rule.mc[ST.mcIdx];
+  const tot=rule.mc.length;
+  document.getElementById('mcLbl').textContent=`Topik ${rule.num} · Pilihan Ganda`;
+  document.getElementById('mcLbl').style.color=sec.col;
+  document.getElementById('mcCtr').textContent=`${ST.mcIdx+1} / ${tot}`;
+  document.getElementById('mcBar').style.width=`${((ST.mcIdx+1)/tot)*100}%`;
+  document.getElementById('mcBar').style.background=sec.col;
+  document.getElementById('mcNum').textContent=`SOAL ${ST.mcIdx+1} DARI ${tot}`;
+  document.getElementById('mcQ').textContent=q.q;
+  const opts=document.getElementById('mcOpts');opts.innerHTML='';
+  ['A','B','C','D'].forEach((lbl,i)=>{
+    if(i>=q.o.length)return;
+    const btn=document.createElement('button');btn.className='ob';
+    btn.innerHTML=`<span class="ol">${lbl}</span><span>${q.o[i]}</span>`;
+    btn.onclick=()=>pickOpt(i);opts.appendChild(btn);
+  });
+  document.getElementById('mcExp').classList.add('hi');
+  document.getElementById('mcNext').classList.add('hi');
+}
+function pickOpt(idx){
+  if(ST.mcA[ST.mcIdx]!==undefined)return;
+  ST.mcA[ST.mcIdx]=idx;
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const q=sec.ruleList[ST.curRule].mc[ST.mcIdx];
+  const ok=idx===q.a;
+  document.querySelectorAll('.ob').forEach((btn,i)=>{
+    btn.disabled=true;
+    if(i===q.a)btn.classList.add('ok');
+    else if(i===idx&&!ok)btn.classList.add('ng');
+    else btn.classList.add('dm');
+    const l=btn.querySelector('.ol');
+    if(i===q.a)l.textContent='✓';else if(i===idx&&!ok)l.textContent='✗';
+  });
+  const ex=document.getElementById('mcExp');
+  ex.className='exp '+(ok?'ek':'en');
+  ex.innerHTML=`<div style="font-weight:700;margin-bottom:5px;">${ok?'✅ Benar!':'❌ Salah'}</div>${q.e}`;
+  ex.classList.remove('hi');
+  const nb=document.getElementById('mcNext');
+  nb.textContent=ST.mcIdx===sec.ruleList[ST.curRule].mc.length-1?'Lihat Hasil →':'Soal Berikutnya →';
+  nb.classList.remove('hi');
+}
+function nextMC(){
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const rule=sec.ruleList[ST.curRule];
+  const isLast=ST.mcIdx===rule.mc.length-1;
+  if(!isLast){ST.mcIdx++;renderMC();return;}
+  let ok=0;rule.mc.forEach((_,i)=>{if(ST.mcA[i]===rule.mc[i].a)ok++;});
+  const score=Math.round((ok/rule.mc.length)*100);
+  const pass=score>=70;
+  setRuP(ST.curSec,ST.curRule,{score,pass});
+  const rc=document.getElementById('resCard');
+  rc.style.borderColor=pass?'rgba(34,197,94,.5)':'rgba(239,68,68,.4)';
+  document.getElementById('resEmo').textContent=pass?'🎉':'📚';
+  document.getElementById('resScore').textContent=score+'%';
+  document.getElementById('resScore').style.color=pass?'var(--grn)':'var(--red)';
+  document.getElementById('resLbl').textContent=pass?'Selamat! Lulus!':'Belum Lulus. Ulangi lagi!';
+  document.getElementById('resLbl').style.color=pass?'var(--grn)':'var(--red)';
+  document.getElementById('resDet').textContent=`${ok} benar dari ${rule.mc.length} soal · Target ≥70%`;
+  const rl=document.getElementById('recapList');rl.innerHTML='';
+  rule.mc.forEach((q,i)=>{
+    const good=ST.mcA[i]===q.a;
+    const d=document.createElement('div');d.className='ri';
+    d.innerHTML=`<div class="rd ${good?'rk':'rn'}">${good?'✓':'✗'}</div><div><div style="font-size:13px;">${q.q.substring(0,88)}…</div>${!good?`<div style="font-size:12px;color:var(--red);margin-top:2px;">Kamu: ${['A','B','C','D'][ST.mcA[i]]} · Benar: ${['A','B','C','D'][q.a]}</div>`:''}</div>`;
+    rl.appendChild(d);
+  });
+  const ra=document.getElementById('resActs');
+  const nextRi=ST.curRule+1;
+  const hasNext=nextRi<sec.ruleList.length;
+  if(pass){
+    ra.innerHTML=hasNext
+      ?`<button class="b bg" onclick="openRule('${ST.curSec}',${nextRi})">Lanjut ke Topik ${sec.ruleList[nextRi].num} →</button><button class="b bgh" onclick="startRuleQuiz()">⟳ Ulangi Soal Ini</button>`
+      :`<div class="c" style="padding:14px;border-color:rgba(201,168,76,.4);text-align:center;"><div style="color:var(--gold);font-weight:700;margin-bottom:5px;">✅ Semua Topik Lulus!</div><div style="font-size:13px;color:var(--mut2);">Kerjakan Esai untuk menyelesaikan ${SECS.find(s=>s.id===ST.curSec).title}</div></div>
+         <button class="b bg" onclick="startEssay('${ST.curSec}')">✍️ Mulai Esai →</button>
+         <button class="b bgh" onclick="exitSec()">Kembali ke Daftar Topik</button>`;
+  } else {
+    ra.innerHTML=`<button class="b bg" onclick="openRule('${ST.curSec}',${ST.curRule})">📖 Baca Materi Lagi</button><button class="b bo" onclick="startRuleQuiz()">⟳ Ulangi Pilihan Ganda</button><button class="b bgh" onclick="exitSec()">← Kembali</button>`;
+  }
+  show('res');
+}
+
+// ============================================================
+// ESSAY
+// ============================================================
+function startEssay(sId){
+  ST.curSec=sId;ST.essIdx=0;ST.essRes=[];
+  renderEssQ();show('ess');
+}
+function renderEssQ(){
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const q=sec.essay[ST.essIdx];
+  const tot=sec.essay.length;
+  document.getElementById('essLbl').textContent=`${sec.title} · Esai`;
+  document.getElementById('essCtr').textContent=`${ST.essIdx+1} / ${tot}`;
+  document.getElementById('essBar').style.width=`${((ST.essIdx+1)/tot)*100}%`;
+  document.getElementById('essNum').textContent=`SOAL ESAI ${ST.essIdx+1} DARI ${tot}`;
+  document.getElementById('essQ').textContent=q.q;
+  const ta=document.getElementById('essTa');ta.value='';
+  ta.oninput=()=>{document.getElementById('essChr').textContent=ta.value.length+' karakter';document.getElementById('essBtn').disabled=ta.value.trim().length<80;};
+  document.getElementById('essChr').textContent='0 karakter';
+  document.getElementById('essBtn').disabled=true;
+  document.getElementById('essBtn').textContent='Kirim Jawaban →';
+  document.getElementById('essErr').classList.add('hi');
+  document.getElementById('essWrite').classList.remove('hi');
+  document.getElementById('essFB').classList.add('hi');
+}
+async function submitEssay(){
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const q=sec.essay[ST.essIdx];
+  const ans=document.getElementById('essTa').value.trim();
+  document.getElementById('essBtn').disabled=true;document.getElementById('essBtn').textContent='Memproses…';
+  document.getElementById('essErr').classList.add('hi');
+  document.getElementById('gOverlay').classList.add('on');
+  try{
+    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:1000,
+        messages:[{role:"user",content:`Kamu adalah dosen kepelautan yang menguji mahasiswa Nautika POLIMARIN tentang MARPOL 73/78. Nilai jawaban secara adil — yang penting PEMAHAMAN KONSEP yang benar, bukan hafalan kata per kata. Bahasa Indonesia diutamakan.
+
+Pertanyaan: "${q.q}"
+Poin kunci: ${q.kp.map((p,i)=>`${i+1}. ${p}`).join('; ')}
+Jawaban mahasiswa: "${ans}"
+
+Balas HANYA dengan JSON valid tanpa backticks: {"score":7,"passed":true,"summary":"...","strengths":"...","improvements":"...","correctPoints":["..."],"missedPoints":["..."]}`}]})});
+    const data=await res.json();
+    let txt=(data.content||[]).find(b=>b.type==="text")?.text||"{}";
+    txt=txt.replace(/```json|```/g,"").trim();
+    const js=txt.indexOf('{');const je=txt.lastIndexOf('}');if(js!==-1&&je!==-1)txt=txt.substring(js,je+1);
+    const result=JSON.parse(txt);
+    ST.essRes.push({...result,q:q.q,ans});
+    renderEssFB(result,ans);
+  }catch(e){
+    document.getElementById('essErr').textContent="⚠️ Gagal menilai. Periksa koneksi internet dan coba lagi.";
+    document.getElementById('essErr').classList.remove('hi');
+    document.getElementById('essBtn').disabled=false;document.getElementById('essBtn').textContent='Coba Lagi →';
+  }finally{document.getElementById('gOverlay').classList.remove('on');}
+}
+function renderEssFB(r,ans){
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const isLast=ST.essIdx===sec.essay.length-1;
+  document.getElementById('fbCard').style.borderColor=r.passed?'rgba(34,197,94,.5)':'rgba(201,168,76,.4)';
+  document.getElementById('fbEmo').textContent=r.passed?'🎓':'📖';
+  document.getElementById('fbScore').textContent=r.score;
+  document.getElementById('fbScore').style.color=r.passed?'var(--grn)':'var(--gold)';
+  document.getElementById('fbPass').textContent=r.passed?'Lulus ✓':'Perlu Diperdalam';
+  document.getElementById('fbPass').style.color=r.passed?'var(--grn)':'var(--gold)';
+  document.getElementById('fbSum').textContent=r.summary;
+  document.getElementById('fbStr').textContent=r.strengths;
+  document.getElementById('fbImp').textContent=r.improvements;
+  const kp=document.getElementById('fbKP');kp.innerHTML=
+    (r.correctPoints||[]).map(p=>`<div style="display:flex;gap:7px;margin-bottom:5px;font-size:13px;color:var(--grn);"><span>✓</span><span>${p}</span></div>`).join('')+
+    (r.missedPoints||[]).map(p=>`<div style="display:flex;gap:7px;margin-bottom:5px;font-size:13px;color:var(--mut2);"><span>○</span><span>${p}</span></div>`).join('');
+  document.getElementById('fbAns').textContent=ans;
+  document.getElementById('essNxt').textContent=isLast?'🏁 Selesaikan Bagian Ini →':'Soal Esai Berikutnya →';
+  document.getElementById('essWrite').classList.add('hi');document.getElementById('essFB').classList.remove('hi');
+}
+function nextEssay(){
+  const sec=SECS.find(s=>s.id===ST.curSec);
+  const isLast=ST.essIdx===sec.essay.length-1;
+  if(!isLast){ST.essIdx++;renderEssQ();return;}
+  const sp=getSecP(ST.curSec);sp.essayDone=true;sp.complete=true;save();
+  const ni=SECS.findIndex(s=>s.id===ST.curSec)+1;
+  document.getElementById('doneTitle').textContent=`${sec.title} Selesai!`;
+  document.getElementById('doneSub').textContent=`${sec.full} · ${sec.rules}`;
+  const avgMC=Object.values(sp.rules).filter(r=>r.score!==null).reduce((s,r,_,a)=>s+r.score/a.length,0);
+  document.getElementById('doneMC').textContent=Math.round(avgMC)+'%';
+  const avgEss=ST.essRes.length>0?Math.round(ST.essRes.reduce((s,r)=>s+(r.score||0),0)/ST.essRes.length*10)+'%':'—';
+  document.getElementById('doneEss').textContent=avgEss;
+  const nxtSec=ni<SECS.length?SECS[ni]:null;
+  document.getElementById('doneUnlock').innerHTML=nxtSec
+    ?`<div class="c" style="padding:14px;border-color:rgba(34,197,94,.4);margin-bottom:15px;"><div style="color:var(--grn);font-weight:700;margin-bottom:5px;">✅ ${sec.title} Selesai!</div><div style="font-size:14px;">Lanjut ke ${nxtSec.title}: ${nxtSec.ico} ${nxtSec.full}</div></div>`
+    :`<div class="c" style="padding:20px;text-align:center;border-color:rgba(201,168,76,.4);margin-bottom:15px;"><div style="font-size:40px;margin-bottom:8px;">🎓</div><div style="font-family:'Cinzel',serif;color:var(--gold);font-size:16px;">MARPOL MASTERY COMPLETE!</div></div>`;
+  document.getElementById('doneActs').innerHTML=(nxtSec?`<button class="b bg" onclick="openSec('${nxtSec.id}')">Lanjut ke ${nxtSec.title} →</button>`:'')+`<button class="b bgh" onclick="goMarpol()">← Kembali ke MARPOL</button>`;
+  show('done');
+}
+
+// ============================================================
+// INIT
+// ============================================================
+if(load()){goMarpol();}else{renderSaved();show('name');}
+</script>
+</body>
+</html>
