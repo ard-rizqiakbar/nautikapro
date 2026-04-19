@@ -295,7 +295,7 @@ const SUBJS=[
   {id:"stcw",n:"STCW",ico:"📜",d:"Standar Pelatihan Pelaut",on:false},
   {id:"unclos",n:"UNCLOS",ico:"🗺️",d:"Hukum Laut Internasional",on:false},
   {id:"nav",n:"Navigation",ico:"🧭",d:"Plotting, Kompas & Navigasi Peta",on:false},
-  {id:"stability",n:"Ship Stability",ico:"⚖️",d:"Stabilitas & Trim Kapal",on:false},
+  {id:"stability",n:"Ship Stability",ico:"⚖️",d:"Stabilitas & Trim Kapal",on:true,col:"#22c55e",href:"STABILITY.html"},
   {id:"cargo",n:"Cargo Handling",ico:"📦",d:"Penanganan & Penyimpanan Muatan",on:false},
   {id:"smcp",n:"SMCP",ico:"📡",d:"Frase Komunikasi Maritim Standar",on:false},
 ];
@@ -351,25 +351,7 @@ document.getElementById('nameInp').addEventListener('keydown',e=>{if(e.key==='En
 // ============================================================
 // SUBJECTS
 // ============================================================
-function goSubj(){
-  document.getElementById('greeting').textContent=`Halo, ${ST.name} 👋`;
-  const g=document.getElementById('subjGrid');
-  g.innerHTML=SUBJS.map(s=>{
-    let clickAction='';
-    if(s.on){
-      if(s.href)clickAction=`window.location.href='${s.href}'`;
-      else clickAction='goIala()';
-    }
-    return `<div class="sc${s.on?'':' cs'}" onclick="${clickAction}">
-      ${!s.on?`<div style="position:absolute;top:8px;right:8px;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);border-radius:10px;padding:2px 7px;font-size:10px;font-family:'Cinzel',serif;">Segera</div>`:''}
-      <div style="font-size:28px;margin-bottom:7px;">${s.ico}</div>
-      <div style="font-family:'Cinzel',serif;font-size:12px;color:${s.on?'var(--gold)':'var(--mut2)'};font-weight:700;margin-bottom:3px;">${s.n}</div>
-      <div style="font-size:11px;color:var(--mut2);line-height:1.4;">${s.d}</div>
-      ${s.on?`<div style="margin-top:9px;font-size:11px;color:${s.id==='iala'?'var(--tel)':'var(--grn)'};font-weight:700;">Tersedia →</div>`:''}
-    </div>`;
-  }).join('');
-  show('subj');
-}
+function goSubj(){ window.location.href='index.html'; }
 function switchUser(){ST.name=null;renderSaved();document.getElementById('nameInp').value='';show('name');}
 function toggleImport(){document.getElementById('importBox').classList.toggle('hi');}
 function doExport(){

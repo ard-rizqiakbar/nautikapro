@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NautikaPRO — Ship Stability</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#04111f;--bg2:#071a2f;--bg3:#0a2241;--bdr:#153a6b;--bdr2:#1e4d85;--gold:#c9a84c;--gold2:#e8c870;--txt:#d8cfbe;--mut:#5f7b9e;--mut2:#8a9bb0;--grn:#22c55e;--red:#ef4444;--blu:#3b82f6;--org:#f97316;--pur:#a855f7;--tel:#14b8a6;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);font-family:'Source Sans 3',sans-serif;min-height:100vh;overflow-x:hidden;}
+::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:3px;}
+.cf{font-family:'Cinzel',serif;}.lf{font-family:'Lora',serif;}.hi{display:none!important;}
+.screen{display:none;min-height:100vh;}.screen.on{display:block;animation:fi .3s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.nav{background:var(--bg2);border-bottom:1px solid var(--bdr);padding:13px 18px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;}
+.w{max-width:700px;margin:0 auto;padding:22px 16px;}
+.c{background:var(--bg2);border:1px solid var(--bdr);border-radius:13px;transition:all .2s;}
+.b{display:block;width:100%;padding:13px 18px;border:none;border-radius:10px;font-family:'Source Sans 3',sans-serif;font-size:15px;font-weight:700;cursor:pointer;text-align:center;transition:all .2s;}
+.bg{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#04111f;}.bg:hover{transform:translateY(-1px);box-shadow:0 5px 20px rgba(201,168,76,.3);}
+.bg:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none;}
+.bo{background:transparent;color:var(--gold);border:1px solid var(--gold);}.bo:hover{background:rgba(201,168,76,.08);}
+.bgh{background:transparent;color:var(--mut2);border:1px solid var(--bdr2);}.bgh:hover{background:var(--bg3);color:var(--txt);}
+.bs{display:flex;flex-direction:column;gap:10px;}
+.bb{background:transparent;color:var(--gold);border:1px solid var(--bdr2);padding:7px 15px;font-size:13px;border-radius:8px;cursor:pointer;font-family:'Source Sans 3',sans-serif;font-weight:600;transition:all .2s;}.bb:hover{border-color:var(--gold);}
+.qp{height:4px;background:var(--bdr);}.qpf{height:100%;transition:width .4s;}
+.ob{width:100%;background:var(--bg2);border:1px solid var(--bdr);border-radius:11px;padding:13px 16px;text-align:left;cursor:pointer;color:var(--txt);font-size:14px;line-height:1.5;font-family:'Source Sans 3',sans-serif;transition:all .15s;display:flex;align-items:flex-start;gap:11px;margin-bottom:9px;}
+.ob:hover:not(:disabled){background:var(--bg3);border-color:var(--bdr2);transform:translateX(3px);}.ob:disabled{cursor:default;transform:none;}
+.ob.ok{background:#0a2d1a;border-color:var(--grn);color:var(--grn);}
+.ob.ng{background:#2d0a0a;border-color:var(--red);color:var(--red);}
+.ob.dm{background:var(--bg2);border-color:var(--bdr);color:var(--mut);}
+.ol{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--bdr);display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700;margin-top:1px;}
+.ob.ok .ol{background:var(--grn);}.ob.ng .ol{background:var(--red);}
+.exp{margin:0 0 14px;padding:14px 16px;border-radius:10px;font-family:'Lora',serif;font-size:14px;line-height:1.65;}
+.exp.ek{background:#061f10;border:1px solid rgba(34,197,94,.3);color:#a7f3c0;}
+.exp.en{background:#1f0606;border:1px solid rgba(239,68,68,.3);color:#fca5a5;}
+.mb{font-size:15px;line-height:1.85;color:var(--txt);}
+.mb p{margin-bottom:13px;}
+.mb h3{font-family:'Cinzel',serif;font-size:13px;color:var(--gold);letter-spacing:.8px;margin:18px 0 9px;border-bottom:1px solid var(--bdr);padding-bottom:5px;}
+.mb strong u{color:var(--gold2);text-decoration-color:var(--gold);text-underline-offset:3px;font-weight:700;}
+.mb .kb{background:var(--bg3);border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:11px 15px;margin:13px 0;font-size:14px;line-height:1.6;}
+.mb ul{padding-left:17px;margin-bottom:13px;}.mb li{margin-bottom:5px;line-height:1.6;}
+.rr{display:inline-block;background:rgba(201,168,76,.15);color:var(--gold);border:1px solid rgba(201,168,76,.3);border-radius:6px;padding:1px 7px;font-size:12px;font-family:'Cinzel',serif;font-weight:600;margin-right:4px;}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;}
+.sc{padding:16px;text-align:center;cursor:pointer;position:relative;transition:all .2s;border-radius:13px;background:var(--bg2);border:1px solid var(--bdr);touch-action:manipulation;}
+.sc:not(.cs):hover{background:var(--bg3);transform:translateY(-2px);border-color:var(--bdr2);}
+.sc.cs{opacity:.5;cursor:default;}
+.ni{width:100%;background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:13px 16px;color:var(--txt);font-size:16px;font-family:'Lora',serif;outline:none;transition:border-color .2s;}.ni:focus{border-color:var(--gold);}
+.pp{background:var(--bg2);border:1px solid var(--bdr2);border-radius:10px;padding:9px 14px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px;margin-bottom:8px;}.pp:hover{background:var(--bg3);border-color:var(--gold);}
+.ri{display:flex;align-items:flex-start;gap:9px;padding:9px 0;border-bottom:1px solid var(--bdr);}.ri:last-child{border-bottom:none;}
+.rd{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:700;margin-top:2px;}
+.rd.rk{background:#0a2d1a;border:1px solid var(--grn);color:var(--grn);}
+.rd.rn{background:#2d0a0a;border:1px solid var(--red);color:var(--red);}
+/* ---- QUIZ CARDS (info/reminder/formula) ---- */
+.qcard{border-radius:11px;padding:12px 15px;margin-bottom:10px;font-size:13px;line-height:1.7;}
+.qcard-hd{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:6px;}
+.qc-info{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);}
+.qc-info .qcard-hd{color:#60a5fa;}
+.qc-remind{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.25);}
+.qc-remind .qcard-hd{color:var(--gold);}
+.qc-formula{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.25);}
+.qc-formula .qcard-hd{color:var(--grn);}
+.itbl{width:100%;border-collapse:collapse;font-size:13px;}
+.itbl td{padding:4px 0;vertical-align:top;}
+.itbl td:first-child{color:var(--mut2);width:55%;padding-right:8px;}
+.itbl td:last-child{color:var(--txt);font-weight:600;text-align:right;}
+.itbl tr:not(:last-child) td{border-bottom:1px solid rgba(255,255,255,.04);}
+.arow{display:flex;justify-content:space-between;align-items:center;padding:4px 0;font-size:12px;border-bottom:1px solid rgba(255,255,255,.04);}
+.arow:last-child{border:none;}
+.arow .anm{color:var(--mut2);}
+.arow .avn{font-weight:700;}
+.arow .avn.p{color:#4ade80;}
+.arow .avn.m{color:#f87171;}
+.mono{font-family:'Courier New',monospace;background:#071e3d;border-radius:8px;padding:9px 13px;font-size:13px;line-height:1.9;color:var(--gold2);white-space:pre;}
+/* ---- KAMUS ---- */
+.km-entry{padding:14px 0;border-bottom:1px solid var(--bdr);}
+.km-entry:last-child{border:none;}
+.km-sym{display:inline-block;background:rgba(201,168,76,.15);color:var(--gold2);border:1px solid rgba(201,168,76,.3);border-radius:8px;padding:3px 13px;font-family:'Cinzel',serif;font-weight:700;font-size:15px;margin-bottom:7px;}
+.km-en{font-size:12px;color:var(--mut);margin-bottom:4px;font-style:italic;}
+.km-id{font-size:14px;color:var(--txt);margin-bottom:4px;}
+.km-tip{font-size:13px;color:var(--mut2);line-height:1.6;}
+.tip-box{background:var(--bg3);border-left:3px solid var(--grn);border-radius:0 10px 10px 0;padding:11px 15px;margin:10px 0;font-size:13px;line-height:1.65;color:var(--txt);}
+.tip-box .th{font-family:'Cinzel',serif;font-size:10px;color:var(--grn);letter-spacing:1px;margin-bottom:6px;}
+.mono-sm{font-family:'Courier New',monospace;background:#071e3d;border-radius:6px;padding:5px 10px;font-size:12px;color:var(--gold2);display:inline-block;margin:3px 0;}
+.zone-tbl{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0;}
+.zone-tbl th{background:var(--bg3);color:var(--gold);font-family:'Cinzel',serif;font-size:11px;letter-spacing:.5px;padding:7px 10px;text-align:left;border-bottom:1px solid var(--bdr2);}
+.zone-tbl td{padding:7px 10px;border-bottom:1px solid var(--bdr);color:var(--txt);}
+.zone-tbl tr:last-child td{border:none;}
+/* ---- SECTION CARDS ---- */
+.sec-card{background:var(--bg2);border:1px solid var(--bdr);border-radius:13px;padding:15px 18px;margin-bottom:11px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:all .2s;}
+.sec-card:hover{background:var(--bg3);transform:translateX(4px);}
+.sec-card.locked{opacity:.5;cursor:default;}
+.sec-ico{font-size:26px;flex-shrink:0;}
+.sec-info{flex:1;}
+.sec-ttl{font-family:'Cinzel',serif;font-size:13px;margin-bottom:3px;}
+.sec-sub{font-size:12px;color:var(--mut2);}
+.sec-badge{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;flex-shrink:0;}
+.badge-done{background:#061f10;color:var(--grn);border:1px solid rgba(34,197,94,.3);}
+.badge-try{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.3);}
+.badge-lock{background:var(--bg3);color:var(--mut);border:1px solid var(--bdr);}
+.badge-read{background:rgba(168,85,247,.1);color:#c084fc;border:1px solid rgba(168,85,247,.3);}
+@media(max-width:480px){.sg{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<!-- ========== LOGIN ========== -->
+<div class="screen on" id="sc-name">
+  <div style="max-width:460px;margin:0 auto;padding:52px 18px;">
+    <div style="text-align:center;margin-bottom:32px;">
+      <div style="font-size:50px;margin-bottom:12px;">⚖️</div>
+      <h1 class="cf" style="font-size:26px;color:var(--gold);letter-spacing:3px;margin-bottom:7px;">NautikaPRO</h1>
+      <p class="lf" style="font-style:italic;color:var(--mut2);font-size:14px;">Ship Stability — Stabilitas & Trim Kapal</p>
+    </div>
+    <div class="c" style="padding:24px;margin-bottom:14px;">
+      <div class="cf" style="font-size:11px;color:var(--gold);letter-spacing:1px;margin-bottom:13px;">MASUK SEBAGAI</div>
+      <input class="ni" id="nameInp" type="text" placeholder="Ketik nama lengkap kamu…" maxlength="60" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <div style="font-size:12px;color:var(--mut);margin-top:7px;">Progress disimpan berdasarkan nama di perangkat ini.</div>
+      <button class="b bg" style="margin-top:13px;" onclick="doLogin()">Mulai Belajar →</button>
+    </div>
+    <div id="savedList"></div>
+    <div style="margin-top:12px;text-align:center;">
+      <a href="index.html" style="font-size:12px;color:var(--mut2);text-decoration:none;">← Kembali ke Semua Mata Kuliah</a>
+    </div>
+  </div>
+</div>
+
+<!-- ========== STABILITY HOME ========== -->
+<div class="screen" id="sc-stab">
+  <div class="nav">
+    <button class="bb" onclick="goSubj()">← Mata Kuliah</button>
+    <div style="flex:1;">
+      <div class="cf" style="font-size:12px;color:var(--grn);">SHIP STABILITY</div>
+      <div style="font-size:13px;" id="stabGreet"></div>
+    </div>
+  </div>
+  <div class="w">
+    <div style="text-align:center;padding:14px 0 10px;">
+      <div style="font-size:12px;color:var(--mut2);">Progress keseluruhan</div>
+      <div style="max-width:360px;margin:9px auto;height:5px;background:var(--bdr);border-radius:3px;overflow:hidden;">
+        <div style="height:100%;background:linear-gradient(90deg,var(--grn),#4ade80);border-radius:3px;transition:width .6s;" id="mainBar"></div>
+      </div>
+      <div style="font-size:12px;color:var(--mut);" id="mainPct"></div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;padding:12px 15px;font-size:13px;color:var(--mut2);margin-bottom:15px;">
+      🎯 <strong style="color:var(--gold)">Alur:</strong> Baca Kamus → Baca Materi → Kerjakan PG (≥70%) → Bagian berikutnya terbuka
+    </div>
+    <div id="secList"></div>
+  </div>
+</div>
+
+<!-- ========== KAMUS ========== -->
+<div class="screen" id="sc-kamus">
+  <div class="nav">
+    <button class="bb" onclick="goStab()">← Daftar Topik</button>
+    <div style="flex:1;">
+      <div class="cf" style="font-size:12px;color:#c084fc;">KAMUS & SIMBOL</div>
+      <div style="font-size:13px;">Referensi Simbol, Singkatan & Tips Cepat</div>
+    </div>
+    <div style="font-size:22px;">📚</div>
+  </div>
+  <div class="w" id="kamusBody"></div>
+</div>
+
+<!-- ========== MATERIAL ========== -->
+<div class="screen" id="sc-mat">
+  <div class="nav">
+    <button class="bb" onclick="goStab()">← Daftar Topik</button>
+    <div style="flex:1;">
+      <div class="cf" style="font-size:12px;" id="matLbl"></div>
+      <div style="font-size:13px;" id="matSub"></div>
+    </div>
+    <div style="font-size:22px;" id="matIco"></div>
+  </div>
+  <div class="w">
+    <div class="c" style="padding:24px;margin-bottom:14px;">
+      <div class="cf" style="font-size:11px;color:var(--mut);letter-spacing:1px;margin-bottom:5px;">MATERI PEMBELAJARAN</div>
+      <h2 class="cf" style="font-size:17px;margin-bottom:16px;" id="matTitle"></h2>
+      <div class="mb" id="matBody"></div>
+    </div>
+    <div class="c" style="padding:15px;margin-bottom:15px;border-color:rgba(201,168,76,.3);">
+      <div class="cf" style="font-size:11px;color:var(--gold);margin-bottom:8px;">📌 POIN PENTING — Baca sebelum mengerjakan soal</div>
+      <div style="font-size:13px;line-height:1.75;" id="matKP"></div>
+    </div>
+    <button class="b bg" onclick="startQuiz()">Mulai Pilihan Ganda →</button>
+  </div>
+</div>
+
+<!-- ========== MC QUIZ ========== -->
+<div class="screen" id="sc-mc">
+  <div class="nav">
+    <button class="bb" onclick="goStab()">← Keluar</button>
+    <div style="flex:1;"><div class="cf" style="font-size:12px;" id="mcLbl"></div></div>
+    <div class="cf" style="font-size:14px;color:var(--gold);" id="mcCtr"></div>
+  </div>
+  <div class="qp"><div class="qpf" id="mcBar" style="background:var(--grn);"></div></div>
+  <div class="w">
+    <div id="mcCards"></div>
+    <div class="c" style="padding:20px;margin-bottom:14px;">
+      <div class="cf" style="font-size:11px;color:var(--mut2);margin-bottom:9px;letter-spacing:1px;" id="mcNum"></div>
+      <div class="lf" style="font-size:16px;line-height:1.8;" id="mcQ"></div>
+    </div>
+    <div id="mcOpts"></div>
+    <div id="mcExp" class="hi"></div>
+    <button class="b bg hi" id="mcNext" onclick="nextMC()"></button>
+  </div>
+</div>
+
+<!-- ========== RESULTS ========== -->
+<div class="screen" id="sc-res">
+  <div class="nav">
+    <button class="bb" onclick="goStab()">← Topik</button>
+    <div class="cf" style="font-size:13px;color:var(--gold);">Hasil Pilihan Ganda</div>
+  </div>
+  <div class="w">
+    <div class="c" style="padding:28px;text-align:center;margin-bottom:15px;" id="resCard">
+      <div style="font-size:62px;margin-bottom:8px;" id="resEmo"></div>
+      <div class="cf" style="font-size:50px;font-weight:900;" id="resScore"></div>
+      <div class="lf" style="font-size:17px;font-style:italic;margin-top:5px;" id="resLbl"></div>
+      <div style="font-size:14px;color:var(--mut2);margin-top:8px;" id="resDet"></div>
+    </div>
+    <div class="c" style="padding:16px;margin-bottom:15px;">
+      <div class="cf" style="font-size:11px;color:var(--gold);margin-bottom:11px;">REKAP JAWABAN</div>
+      <div id="recapList"></div>
+    </div>
+    <div class="bs" id="resActs"></div>
+  </div>
+</div>
+
+<!-- ========== COMPLETE ========== -->
+<div class="screen" id="sc-done">
+  <div class="w" style="padding-top:38px;">
+    <div style="text-align:center;margin-bottom:22px;">
+      <div style="font-size:70px;margin-bottom:13px;">🏆</div>
+      <h2 class="cf" style="color:var(--gold);font-size:22px;margin-bottom:7px;">Ship Stability Selesai!</h2>
+      <p class="lf" style="color:var(--mut2);font-style:italic;">Kamu telah menguasai semua topik Ship Stability</p>
+    </div>
+    <div class="c" style="padding:22px;text-align:center;margin-bottom:15px;">
+      <div class="cf" style="font-size:11px;color:var(--mut2);margin-bottom:5px;">RATA-RATA SKOR PILIHAN GANDA</div>
+      <div class="cf" style="font-size:42px;font-weight:900;color:var(--grn);" id="doneScore"></div>
+    </div>
+    <button class="b bgh" style="margin-top:10px;" onclick="goStab()">← Kembali ke Daftar Topik</button>
+  </div>
+</div>
+
+<script>
+// =====================================================================
+// SUBJECTS (for nav)
+// =====================================================================
+const SUBJS=[
+  {id:"colreg",n:"COLREG",ico:"⚓",d:"Peraturan Pencegahan Tubrukan di Laut 1972",on:true,col:"#3b82f6",href:"COLREG.html"},
+  {id:"marpol",n:"MARPOL",ico:"🌊",d:"Pencemaran dari Kapal",on:true,col:"#f97316",href:"MARPOL.html"},
+  {id:"solas",n:"SOLAS",ico:"🛟",d:"Keselamatan Jiwa di Laut",on:false},
+  {id:"iala",n:"IALA BUOY",ico:"🔴",d:"Sistem Pelampung IALA",on:true,col:"#14b8a6",href:"IALA.html"},
+  {id:"stcw",n:"STCW",ico:"📜",d:"Standar Pelatihan Pelaut",on:false},
+  {id:"unclos",n:"UNCLOS",ico:"🗺️",d:"Hukum Laut Internasional",on:false},
+  {id:"nav",n:"Navigation",ico:"🧭",d:"Plotting, Kompas & Navigasi Peta",on:false},
+  {id:"stability",n:"Ship Stability",ico:"⚖️",d:"Stabilitas & Trim Kapal",on:true,col:"#22c55e",href:null},
+  {id:"cargo",n:"Cargo Handling",ico:"📦",d:"Penanganan & Penyimpanan Muatan",on:false},
+];
+
+// =====================================================================
+// KAMUS DATA
+// =====================================================================
+const KAMUS_HTML = `
+<div style="margin-bottom:20px;">
+  <div class="cf" style="font-size:11px;color:#c084fc;letter-spacing:1.5px;margin-bottom:14px;">SIMBOL & TITIK PENTING</div>
+  <div class="km-entry">
+    <div class="km-sym">K</div>
+    <div class="km-en">Keel</div>
+    <div class="km-id">Lunas kapal — titik paling bawah, titik referensi NOL untuk semua pengukuran vertikal.</div>
+    <div class="km-tip">Semua jarak diukur dari K ke atas. K tidak bergerak.</div>
+  </div>
+  <div class="km-entry">
+    <div class="km-sym">B</div>
+    <div class="km-en">Center of Buoyancy / Titik Apung</div>
+    <div class="km-id">Titik pusat dari volume bagian kapal yang terbenam di air. Menghasilkan gaya ke atas (gaya apung).</div>
+    <div class="km-tip">B bergerak secara horizontal saat kapal miring — inilah yang menghasilkan momen penegak.</div>
+  </div>
+  <div class="km-entry">
+    <div class="km-sym">G</div>
+    <div class="km-en">Center of Gravity / Titik Berat</div>
+    <div class="km-id">Titik pusat dari seluruh berat kapal + muatan. Tempat seluruh gaya berat seolah-olah bekerja.</div>
+    <div class="km-tip">G bergerak saat kamu muat, bongkar, atau pindahkan muatan. Menghitung G baru adalah inti dari Ship Stability.</div>
+  </div>
+  <div class="km-entry">
+    <div class="km-sym">M</div>
+    <div class="km-en">Metacenter / Metasentra</div>
+    <div class="km-id">Titik imajiner di atas B — titik pertemuan antara garis vertikal melalui B (saat kapal miring) dengan garis tengah kapal.</div>
+    <div class="km-tip">M dianggap tetap untuk sudut kemiringan kecil (&lt;15°). Nilainya diperoleh dari tabel stabilitas kapal.</div>
+  </div>
+  <div class="km-entry">
+    <div class="km-sym">GZ</div>
+    <div class="km-en">Righting Lever / Lengan Penegak</div>
+    <div class="km-id">Jarak horizontal antara garis vertikal melalui G dan melalui B saat kapal miring. Ukuran kemampuan kapal kembali tegak.</div>
+    <div class="km-tip">GZ = GM × sin(θ). Semakin besar GZ, semakin kuat kapal bisa kembali tegak.</div>
+  </div>
+</div>
+
+<div style="margin-bottom:20px;">
+  <div class="cf" style="font-size:11px;color:#60a5fa;letter-spacing:1.5px;margin-bottom:14px;">JARAK-JARAK KUNCI</div>
+  <table class="zone-tbl">
+    <tr><th>Simbol</th><th>Arti</th><th>Rumus / Sumber</th></tr>
+    <tr><td><strong>KG</strong></td><td>Jarak K ke G (tinggi titik berat)</td><td>KG = ΣMoment / ΣBerat</td></tr>
+    <tr><td><strong>KM</strong></td><td>Jarak K ke M</td><td>Dari tabel stabilitas kapal (diberikan)</td></tr>
+    <tr><td><strong style="color:var(--gold2)">GM</strong></td><td>Tinggi Metasentra — INDIKATOR UTAMA</td><td><strong>GM = KM − KG</strong></td></tr>
+    <tr><td><strong>KB</strong></td><td>Jarak K ke B</td><td>≈ Sarat / 2 (perkiraan)</td></tr>
+    <tr><td><strong>BM</strong></td><td>Jari-jari Metasentra (K ke M via B)</td><td>BM = KM − KB</td></tr>
+  </table>
+  <div class="tip-box">
+    <div class="th">🔑 KUNCI MEMBACA GM</div>
+    <div>GM &gt; 0 → ✅ <strong>STABIL</strong> — kapal kembali tegak setelah miring</div>
+    <div>GM = 0 → ⚠️ <strong>NETRAL</strong> — sangat berbahaya, jangan berlayar</div>
+    <div>GM &lt; 0 → ❌ <strong>TIDAK STABIL</strong> — kapal miring ke satu sisi (Angle of Loll), bisa terbalik!</div>
+  </div>
+</div>
+
+<div style="margin-bottom:20px;">
+  <div class="cf" style="font-size:11px;color:var(--gold);letter-spacing:1.5px;margin-bottom:14px;">SINGKATAN PENTING</div>
+  <div class="km-entry">
+    <div class="km-sym">FWA</div>
+    <div class="km-en">Fresh Water Allowance</div>
+    <div class="km-id">Koreksi draft untuk air tawar murni (BJ = 1.000). Berapa milimeter kapal boleh lebih dalam saat di air tawar dibanding air laut.</div>
+    <div class="mono-sm">FWA (mm) = Displacement ÷ (4 × TPC)</div>
+  </div>
+  <div class="km-entry">
+    <div class="km-sym">DWA</div>
+    <div class="km-en">Dock Water Allowance</div>
+    <div class="km-id">Koreksi draft untuk air pelabuhan / sungai (BJ antara 1.000–1.025). Interpolasi antara FWA dan nol.</div>
+    <div class="mono-sm">DWA (mm) = FWA × (1.025 − BJ_dok) ÷ 0.025</div>
+  </div>
+  <div class="km-entry">
+    <div class="km-sym">TPC</div>
+    <div class="km-en">Tons Per Centimeter</div>
+    <div class="km-id">Berapa ton beban yang dibutuhkan untuk menenggelamkan kapal 1 cm lebih dalam di air laut (BJ = 1.025).</div>
+    <div class="mono-sm">TPC = (L × B × Cw × 1.025) ÷ 100</div>
+  </div>
+  <div class="km-entry">
+    <div class="km-sym">TPCs</div>
+    <div class="km-en">TPC di air spesifik (dock/sungai)</div>
+    <div class="km-id">TPC yang disesuaikan untuk air pelabuhan atau sungai dengan BJ tertentu.</div>
+    <div class="mono-sm">TPCs = TPC × (BJ_dok ÷ 1.025)</div>
+  </div>
+  <div class="km-entry">
+    <div class="km-sym">FSE</div>
+    <div class="km-en">Free Surface Effect</div>
+    <div class="km-id">Efek negatif dari cairan yang tidak penuh di dalam tangki. Cairan bergerak saat kapal miring, seolah-olah menaikkan G ke atas. Mengurangi GM efektif.</div>
+    <div class="mono-sm">FSE = (BJ_cairan × l × b³) ÷ (12 × Displacement)</div>
+    <div class="mono-sm">GM_efektif = GM − FSE</div>
+  </div>
+  <div class="km-entry">
+    <div class="km-sym">DC</div>
+    <div class="km-en">Daily Consumption</div>
+    <div class="km-id">Total pemakaian harian kapal: Fuel Oil + Fresh Water + Diesel Oil + Lubricating Oil + Provision.</div>
+    <div class="mono-sm">DC_total = DC_harian × (jam ÷ 24)</div>
+  </div>
+  <div class="km-entry">
+    <div class="km-sym">BJ / SG</div>
+    <div class="km-en">Berat Jenis / Specific Gravity</div>
+    <div class="km-id">Perbandingan massa zat terhadap air tawar murni. Air laut = 1.025, Air tawar = 1.000.</div>
+    <div class="km-tip">BJ makin kecil → air makin ringan → kapal makin dalam tenggelam → perlu koreksi (FWA / DWA).</div>
+  </div>
+  <div class="km-entry">
+    <div class="km-sym">Cw</div>
+    <div class="km-en">Coefficient of Waterplane Area</div>
+    <div class="km-id">Rasio luas bidang air kapal terhadap persegi panjang yang mengelilinginya (L × B). Nilai 0–1.</div>
+    <div class="km-tip">Cw = 0.83 berarti 83% dari L×B adalah bidang air efektif kapal.</div>
+  </div>
+  <div class="km-entry">
+    <div class="km-sym">GG' / GG₁</div>
+    <div class="km-en">Pergeseran titik berat G</div>
+    <div class="km-id">Jarak perpindahan G akibat memuat, membongkar, atau memindahkan muatan.</div>
+    <div class="mono-sm">GG₁ = (w × d) ÷ W  [saat pindah muatan]</div>
+    <div class="km-tip">w = berat muatan yang dipindah, d = jarak pindah, W = displacement total</div>
+  </div>
+</div>
+
+<div style="margin-bottom:20px;">
+  <div class="cf" style="font-size:11px;color:var(--grn);letter-spacing:1.5px;margin-bottom:14px;">ZONA LOAD LINE — URUTAN DRAFT</div>
+  <table class="zone-tbl">
+    <tr><th>Zona</th><th>Singkatan</th><th>Draft vs Summer</th><th>Rumus Koreksi</th></tr>
+    <tr><td>Tropical Fresh</td><td style="color:#4ade80">TF</td><td>Paling tinggi ▲▲</td><td>T + FWA</td></tr>
+    <tr><td>Fresh Water</td><td style="color:#4ade80">F</td><td>Tinggi ▲</td><td>S + FWA</td></tr>
+    <tr><td>Tropical</td><td style="color:var(--gold)">T</td><td>Sedikit di atas S ▲</td><td>S + (S÷48)</td></tr>
+    <tr><td>Summer</td><td style="color:var(--gold)">S</td><td>Baseline (referensi)</td><td>—</td></tr>
+    <tr><td>Winter</td><td style="color:var(--org)">W</td><td>Lebih rendah ▼</td><td>S − (S÷48)</td></tr>
+    <tr><td>Winter N. Atlantic</td><td style="color:var(--red)">WNA</td><td>Paling rendah ▼▼</td><td>W − 50 mm</td></tr>
+  </table>
+  <div class="tip-box">
+    <div class="th">💡 CARA HAFAL URUTAN ZONA</div>
+    <div><strong style="color:#4ade80">TF &gt; F &gt; T &gt; S &gt; W &gt; WNA</strong></div>
+    <div style="margin-top:5px;font-size:12px;color:var(--mut2);">"Tropical Fresh paling bebas, Winter NA paling ketat"</div>
+  </div>
+</div>
+
+<div style="margin-bottom:20px;">
+  <div class="cf" style="font-size:11px;color:var(--gold2);letter-spacing:1.5px;margin-bottom:14px;">TIPS & RUMUS CEPAT</div>
+  <div class="tip-box" style="border-color:var(--gold);margin-bottom:10px;">
+    <div class="th" style="color:var(--gold);">⚡ HOGGING vs SAGGING — CARA CEPAT</div>
+    <div>Hitung M rata-rata: <span class="mono-sm">M_rata = (F + A) / 2</span></div>
+    <div style="margin-top:6px;">M_tengah &lt; M_rata → <strong style="color:var(--org)">HOGGING</strong> (kapal melengkung ke atas di tengah)</div>
+    <div>M_tengah &gt; M_rata → <strong style="color:var(--blu)">SAGGING</strong> (kapal melengkung ke bawah di tengah)</div>
+  </div>
+  <div class="tip-box" style="border-color:var(--gold);margin-bottom:10px;">
+    <div class="th" style="color:var(--gold);">⚡ DRAFT RATA-RATA TERKOREKSI</div>
+    <div class="mono-sm">d = (F + 6M + A) / 8</div>
+    <div style="margin-top:5px;font-size:12px;color:var(--mut2);">F = draft depan rata-rata, M = draft tengah rata-rata, A = draft belakang rata-rata</div>
+  </div>
+  <div class="tip-box" style="border-color:var(--gold);margin-bottom:10px;">
+    <div class="th" style="color:var(--gold);">⚡ METODE TABEL KG — URUTAN LANGKAH</div>
+    <div style="font-size:13px;">1. Buat kolom: <strong>Berat | KG | Moment (Berat×KG)</strong></div>
+    <div style="font-size:13px;">2. Isi baris kondisi awal (W awal, KG awal)</div>
+    <div style="font-size:13px;">3. Tambah baris tiap kegiatan: muat (+), bongkar (−)</div>
+    <div style="font-size:13px;">4. Jumlahkan: ΣBerat dan ΣMoment</div>
+    <div style="font-size:13px;">5. KG₁ = ΣMoment ÷ ΣBerat</div>
+    <div style="font-size:13px;">6. GM = KM − KG₁ → <strong>simpulkan kondisi!</strong></div>
+  </div>
+  <div class="tip-box" style="border-color:var(--gold);margin-bottom:10px;">
+    <div class="th" style="color:var(--gold);">⚡ SEKAT MEMBUJUR & FSE</div>
+    <div>n sekat membujur → (n+1) kompartemen</div>
+    <div class="mono-sm">FSE berkurang (n+1)² kali</div>
+    <div style="margin-top:5px;color:var(--mut2);font-size:12px;">3 sekat → 4 kompartemen → FSE hanya 1/16 dari tanpa sekat!</div>
+  </div>
+  <div class="tip-box" style="border-color:var(--gold);margin-bottom:10px;">
+    <div class="th" style="color:var(--gold);">⚡ PERJALANAN SUNGAI — LANGKAH</div>
+    <div style="font-size:13px;">1. Waktu di pelabuhan = durasi kegiatan (jam)</div>
+    <div style="font-size:13px;">2. Waktu ke muara = Jarak (mil) ÷ Kecepatan (knots) = jam</div>
+    <div style="font-size:13px;">3. Total waktu di sungai = keduanya dijumlah</div>
+    <div style="font-size:13px;">4. DC = DC_harian × (total jam ÷ 24)</div>
+    <div style="font-size:13px;">5. Waktu tiba muara = waktu berangkat + waktu ke muara</div>
+  </div>
+  <div class="tip-box" style="border-color:var(--gold);">
+    <div class="th" style="color:var(--gold);">⚡ PERBAIKAN GM NEGATIF — PILIHAN</div>
+    <div style="font-size:13px;">✅ Isi ballast di tangki dasar berganda (G turun)</div>
+    <div style="font-size:13px;">✅ Pindah muatan dari palka atas ke palka bawah (G turun)</div>
+    <div style="font-size:13px;">✅ Bongkar muatan yang KG-nya tinggi (G turun)</div>
+    <div style="font-size:13px;">❌ JANGAN pindah muatan secara menyamping/transversal</div>
+    <div style="font-size:13px;">❌ JANGAN memberi ballast di tangki atas (G malah naik)</div>
+  </div>
+</div>
+<div style="height:30px;"></div>
+`;
+
+// =====================================================================
+// SECTION DATA
+// =====================================================================
+const SD = [
+{
+  id:'draft', title:'Draft & Sarat', ico:'📏', col:'#3b82f6',
+  desc:'Membaca draft 6 sisi, menentukan Hogging/Sagging, menghitung draft rata-rata terkoreksi, TPC, dan FWA.',
+  mat:`<h3>Membaca Draft Kapal</h3>
+<p>Draft kapal dibaca di 6 titik: kiri-kanan pada bagian depan (F), tengah (M), dan belakang (A). Rata-ratakan kiri dan kanan terlebih dahulu.</p>
+<div class="kb">📐 <strong>Draft Rata-rata Terkoreksi (1/8 Rule):</strong><br>d = (F + 6M + A) / 8<br>Ini lebih akurat dari sekadar (F+A)/2 karena mempertimbangkan bagian tengah.</div>
+<h3>Hogging vs Sagging</h3>
+<p><strong><u>Hogging</u></strong>: Bagian tengah kapal lebih tinggi dari rata-rata depan-belakang. Kapal melengkung ke atas di tengah seperti punggung kuda. Terjadi saat muatan terpusat di ujung-ujung kapal.</p>
+<p><strong><u>Sagging</u></strong>: Bagian tengah kapal lebih rendah dari rata-rata depan-belakang. Kapal melengkung ke bawah di tengah. Terjadi saat muatan terpusat di tengah kapal.</p>
+<div class="kb">⚡ <strong>Cara cepat:</strong> Hitung M_rata = (F + A) / 2<br>M_tengah &lt; M_rata → HOGGING | M_tengah &gt; M_rata → SAGGING</div>
+<h3>TPC (Tons Per Centimeter)</h3>
+<p>TPC adalah berat yang dibutuhkan untuk menenggelamkan kapal 1 cm lebih dalam di air laut (BJ = 1.025).</p>
+<div class="kb">TPC = (L × B × Cw × BJ_laut) / 100<br>TPCs = TPC × (BJ_dok / 1.025)  ← di air sungai/pelabuhan</div>
+<h3>FWA (Fresh Water Allowance)</h3>
+<p>Saat kapal pindah dari air laut (BJ 1.025) ke air tawar (BJ 1.000), kapal akan tenggelam lebih dalam karena air tawar lebih ringan. FWA adalah koreksi ini dalam milimeter.</p>
+<div class="kb">FWA (mm) = Displacement / (4 × TPC)</div>`,
+  kp:`<ul>
+<li><strong>Draft rata-rata:</strong> d = (F + 6M + A) / 8</li>
+<li><strong>Hogging:</strong> M_tengah &lt; (F+A)/2</li>
+<li><strong>Sagging:</strong> M_tengah &gt; (F+A)/2</li>
+<li><strong>TPC</strong> = (L × B × Cw × 1.025) / 100</li>
+<li><strong>TPCs</strong> = TPC × BJ_dok / 1.025</li>
+<li><strong>FWA</strong> = Displacement / (4 × TPC) [dalam mm]</li>
+</ul>`,
+  mc:[
+    {
+      q:'Kapal MV. MERAK JAYA tiba di pelabuhan. Setelah membaca draft di 6 titik dan merata-ratakan kiri-kanan, diperoleh: Draft Depan (F) = 4,625 m, Draft Tengah (M) = 5,395 m, Draft Belakang (A) = 6,185 m. Apakah kondisi kapal Hogging atau Sagging?',
+      info:'<table class="itbl"><tr><td>Draft Depan (F)</td><td>4,625 m</td></tr><tr><td>Draft Tengah (M)</td><td>5,395 m</td></tr><tr><td>Draft Belakang (A)</td><td>6,185 m</td></tr></table>',
+      reminder:'<div class="arow"><span class="anm">Draft depan kiri / kanan</span><span class="avn">4,62 m / 4,63 m</span></div><div class="arow"><span class="anm">Draft belakang kiri / kanan</span><span class="avn">6,20 m / 6,17 m</span></div><div class="arow"><span class="anm">Draft tengah kiri / kanan</span><span class="avn">5,41 m / 5,38 m</span></div>',
+      formula:'<div class="mono">M_rata = (F + A) / 2\n       = (4,625 + 6,185) / 2\n       = 5,405 m\n\nBandingkan M_tengah (5,395) vs M_rata (5,405)</div>',
+      o:['Hogging — karena M_tengah (5,395 m) LEBIH KECIL dari M_rata (5,405 m). Kapal melengkung ke atas di tengah.','Sagging — karena M_tengah (5,395 m) LEBIH KECIL dari M_rata (5,405 m). Kapal melengkung ke bawah.','Hogging — karena draft belakang lebih besar dari draft depan.','Sagging — karena draft tengah lebih kecil dari draft belakang.'],
+      a:0,
+      e:'M_rata = (4,625 + 6,185)/2 = 5,405 m. Karena M_tengah (5,395 m) < M_rata (5,405 m), kapal mengalami HOGGING — bagian tengah lebih tinggi dari rata-rata depan-belakang. Kondisi ini terjadi karena muatan lebih berat di kedua ujung kapal. Hogging menimbulkan tegangan tarik di bagian bawah tengah kapal.'
+    },
+    {
+      q:'Dengan data draft yang sama (F=4,625 m, M=5,395 m, A=6,185 m), berapakah draft rata-rata terkoreksi menggunakan rumus 1/8?',
+      info:'<table class="itbl"><tr><td>Draft Depan (F)</td><td>4,625 m</td></tr><tr><td>Draft Tengah (M)</td><td>5,395 m</td></tr><tr><td>Draft Belakang (A)</td><td>6,185 m</td></tr></table>',
+      formula:'<div class="mono">d = (F + 6M + A) / 8\n  = (4,625 + 6 × 5,395 + 6,185) / 8\n  = (4,625 + 32,370 + 6,185) / 8\n  = 43,180 / 8</div>',
+      o:['5,35 m','5,40 m','5,45 m','5,50 m'],
+      a:1,
+      e:'d = (4,625 + 6×5,395 + 6,185) / 8 = (4,625 + 32,370 + 6,185) / 8 = 43,180 / 8 = 5,3975 m ≈ 5,40 m. Rumus 1/8 lebih akurat karena memberikan bobot 6× pada draft tengah, mencerminkan bentuk lambung kapal yang tidak seragam dari depan ke belakang.'
+    },
+    {
+      q:'Kapal MV. MERAK JAYA memiliki data: Panjang (L) = 125 m, Lebar (B) = 15 m, Cw = 0,83. Berapakah nilai TPC kapal di air laut (BJ = 1,025)?',
+      info:'<table class="itbl"><tr><td>Panjang (L)</td><td>125 m</td></tr><tr><td>Lebar (B)</td><td>15 m</td></tr><tr><td>Cw</td><td>0,83</td></tr><tr><td>BJ Air Laut</td><td>1,025 T/M³</td></tr></table>',
+      formula:'<div class="mono">TPC = (L × B × Cw × BJ) / 100\n    = (125 × 15 × 0,83 × 1,025) / 100\n    = (1.556,25 × 1,025) / 100\n    = 1.594,66 / 100</div>',
+      o:['14,82 t/cm','15,23 t/cm','15,87 t/cm','15,95 t/cm'],
+      a:3,
+      e:'TPC = (125 × 15 × 0,83 × 1,025) / 100 = 1.594,66 / 100 = 15,95 t/cm. Artinya: untuk setiap 15,95 ton yang dimuat, kapal akan tenggelam 1 cm lebih dalam di air laut.'
+    },
+    {
+      q:'Displacement kapal MV. MERAK JAYA = 17.000 ton, TPC = 15,95 t/cm. Berapakah FWA (Fresh Water Allowance) kapal tersebut?',
+      info:'<table class="itbl"><tr><td>Displacement</td><td>17.000 ton</td></tr><tr><td>TPC (air laut)</td><td>15,95 t/cm</td></tr></table>',
+      formula:'<div class="mono">FWA = Displacement / (4 × TPC)\n    = 17.000 / (4 × 15,95)\n    = 17.000 / 63,8</div>',
+      o:['178 mm','200 mm','266 mm','320 mm'],
+      a:2,
+      e:'FWA = 17.000 / (4 × 15,95) = 17.000 / 63,8 = 266,46 mm ≈ 266 mm. Artinya: saat kapal pindah dari air laut ke air tawar murni (BJ=1,000), kapal akan tenggelam 266 mm (≈ 26,6 cm) lebih dalam. Ini adalah koreksi maksimum untuk air tawar.'
+    }
+  ]
+},
+{
+  id:'zones', title:'Load Line & Zona', ico:'🌐', col:'#f97316',
+  desc:'Menghitung DWA, draft maksimum di berbagai zona (Winter, WNA, Tropical) dan di air pelabuhan.',
+  mat:`<h3>Zone Load Line</h3>
+<p>International Load Line Convention menetapkan batas draft maksimum berdasarkan zona geografis dan musim. Summer (S) adalah referensi utama.</p>
+<table class="zone-tbl">
+<tr><th>Zona</th><th>Rumus</th></tr>
+<tr><td>Summer (S)</td><td>Baseline / referensi</td></tr>
+<tr><td>Tropical (T)</td><td>S + (S/48)</td></tr>
+<tr><td>Winter (W)</td><td>S − (S/48)</td></tr>
+<tr><td>Winter N. Atlantic (WNA)</td><td>W − 50 mm</td></tr>
+<tr><td>Fresh Water (F)</td><td>S + FWA</td></tr>
+<tr><td>Tropical Fresh (TF)</td><td>T + FWA</td></tr>
+</table>
+<h3>DWA (Dock Water Allowance)</h3>
+<p>Saat kapal berada di pelabuhan sungai atau danau, BJ air lebih kecil dari 1,025. Kapal boleh memuat lebih dalam, karena akan naik saat mencapai laut. DWA adalah koreksi tambahannya.</p>
+<div class="kb">DWA (mm) = FWA × (1,025 − BJ_dok) / 0,025<br><br>Draft maks di dok = Draft zona berlaku + DWA</div>`,
+  kp:`<ul>
+<li>Urutan: <strong>TF &gt; F &gt; T &gt; S &gt; W &gt; WNA</strong></li>
+<li>S/48 = koreksi tiap naik atau turun satu zona dari Summer</li>
+<li>WNA = Winter − 50 mm (ekstra 50 mm lebih dangkal)</li>
+<li><strong>DWA</strong> = FWA × (1,025 − BJ) / 0,025</li>
+<li>Draft maks di dok = Draft zona + DWA</li>
+</ul>`,
+  mc:[
+    {
+      q:'Kapal MV. MERAK JAYA memiliki FWA = 266 mm dan berada di pelabuhan sungai dengan BJ air = 1,020. Berapakah DWA-nya?',
+      info:'<table class="itbl"><tr><td>FWA</td><td>266 mm</td></tr><tr><td>BJ air pelabuhan</td><td>1,020 T/M³</td></tr><tr><td>BJ air laut</td><td>1,025 T/M³</td></tr></table>',
+      formula:'<div class="mono">DWA = FWA × (1,025 − BJ_dok) / 0,025\n    = 266 × (1,025 − 1,020) / 0,025\n    = 266 × 0,005 / 0,025\n    = 266 × 0,2</div>',
+      o:['27 mm','53 mm','79 mm','133 mm'],
+      a:1,
+      e:'DWA = 266 × (0,005 / 0,025) = 266 × 0,2 = 53,2 mm ≈ 53 mm. Kapal boleh tenggelam 53 mm lebih dalam dari batas zona di air sungai BJ=1,020 ini. Saat kapal berlayar ke laut (BJ=1,025), kapal akan naik kembali 53 mm.'
+    },
+    {
+      q:'Summer Draft kapal = 7,66 m. Kapal akan berlayar ke zona Winter. Berapakah draft maksimum yang diizinkan untuk zona Winter?',
+      info:'<table class="itbl"><tr><td>Summer Draft (S)</td><td>7,66 m</td></tr><tr><td>Zona tujuan</td><td>Winter (W)</td></tr></table>',
+      formula:'<div class="mono">Koreksi = S / 48\n        = 7,66 / 48\n        = 0,160 m  (dibulatkan)\n\nWinter Draft = S − koreksi\n             = 7,66 − 0,160</div>',
+      o:['7,34 m','7,50 m','7,66 m','7,82 m'],
+      a:1,
+      e:'Winter Draft = 7,66 − (7,66/48) = 7,66 − 0,1596 ≈ 7,66 − 0,160 = 7,500 m. Di zona Winter, kapal harus lebih dangkal 160 mm dari Summer karena cuaca lebih buruk, gelombang lebih besar, dan risiko tenggelam lebih tinggi.'
+    },
+    {
+      q:'Summer Draft = 7,66 m. Kapal berlayar ke zona Winter North Atlantic (WNA). Berapakah draft maksimum yang diizinkan?',
+      info:'<table class="itbl"><tr><td>Summer Draft (S)</td><td>7,66 m</td></tr><tr><td>Winter Draft (W)</td><td>7,50 m</td></tr><tr><td>Zona tujuan</td><td>Winter North Atlantic (WNA)</td></tr></table>',
+      formula:'<div class="mono">WNA = Winter Draft − 50 mm\n    = 7,500 − 0,050</div>',
+      o:['7,35 m','7,40 m','7,45 m','7,50 m'],
+      a:2,
+      e:'WNA = Winter − 50 mm = 7,500 − 0,050 = 7,450 m. Zona WNA memiliki persyaratan paling ketat karena perairan Atlantik Utara saat musim dingin sangat berbahaya — ombak tinggi, es, dan badai. Kapal harus 210 mm lebih dangkal dari Summer Draft.'
+    },
+    {
+      q:'Kapal berada di zona Summer, berlabuh di pelabuhan sungai BJ = 1,020. Summer Draft = 7,66 m, DWA = 53 mm. Berapakah draft MAKSIMUM yang boleh dicapai kapal saat di pelabuhan sungai ini?',
+      info:'<table class="itbl"><tr><td>Zona berlaku</td><td>Summer (S)</td></tr><tr><td>Summer Draft</td><td>7,66 m</td></tr><tr><td>DWA</td><td>53 mm = 0,053 m</td></tr><tr><td>BJ pelabuhan</td><td>1,020 T/M³</td></tr></table>',
+      formula:'<div class="mono">Draft maks di dok = Summer Draft + DWA\n                 = 7,660 + 0,053</div>',
+      o:['7,50 m','7,66 m','7,71 m','7,82 m'],
+      a:2,
+      e:'Draft maks di dok = 7,660 + 0,053 = 7,713 m ≈ 7,71 m. Kapal boleh tenggelam hingga 7,71 m saat di pelabuhan sungai ini, karena saat berlayar ke laut dan masuk ke air garam BJ=1,025, kapal akan naik 53 mm kembali ke 7,66 m (batas Summer). Ini adalah keuntungan memuat di air tawar/sungai.'
+    }
+  ]
+},
+{
+  id:'kgm', title:'KG & GM — Muat / Bongkar', ico:'⚖️', col:'#22c55e',
+  desc:'Menghitung KG baru, GM akhir, dan sarat akhir setelah kegiatan muat, bongkar, atau pindah muatan menggunakan metode tabel.',
+  mat:`<h3>Metode Tabel — Cara Standar Hitung KG</h3>
+<p>Setiap kali ada kegiatan muat, bongkar, atau pindah muatan, KG kapal berubah. Cara paling sistematis adalah menggunakan tabel momen.</p>
+<div class="kb">
+<strong>Kolom tabel:</strong><br>
+Berat (W) | KG (kg) | Moment = W × kg<br><br>
+Muat → tambahkan baris dengan tanda (+)<br>
+Bongkar → tambahkan baris dengan tanda (−)<br><br>
+KG₁ = ΣMoment / ΣBerat<br>
+GM = KM − KG₁
+</div>
+<h3>Menyimpulkan Kondisi Stabilitas</h3>
+<p>Setelah menghitung GM, wajib disimpulkan kondisinya:</p>
+<ul>
+<li>GM &gt; 0 → ✅ <strong>Stabil</strong> — aman berlayar</li>
+<li>GM = 0 → ⚠️ <strong>Netral</strong> — berbahaya</li>
+<li>GM &lt; 0 → ❌ <strong>Tidak Stabil</strong> — darurat, harus segera diperbaiki</li>
+</ul>
+<h3>Perubahan Sarat</h3>
+<div class="kb">Δsarat (cm) = ΔBerat / TPCs<br>Sarat akhir = Sarat awal + Δsarat</div>`,
+  kp:`<ul>
+<li>KG₁ = ΣMoment / ΣBerat</li>
+<li>GM = KM − KG₁</li>
+<li>Muat (+), Bongkar (−) pada kolom Berat dan Moment</li>
+<li>Δsarat = ΔBerat (net muat) / TPCs</li>
+<li>Selalu simpulkan: GM positif/negatif/nol → kondisi kapal apa?</li>
+</ul>`,
+  mc:[
+    {
+      q:'Kapal MV. BAHARI tiba dengan Displacement = 8.200 ton, KG = 6,20 m. Setelah kegiatan di bawah, berapakah total ΣBerat (Displacement akhir)?',
+      info:'<table class="itbl"><tr><td>Displacement awal</td><td>8.200 ton</td></tr><tr><td>KG awal</td><td>6,20 m</td></tr><tr><td>KM</td><td>8,00 m</td></tr><tr><td>Sarat awal</td><td>6,40 m</td></tr><tr><td>TPC</td><td>20 t/cm</td></tr></table>',
+      reminder:'<div class="arow"><span class="anm">Muat di LTD (Lower Tween Deck)</span><span class="avn p">+3.600 t | KG 6,5 m</span></div><div class="arow"><span class="anm">Isi Air Tawar di APT</span><span class="avn p">+200 t | KG 2,5 m</span></div><div class="arow"><span class="anm">Bongkar Plat Besi di LH</span><span class="avn m">−200 t | KG 3,5 m</span></div>',
+      formula:'<div class="mono">ΣBerat = W_awal + semua muat − semua bongkar\n       = 8.200 + 3.600 + 200 − 200</div>',
+      o:['10.800 ton','11.200 ton','11.800 ton','12.400 ton'],
+      a:2,
+      e:'ΣBerat = 8.200 + 3.600 + 200 − 200 = 11.800 ton. Net muat = 3.600 ton (muat 3.800, bongkar 200). Displacement akhir kapal menjadi 11.800 ton.'
+    },
+    {
+      q:'Dengan data yang sama, berapakah total ΣMoment setelah semua kegiatan?',
+      info:'<table class="itbl"><tr><td>Displacement awal</td><td>8.200 ton</td></tr><tr><td>KG awal</td><td>6,20 m</td></tr></table>',
+      reminder:'<div class="arow"><span class="anm">Kondisi awal: 8.200 × 6,20</span><span class="avn">= 50.840 t.m</span></div><div class="arow"><span class="anm">Muat LTD: +3.600 × 6,5</span><span class="avn p">+23.400 t.m</span></div><div class="arow"><span class="anm">Isi FW APT: +200 × 2,5</span><span class="avn p">+500 t.m</span></div><div class="arow"><span class="anm">Bongkar Besi: −200 × 3,5</span><span class="avn m">−700 t.m</span></div>',
+      formula:'<div class="mono">ΣMoment = 50.840 + 23.400 + 500 − 700</div>',
+      o:['71.240 t.m','72.840 t.m','74.040 t.m','75.640 t.m'],
+      a:2,
+      e:'ΣMoment = 50.840 + 23.400 + 500 − 700 = 74.040 t.m. Setiap baris dihitung: Berat × KG = Moment. Muat menambah momen, bongkar mengurangi momen.'
+    },
+    {
+      q:'ΣBerat = 11.800 ton, ΣMoment = 74.040 t.m. Berapakah KG₁ (KG akhir) kapal?',
+      info:'<table class="itbl"><tr><td>ΣBerat</td><td>11.800 ton</td></tr><tr><td>ΣMoment</td><td>74.040 t.m</td></tr></table>',
+      formula:'<div class="mono">KG₁ = ΣMoment / ΣBerat\n    = 74.040 / 11.800</div>',
+      o:['5,97 m','6,09 m','6,27 m','6,45 m'],
+      a:2,
+      e:'KG₁ = 74.040 / 11.800 = 6,2746 m ≈ 6,27 m. KG turun dari 6,20 m menjadi 6,27 m — naik sedikit karena muatan LTD (KG=6,5) yang besar lebih tinggi dari KG awal. Meski naik, naiknya kecil karena ada muatan bawah (FW APT KG=2,5).'
+    },
+    {
+      q:'KM = 8,00 m, KG₁ = 6,27 m. Berapakah GM akhir dan bagaimana kondisi stabilitas kapal?',
+      info:'<table class="itbl"><tr><td>KM</td><td>8,00 m</td></tr><tr><td>KG₁ (akhir)</td><td>6,27 m</td></tr></table>',
+      formula:'<div class="mono">GM = KM − KG₁\n   = 8,00 − 6,27</div>',
+      o:['GM = +1,73 m → STABIL — kapal aman dan dapat kembali tegak jika miring','GM = −0,27 m → TIDAK STABIL — kapal dalam kondisi darurat (Angle of Loll)','GM = 0 m → NETRAL — tidak ada lengan penegak','GM = +0,47 m → Stabil tapi mendekati netral, waspada'],
+      a:0,
+      e:'GM = 8,00 − 6,27 = +1,73 m. GM POSITIF → kapal STABIL. Artinya M berada di atas G, sehingga saat kapal miring, momen penegak akan membawa kapal kembali tegak. Nilai 1,73 m adalah GM yang sangat baik untuk kapal kargo.'
+    },
+    {
+      q:'Sarat awal = 6,40 m, TPC = 20 t/cm. Setelah kegiatan (net muat = 3.600 ton), berapakah sarat akhir kapal?',
+      info:'<table class="itbl"><tr><td>Sarat awal</td><td>6,40 m</td></tr><tr><td>TPC</td><td>20 t/cm</td></tr><tr><td>Net muat</td><td>+3.600 ton</td></tr></table>',
+      reminder:'<div class="arow"><span class="anm">Total muat</span><span class="avn p">+3.800 ton</span></div><div class="arow"><span class="anm">Total bongkar</span><span class="avn m">−200 ton</span></div><div class="arow"><span class="anm">Net muat (selisih)</span><span class="avn p">+3.600 ton</span></div>',
+      formula:'<div class="mono">Δsarat = Net_muat / TPC\n       = 3.600 / 20\n       = 180 cm = 1,80 m\n\nSarat akhir = 6,40 + 1,80</div>',
+      o:['6,40 m (tidak berubah)','7,60 m','8,20 m','8,60 m'],
+      a:2,
+      e:'Δsarat = 3.600 / 20 = 180 cm = 1,80 m. Sarat akhir = 6,40 + 1,80 = 8,20 m. Karena net muat 3.600 ton, kapal tenggelam 180 cm lebih dalam. Pastikan sarat akhir tidak melebihi draft maksimum zona yang berlaku!'
+    }
+  ]
+},
+{
+  id:'fse', title:'Free Surface Effect (FSE)', ico:'💧', col:'#14b8a6',
+  desc:'Memahami pengaruh cairan tidak penuh dalam tangki terhadap GM efektif, dan peran sekat membujur.',
+  mat:`<h3>Apa itu Free Surface Effect?</h3>
+<p>Jika ada cairan yang tidak penuh (dan tidak kosong) di dalam tangki, cairan itu akan bergerak saat kapal miring. Pergerakan cairan ini seolah-olah menaikkan titik G ke atas, sehingga mengurangi GM.</p>
+<div class="kb">GM_efektif = GM − FSE<br><br>FSE = (BJ_cairan × l × b³) / (12 × Displacement)<br><br>l = panjang tangki, b = lebar tangki</div>
+<h3>Peran Sekat Membujur</h3>
+<p>Sekat membujur membagi tangki menjadi beberapa kompartemen yang lebih sempit. Karena FSE berbanding lurus dengan <strong>b³</strong> (pangkat tiga!), membagi lebar menjadi setengahnya mengurangi FSE sebesar 8 kali!</p>
+<div class="kb">n sekat membujur → (n+1) kompartemen<br>FSE total = (n+1) × FSE_per_kompartemen<br>= (n+1) × [BJ × l × (b/(n+1))³] / (12 × W)<br><br>Efek: FSE berkurang (n+1)² kali!</div>
+<h3>Dampak GM Negatif Akibat FSE</h3>
+<p>Jika GM_efektif &lt; 0, kapal mengalami <strong>Angle of Loll</strong> — kapal miring ke satu sisi dan tidak bisa kembali tegak sendiri. Ini sangat berbahaya dan harus segera diatasi.</p>`,
+  kp:`<ul>
+<li>FSE mengurangi GM: <strong>GM_efektif = GM − FSE</strong></li>
+<li>Tangki penuh atau kosong = FSE = 0 (tidak ada permukaan bebas)</li>
+<li>FSE ∝ b³ — lebar tangki sangat menentukan besar FSE</li>
+<li>3 sekat membujur → 4 kompartemen → FSE berkurang 16× (4²)</li>
+<li>GM_efektif &lt; 0 → Angle of Loll → darurat!</li>
+</ul>`,
+  mc:[
+    {
+      q:'Kapal MV. SAMUDRA memiliki satu tangki yang tidak penuh (ada FSE). Data tangki: Panjang (l) = 20 m, Lebar (b) = 12 m, BJ cairan = 0,875 T/M³. Displacement kapal = 10.000 ton. Tangki TANPA sekat membujur. Berapakah FSE-nya?',
+      info:'<table class="itbl"><tr><td>Displacement kapal</td><td>10.000 ton</td></tr><tr><td>Panjang tangki (l)</td><td>20 m</td></tr><tr><td>Lebar tangki (b)</td><td>12 m</td></tr><tr><td>BJ cairan</td><td>0,875 T/M³</td></tr><tr><td>Sekat membujur</td><td>Tidak ada</td></tr></table>',
+      formula:'<div class="mono">FSE = (BJ × l × b³) / (12 × W)\n    = (0,875 × 20 × 12³) / (12 × 10.000)\n    = (0,875 × 20 × 1.728) / 120.000\n    = 30.240 / 120.000</div>',
+      o:['0,063 m','0,126 m','0,189 m','0,252 m'],
+      a:3,
+      e:'FSE = (0,875 × 20 × 1.728) / (12 × 10.000) = 30.240 / 120.000 = 0,252 m. Ini adalah koreksi yang cukup besar — mengurangi GM sebesar 0,252 m hanya karena satu tangki tidak penuh!'
+    },
+    {
+      q:'Tangki yang sama (l=20m, b=12m, BJ=0,875, W=10.000 ton), tetapi kini dilengkapi 3 sekat membujur (menjadi 4 kompartemen). Berapakah FSE total sekarang?',
+      info:'<table class="itbl"><tr><td>Displacement kapal</td><td>10.000 ton</td></tr><tr><td>Panjang tangki (l)</td><td>20 m</td></tr><tr><td>Lebar total (b)</td><td>12 m</td></tr><tr><td>BJ cairan</td><td>0,875 T/M³</td></tr><tr><td>Sekat membujur</td><td>3 sekat → 4 kompartemen</td></tr></table>',
+      formula:'<div class="mono">b tiap kompartemen = 12 / 4 = 3 m\n\nFSE_1 kompartemen = (0,875 × 20 × 3³) / (12 × 10.000)\n                  = (0,875 × 20 × 27) / 120.000\n                  = 472,5 / 120.000\n\nFSE total = 4 × FSE_1</div>',
+      o:['0,016 m','0,063 m','0,126 m','0,252 m'],
+      a:0,
+      e:'FSE per kompartemen = 472,5/120.000 = 0,003938 m. FSE total = 4 × 0,003938 = 0,01575 m ≈ 0,016 m. Dengan 3 sekat (4 kompartemen), FSE berkurang dari 0,252 m menjadi 0,016 m — berkurang 16 kali lipat (= 4² = 16). Sekat membujur sangat efektif!'
+    },
+    {
+      q:'GM kapal sebelum memperhitungkan FSE = 0,25 m. Tangki tidak bersekat dengan FSE = 0,252 m. Berapakah GM efektif dan bagaimana kondisi kapal?',
+      info:'<table class="itbl"><tr><td>GM (sebelum FSE)</td><td>0,25 m</td></tr><tr><td>FSE (tangki tanpa sekat)</td><td>0,252 m</td></tr></table>',
+      formula:'<div class="mono">GM_efektif = GM − FSE\n           = 0,25 − 0,252</div>',
+      o:['GM_efektif = +0,502 m → Stabil','GM_efektif = −0,002 m → TIDAK STABIL — Angle of Loll! Kapal miring ke satu sisi.','GM_efektif = 0 m → Netral','GM_efektif = +0,25 m → FSE tidak berpengaruh'],
+      a:1,
+      e:'GM_efektif = 0,25 − 0,252 = −0,002 m. GM menjadi NEGATIF! Meskipun selisihnya kecil (−2 mm), kapal tetap TIDAK STABIL. Kapal akan mengalami Angle of Loll — miring permanen ke satu sisi. Harus segera diatasi: isi atau kosongkan tangki, isi ballast di double bottom, atau pindah muatan ke bawah.'
+    },
+    {
+      q:'Apa yang terjadi pada kapal yang mengalami Angle of Loll, dan apa tindakan PERTAMA yang benar untuk mengatasinya?',
+      info:'<table class="itbl"><tr><td>Kondisi</td><td>GM negatif (Angle of Loll)</td></tr><tr><td>Gejala</td><td>Kapal miring permanen ke satu sisi</td></tr></table>',
+      o:['Kapal langsung tenggelam. Tindakan pertama: evakuasi semua kru.','Kapal miring permanen ke satu sisi dan tidak bisa tegak sendiri. Tindakan pertama: isi air ballast di tangki DASAR BERGANDA (double bottom) untuk menurunkan G.','Kapal akan miring ke kiri dan kanan bergantian dengan cepat (rolling kencang). Tindakan: pindah muatan ke sisi yang lebih tinggi.','Kapal aman karena masih bisa bergerak. Tidak perlu tindakan segera.'],
+      a:1,
+      e:'Angle of Loll adalah kondisi di mana GM negatif menyebabkan kapal miring ke satu sisi pada sudut tertentu dan berdiam di sana. Kapal tidak terbalik karena GZ menjadi positif lagi pada sudut tersebut, tapi kondisi ini sangat berbahaya. Tindakan benar: (1) Isi ballast di tangki dasar berganda — ini menurunkan G sehingga GM menjadi positif. (2) JANGAN pindah muatan transversal — justru bisa memperparah. (3) Kosongkan tangki yang setengah isi untuk hilangkan FSE.'
+    }
+  ]
+},
+{
+  id:'river', title:'Perjalanan Sungai & DC', ico:'🌊', col:'#c9a84c',
+  desc:'Menghitung Total Daily Consumption selama di sungai dan menentukan waktu tiba di muara.',
+  mat:`<h3>Daily Consumption (DC)</h3>
+<p>DC adalah total pemakaian harian kapal yang mencakup semua jenis bahan bakar, air tawar, pelumas, dan perbekalan.</p>
+<div class="kb">Total DC/hari = FO + FW + DO + LO + Provision (dalam ton/hari)<br><br>DC untuk waktu tertentu = DC_harian × (jam / 24)</div>
+<h3>Perjalanan Sungai — Langkah Perhitungan</h3>
+<ol style="padding-left:18px;line-height:2;">
+<li>Hitung waktu kegiatan di pelabuhan (jam)</li>
+<li>Hitung waktu perjalanan ke muara: t = Jarak (mil) / Kecepatan (knots)</li>
+<li>Total waktu di sungai = waktu kegiatan + waktu perjalanan</li>
+<li>DC total = DC_harian × (total jam / 24)</li>
+<li>Waktu tiba muara = waktu berangkat + waktu perjalanan</li>
+</ol>
+<div class="kb">⚠️ Perhatikan tanggal! Tambah jam secara berurutan: 24 jam = 1 hari. Hati-hati saat melewati tengah malam.</div>`,
+  kp:`<ul>
+<li>Total DC/hari = jumlah semua komponen konsumsi</li>
+<li>Waktu ke muara = Jarak (mil) / Kecepatan (knots) = jam</li>
+<li>Total waktu di sungai = kegiatan + perjalanan ke muara</li>
+<li>DC total = DC_harian × (total jam / 24)</li>
+<li>Waktu berangkat = waktu tiba + lama kegiatan</li>
+</ul>`,
+  mc:[
+    {
+      q:'Kapal MV. MERAK JAYA memiliki Daily Consumption: Fuel Oil = 22 ton, Fresh Water = 26 ton, Diesel Oil = 14 ton, Lubricating Oil = 3 ton, Provision = 7 ton. Berapakah total Daily Consumption per hari?',
+      info:'<table class="itbl"><tr><td>Fuel Oil (FO)</td><td>22 ton/hari</td></tr><tr><td>Fresh Water (FW)</td><td>26 ton/hari</td></tr><tr><td>Diesel Oil (DO)</td><td>14 ton/hari</td></tr><tr><td>Lubricating Oil (LO)</td><td>3 ton/hari</td></tr><tr><td>Provision</td><td>7 ton/hari</td></tr></table>',
+      formula:'<div class="mono">DC_total/hari = FO + FW + DO + LO + Prov\n             = 22 + 26 + 14 + 3 + 7</div>',
+      o:['58 ton/hari','65 ton/hari','72 ton/hari','79 ton/hari'],
+      a:2,
+      e:'DC total/hari = 22 + 26 + 14 + 3 + 7 = 72 ton/hari. Semua jenis konsumsi dijumlahkan. Angka ini akan digunakan untuk menghitung total pemakaian selama waktu tertentu di sungai.'
+    },
+    {
+      q:'Jarak dari pelabuhan sungai ke muara = 64 mil. Kecepatan kapal rata-rata di sungai = 8 knots. Berapa jam waktu yang dibutuhkan untuk menempuh perjalanan dari pelabuhan ke muara?',
+      info:'<table class="itbl"><tr><td>Jarak ke muara</td><td>64 mil</td></tr><tr><td>Kecepatan di sungai</td><td>8 knots</td></tr></table>',
+      formula:'<div class="mono">Waktu = Jarak / Kecepatan\n      = 64 mil / 8 knots</div>',
+      o:['6 jam','8 jam','10 jam','12 jam'],
+      a:1,
+      e:'Waktu = 64 / 8 = 8 jam. 1 knot = 1 mil laut per jam, jadi pembagian langsung menghasilkan jam. Ini adalah waktu dari pelabuhan ke muara sungai saja, belum termasuk waktu kegiatan di pelabuhan.'
+    },
+    {
+      q:'Kapal melakukan kegiatan di pelabuhan selama 45 jam, lalu berlayar 8 jam ke muara. DC kapal = 72 ton/hari. Berapakah TOTAL DC (pemakaian) selama kapal berada di sungai (sejak tiba hingga tiba di muara)?',
+      info:'<table class="itbl"><tr><td>Lama kegiatan di pelabuhan</td><td>45 jam</td></tr><tr><td>Waktu perjalanan ke muara</td><td>8 jam</td></tr><tr><td>Total waktu di sungai</td><td>53 jam</td></tr><tr><td>DC per hari</td><td>72 ton/hari</td></tr></table>',
+      formula:'<div class="mono">Total waktu = 45 + 8 = 53 jam\n\nDC_total = DC_harian × (jam / 24)\n         = 72 × (53 / 24)\n         = 72 × 2,2083</div>',
+      o:['126 ton','144 ton','159 ton','177 ton'],
+      a:2,
+      e:'DC total = 72 × (53/24) = 72 × 2,2083 = 159 ton. Total 159 ton berbagai material dikonsumsi selama 53 jam di sungai. Ini penting untuk menghitung berapa banyak muatan gandum yang bisa dimuat agar kapal tidak melebihi draft saat tiba di laut.'
+    },
+    {
+      q:'Kapal tiba di pelabuhan pada 27 Februari 2024 pukul 20:00 LT. Setelah 45 jam kegiatan, kapal langsung berangkat ke muara (8 jam perjalanan). Kapan kapal tiba di muara sungai?',
+      info:'<table class="itbl"><tr><td>Tiba di pelabuhan</td><td>27 Feb 2024, 20:00 LT</td></tr><tr><td>Lama kegiatan</td><td>45 jam</td></tr><tr><td>Lama ke muara</td><td>8 jam</td></tr></table>',
+      reminder:'<div class="arow"><span class="anm">27 Feb 20:00 + 24 jam</span><span class="avn">= 28 Feb 20:00 LT</span></div><div class="arow"><span class="anm">28 Feb 20:00 + 21 jam</span><span class="avn">= 1 Mar 17:00 LT (berangkat)</span></div><div class="arow"><span class="anm">1 Mar 17:00 + 8 jam</span><span class="avn">= ? (tiba muara)</span></div>',
+      formula:'<div class="mono">Berangkat = 27 Feb 20:00 + 45 jam\n          = 1 Maret 2024, 17:00 LT\n\nTiba muara = 1 Mar 17:00 + 8 jam</div>',
+      o:['1 Maret 2024, pukul 17:00 LT','2 Maret 2024, pukul 01:00 LT','2 Maret 2024, pukul 03:00 LT','2 Maret 2024, pukul 09:00 LT'],
+      a:1,
+      e:'Kapal berangkat: 27 Feb 20:00 + 45 jam = 1 Mar 17:00 LT. Tiba muara: 1 Mar 17:00 + 8 jam = 2 Mar 01:00 LT (tengah malam). Perhatikan saat melewati tengah malam: 17:00 + 7 jam = 24:00 = 00:00 tanggal berikutnya, + 1 jam lagi = 01:00 tanggal 2 Maret.'
+    }
+  ]
+},
+{
+  id:'fixgm', title:'Perbaikan GM Negatif', ico:'🔧', col:'#ef4444',
+  desc:'Menghitung kebutuhan ballast atau pemindahan muatan untuk memperbaiki GM negatif menjadi target GM positif.',
+  mat:`<h3>Kapan GM Bisa Negatif?</h3>
+<ul>
+<li>Terlalu banyak muatan berat di tempat tinggi (top-heavy)</li>
+<li>Free Surface Effect (FSE) yang besar dari tangki setengah isi</li>
+<li>Membongkar muatan bawah tanpa muat pengganti</li>
+</ul>
+<h3>Cara Memperbaiki GM Negatif</h3>
+<p>Tujuannya: menurunkan KG hingga GM menjadi positif sesuai target.</p>
+<div class="kb">Langkah sistematis:<br>
+1. Hitung GG₁ yang dibutuhkan: GG₁ = GM_target − GM_awal<br>
+2. Hitung KG target: KG₁ = KG_awal − GG₁<br>
+3. Gunakan metode tabel: masukkan x (ballast) dengan KG-nya<br>
+4. Selesaikan persamaan untuk x<br>
+5. Hitung volume: Volume = x / BJ_cairan</div>
+<h3>Memindahkan Muatan</h3>
+<p>Jika solusinya adalah pindah muatan (bukan ballast), gunakan rumus:</p>
+<div class="kb">GG₁ = (w × d) / W<br>w = berat muatan yang dipindah<br>d = jarak vertikal perpindahan (|KG_baru − KG_lama|)<br>W = displacement total</div>`,
+  kp:`<ul>
+<li>GG₁ = GM_target − GM_awal (seberapa jauh G harus turun)</li>
+<li>KG₁ = KG_awal − GG₁</li>
+<li>Ballast di double bottom: KG air = tinggi tangki / 2</li>
+<li>Volume ballast = massa / BJ air laut (1,025)</li>
+<li>GM_akhir = KM − KG₁ → harus positif</li>
+</ul>`,
+  mc:[
+    {
+      q:'Kapal MV. ANDALAN memiliki Displacement = 5.000 ton, KG = 7,5 m, GM = −0,06 m. Untuk mencapai target GM = +0,30 m, seberapa jauh G harus diturunkan (GG₁)?',
+      info:'<table class="itbl"><tr><td>Displacement</td><td>5.000 ton</td></tr><tr><td>KG awal</td><td>7,5 m</td></tr><tr><td>GM awal</td><td>−0,06 m (NEGATIF ❌)</td></tr><tr><td>KM</td><td>7,44 m</td></tr><tr><td>Target GM</td><td>+0,30 m</td></tr></table>',
+      formula:'<div class="mono">GG₁ = GM_target − GM_awal\n    = (+0,30) − (−0,06)\n    = 0,30 + 0,06</div>',
+      o:['0,06 m','0,24 m','0,30 m','0,36 m'],
+      a:3,
+      e:'GG₁ = 0,30 − (−0,06) = 0,30 + 0,06 = 0,36 m. G harus turun 0,36 m dari posisinya sekarang. Ingat: GM negatif berarti G sudah di ATAS M. Kita perlu menurunkan G sampai GM menjadi +0,30 m, sehingga total pergeseran = 0,06 + 0,30 = 0,36 m.'
+    },
+    {
+      q:'KG awal = 7,5 m, GG₁ yang dibutuhkan = 0,36 m. Berapakah KG target (KG₁) yang harus dicapai?',
+      info:'<table class="itbl"><tr><td>KG awal</td><td>7,5 m</td></tr><tr><td>GG₁ (G harus turun)</td><td>0,36 m</td></tr></table>',
+      formula:'<div class="mono">KG₁ = KG_awal − GG₁\n    = 7,5 − 0,36</div>',
+      o:['6,94 m','7,14 m','7,44 m','7,56 m'],
+      a:1,
+      e:'KG₁ = 7,5 − 0,36 = 7,14 m. Titik berat kapal harus berada di 7,14 m dari lunas agar GM = KM − KG₁ = 7,44 − 7,14 = 0,30 m. Ini adalah KG target yang harus kita capai dengan mengisi ballast atau memindahkan muatan.'
+    },
+    {
+      q:'Solusi: isi ballast di tangki dasar berganda (tinggi tangki = 1,5 m, diisi dari kosong hingga penuh). KG air ballast = 1,5/2 = 0,75 m. BJ air laut = 1,025. KG target = 7,14 m. Berapa ton ballast yang dibutuhkan?',
+      info:'<table class="itbl"><tr><td>Displacement awal (W)</td><td>5.000 ton</td></tr><tr><td>KG awal</td><td>7,5 m → Moment = 37.500 t.m</td></tr><tr><td>KG ballast</td><td>0,75 m</td></tr><tr><td>KG target (KG₁)</td><td>7,14 m</td></tr></table>',
+      reminder:'<div class="arow"><span class="anm">Kondisi awal: 5.000 × 7,5</span><span class="avn">= 37.500 t.m</span></div><div class="arow"><span class="anm">Tambah ballast: x × 0,75</span><span class="avn p">= 0,75x t.m</span></div><div class="arow"><span class="anm">ΣBerat = 5.000 + x</span><span class="avn">ΣMoment = 37.500 + 0,75x</span></div>',
+      formula:'<div class="mono">KG₁ = ΣMoment / ΣBerat\n7,14 = (37.500 + 0,75x) / (5.000 + x)\n\n7,14(5.000 + x) = 37.500 + 0,75x\n35.700 + 7,14x = 37.500 + 0,75x\n6,39x = 1.800\nx = ?</div>',
+      o:['225 ton','252 ton','282 ton','315 ton'],
+      a:2,
+      e:'6,39x = 1.800 → x = 1.800/6,39 = 281,69 ton ≈ 282 ton. Dengan mengisi 282 ton air ballast di tangki dasar berganda (KG rendah = 0,75 m), titik berat kapal turun dari 7,5 m menjadi 7,14 m, sehingga GM naik dari −0,06 m menjadi +0,30 m.'
+    },
+    {
+      q:'Setelah mengisi 282 ton ballast (BJ = 1,025) di tangki dasar berganda, GM akhir = +0,30 m. Bagaimana kondisi stabilitas kapal sekarang, dan berapa volume tangki ballast yang terisi?',
+      info:'<table class="itbl"><tr><td>Ballast yang diisi</td><td>282 ton</td></tr><tr><td>BJ air laut</td><td>1,025 T/M³</td></tr><tr><td>GM akhir</td><td>+0,30 m</td></tr></table>',
+      formula:'<div class="mono">Volume = Massa / BJ\n       = 282 / 1,025\n\nGM_akhir = KM − KG₁\n         = 7,44 − 7,14 = +0,30 m</div>',
+      o:['Volume = 275,1 m³ — Kapal STABIL (GM +0,30 m positif, G sudah di bawah M, kapal bisa kembali tegak)','Volume = 275,1 m³ — Kapal masih TIDAK STABIL karena GM terlalu kecil','Volume = 289,1 m³ — Kapal STABIL','Volume = 289,1 m³ — Kapal TIDAK STABIL, perlu lebih banyak ballast'],
+      a:0,
+      e:'Volume = 282/1,025 = 275,1 m³. GM akhir = +0,30 m → STABIL. Kapal kini memiliki lengan penegak — saat miring, momen penegak akan membawanya kembali tegak. Nilai GM 0,30 m sudah aman untuk berlayar, meskipun tidak terlalu besar. Perlu dipantau apakah masih ada FSE yang belum diperhitungkan.'
+    }
+  ]
+}
+];
+
+// =====================================================================
+// STATE & STORAGE
+// =====================================================================
+let uName='', progKey='', prog={}, curSec=null, curQ=0, mcAnss=[], mcShuf=[];
+
+function getPK(n){ return 'njpro_stab_'+n.toLowerCase().trim().replace(/\s+/g,'_'); }
+function loadProg(){ prog=JSON.parse(localStorage.getItem(progKey)||'{}'); }
+function saveProg(){ localStorage.setItem(progKey,JSON.stringify(prog)); }
+function getSavedUsers(){ return JSON.parse(localStorage.getItem('njpro_stab_users')||'[]'); }
+function addSavedUser(n){
+  let us=getSavedUsers(); if(!us.includes(n)) us.unshift(n);
+  if(us.length>5)us=us.slice(0,5);
+  localStorage.setItem('njpro_stab_users',JSON.stringify(us));
+}
+function getSecProg(id){ return prog[id]||{passed:false,score:0,attempts:0}; }
+
+// =====================================================================
+// SCREEN NAV
+// =====================================================================
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('on'));
+  const el=document.getElementById(id); if(el){el.classList.add('on');}
+  window.scrollTo(0,0);
+}
+
+// =====================================================================
+// LOGIN
+// =====================================================================
+window.onload=function(){
+  // Cek sesi login dari storage utama nautikapro_v2
+  try{
+    const d=JSON.parse(localStorage.getItem('nautikapro_v2')||'{}');
+    const ln=d.last;
+    if(ln&&d.profiles&&d.profiles[ln]){
+      uName=ln; progKey=getPK(ln);
+      addSavedUser(ln); loadProg(); goStab(); return;
+    }
+  }catch(e){}
+  renderSavedList();
+  document.getElementById('nameInp').focus();
+};
+
+function renderSavedList(){
+  const us=getSavedUsers();
+  const el=document.getElementById('savedList'); if(!el)return;
+  if(!us.length){el.innerHTML='';return;}
+  el.innerHTML='<div class="cf" style="font-size:11px;color:var(--mut);letter-spacing:1px;margin-bottom:8px;margin-top:16px;">LANJUTKAN SEBAGAI</div>'+
+    us.map(n=>`<div class="pp" onclick="quickLogin('${n.replace(/'/g,"\\'")}')">
+      <div style="font-size:20px;">👤</div>
+      <div style="flex:1;"><div style="font-size:14px;font-weight:600;">${n}</div></div>
+      <div style="font-size:12px;color:var(--mut);">Lanjutkan →</div>
+    </div>`).join('');
+}
+
+function quickLogin(n){ uName=n; document.getElementById('nameInp').value=n; doLogin(); }
+
+function doLogin(){
+  const n=document.getElementById('nameInp').value.trim();
+  if(!n){alert('Masukkan nama kamu dulu!');return;}
+  uName=n; progKey=getPK(n);
+  addSavedUser(n); loadProg(); goStab();
+}
+
+function goSubj(){ window.location.href='index.html'; }
+
+function switchUser(){
+  uName=''; progKey=''; prog={};
+  document.getElementById('nameInp').value='';
+  renderSavedList();
+  show('sc-name');
+}
+
+// =====================================================================
+// STABILITY HOME
+// =====================================================================
+function goStab(){
+  document.getElementById('stabGreet').textContent=uName;
+  renderSecList(); updateMainBar();
+  show('sc-stab');
+}
+
+function renderSecList(){
+  const el=document.getElementById('secList'); if(!el)return;
+  // Kamus always first
+  let html=`<div class="sec-card" onclick="openKamus()">
+    <div class="sec-ico">📚</div>
+    <div class="sec-info">
+      <div class="sec-ttl" style="color:#c084fc;">Kamus & Simbol</div>
+      <div class="sec-sub">Simbol, singkatan, tips & rumus cepat — baca ini dulu!</div>
+    </div>
+    <div class="sec-badge badge-read">REFERENSI</div>
+  </div>`;
+
+  let prevPassed=true;
+  SD.forEach((sec,i)=>{
+    const p=getSecProg(sec.id);
+    const locked=false;
+    const badge=locked?'<div class="sec-badge badge-lock">🔒 Terkunci</div>':
+                p.passed?`<div class="sec-badge badge-done">✅ ${p.score}%</div>`:
+                `<div class="sec-badge badge-try">Mulai</div>`;
+    html+=`<div class="sec-card${locked?' locked':''}" onclick="${locked?'showLocked()':'openSec(\''+sec.id+'\')'}" style="border-left:3px solid ${sec.col}">
+      <div class="sec-ico">${sec.ico}</div>
+      <div class="sec-info">
+        <div class="sec-ttl" style="color:${sec.col};">${sec.title}</div>
+        <div class="sec-sub">${sec.desc}</div>
+      </div>
+      ${badge}
+    </div>`;
+  });
+  el.innerHTML=html;
+}
+
+function showLocked(){ alert('Selesaikan topik sebelumnya terlebih dahulu (skor ≥70%)!'); }
+
+function updateMainBar(){
+  const total=SD.length;
+  const done=SD.filter(s=>getSecProg(s.id).passed).length;
+  const pct=Math.round((done/total)*100);
+  const bar=document.getElementById('mainBar');
+  const pctEl=document.getElementById('mainPct');
+  if(bar)bar.style.width=pct+'%';
+  if(pctEl)pctEl.textContent=done+'/'+total+' topik selesai ('+pct+'%)';
+  if(done===total&&total>0){
+    const sc=document.getElementById('doneScore');
+    if(sc){
+      const avg=Math.round(SD.reduce((a,s)=>a+getSecProg(s.id).score,0)/total);
+      sc.textContent=avg+'%';
+    }
+  }
+}
+
+// =====================================================================
+// KAMUS
+// =====================================================================
+function openKamus(){
+  document.getElementById('kamusBody').innerHTML=KAMUS_HTML;
+  show('sc-kamus');
+}
+
+// =====================================================================
+// SECTION & MATERIAL
+// =====================================================================
+function openSec(id){
+  curSec=SD.find(s=>s.id===id); if(!curSec)return;
+  document.getElementById('matLbl').textContent=curSec.title;
+  document.getElementById('matSub').textContent=curSec.desc;
+  document.getElementById('matIco').textContent=curSec.ico;
+  document.getElementById('matTitle').textContent=curSec.title;
+  document.getElementById('matTitle').style.color=curSec.col;
+  document.getElementById('matBody').innerHTML=curSec.mat;
+  document.getElementById('matKP').innerHTML=curSec.kp;
+  show('sc-mat');
+}
+
+// =====================================================================
+// QUIZ
+// =====================================================================
+function startQuiz(){
+  if(!curSec)return;
+  curQ=0; mcAnss=[];
+  mcShuf=curSec.mc.map((_,i)=>i); // No shuffle — keep question order
+  renderMC();
+  show('sc-mc');
+}
+
+function renderMC(){
+  const q=curSec.mc[mcShuf[curQ]];
+  const tot=curSec.mc.length;
+  document.getElementById('mcLbl').textContent=curSec.title;
+  document.getElementById('mcCtr').textContent=(curQ+1)+'/'+tot;
+  document.getElementById('mcNum').textContent='SOAL '+(curQ+1)+' DARI '+tot;
+  document.getElementById('mcBar').style.width=(((curQ)/tot)*100)+'%';
+
+  // Cards
+  let cards='';
+  if(q.info) cards+=`<div class="qcard qc-info"><div class="qcard-hd">📋 INFORMASI KAPAL</div>${q.info}</div>`;
+  if(q.reminder) cards+=`<div class="qcard qc-remind"><div class="qcard-hd">📌 PENGINGAT — Daftar Kegiatan / Data Pendukung</div>${q.reminder}</div>`;
+  if(q.formula) cards+=`<div class="qcard qc-formula"><div class="qcard-hd">📐 RUMUS & LANGKAH</div>${q.formula}</div>`;
+  document.getElementById('mcCards').innerHTML=cards;
+
+  document.getElementById('mcQ').innerHTML=q.q;
+  const optsEl=document.getElementById('mcOpts');
+  const labels=['A','B','C','D'];
+  optsEl.innerHTML=q.o.map((opt,i)=>`
+    <button class="ob" id="opt${i}" onclick="pickOpt(${i})">
+      <div class="ol">${labels[i]}</div>
+      <div>${opt}</div>
+    </button>`).join('');
+  document.getElementById('mcExp').className='hi';
+  const nx=document.getElementById('mcNext');
+  nx.className='b bg hi'; nx.textContent='';
+}
+
+function pickOpt(idx){
+  const q=curSec.mc[mcShuf[curQ]];
+  const correct=q.a;
+  const opts=document.querySelectorAll('.ob');
+  opts.forEach((o,i)=>{
+    o.disabled=true;
+    if(i===correct) o.classList.add('ok');
+    else if(i===idx&&i!==correct) o.classList.add('ng');
+    else o.classList.add('dm');
+  });
+  mcAnss.push({q:curQ, chosen:idx, correct});
+  const expEl=document.getElementById('mcExp');
+  expEl.className='exp '+(idx===correct?'ek':'en');
+  expEl.innerHTML='<strong>'+(idx===correct?'✅ Benar!':'❌ Kurang tepat.')+'</strong> '+q.e;
+  const nx=document.getElementById('mcNext');
+  nx.classList.remove('hi');
+  nx.textContent=curQ+1<curSec.mc.length?'Soal Berikutnya →':'Lihat Hasil';
+}
+
+function nextMC(){
+  curQ++;
+  if(curQ<curSec.mc.length){ renderMC(); }
+  else { showResults(); }
+}
+
+// =====================================================================
+// RESULTS
+// =====================================================================
+function showResults(){
+  const tot=mcAnss.length;
+  const correct=mcAnss.filter(a=>a.chosen===a.correct).length;
+  const pct=Math.round((correct/tot)*100);
+  const passed=pct>=70;
+
+  // Save progress
+  const p=getSecProg(curSec.id);
+  p.attempts=(p.attempts||0)+1;
+  if(pct>=(p.score||0)){p.score=pct;}
+  if(passed)p.passed=true;
+  prog[curSec.id]=p;
+  saveProg();
+
+  // Emoji & label
+  const emo=pct>=90?'🏆':pct>=70?'✅':pct>=50?'📚':'💪';
+  const lbl=pct>=90?'Luar Biasa!':pct>=70?'Lulus — Bagus!':pct>=50?'Hampir — Coba Lagi':'Belajar Lagi Yuk!';
+  document.getElementById('resEmo').textContent=emo;
+  document.getElementById('resScore').textContent=pct+'%';
+  document.getElementById('resScore').style.color=passed?'var(--grn)':'var(--red)';
+  document.getElementById('resLbl').textContent=lbl;
+  document.getElementById('resDet').textContent=correct+' benar dari '+tot+' soal — Batas lulus: 70%';
+
+  const resCard=document.getElementById('resCard');
+  resCard.style.borderColor=passed?'rgba(34,197,94,.3)':'rgba(239,68,68,.3)';
+
+  // Recap
+  const labels=['A','B','C','D'];
+  document.getElementById('recapList').innerHTML=mcAnss.map((a,i)=>{
+    const q=curSec.mc[mcShuf[i]];
+    const ok=a.chosen===a.correct;
+    return `<div class="ri">
+      <div class="rd ${ok?'rk':'rn'}">${ok?'✓':'✗'}</div>
+      <div style="flex:1;">
+        <div style="font-size:13px;margin-bottom:3px;">${q.q.substring(0,80)}${q.q.length>80?'…':''}</div>
+        <div style="font-size:12px;color:var(--mut2);">Kamu: <strong>${labels[a.chosen]}</strong>${!ok?' | Benar: <strong style="color:var(--grn)">'+labels[a.correct]+'</strong>':''}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Actions
+  let acts=`<button class="b bgh" onclick="retryQuiz()">🔄 Ulangi Soal</button>
+             <button class="b bgh" onclick="openSec('${curSec.id}')">📖 Baca Materi Lagi</button>
+             <button class="b bg" onclick="goStab()">← Kembali ke Daftar Topik</button>`;
+  document.getElementById('resActs').innerHTML=acts;
+
+  show('sc-res');
+
+  // Check all done
+  if(SD.every(s=>getSecProg(s.id).passed)) setTimeout(()=>show('sc-done'),1800);
+}
+
+function retryQuiz(){ startQuiz(); }
+</script>
+</body>
+</html>
